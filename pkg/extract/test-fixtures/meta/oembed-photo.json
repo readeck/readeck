@@ -1,0 +1,23 @@
+{
+  "type": "photo",
+  "flickr_type": "photo",
+  "title": "Authentically Dingy Bathroom",
+  "author_name": "randomwire",
+  "author_url": "https://www.flickr.com/photos/randomwire/",
+  "width": 1024,
+  "height": 575,
+  "url": "https://live.staticflickr.com/7302/9050180936_43804d2e1c_b.jpg",
+  "web_page": "https://www.flickr.com/photos/randomwire/9050180936/",
+  "thumbnail_url": "https://live.staticflickr.com/7302/9050180936_43804d2e1c_q.jpg",
+  "thumbnail_width": 150,
+  "thumbnail_height": 150,
+  "web_page_short_url": "https://flic.kr/p/eMJxum",
+  "license": "Attribution-NonCommercial-ShareAlike License",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+  "license_id": "1",
+  "html": "<a data-flickr-embed=\"true\" href=\"https://www.flickr.com/photos/randomwire/9050180936/\" title=\"Authentically Dingy Bathroom by randomwire, on Flickr\"><img src=\"https://live.staticflickr.com/7302/9050180936_43804d2e1c_b.jpg\" width=\"1024\" height=\"575\" alt=\"Authentically Dingy Bathroom\"></a><script async src=\"https://embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>",
+  "version": "1.0",
+  "cache_age": 3600,
+  "provider_name": "Flickr",
+  "provider_url": "https://www.flickr.com/"
+}

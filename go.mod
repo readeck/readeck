@@ -1,0 +1,16 @@
+module github.com/readeck/readeck
+
+go 1.14
+
+require (
+	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
+	github.com/disintegration/imaging v1.6.2
+	github.com/go-shiori/dom v0.0.0-20200611094855-2cf8a4b8b9eb
+	github.com/jarcoal/httpmock v1.0.5
+	github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e // indirect
+	github.com/sirupsen/logrus v1.6.0
+	github.com/stretchr/testify v1.6.1
+	golang.org/x/image v0.0.0-20200609002522-3f4726a040e8
+	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+	golang.org/x/text v0.3.2
+)
