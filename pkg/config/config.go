@@ -1,11 +1,15 @@
 package config
 
 import (
+	"math/rand"
 	"os"
 	"runtime"
+	"time"
 
 	"github.com/pelletier/go-toml"
 )
+
+var keyChars = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890&~@#$%")
 
 // Because we don't need viper's mess for just storing configuration from
 // a source.
@@ -19,6 +23,7 @@ type config struct {
 type configMain struct {
 	LogLevel      string `toml:"log_level"`
 	DevMode       bool   `toml:"dev_mode"`
+	SignKey       string `toml:"sign_key"`
 	SecretKey     string `toml:"secret_key"`
 	DataDirectory string `toml:"data_directory"`
 }
@@ -85,4 +90,35 @@ func LoadConfiguration(configPath string) error {
 	}
 
 	return nil
+}
+
+// WriteConfig writes configuration to a file.
+func WriteConfig(filename string) error {
+	fd, err := os.OpenFile(filename, os.O_RDWR|os.O_TRUNC, 0600)
+	if err != nil {
+		return err
+	}
+
+	enc := toml.NewEncoder(fd).
+		ArraysWithOneElementPerLine(true).
+		Indentation("  ").
+		Order(toml.OrderPreserve)
+
+	if err = enc.Encode(Config); err != nil {
+		defer fd.Close()
+		return err
+	}
+
+	return fd.Close()
+}
+
+// MakeKey returns a random key
+func MakeKey(length int) string {
+	rand.Seed(time.Now().UnixNano())
+
+	b := make([]rune, length)
+	for i := range b {
+		b[i] = keyChars[rand.Intn(len(keyChars))]
+	}
+	return string(b)
 }

@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/signal"
 	"path"
-	"strings"
 	"syscall"
 
 	log "github.com/sirupsen/logrus"
@@ -39,13 +38,21 @@ func init() {
 }
 
 func appPersistentPreRun(c *cobra.Command, args []string) error {
+	if configPath == "" {
+		configPath = "config.toml"
+		if err := createConfigFile(configPath); err != nil {
+			return err
+		}
+	}
+
 	if err := config.LoadConfiguration(configPath); err != nil {
 		return fmt.Errorf("Error loading configuration (%s)", err)
 	}
 
-	// Check if we have a configuration secret key
-	if strings.TrimSpace(config.Config.Main.SecretKey) == "" {
-		return fmt.Errorf("Secret key is not set (in [main] secret_key)")
+	if updateConfig() {
+		if err := config.WriteConfig(configPath); err != nil {
+			return err
+		}
 	}
 
 	// Enforce debug in dev mode
@@ -120,6 +127,39 @@ func appPersistentPostRunE(cmd *cobra.Command, args []string) error {
 
 func cleanup() error {
 	return db.Close()
+}
+
+func createConfigFile(filename string) error {
+	_, err := os.Stat(filename)
+	if err != nil {
+		if !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
+		fd, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
+		if err != nil {
+			return err
+		}
+		if err = fd.Close(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func updateConfig() bool {
+	updated := false
+
+	if config.Config.Main.SecretKey == "" {
+		config.Config.Main.SecretKey = config.MakeKey(64)
+		updated = true
+	}
+
+	if config.Config.Main.SignKey == "" {
+		config.Config.Main.SignKey = config.MakeKey(32)
+		updated = true
+	}
+
+	return updated
 }
 
 func createFolder(name string) error {
