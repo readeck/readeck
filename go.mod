@@ -3,6 +3,8 @@ module github.com/readeck/readeck
 go 1.14
 
 require (
+	github.com/antchfx/htmlquery v1.2.3
+	github.com/araddon/dateparse v0.0.0-20200409225146-d820a6159ab1
 	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
 	github.com/disintegration/imaging v1.6.2
 	github.com/go-shiori/dom v0.0.0-20200611094855-2cf8a4b8b9eb
