@@ -8,9 +8,13 @@ require (
 	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
 	github.com/disintegration/imaging v1.6.2
 	github.com/doug-martin/goqu/v9 v9.9.0
+	github.com/go-chi/chi v4.1.2+incompatible
+	github.com/go-ozzo/ozzo-validation/v4 v4.2.1
 	github.com/go-shiori/dom v0.0.0-20200611094855-2cf8a4b8b9eb
 	github.com/go-shiori/go-readability v0.0.0-20200413080041-05caea5f6592
 	github.com/go-shiori/obelisk v0.0.0-20200419085100-e22fddd84824
+	github.com/gorilla/schema v1.1.0
+	github.com/gorilla/sessions v1.2.0
 	github.com/hlandau/passlib v1.0.10
 	github.com/jarcoal/httpmock v1.0.5
 	github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e // indirect
