@@ -1,3 +1,5 @@
+/config.toml
+/data
 /dist
 
 /pkg/assets/assets_vfsdata.go
