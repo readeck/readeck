@@ -1,0 +1,4 @@
+single_page_link_selectors = [
+    "//div[@class='post']/div[@class='title']/a",
+    "//a[@href][@class='post__link']/@href"
+]
