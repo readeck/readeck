@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div//ul",
+  "//aside",
+]
+strip_id_or_class = [
+  "adWrapper",
+  "noPrint",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.watoday.com.au/business/the-economy/no-one-died-behind-the-typo-on-the-new-50-note-20190618-p51yqg.html"
+  Contains = []

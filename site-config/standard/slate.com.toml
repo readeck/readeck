@@ -1,0 +1,38 @@
+title_selectors = ["//h1[@class=\"sl-art-head-dek\"]"]
+body_selectors = ["//article//div[@class='sl-art-body']/div[contains(@class, 'body')]"]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = [
+  "//meta[@name=\"author\"]/@content",
+  "//a[contains(@href, '/author')]",
+]
+strip_selectors = [
+  "//div[@class=\"department_kicker\"]",
+  "//div[@id=\"insider_ad_wrapper\" or @id=\"insider_ad_inner\"]",
+  "//div[@id=\"bottom_sponsored_links\"]",
+  "//div[@class=\"sl-art-ad-midflex\"]",
+  "//aside[contains(@class, 'in-article-recirc')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "GDPR_consent=1"
+
+[[tests]]
+  URL = "https://slate.com/news-and-politics/2020/01/impeachment-trial-witness-trade-bad-idea.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://slate.com/technology/2010/11/the-facebook-google-spat-over-who-controls-your-data.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://slate.com/news-and-politics/2011/05/the-danger-of-confusing-the-death-of-osama-bin-laden-with-an-act-of-justice.html"
+  Contains = []

@@ -1,0 +1,40 @@
+title_selectors = ["//meta[@property='og:title']/@content"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' td-ss-main-content ')]"]
+date_selectors = ["//div[contains(@class, 'entry-meta')]//time[@pubdate or @pubDate]"]
+author_selectors = ["//div[contains(@class, 'entry-meta')]//a[@rel='author']"]
+strip_selectors = [
+  "//nav",
+  "//header",
+  "//*[@id='comments' or @id='respond']",
+  "//div[contains(@class, 'comments')]",
+  "//iframe",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' navigation ')]",
+  "//blockquote[contains(concat(' ',normalize-space(@class),' '),' td_quote_box ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' td-post-sharing-bottom ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' author-box-wrap ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' td-post-sharing-top ')]",
+  "//img[contains(concat(' ',normalize-space(@class),' '),' entry-thumb ')]",
+]
+strip_id_or_class = [
+  "sharedaddy",
+  "wpadvert",
+  "commentlist",
+  "sociable",
+  "related_post",
+  "wp-socializer",
+  "addtoany",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://fossbytes.com/nsa-call-detail-records-unauthorized-hundreds-of-millions/"
+  Contains = []

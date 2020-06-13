@@ -1,0 +1,23 @@
+title_selectors = ["//h2"]
+body_selectors = []
+date_selectors = ["substring-after(//p[@class='info'], ' on ')"]
+author_selectors = ["//p[@class='info']//a"]
+strip_selectors = ["//div[ contains(@class, 'respond') ]  |  //h2  |  //h1"]
+strip_id_or_class = [
+  "social",
+  "dd_post_share",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.rockpapershotgun.com/2010/07/29/rps-half-verdict-starcraft-2/"
+  Contains = []

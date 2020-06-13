@@ -1,0 +1,28 @@
+title_selectors = ["//div[@id='contentBody']//h1"]
+body_selectors = ["//div[@id='storyMediaBox'] | //div[contains(@class, 'storyText')]"]
+date_selectors = [
+  "//meta[@name=\"published\"]/@content",
+  "//div[@class=\"timeLine\"]",
+]
+author_selectors = ["//dl[@class=\"storyBlogByline\"]/dd/a"]
+strip_selectors = [
+  "//div[@class=\"scrollingArrows\"]",
+  "//div[@class=\"timeLine\"]",
+  "//dl[@class=\"storyBlogByline\"]",
+  "//span[@class='image-credit']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.cbsnews.com/8301-201_162-57366361/rescued-americans-dad-proud-of-the-u.s/"
+  Contains = []

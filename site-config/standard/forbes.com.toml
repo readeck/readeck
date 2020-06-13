@@ -1,0 +1,43 @@
+title_selectors = [
+  "//hgroup//h1",
+  "//span[@class='mainarttitle']",
+]
+body_selectors = ["//div[@id='leftRail']//div[contains(@class, 'body')]"]
+date_selectors = [
+  "substring-before(//hgroup//h6, '@')",
+  "//span[@class='mainartdate']",
+]
+author_selectors = [
+  "//meta[@name=\"author\"]/@content",
+  "//span[@class='mainartauthor']",
+]
+strip_selectors = ["//aside"]
+strip_id_or_class = [
+  "sticky_sharing",
+  "pagination",
+  "controlsbox",
+  "storyboxes",
+  "sponsoredlinks",
+  "nextpage",
+  "contextuallinks",
+  "article_actions",
+  "engagement_block",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//a[contains(@href, '/print/')]"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.forbes.com/forbes/2011/0509/technology-frog-design-jan-chipchase-ethnographer-birth-cool_print.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.forbes.com/sites/bruceupbin/2012/09/11/the-iphone-5-winners-and-losers/"
+  Contains = []

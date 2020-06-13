@@ -1,0 +1,20 @@
+title_selectors = ["//div[contains(@class, 'main-content')]//h1"]
+body_selectors = ["//div[@class='summary-column'] | //div[contains(@class, 'main-content')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//div[@id='biography-action-links']//a[contains(@href, '/print/')]"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.biography.com/print/profile/martin-luther-9389283"
+  Contains = []

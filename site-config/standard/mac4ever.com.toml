@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' news-news-content ')]"]
+date_selectors = ["//meta[@itemprop=\"datePublished\"]/@content"]
+author_selectors = ["//meta[@name=\"author\"]/@content"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.mac4ever.com/actu/104137_kim-kardashian-et-ses-soeurs-etaient-a-l-apple-store-de-soho-pour-presenter-leur-nouvelle-app"
+  Contains = []

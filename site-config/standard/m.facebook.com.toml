@@ -1,0 +1,20 @@
+title_selectors = ["//div[@id='m_story_permalink_view' or contains(@data-sigil, 'm-story-view')]//h3"]
+body_selectors = ["//div[@id='m_story_permalink_view' or contains(@data-sigil, 'm-story-view')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//*[contains(@data-sigil, 'm-mentions-expand') or contains(@data-sigil, 'story-popup-context') or contains(@data-sigil, 'share') or contains(@data-sigil, 'translate')]"]
+strip_id_or_class = ["commentable"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://m.facebook.com/permalink.php?story_fbid=10154584776550183&id=294468630182"
+  Contains = ["holding an extraordinary session in Brussels this month"]

@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//article"]
+date_selectors = ["//time[@itemprop=\"datePublished\"]/@datetime"]
+author_selectors = ["//a[contains(concat(' ',normalize-space(@class),' '),' gtm-author-byline ')]"]
+strip_selectors = [
+  "//time[@itemprop=\"datePublished\"]",
+  "//img[@role=\"presentation\"]",
+]
+strip_id_or_class = ["gtm-primary-tag-link"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "hidden-",
+  "show-",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.axios.com/apple-buy-driveai-753da17d-60fe-44f9-84ff-1d2d82cd0b81.html"
+  Contains = []

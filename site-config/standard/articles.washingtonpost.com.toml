@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = [
+  "//div[contains(@class, \"article_body\")]",
+  "//div[@id='print_facet']//div[@id='body']",
+]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["concat(substring-before(//div[@id=\"echo_container_a\"]/@guid, '_story.html'), '_print.html')"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "wp_devicetype=0; rplpwabt4=1; devicetype=0; osfam=0; de=; client_region=0; wp_gdpr=1|1; rplmct=1; washpost_poe=true;"
+
+[[tests]]
+  URL = "http://articles.washingtonpost.com/2011-10-22/world/35279694_1_germany-acts-german-leaders-chancellor-angela-merkel"
+  Contains = []
+
+[[tests]]
+  URL = "http://articles.washingtonpost.com/2013-05-31/opinions/39658000_1_chemical-weapons-mass-destruction-cartels"
+  Contains = []

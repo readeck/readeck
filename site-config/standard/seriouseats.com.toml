@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//div[@id='content']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//h2[@class='fn'] | //h2[@class='double-lined'] | //h3 | //div[@id='threeColumn2'] | //div[@id='threeColumn3']"]
+strip_id_or_class = [
+  "\"recipe-feedback\"",
+  "\"comments\"",
+  "\"procedure-number\"",
+  "\"more-with-author\"",
+  "\"inner\"",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.seriouseats.com/recipes/2010/09/peking-duck-mandarin-pancakes-plum-sauce-recipe.html"
+  Contains = []

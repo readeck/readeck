@@ -1,0 +1,33 @@
+title_selectors = ["//meta[@property = 'og:title']/@content"]
+body_selectors = ["//div[@class = 'hb-body']"]
+date_selectors = ["//p[@class = 'hb-date']"]
+author_selectors = ["//h4[@class = 'hb-name']/a"]
+strip_selectors = []
+strip_id_or_class = [
+  "hb-imgWrapper",
+  "hvr-shrink",
+  "hb-expandable",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<span class=\"hcf-location-mark\">",
+  "<strong>",
+],
+  [
+  "</span>",
+  ".</strong>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://app.handelsblatt.com/politik/international/eu-coronahilfen-spanien-lenkt-im-streit-um-corona-bonds-ein-und-wirbt-fuer-kompromissmodell/25757852.html"
+  Contains = ["Die ehemalige EU-Funktionärin sieht in der Krise den richtigen Anlass"]

@@ -1,0 +1,24 @@
+title_selectors = ["//div[@id='article-title']"]
+body_selectors = ["//div[@id='article']"]
+date_selectors = []
+author_selectors = ["//div[@id='articleAuthors']"]
+strip_selectors = ["//div[@class='module wide']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://hbr.org/2012/04/the-real-leadership-lessons-of-steve-jobs/ar/"
+  Contains = []
+
+[[tests]]
+  URL = "http://hbr.org/2013/03/big-bang-disruption/ar/"
+  Contains = []

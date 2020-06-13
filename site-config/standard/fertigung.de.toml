@@ -1,0 +1,32 @@
+title_selectors = ["//title"]
+body_selectors = ["//div[@id='content']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "(//div[@id='content']/h2)[1]",
+  "//h2[contains(., 'mehr News')]/following::*",
+  "//h2[contains(., 'mehr News')]",
+  "//div[contains(@class, 'indizar')]/following::*",
+  "//div[contains(@class, 'indizar')]",
+  "//h1[contains(@class, 'single')]/preceding::*",
+  "//h1[contains(@class, 'single')]",
+]
+strip_id_or_class = ["plista_widget"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//a[contains(., 'Weiter')]"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.fertigung.de/2013/04/igus-neuer-energiekettenkatalog/"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.fertigung.de/2013/04/dynamisch-und-hochpraezise/"
+  Contains = []

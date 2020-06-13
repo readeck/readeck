@@ -1,0 +1,27 @@
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[contains(@class, 'postBody')]"]
+date_selectors = ["//div[@id='nameAndTime']/time"]
+author_selectors = ["//div[@id='nameAndTime']/span[@class='author']"]
+strip_selectors = []
+strip_id_or_class = [
+  "image-credit",
+  "noAutolink",
+  "related",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "Download today's podcast</a>",
+  "Download today's podcast</a></div></body></html>",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.cnet.com/8301-13952_1-57367607-81/the-404-981-where-the-world-is-a-vampire-podcast/"
+  Contains = []

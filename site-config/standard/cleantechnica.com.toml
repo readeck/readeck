@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//a[@href=\"https://shop.spreadshirt.com/CleanTechnica\"]",
+  "//a[@href=\"https://future-trends.cleantechnica.com/subscribe/\"]",
+  "//a[@href=\"https://cleantechnica.com/cleantechnica-newsletters/\"]",
+]
+strip_id_or_class = [
+  "dpsp-content-top",
+  "omc-inner-placeholder",
+  "omc-related-posts",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://cleantechnica.com/2019/07/16/how-did-a-nissan-leaf-beat-a-tesla-model-s-in-a-race/"
+  Contains = []

@@ -1,0 +1,20 @@
+title_selectors = ["//div[@id=\"main-content\"]//h2"]
+body_selectors = ["//div[@id=\"main-content\"]//div[@class=\"content\"]"]
+date_selectors = ["//div[@id=\"main-content\"]//span[@class=\"timestamp\"]"]
+author_selectors = ["//div[@id=\"main-content\"]//span[@class=\"authors\"]"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.news-gazette.com/news/business/economy/2011-08-08/ibm-drops-out-blue-waters-project.html"
+  Contains = []

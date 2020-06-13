@@ -1,0 +1,29 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' node__content ')]"]
+date_selectors = []
+author_selectors = ["//span[@class='submitted']/a"]
+strip_selectors = [
+  "//div[@class='clear-block clr']",
+  "//div[@class='picture']",
+  "//span[@class='submitted']",
+  "//div[@class='breadcrumb']",
+  "//div[@class='fivestar-static-form-item']",
+  "//div[@class='js-links']",
+  "//div[@class='links clear-block clear']",
+  "//div[@class='block block-block']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.zerohedge.com/news/bernankes-columbus-voyage-end-monetary-policy-world"
+  Contains = []

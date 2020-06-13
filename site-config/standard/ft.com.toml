@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[@id='storyContent']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "shareArt",
+  "promobox",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.ft.com/cms/s/2/19fe32bc-d6db-11e5-8887-98e7feb46f27.html"
+  Contains = []

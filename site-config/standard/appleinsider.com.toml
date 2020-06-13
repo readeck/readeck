@@ -1,0 +1,42 @@
+title_selectors = ["//h1[@class=\"art-head\"]"]
+body_selectors = ["//div[@class=\"article\"]"]
+date_selectors = ["//p[contains(@class, 'date-header')]"]
+author_selectors = ["//p[contains(@class, 'byline')]/a"]
+strip_selectors = []
+strip_id_or_class = [
+  "lazy",
+  "multipagefooter",
+  "date-header",
+  "byline",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<noscript>",
+  "<div>",
+],
+  [
+  "</noscript>",
+  "</div>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.appleinsider.com/articles/12/02/29/inside_os_x_108_mountain_lion_safari_52_gets_a_simplified_user_interface_with_new_sharing_features.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://appleinsider.com/articles/13/10/03/goldee-companion-app-for-philips-hue-bulbs-offers-shifting-dynamic-light-scenes"
+  Contains = []
+
+[[tests]]
+  URL = "http://appleinsider.com/appleinsider.rss"
+  Contains = []

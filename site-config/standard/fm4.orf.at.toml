@@ -1,0 +1,23 @@
+title_selectors = ["//h1[@class='detail']"]
+body_selectors = ["//div[@id='story']"]
+date_selectors = ["translate(translate(substring-before(substring-after(//p[@class='date'],'Erstellt am:'), ' Uhr'), '. ', '.'), '-', ' ')"]
+author_selectors = ["//div[@class='authorDescription']/h2"]
+strip_selectors = [
+  "//p[@class='date']",
+  "//p[@class='credit']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://fm4.orf.at/stories/1689156/"
+  Contains = []

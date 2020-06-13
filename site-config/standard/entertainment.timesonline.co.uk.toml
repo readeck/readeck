@@ -1,0 +1,27 @@
+title_selectors = ["//h1[@class = 'heading']"]
+body_selectors = ["//div[@id = 'related-article-links']"]
+date_selectors = []
+author_selectors = ["//div[@class = 'article-author']/span[@class = 'byline']"]
+strip_selectors = [
+  "//div[@id = 'comment-sort-order']",
+  "//div[@id = 'my-profile']",
+  "//div[@class = 'article-author']",
+  "//div[@class = 'bg-f8f1d8 width-385 text-left']",
+  "//div[@id = 'login-status']",
+  "//div[@class = 'puff-padding']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://entertainment.timesonline.co.uk/tol/arts_and_entertainment/the_tls/article7177738.ece"
+  Contains = []

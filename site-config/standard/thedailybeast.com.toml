@@ -1,0 +1,30 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'ArticleBody')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "share",
+  "Share",
+  "footer",
+  "Footer",
+  "Newsletter",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.thedailybeast.com/articles/2017/04/01/michael-flynn-failed-to-disclose-payments-from-russian-propaganda-network.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.thedailybeast.com/articles/2010/04/06/how-mastercard-predicts-divorce.html"
+  Contains = ["people who are going through a divorce are more likely to miss payments"]

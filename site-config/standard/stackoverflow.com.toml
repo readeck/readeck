@@ -1,0 +1,36 @@
+title_selectors = []
+body_selectors = ["//div[@class='post-text' or @class='user-action-time' or @class='user-details' or @class='vote'] | //div[@id='answers-header']//h2"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "vote-up",
+  "vote-down",
+  "star-off",
+  "favoritecount",
+  "-share",
+  "badgecount",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<div class=\"user-details\"><br></div>",
+  "<!-- nothing -->",
+],
+  [
+  "<div class=\"vote\">",
+  "<div class=\"vote\"><h3>Vote count:",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://stackoverflow.com/questions/4484289/id-like-to-understand-the-jquery-plugin-syntax"
+  Contains = []

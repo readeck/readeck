@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//div[@id='content']"]
+date_selectors = ["//div[@class='notes']/a"]
+author_selectors = []
+strip_selectors = ["//div[@id='content']//h2"]
+strip_id_or_class = [
+  "tags",
+  "permalink",
+  "notes",
+  "post_nav",
+  "right_column",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://findtheswagger.tumblr.com/post/11589145141/moe-resners-end-of-an-era-1957-giants-final"
+  Contains = []

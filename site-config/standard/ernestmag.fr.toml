@@ -1,0 +1,34 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' post-video ')] | //div[contains(concat(' ',normalize-space(@class),' '),' post-content ')]"]
+date_selectors = []
+author_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' post-author ')]//a[@rel='author']"]
+strip_selectors = ["//script"]
+strip_id_or_class = [
+  "post-meta",
+  "post-title",
+  "post-category",
+  "woocommerce",
+  "article-cta",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.ernestmag.fr/2018/06/18/coulon-en-chair-en-os-et-en-voix/"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.ernestmag.fr/2018/07/31/decouvertes-ernest-de-lannee/"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.ernestmag.fr/2018/04/03/sous-le-manteau-du-volcan/"
+  Contains = []

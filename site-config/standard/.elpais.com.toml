@@ -1,0 +1,45 @@
+title_selectors = [
+  "//meta[@name='DC.title']/@content",
+  "//div[contains(@class, 'cabecera_noticia')]//h1",
+]
+body_selectors = [
+  "//div[@class='columna_texto']",
+  "//div[@id='cuerpo_noticia']",
+  "//div[@class='estructura_2col_1zq']//div[@class='margen_n']",
+]
+date_selectors = [
+  "//meta[@name='DC.date']/@content",
+  "//meta[@name='date']/@content",
+]
+author_selectors = []
+strip_selectors = [
+  "//div[starts-with(@id, 'sumario') and contains(., 'más información')]",
+  "//div[@id='coment' or @id='foros_not']",
+  "//picture//source",
+]
+strip_id_or_class = [
+  "disposicion_vertical",
+  "ampliar_foto",
+  "utilidades",
+  "info_relacionada",
+  "m-kiosko",
+  "info_complementa",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://economia.elpais.com/economia/2012/02/07/actualidad/1328611790_342868.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://internacional.elpais.com/internacional/2012/02/07/actualidad/1328602145_448315.html"
+  Contains = []

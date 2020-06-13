@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[@id='blox-story-text']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.utdailybeacon.com/news/article_ccf6d024-0f15-11e5-ae29-9f63598deb81.html"
+  Contains = []

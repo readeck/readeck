@@ -1,0 +1,81 @@
+title_selectors = []
+body_selectors = ["//div[@class='GeneralMaterial-article']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "Toolbar",
+  "RelatedBlock",
+  "AudioPanel-podcast",
+  "AudioPanel-buttonPlay",
+  "AudioPanel-title",
+  "AudioPanel-progressText",
+  "Progress-panel",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<noscript>",
+  "<span data-was=\"noscript\">",
+],
+  [
+  "</noscript>",
+  "</span>",
+],
+  [
+  "<p class=\"SimpleBlock-context_p\">",
+  "<p class=\"SimpleBlock-context_p\" style=\"display:list-item; margin-left:2em\">",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://meduza.io/news/2020/03/25/sud-v-nyu-yorke-zapretil-vypusk-kriptovalyuty-telegram"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/video/2019/12/11/dalnost-poleta-poka-ne-ta-o-kakoy-mozhno-mechtat-no-dlya-nachala-revolyutsii-etogo-dostatochno"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/episodes/2020/02/27/moya-tsel-svoboda-molodoy-uchenyy-astrofizik-investiruet-neskolko-let-i-uzhe-millioner-no-kak"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/episodes/2020/04/08/beloe-krasnoe-konyak-ne-odnovremenno-my-ochen-trevozhimsya-za-sebya-i-svoih-detey-kak-s-etim-spravitsya"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/news/2019/09/20/ya-na-svobode-pavel-ustinov-poblagodaril-vseh-za-podderzhku"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/feature/2019/09/24/v-iphone-11-pro-tselyh-tri-kamery-my-poprosili-fotografa-evgeniya-feldmana-ispytat-ih-vozmozhnosti"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/feature/2019/12/10/chto-takoe-luzhkovskaya-arhitektura-10-zdaniy-kotorye-izmenili-moskvu"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/news/2020/04/08/putin-ob-yavil-o-doplate-80-tysyach-rubley-vracham-rabotayuschim-s-patsientami-s-koronavirusom"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/feature/2019/09/18/meduza-opoznala-politseyskogo-slomavshego-nogu-dizayneru-konstantinu-konovalovu-vo-vremya-zaderzhaniya-v-tsentre-moskvy"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/news/2020/04/01/belorussiya-poprosila-u-rossii-pomoschi-v-borbe-s-koronavirusom"
+  Contains = []
+
+[[tests]]
+  URL = "https://meduza.io/shapito/2020/04/08/politsiya-luiziany-sluchayno-ob-yavila-sudnuyu-noch-da-da-toy-samoy-sirenoy-iz-odnoimennyh-filmov"
+  Contains = []

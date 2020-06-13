@@ -1,0 +1,30 @@
+title_selectors = []
+body_selectors = [
+  "//h2[contains(@class, 'body_head')] | //div[@id='img_article' or contains(@class, 'body_content')]",
+  "//div[contains(@class, 'cpanel')]//div[contains(@class, 'thumbnails')]",
+]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[starts-with(@class, 'actu_')]",
+  "//div[contains(@class, 'data')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.sport365.fr/basketball/nba/new-york-accord-avec-toronto-pour-bargnani-1038773.shtml"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.sport365.fr/rss.xml"
+  Contains = []

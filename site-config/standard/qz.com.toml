@@ -1,0 +1,23 @@
+title_selectors = ["//h1"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' item-content ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//div[@class='inline-ad']"]
+strip_id_or_class = [
+  "item-meta",
+  "article-aside",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://qz.com/897790/cia-documents-from-attacking-pakistan-to-ufo-sightings-here-is-everything-the-declassified-cia-documents-have-on-india/"
+  Contains = []

@@ -1,0 +1,25 @@
+title_selectors = []
+body_selectors = ["//article[contains(concat(' ',normalize-space(@class),' '),' post ')]"]
+date_selectors = []
+author_selectors = ["//a[contains(concat(' ',normalize-space(@class),' '),' author-url ')]"]
+strip_selectors = []
+strip_id_or_class = [
+  "ad-content",
+  "post-author",
+  "post-pagination",
+  "post-related",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://blog.netinfluence.ch/2019/05/17/faire-une-application-temps-reel-a-la-decouverte-de-mercure/"
+  Contains = []

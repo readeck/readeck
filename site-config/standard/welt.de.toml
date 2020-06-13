@@ -1,0 +1,30 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'articleContent')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@class='advertising']",
+  "//div[@class='themenalarm']",
+  "//div[contains(@class, 'inTextTeaser')]",
+  "//span[@class='copyRight']",
+  "//div[contains(@class, 'textGallery')]",
+  "//div[contains(@class, 'videoGallery')]",
+  "//div[contains(@class, 'imageGallery')]",
+  "//div[contains(@class, 'openContent')]",
+  "//div[@id = 'writeComment']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.welt.de/vermischtes/weltgeschehen/article11050589/27-Bergleute-in-neuseelaendischer-Mine-vermisst.html"
+  Contains = []

@@ -1,0 +1,28 @@
+title_selectors = ["//title"]
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = [
+  "l-stat.livejournal.com",
+  "www.livejournal.com",
+  "l-userpic.livejournal.com",
+]
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://news.livejournal.com/136664.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://stelazin.livejournal.com/91363.html"
+  Contains = []

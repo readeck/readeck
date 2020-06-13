@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[@class='right']//div[@class='articles']"]
+date_selectors = []
+author_selectors = ["//div[@id='artinfo']//a[contains(@href, '/author/')]"]
+strip_selectors = [
+  "//div[@id='artinfo']",
+  "//table[//a[contains(@href, 'twitter.com')]]",
+]
+strip_id_or_class = ["twitter"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.newsunspun.org/eotn/bbc-headline-change-iran-goes-from-not-building-to-undecided-on-nuclear-bomb"
+  Contains = []

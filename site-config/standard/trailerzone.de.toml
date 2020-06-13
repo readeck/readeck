@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//div[@id='video' or @id='main']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "socialshareprivacy2",
+  "wp_rp_first",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "Genre</strong>",
+  "</strong></p><p><strong>Genre</strong>",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.trailerzone.de/g-i-joe-2-die-abrechnung/"
+  Contains = []

@@ -1,0 +1,29 @@
+title_selectors = ["//article//h1[contains(@class, 'title')]"]
+body_selectors = ["//article//h2[contains(@class, 'subheader')] | (//article//div[contains(@class, 'image')])[1] | //div[@id=\"article-body\"]"]
+date_selectors = []
+author_selectors = ["//div[contains(@class, \"byline\")]//span[contains(@class, 'author')]"]
+strip_selectors = ["//img[contains(@src, '/20x0/')]"]
+strip_id_or_class = [
+  "bgmp-comments",
+  "aside",
+  "promo",
+  "skip-nav",
+  "article-more",
+  "article-bar",
+  "post-comment",
+  "figure",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.bostonglobe.com/2020/04/07/metro/coronavirus-cases-surge-citys-safety-net-hospital-four-out-10-cases-are-now-related-pandemic/"
+  Contains = []

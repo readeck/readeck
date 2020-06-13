@@ -1,0 +1,29 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'copy') or contains(@class, 'comments')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//a[. = 'Subscribe']",
+  "//h1/span[@class = 'smallcopy']",
+  "//a[@class = 'skip']",
+  "//div[@id = 'logo']",
+  "//div[contains(@class, 'comments') and contains(., 'You are not currently logged in')]",
+]
+strip_id_or_class = [
+  "related",
+  "whitesmallcopy",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://ask.metafilter.com/159539/Connect-ZERO-I-feel-like-an-idiot"
+  Contains = []

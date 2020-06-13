@@ -1,0 +1,24 @@
+title_selectors = ["//meta[@property='og:title']/@content"]
+body_selectors = ["//div[@id='article_detail']"]
+date_selectors = ["//div[@id='date_com_art']//a[@class='date']"]
+author_selectors = ["//div[@id='article_detail']//font[@class='auteur']"]
+strip_selectors = []
+strip_id_or_class = [
+  "porte_titre_theme",
+  "cont_param",
+  "date_com_art",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.businessnews.com.tn/details_article.php?a=31073&t=522&lang=fr&temp=1"
+  Contains = []

@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//article//main"]
+date_selectors = ["//span[@itemprop='datePublished']/@content"]
+author_selectors = ["//a[@itemprop='author']/text()"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.eurogamer.net/articles/2014-08-20-bungie-ordered-to-return-shares-to-composer-marty-odonnell"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.eurogamer.net/articles/2014-08-20-invisible-inc-does-espionage-justice"
+  Contains = []

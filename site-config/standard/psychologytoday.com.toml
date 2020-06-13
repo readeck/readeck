@@ -1,0 +1,26 @@
+title_selectors = ["//div[@class=\"page-title\"]/h1"]
+body_selectors = []
+date_selectors = ["substring-before(substring-after(//span[@class=\"submitted\"], 'Published on '), ' by')"]
+author_selectors = ["//a[@title=\"View Bio\"]"]
+strip_selectors = [
+  "//div[@class=\"page-title\"]/h1",
+  "//div[@class=\"article-abstract\"]",
+  "//div[@class=\"article-meta\"]",
+  "//div[@id=\"rightColumn\"]",
+  "//div[@id=\"inline-content-bottom-left\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.psychologytoday.com/blog/how-happiness/201205/my-quibble-facebook"
+  Contains = []

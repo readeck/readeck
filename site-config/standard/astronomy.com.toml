@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article ')]"]
+date_selectors = []
+author_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' byline ')]/a"]
+strip_selectors = []
+strip_id_or_class = [
+  "relatedArticles",
+  "byline",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.astronomy.com/news/2019/05/the-universes-first-supernovae-spewed-jets-of-material-into-neighboring-galaxies"
+  Contains = []

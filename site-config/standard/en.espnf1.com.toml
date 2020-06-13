@@ -1,0 +1,29 @@
+title_selectors = []
+body_selectors = ["//div[@id='content']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@class='rl']",
+  "//p[@class='authdesc']",
+  "//p[@class='strybtm']",
+  "//div[@id='stryFtrLft']",
+  "//div[@id='f1Conversation']",
+  "//div[@id='cmtSpncrRuler']",
+  "//div[@id='stryComments']",
+  "//div[@id='athrData']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://en.espnf1.com/monaco/motorsport/story/50529.html"
+  Contains = []

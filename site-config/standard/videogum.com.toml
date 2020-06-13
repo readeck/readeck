@@ -1,0 +1,23 @@
+title_selectors = ["//h2[@class='posttitle']"]
+body_selectors = ["//div[@class='entry line_top']"]
+date_selectors = [
+  "substring-before(substring-after(//span[@class='postdate'], 'on '), ' by')",
+  "//span[@class='postdate']",
+]
+author_selectors = ["//span[@class='postdate']/a"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://videogum.com/395042/here-are-some-afternoon-links-92/list/"
+  Contains = []

@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[contains(@itemprop, 'articleBody')]"]
+date_selectors = ["//meta[@itemprop=\"datePublished\"]/@content"]
+author_selectors = ["//div[@itemprop=\"author\"]"]
+strip_selectors = []
+strip_id_or_class = ["share-tools"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.usatoday.com/story/news/world/2014/03/18/malaysia-plane-search/6552429/"
+  Contains = []
+
+[[tests]]
+  URL = "http://rssfeeds.usatoday.com/usatoday-NewsTopStories"
+  Contains = []

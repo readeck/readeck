@@ -1,0 +1,20 @@
+title_selectors = ["//span[@class='pcol1 itemSubjectBoldfont']"]
+body_selectors = ["//div[@id='postListBody']"]
+date_selectors = ["//p[@class='date fil5 pcol2']"]
+author_selectors = []
+strip_selectors = ["//div[@class='post-btn']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["/html/frameset/frame[1]/attribute::src"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://blog.naver.com/how2invest/110135068757"
+  Contains = []

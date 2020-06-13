@@ -1,0 +1,43 @@
+title_selectors = ["//h1[contains(@class, 'title')]"]
+body_selectors = ["//div[contains(@class, 'recipe-printview')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "field-name-field-video",
+  "field-name-field-image",
+  "preparation-step-count #evtl auch nicht!",
+  "ad",
+  "adsense",
+  "print-list",
+  "71M_inreadads",
+  "bring-app",
+  "simplora-widget",
+  "field-name-field-kitchen-utensils",
+  "fivestar-wrapper",
+  "pane-eatsmarter-latest-comments",
+  "traffic-lights-wrapper",
+  "logo",
+  "traffic-lights-wrapper",
+  "info-extra",
+  "simplora-widget",
+  "shoplink",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//div[contains(@class, 'pane-eatsmarter-actionbar')]/div[@class='pane-content']/div[contains(@class, 'actionbar-print')]/div[@class='actionbar-item-action']/a"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://eatsmarter.de/rezepte/chili-schokoladen-sorbet"
+  Contains = ["Die Schokolade fein hacken"]
+
+[[tests]]
+  URL = "https://eatsmarter.de/rezepte/thunfisch-wraps-1/druckansicht"
+  Contains = ["den Strunk herausschneiden"]

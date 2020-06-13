@@ -1,0 +1,24 @@
+title_selectors = ["//div[@class='title']"]
+body_selectors = ["//div[ @class='post-content' ]"]
+date_selectors = []
+author_selectors = ["//a[ contains(@href, '/people') ]"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://blog.cloudflare.com/understanding-analytics-when-is-a-page-view-n"
+  Contains = []
+
+[[tests]]
+  URL = "https://blog.cloudflare.com/sha-1-deprecation-no-browser-left-behind"
+  Contains = []

@@ -1,0 +1,24 @@
+title_selectors = ["//h3[@class=\"post-name\"]"]
+body_selectors = ["//div[@class=\"post-content user-defined-markup\"]"]
+date_selectors = ["//div[@class=\"post-date\"]"]
+author_selectors = ["//span[@class=\"user-name\"]"]
+strip_selectors = []
+strip_id_or_class = ["log-feedback-list"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://blogs.technet.com/b/dlemson/archive/2004/03/03/83304.aspx"
+  Contains = []
+
+[[tests]]
+  URL = "http://blogs.technet.com/b/isablog/archive/2009/01/07/a-pptp-client-might-fail-to-connect-to-a-vpn-server-on-the-internet-through-an-isa-server-2006.aspx"
+  Contains = []

@@ -1,0 +1,30 @@
+title_selectors = ["//div[@class='headline'] | //div[@class='mod-header']/h3"]
+body_selectors = ["//div[contains(@class, 'article')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[contains(@class, 'mod-inline')]",
+  "//*/span[@class='page-actions']",
+  "//div[@class='page-actions']/*",
+  "//div[@class='headline'] | //div[@class='mod-header']/h3",
+  "//div[@class='mod-blog-navigation']",
+  "//div[@class='monthday']",
+  "//div[@class='time']",
+  "//div[@class='timeofday']",
+  "//div[contains(@class, 'mod-conversations')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://espn.go.com/boston/mlb/story/_/id/7092528/terry-francona-victim-latest-red-sox-smear-campaign"
+  Contains = []

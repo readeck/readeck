@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = [
+  "//div[contains(@class, 'entry__text')]",
+  "//section[@id='entry-body']",
+]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "A3=d=AQABBHKoQl4CEIemT4yNVwXsjj9-v6PMOlMFEgABAQH4Q14LX_W6b2UB_iMAAAcIa6hCXgxb2nQ&S=AQAAAmgPcrcQNEeDSeHZkaQboZc"
+
+[[tests]]
+  URL = "https://www.huffpost.com/entry/tracking-beijings-boom-th_b_1209828"
+  Contains = ["expats liked to wax nostalgic"]
+
+[[tests]]
+  URL = "https://www.huffpost.com/entry/president-obama-iphone-throwdown_n_1873826"
+  Contains = ["president was allowed to keep the phone"]

@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//article[@class='article fjs-article']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//ul[@class='article__metadata']",
+  "//div[@class='article__tag-list']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  cookie = "pws=functional|analytics|content_recommendation|targeted_advertising|social_media; pwv=2"
+
+[[tests]]
+  URL = "https://www.hln.be/in-de-buurt/leuven/minister-geens-bezoekt-pop-up-naaiatelier-en-krijgt-modieus-mondmasker-aangemeten~a88e678d/"
+  Contains = ["Minister Geens bezoekt pop-up naaiatelier en krijgt modieus mondmasker aangemeten"]

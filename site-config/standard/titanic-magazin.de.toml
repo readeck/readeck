@@ -1,0 +1,27 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'tt_news-bodytext')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "<!--TYPO3SEARCH_end-->",
+  "</div></body></html>",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.titanic-magazin.de/ich.war.bei.der.waffen.rss"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.titanic-magazin.de/news/wenig-bekannte-fakten-ueber-2014-6986/"
+  Contains = []

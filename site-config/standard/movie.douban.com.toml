@@ -1,0 +1,24 @@
+title_selectors = ["//span[contains(@property, 'v:summary')]"]
+body_selectors = ["//div[contains(@class, 'main-bd')]"]
+date_selectors = ["//span[contains(@property, 'v:dtreviewed')]"]
+author_selectors = ["//span[contains(@property, 'v:reviewer')]"]
+strip_selectors = ["//img[contains(@class,'rating')]|//img[contains(@class,'review-stat')]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://movie.douban.com/review/1062013/"
+  Contains = []
+
+[[tests]]
+  URL = "http://movie.douban.com/review/1021870/"
+  Contains = []

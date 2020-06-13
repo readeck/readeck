@@ -1,0 +1,76 @@
+title_selectors = [
+  "//h2[contains(@class, 'article-title')]",
+  "//div[@id='spArticleContent']/h2",
+  "//div[@class='spBigaHeadline']",
+]
+body_selectors = [
+  "//div[@id=\"spArticleContent\"]",
+  "//div[@id=\"spArticleSection\"]",
+  "//div[contains(@class, 'article-section')] | //div[@id='js-article-top-wide-asset'] | //p[contains(@class, 'article-intro')] | //div[contains(@class, 'js-module-box-image')]",
+  "//div[@id=\"spBigaContent\"]",
+]
+date_selectors = [
+  "//div[@id=\"spArticleContent\"]/h3",
+  "//div[@id=\"spBigaDatum\"]",
+]
+author_selectors = [
+  "//p[@class=\"spAuthor\"]/a",
+  "substring-after(//p[@class=\"spAuthor\"], 'Von ')",
+]
+strip_selectors = [
+  "//div[@id=\"spArticleContent\"]/h3",
+  "//div[@id='spArticleContent']/h1",
+  "//div[@id='spArticleContent']/h2",
+  "//p[@class='spAuthor']",
+  "//*/span[@class='spPicLayerText']",
+  "//*/div[@class='spPanoPlayerPaneControl']",
+  "//*/div[@class='spCredit']",
+  "//*/div[@class='spCredit']/following-sibling::p",
+  "//div[@class='spMInline']",
+  "//div[contains(@class, 'spPhotoGallery')]",
+  "//div[@class='spPhotoGallery']/following-sibling::br",
+  "//div[@class='spAssetAlignleft']",
+  "//div[contains(@class,'spAsset')]",
+  "//br[@clear='all']",
+  "//div[@id='spSocialBookmark']",
+  "//div[contains(@class, 'spCommunityBox')]",
+  "//div[contains(@class, 'spArticleNewsfeedBox')]",
+  "//div[@class='spArticleCredit']",
+  "//div[@id='spBreadcrumb']",
+  "//div[@id='spBigaLatestEntries']",
+  "//div[contains(@class, 'spBigaNavi')]",
+  "//div[@class='spDottedLine']",
+  "//div[contains(@class, 'article-print-more')]",
+  "//div[@class='article-copyright']",
+  "//span[@class='image-buttons']",
+  "//br[@class='clearfix']",
+  "//div/div[@class='innen']",
+  "//div/h4[contains(text(), 'URL:')]/following::ul",
+  "//div/h4[contains(text(), 'URL:')]",
+]
+strip_id_or_class = ["article-function-box"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//a[contains(@href, '-druck')]"]
+next_page_link_selectors = ["//a[@class='spBigaControlForw']"]
+replace_strings = [[
+  "<title>Druckversion -",
+  "<title>",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.spiegel.de/politik/deutschland/0,1518,787602,00.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.spiegel.de/wirtschaft/soziales/griechenland-was-den-griechischen-buergern-nun-droht-a-1042682.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.spiegel.de/spiegel/a-710880.html"
+  Contains = []

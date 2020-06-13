@@ -1,0 +1,24 @@
+title_selectors = ["//div[@id='articleTitleWrapper' or @id='mainFeature']//h1"]
+body_selectors = ["//div[@id='mainFeature']//img | //div[contains(@class, 'fullText')]"]
+date_selectors = ["//div[@id='articleMeta']/p"]
+author_selectors = ["//*[@id='authorNameJob']//a"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.spiked-online.com/newsite/article/standing_up_to_the_white-coated_gods_of_fortune/13785"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.spiked-online.com/newsite/article/sex_box_and_the_crisis_of_intimacy/14168"
+  Contains = []

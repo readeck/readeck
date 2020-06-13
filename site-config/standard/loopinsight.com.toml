@@ -1,0 +1,29 @@
+title_selectors = []
+body_selectors = ["//div[@class='container_16']//div[@class='grid_11']"]
+date_selectors = ["substring-before(substring-after(//time, 'Posted on '), ' at')"]
+author_selectors = ["//a[starts-with(@title, 'Posts by')]"]
+strip_selectors = [
+  "//h2[@class='mast']",
+  "//div[@class='container_16']//div[@class='grid_11']/h1",
+  "//div[@class='container_16']//div[@class='grid_11']/p[1]",
+  "//div[@class='container_16']//div[@class='grid_11']/div",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.loopinsight.com/2012/09/13/forget-iphone-5-naysayers-this-thing-is-big/"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.loopinsight.com/2011/05/20/playbook-returns-high-misses-sales-targets-by-90/"
+  Contains = []

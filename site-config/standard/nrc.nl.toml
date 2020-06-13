@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' nmt-layout--sidebar-align-right ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "article__footer",
+  "nmt-layout__sidebar",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.nrc.nl/nieuws/2016/10/02/de-nederlandse-school-wanorde-onrust-en-lawaai-4566603-a1524441"
+  Contains = []

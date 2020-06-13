@@ -1,0 +1,31 @@
+title_selectors = ["//span[@class='hcf-headline']"]
+body_selectors = ["//div[@class='article']"]
+date_selectors = ["//div[@class='hcf-article-date']"]
+author_selectors = [
+  "//div[@class=\"hcf-author\"]/a/text()",
+  "substring-after(//div[@class='hcf-author'], 'von ')",
+]
+strip_selectors = [
+  "//div[contains(@class,\"hcf-smartbox\")]",
+  "//div[contains(@class,\"hcf-stopper\")]",
+  "//div[contains(@class,\"hcf-img-controls\")]",
+  "//span[@class='hcf-location-mark']",
+  "//span[@class='hcf-copyright']",
+  "//div[@class='hcf-copyright']",
+  "//div[@class='hcf-origin']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//li[contains(@class,\"hcf-print\")]/a"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.handelsblatt.com/meinung/gastbeitraege/gastkommentar-zum-emissionshandel-kurskorrekturen-fuehren-zum-kentern/8044326.html"
+  Contains = []

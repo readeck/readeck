@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = []
+date_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' views-field-stamp ')]//span[contains(concat(' ',normalize-space(@class),' '),' field-content ')]//span"]
+author_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' author-name ')]"]
+strip_selectors = []
+strip_id_or_class = [
+  "podcast-episode-number",
+  "jp-audio",
+  "element-invisible",
+  "pager",
+  "article-author-block",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//a[@title=\"Go to next page\"]"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.quickanddirtytips.com/education/grammar/what-is-proto-indo-european-language"
+  Contains = []

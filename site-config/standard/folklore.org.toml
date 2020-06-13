@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[@class='main']"]
+date_selectors = ["/html/body/table[3]/tbody/tr/td[1]/table[2]/tbody/tr[2]/td[2]"]
+author_selectors = ["/html/body/table[3]/tbody/tr/td[1]/table[2]/tbody/tr[1]/td[2]"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.folklore.org/StoryView.py?story=Calculator_Construction_Set.txt"
+  Contains = []

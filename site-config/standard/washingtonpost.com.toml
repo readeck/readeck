@@ -1,0 +1,56 @@
+title_selectors = ["//meta[@name='title']/@content"]
+body_selectors = [
+  "//div[contains(@class, \"article_body\")]",
+  "//div[@id='print_facet']//div[@id='body']",
+]
+date_selectors = [
+  "//div[contains(@class,'byline')]//span[contains(@class,'published')]/@title",
+  "//meta[@name=\"DC.date.issued\"]/@content",
+  "//span[contains(@class,\"pb-timestamp\")]",
+  "//meta[@name=\"eomportal-lastUpdate\"]/@content",
+]
+author_selectors = [
+  "//article//div[contains(@class, 'byline')]",
+  "//meta[@name='DC.creator']/@content",
+  "//span[@class=\"pb-byline\"]",
+  "//h3[@property='dc.creator']//a[@rel='author']",
+]
+strip_selectors = [
+  "//div[@class=\"relative primary-slot padding-top img-border gallery-container photo-wrapper\"]",
+  "//div[@id=\"wp-column six end\"]",
+  "//div[contains(@class,'hidden')]",
+  "//div[@id='article-side-rail']",
+  "//div[@class=\"module component todays-paper-module curved\"]",
+  "//div[@class=\"module component live-qa curved img-border\"]",
+  "//div[@class=\"module component newsletter-signup curved\"]",
+  "//div[@class=\"module featured-stories component curved img-border\"]",
+  "//h3[@property=\"dc.creator\"]",
+]
+strip_id_or_class = [
+  "carousel",
+  "toolbar",
+  "module",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["concat(substring-before(//link[@rel=\"canonical\"]/@href, \"_story.html\"), \"_print.html?noredirect=on\")"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "wp_devicetype=0; rplpwabt4=1; devicetype=0; osfam=0; de=; client_region=0; wp_gdpr=1|1; rplmct=1; washpost_poe=true;"
+
+[[tests]]
+  URL = "http://www.washingtonpost.com/world/europe/in-europe-new-fears-of-german-might/2011/10/19/gIQA3baZ7L_story.html?hpid=z1"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.washingtonpost.com/national/health-science/radical-theory-of-first-americans-places-stone-age-europeans-in-delmarva-20000-years-ago/2012/02/28/gIQA4mriiR_story.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.washingtonpost.com/lifestyle/magazine/the-sorry-fate-of-a-tech-pioneer-halsey-minor-and-historic-virginia-estate-carters-grove/2012/05/30/gJQAwdJG4U_story.html"
+  Contains = []

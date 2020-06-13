@@ -1,0 +1,29 @@
+title_selectors = ["//header//h1"]
+body_selectors = ["//div[contains(@class, 'recipe-details') or contains(@class, 'tips-carousel')] | //section[@id='recipe-ingredients' or @id='recipe-method']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "recipe-rating-wrapper",
+  "magazine-subcribe-header",
+  "hide",
+  "recipe-actions",
+  "buy-ingredients",
+  "related-content",
+  "recipe-magazine-ad",
+  "copy-right",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.bbcgoodfood.com/recipes/1131634/minced-beef-wellington"
+  Contains = []

@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'layout__inner')]//div[contains(@class, 'file-image') or contains(@class, 'node__content')]"]
+date_selectors = []
+author_selectors = ["//article//div[contains(@class, 'field-byline')]"]
+strip_selectors = []
+strip_id_or_class = [
+  "rekommenderade",
+  "disqus",
+  "annonser",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.goteborgsfria.se/artikel/112079"
+  Contains = []

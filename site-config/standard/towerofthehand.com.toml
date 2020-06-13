@@ -1,0 +1,28 @@
+title_selectors = ["//div[@id='headline']"]
+body_selectors = ["//div[@class='entry_text']"]
+date_selectors = ["//div[text() = 'Published:']/following-sibling::div"]
+author_selectors = ["//div[text() = 'Author:']/following-sibling::div/a"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//a[@href='noscript.html']"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://towerofthehand.com/blog/2014/08/08-pitch-this-got-spinoff/index.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://towerofthehand.com/blog/2014/07/31-definitions-and-embodiments/index.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://towerofthehand.com/blog/2014/07/03-hero-with-thousand-faces/index.html"
+  Contains = []

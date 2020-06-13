@@ -1,0 +1,38 @@
+title_selectors = []
+body_selectors = ["//csn_blogST_main"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "/html/body/div[4]/div[3]/div/div/div/section/div/div/div/div/div/div",
+  "/html/body/div[4]/header",
+  "//div[contains(@style, 'none')]",
+]
+strip_id_or_class = [
+  "article-right-sidebar",
+  "rsn-gigya-sharebar-container",
+  "article-bottom",
+  "hider",
+  "footer",
+  "masthead",
+  "block-menu-menu-rsn-login-or-register",
+  "block-menu-menu-header-links",
+  "block-rsn-follow-bar-follow-bar",
+  "block-rsn-weather-rsn-weather-scoreboard",
+  "logo",
+  "element-invisible",
+  "site-name",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.csnphilly.com/eagles/can-stoutland-save-danny-watkins-career"
+  Contains = []

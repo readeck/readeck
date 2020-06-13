@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = []
+date_selectors = ["//*[@class=\"entry-date\"]"]
+author_selectors = ["//*[@class=\"author vcard\"]"]
+strip_selectors = ["//*[@style=\"position:relative;left:72px;top:2px;\"]|//*[@id=\"authorbox\"]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://wmpoweruser.com/breaking-nokia-announces-nfc-support-in-lumia-610-windows-phone-device/"
+  Contains = []

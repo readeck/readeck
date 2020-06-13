@@ -1,0 +1,20 @@
+title_selectors = ["//meta[@property='og:title']/@content"]
+body_selectors = ["//div[@class='articleContent']"]
+date_selectors = ["//meta[@name='pubdate']/@content"]
+author_selectors = ["//div[@class='articleFunctions']//a"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.dr.dk/Nyheder/Udland/2011/10/24/150115.htm"
+  Contains = []

@@ -1,0 +1,26 @@
+title_selectors = ["//h2[@property='dc:title']"]
+body_selectors = ["//div[@id='wysiwyg']"]
+date_selectors = [
+  "//span[@class='article-date']",
+  "substring-after(//div[@class='print-created'], '|')",
+]
+author_selectors = [
+  "//a[contains(@href, '/authors')]",
+  "substring-before(//div[@class='print-created'], '|')",
+]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//ul[contains(@class, 'article-actions-bar')]//a[contains(@href, '?page=full')]"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.thenation.com/article/162331/hard-against-time-roy-fisher"
+  Contains = []

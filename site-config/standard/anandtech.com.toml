@@ -1,0 +1,31 @@
+title_selectors = ["//div[@class='blog_top_left']//h2"]
+body_selectors = ["//section[@class='main_cont']/img | //div[@class='articleContent']"]
+date_selectors = ["substring-after(substring-before(//div, 'Posted in'), ' on ')"]
+author_selectors = ["//a[@class='b'][1]"]
+strip_selectors = [
+  "//h2[. = 'Page 1']/preceding::p",
+  "//h2",
+]
+strip_id_or_class = []
+strip_image_src = ["/content/images/globals/"]
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["concat('http://www.anandtech.com/print/', substring-after(//meta[@property='og:url']/@content, '/show/'))"]
+next_page_link_selectors = ["//div[@class='article_links']/a[@class='fl-rt']"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.anandtech.com/show/8370/gigabyte-am1m-s2h-review"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.anandtech.com/show/8402/sandisk-releases-ultra-ii-ssd-the-second-tlc-nand-ssd-in-the-market"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.anandtech.com/show/8400/arms-cortex-m-even-smaller-and-lower-power-cpu-cores"
+  Contains = []

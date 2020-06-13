@@ -1,0 +1,20 @@
+title_selectors = ["//h1[@id='headline']"]
+body_selectors = ["//article[@class='interview']"]
+date_selectors = ["//time[@pubdate]"]
+author_selectors = ["substring-after(//section[@class=\"credits\"]/ul/li[1],\"Interview by \")"]
+strip_selectors = ["//article[@class='interview']/footer"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://thegreatdiscontent.com/jeffrey-zeldman"
+  Contains = []

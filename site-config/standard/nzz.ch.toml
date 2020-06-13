@@ -1,0 +1,26 @@
+title_selectors = ["//h3"]
+body_selectors = ["//*[@class='article-full']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//header[@class='group']",
+  "//div[@id='social-media-floater']",
+  "//div[@class='advertisement']",
+  "//div[@class='infobox']",
+  "//div[@id='articleComments']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.nzz.ch/wissen/wissenschaft/sonnenschutz-fuer-die-erde-1.17282213"
+  Contains = []

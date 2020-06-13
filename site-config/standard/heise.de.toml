@@ -1,0 +1,125 @@
+title_selectors = []
+body_selectors = ["//article | //div[@class='meldung_wrapper'] | //section[@id='artikel_text']"]
+date_selectors = ["//p[@class='news_datum']"]
+author_selectors = [
+  "//span[@class='author']",
+  "//div[@class=\"article__author\"]",
+]
+strip_selectors = [
+  "//nav",
+  "//time",
+  "//header",
+  "//h4[@class='author']",
+  "//div[@class='gallery compact']/h3",
+  "//div[@class='gallery compact']/figcaption",
+  "//p[@class='news_datum']",
+  "//p[@class='artikel_datum']",
+  "//p[@class='news_navi']",
+  "//p[@class='printversion']",
+  "//a[contains(@href, 'mailto')]",
+  "//div[@class='gallery compact']/h2",
+  "//p[@class='themen_foren']",
+  "//style",
+  "//span[@class='source']",
+  "//figure[@class='printversion__logo']",
+]
+strip_id_or_class = [
+  "comments",
+  "ISI_IGNORE",
+  "printversion--hide",
+  "linkurl_grossbild",
+  "image-num",
+  "heisebox_right",
+  "dossier",
+  "latest_posting_snippet",
+  "a-pvgs",
+  "a-pvg__body",
+  "teaser_adliste",
+  "ad_",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = [
+  "//a[contains(@href, '?view=print')]",
+  "//a[contains(@title, 'Druck')]",
+]
+next_page_link_selectors = [
+  "//a[@class='next' and not(contains(text(), 'Artikel'))]",
+  "//a[@title='vor']",
+  "//a[@rel='next']",
+]
+replace_strings = [
+  [
+  "<h5>",
+  "<h2>",
+],
+  [
+  "</h5>",
+  "</h2>",
+],
+  [
+  "<title>Druckversion - ",
+  "<title>",
+],
+  [
+  " | heise online</title>",
+  "</title>",
+],
+  [
+  " | c't Magazin</title>",
+  "</title>",
+],
+  [
+  " | Telepolis</title>",
+  "</title>",
+],
+  [
+  " | heise Security</title>",
+  "</title>",
+],
+  [
+  " | heise Autos</title>",
+  "</title>",
+],
+  [
+  "<div class=\"heisebox\">",
+  "<blockquote>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.heise.de/select/ct/2020/3/1580493780857147"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.heise.de/open/artikel/Die-Neuerungen-von-Linux-3-15-2196231.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://m.heise.de/open/artikel/Die-Neuerungen-von-Linux-3-15-2196231.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.heise.de/newsticker/meldung/Ueberwachungstechnik-Die-globale-Handy-Standortueberwachung-2301494.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.heise.de/newsticker/meldung/Bodenradar-fuer-selbstfahrende-Autos-horcht-unter-die-Strasse-3273941.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.heise.de/tp/artikel/49/49473/1.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.heise.de/ct/artikel/Die-Neuerungen-von-Linux-3-15-2196231.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://heise.de/-3527918"
+  Contains = []

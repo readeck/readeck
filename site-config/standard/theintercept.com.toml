@@ -1,0 +1,20 @@
+title_selectors = ["//h1[@class=\"Headline\"]"]
+body_selectors = ["//div[@class=\"PostContent\"]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://theintercept.com/2014/10/30/inside-story-matt-taibbis-departure-first-look-media/"
+  Contains = []

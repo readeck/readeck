@@ -1,0 +1,20 @@
+title_selectors = ["/html/head/meta[@name='title']/@content"]
+body_selectors = ["//div[@class='entry-content']"]
+date_selectors = ["//span[contains(concat(' ',normalize-space(@class),' '),' article_date ')]"]
+author_selectors = ["//span[contains(concat(' ',normalize-space(@class),' '),' article_author ')]/a"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//p[@class='pagination']/a"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.stephenfry.com/2011/10/06/steve-jobs/"
+  Contains = []

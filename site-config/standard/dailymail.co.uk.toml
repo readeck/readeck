@@ -1,0 +1,38 @@
+title_selectors = []
+body_selectors = ["//div[@id='js-article-text']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@class='explore-links']",
+  "//div[@id='js-article-text']/br[position()=1]",
+]
+strip_id_or_class = [
+  "print-or-mail-links",
+  "shareArticles",
+  "googleAds",
+  "digg-button",
+  "article-icon-links-container",
+  "clickToEnlarge",
+  "articleIconLinksContainer",
+  "related-carousel",
+  "reader-comments",
+  "most-watched",
+  "most-read",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "blkBorder img-share",
+  "nothing",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.dailymail.co.uk/news/article-1375423/Royal-wedding-Texan-billionaire-Joe-Albritton-invited-Prince-Charles.html"
+  Contains = []

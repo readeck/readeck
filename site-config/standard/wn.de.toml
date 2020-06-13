@@ -1,0 +1,38 @@
+title_selectors = []
+body_selectors = ["//div[@id='main']//div[@class='col right']"]
+date_selectors = []
+author_selectors = ["//div[@id='main']//div[@class='col right']//div[contains(@class, 'attribute-author')]"]
+strip_selectors = []
+strip_id_or_class = [
+  "boxes",
+  "lazy",
+  "comment_box",
+  "fb_comments",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<noscript>",
+  "<div>",
+],
+  [
+  "</noscript>",
+  "</div>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.wn.de/Muenster/Kultur/1742956-Wilm-Weppelmann-verlaesst-die-Einsiedelei-Und-dann-ab-unter-die-Dusche"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.wn.de/rss/feed/wn_muenster"
+  Contains = []

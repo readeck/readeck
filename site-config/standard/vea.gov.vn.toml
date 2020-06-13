@@ -1,0 +1,25 @@
+title_selectors = ["//div[@class=\"detail-new-title\"]"]
+body_selectors = ["//div[@class=\"innerpad\"]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@class=\"ArticleUtility\"]",
+  "//div[@class=\"commentPost\"]",
+  "//div[@class=\"comment-box\"]",
+  "//div[@id=\"TinLienQuan\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://vea.gov.vn/vn/tintuc/tintuchangngay/Pages/T%C4%83ng-c%C6%B0%E1%BB%9Dng-b%E1%BA%A3o-t%E1%BB%93n-%C4%91%E1%BB%99ng-v%E1%BA%ADt-hoang-d%C3%A3-%E1%BB%9F-Vi%E1%BB%87t-Nam.aspx"
+  Contains = []

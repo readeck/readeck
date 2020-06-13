@@ -1,0 +1,25 @@
+title_selectors = ["//div[@id='page-title-wrapper']/div[@id='page-title']/h2"]
+body_selectors = ["//div[@id = 'article-body']"]
+date_selectors = ["//div[@id = 'page-title']/h5/a[starts-with(@href,'/issues/')]"]
+author_selectors = ["//div[@id = 'page-title']/h3"]
+strip_selectors = []
+strip_id_or_class = [
+  "sIFR-alternate",
+  "article-tools",
+  "js_target",
+  "marker",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//a[contains(@href, 'pagination=false') and not(contains(@href, 'printpage=true'))]"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.nybooks.com/articles/archives/2012/feb/23/were-more-unequal-you-think/"
+  Contains = []

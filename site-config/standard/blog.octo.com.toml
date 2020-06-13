@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = []
+date_selectors = ["//div[contains(@class, 'post-meta')]//time/@datetime"]
+author_selectors = ["//div[contains(@class, \"entry-meta\")]//a[contains(@href, 'blog.octo.com/author/')]"]
+strip_selectors = [
+  "//div[@class=\"sharify-container\"]",
+  "//div[@class=\"yarpp-related\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://blog.octo.com/sortir-de-la-consanguinite-logicielle/"
+  Contains = []

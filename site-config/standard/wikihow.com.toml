@@ -1,0 +1,27 @@
+title_selectors = []
+body_selectors = ["//div[@id='bodycontents']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "gatEditSection",
+  "relatedwikihows",
+  "editsection",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = [
+  "//a[@id='gatPrintView']",
+  "concat(//link[@rel='canonical']/@href, '?printable=yes')",
+]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.wikihow.com/Start-Your-Own-Country"
+  Contains = []

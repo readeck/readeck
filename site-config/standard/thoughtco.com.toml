@@ -1,0 +1,20 @@
+title_selectors = ["//h1[contains(concat(' ',normalize-space(@class),' '),' comp ')]"]
+body_selectors = ["//article[contains(concat(' ',normalize-space(@class),' '),' comp ')]"]
+date_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' updated-label ')]"]
+author_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' byline ')]/a"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.thoughtco.com/waste-vegetable-oil-wvo-part-1-85146"
+  Contains = []

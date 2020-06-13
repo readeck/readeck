@@ -1,0 +1,20 @@
+title_selectors = ["//h2[contains(@class, 'entry-title')]"]
+body_selectors = ["//div[contains(@class, 'entry-content')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.fokus.se/2017/03/olosta-karnfragor/"
+  Contains = []

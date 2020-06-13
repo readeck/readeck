@@ -1,0 +1,35 @@
+title_selectors = ["//td[@class=\"headline\"]"]
+body_selectors = ["//tbody[@class=\"body\"]"]
+date_selectors = ["//td[@class=\"date\"]"]
+author_selectors = ["//font[@color=\"#003366\"]"]
+strip_selectors = [
+  "//td[@class=\"headline\"]",
+  "//font[@color=\"#003366\"]",
+  "//td[@class=\"date\"]",
+  "//img[@src=\"images/2009/logo_en.gif\"]",
+  "//img[@src=\"/images/TabOver.gif\"]",
+  "//td[@width=\"160\"]",
+  "//img[@src=\"/images/TabUnder.gif\"]",
+  "//td[@class=\"small\"]",
+  "//td[@height=\"47\"]",
+  "//td[@valign=\"middle\"]",
+  "//td[@background=\"/images/menu_bottombg.gif\"]",
+  "//img[@src=\"/images/sc_footer_l.gif\"]",
+  "//img[@src=\"/images/sc_footer_m.gif\"]",
+  "//img[@src=\"/images/sc_footer_r.gif\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.manager.co.th/Entertainment/ViewNews.aspx?NewsID=9550000101979"
+  Contains = []

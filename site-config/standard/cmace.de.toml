@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//aside[contains(concat(' ',normalize-space(@class),' '),' member ')] | //div[contains(concat(' ',normalize-space(@class),' '),' messageText ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//a[contains(@title, 'Nächste Seite')]"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.cmace.de/index.php/Thread/9780-Urlaub-auf-Madeira-Erlebnisse-und-Empfehlungen/"
+  Contains = []

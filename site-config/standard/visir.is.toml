@@ -1,0 +1,20 @@
+title_selectors = ["//h1"]
+body_selectors = ["//div[@class='paragraph']"]
+date_selectors = ["//span[@class='date']"]
+author_selectors = ["substring(//div[@class='paragraph']/div[@class='meta'], 0, string-length(//div[@class='paragraph']/div[@class='meta']) - 7)"]
+strip_selectors = ["//div[@class='paragraph']/div[@class='meta']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://visir.is/esb,-ipa,-bhm-og-bsrb/article/2012701319997"
+  Contains = []

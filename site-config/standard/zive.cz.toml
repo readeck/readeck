@@ -1,0 +1,30 @@
+title_selectors = []
+body_selectors = ["//*[@class='ar-annotation'] | //div[contains(@class='ar-content')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "ar-link-to-another",
+  "ar-tags",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//a[@data-tracker='Navigace,NextChapter']"]
+replace_strings = [[
+  "Mohlo by vás zajímat:",
+  "<!-- removed -->",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.zive.cz/clanky/tyden-zive-pocitac-ktery-pripomina-hamburger/sc-3-a-180652/default.aspx"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.zive.cz/clanky/6-specialnich-pc-na-doma-k-praci-i-na-hrani-vanoce-2015/sc-3-a-180617/default.aspx"
+  Contains = []

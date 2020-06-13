@@ -1,0 +1,30 @@
+title_selectors = ["//h1[@class='post-title']"]
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "article-paging",
+  "eyebrow",
+  "underbar",
+  "extras",
+  "share",
+  "recap-links",
+  "tvr-author",
+  "pub-date",
+  "post-title",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//span[@class='paging-next']/a[contains(., 'NEXT')]"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://tvrecaps.ew.com/recap/fringe-season-4-episode-2/"
+  Contains = []

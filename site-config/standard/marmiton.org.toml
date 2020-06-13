@@ -1,0 +1,20 @@
+title_selectors = ["//h1[@class=\"main-title\"]"]
+body_selectors = ["//div[@id=\"sticky-desktop-only\"]"]
+date_selectors = []
+author_selectors = ["//span[@class=\"recipe-author__name\"]"]
+strip_selectors = ["//div[@id=\"bloc-video\"]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.marmiton.org/recettes/recette_gateau-au-chocolat-fondant-rapide_166352.aspx"
+  Contains = []

@@ -1,0 +1,35 @@
+title_selectors = ["//meta[@name='title']/@content"]
+body_selectors = ["//article[@id='fig-article']/div"]
+date_selectors = ["//li[contains(concat(' ',normalize-space(@class),' '),' fig-date-pub ')]//time"]
+author_selectors = [
+  "//span[@class='sign']//a[@class='journaliste']",
+  "//meta[@name='author']/@content",
+]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.lefigaro.fr/environnement/2011/11/10/01029-20111110ARTFIG00801-la-chine-confrontee-a-un-immense-defi-ecologique.php"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.lefigaro.fr/conjoncture/2012/11/20/20002-20121120ARTFIG00609-l-usager-devrait-payer-plus-pour-financer-les-transports.php"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.lefigaro.fr/social/2015/03/10/09010-20150310ARTFIG00312-encore-une-annee-noire-pour-l-emploi-salarie.php"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.lefigaro.fr/vox/societe/la-desinstruction-nationale-une-non-assistance-a-une-jeunesse-en-danger-20200110"
+  Contains = []

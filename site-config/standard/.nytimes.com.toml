@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//*[@id='insideNYTimesScrollWrapper']  |  //*[contains(@class, 'articleInline')]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//li[@class='singlePage']/a"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.nytimes.com/2010/07/13/science/13gravity.html?_r=1&amp;pagewanted=print"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.nytimes.com/2011/05/15/world/middleeast/15prince.html?_r=1&hp"
+  Contains = []

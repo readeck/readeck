@@ -1,0 +1,34 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' news-entry ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[contains(concat(' ',normalize-space(@class),' '),' reserved ')]/following-sibling::*",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' form-inner ')]/parent::div/following-sibling::*",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' form-inner ')]/parent::div",
+]
+strip_id_or_class = [
+  "headline",
+  "post-meta",
+  "post-info",
+  "share-container",
+  "reserved",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.guyaweb.com/actualites/news/culture/caravane-top-vakans-sillone-guyane/"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.guyaweb.com/actualites/news/culture/gabriel-serville-regrette-suppression-de-france-o/"
+  Contains = []

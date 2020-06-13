@@ -1,0 +1,45 @@
+title_selectors = [
+  "//meta[@name='DC.title']/@content",
+  "//div[contains(@class, 'cabecera_noticia')]//h1",
+]
+body_selectors = [
+  "//div[@class='columna_texto']",
+  "//div[@id='cuerpo_noticia']",
+  "//div[@class='estructura_2col_1zq']//div[@class='margen_n']",
+]
+date_selectors = [
+  "//meta[@name='DC.date']/@content",
+  "//meta[@name='date']/@content",
+]
+author_selectors = []
+strip_selectors = [
+  "//p[@class='nota_pie']",
+  "//div[starts-with(@id, 'sumario') and contains(., 'más información')]",
+  "//div[@id='coment' or @id='foros_not']",
+]
+strip_id_or_class = [
+  "disposicion_vertical",
+  "ampliar_foto",
+  "utilidades",
+  "info_relacionada",
+  "m-kiosko",
+  "info_complementa",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://brasil.elpais.com/brasil/2014/10/15/politica/1413334841_878730.html"
+  Contains = ["O PT quer intensificar a presença do ex-presidente"]
+
+[[tests]]
+  URL = "http://brasil.elpais.com/brasil/2014/10/13/internacional/1413225730_450761.html"
+  Contains = ["Todos na localidade onde ele nasceu ainda falavam da façanha"]

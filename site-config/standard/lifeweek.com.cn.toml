@@ -1,0 +1,34 @@
+title_selectors = [
+  "substring-before(//h1, '（')",
+  "//h1",
+]
+body_selectors = ["//div[@class='original ']"]
+date_selectors = ["//ul[@class='authorbox']/li"]
+author_selectors = ["substring-after(//ul[@class='authorbox']/li/following-sibling::li, '作者：')"]
+strip_selectors = [
+  "//h1",
+  "//ul[@class='authorbox']",
+  "//span[@class='app_p']",
+  "//div[@style='text-align:right;']",
+  "//div[@class='pageturn_list']",
+  "//div[@class='lifespeaks']",
+  "//div[@class='vright fr']",
+  "//div[@class='copyrt mg20']",
+  "//div[@class='keyabout mg20']",
+  "//ul[@class='readabout mg20']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//div[@class='pageturn_list']/a[@class='pagedown']"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.lifeweek.com.cn/2013/0308/40213.shtml"
+  Contains = []

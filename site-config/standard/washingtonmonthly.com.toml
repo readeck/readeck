@@ -1,0 +1,24 @@
+title_selectors = ["//a[@class = 'headline-article']"]
+body_selectors = ["//div[@class = 'article']"]
+date_selectors = ["//div[@class = 'article']/span[@class = 'date']"]
+author_selectors = ["substring-after(//div[@class = 'article']/p[@class = 'author'], 'By ')"]
+strip_selectors = [
+  "//p[@class = 'author']",
+  "//a[@class = 'headline-article']",
+  "//span[@class = 'date']",
+]
+strip_id_or_class = ["adsbygoogle"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//a[@class = 'print']"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.washingtonmonthly.com/magazine/julyaugust_2011/features/the_trinity_sisters030380.php"
+  Contains = []

@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[@class=\"wiki-content\"]  |  //div[@class=\"section-bd\"]  |  //div[@class=\"news-story\"]"]
+date_selectors = ["//span[@class=\"dtreviewed\"]"]
+author_selectors = ["//span[@class=\"reviewer\"]  |  //p[@class=\"byline\"]/a/text()"]
+strip_selectors = ["//h1"]
+strip_id_or_class = ["user-review-detail"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.giantbomb.com/the-elder-scrolls-v-skyrim/61-33394/"
+  Contains = []

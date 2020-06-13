@@ -1,0 +1,30 @@
+title_selectors = ["//h2[@class='title']"]
+body_selectors = [
+  "//div[@id='article']",
+  "//div[@id='news']",
+]
+date_selectors = ["//div[@class='tidescr']"]
+author_selectors = []
+strip_selectors = [
+  "//div[@class='topic']",
+  "//h2[@class='title']",
+  "//div[a[contains(@href,'/user/')]]",
+  "//div[@class='picto']",
+  "//p[@class='addinfo']",
+  "//h3[@class='topic']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//a[@title='nächste']"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.pro-linux.de/artikel/2/1762/ubuntu-und-kubuntu-1504.html"
+  Contains = []

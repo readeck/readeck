@@ -1,0 +1,44 @@
+title_selectors = [
+  "//div[@id='storyHdr']/h1",
+  "//div[@id='print']//h2",
+]
+body_selectors = [
+  "//div[@class=\"virtualpage\"]",
+  "//div[@id='print']//div[@id='bd']",
+]
+date_selectors = [
+  "//meta[@name=\"DATE\"]/@content",
+  "//div[@id='print']//div[@id='dte']",
+]
+author_selectors = [
+  "//meta[@name=\"AUTHOR\"]/@content",
+  "(//div[@id='print']//div[@id='bd']/h4)[1]",
+]
+strip_selectors = []
+strip_id_or_class = [
+  "articleFooter",
+  "sidebar",
+  "ie6PrintSubhead",
+  "subHdr",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//div[@id='storyDetail']//a[contains(@href, '/print/')]"]
+next_page_link_selectors = []
+replace_strings = [[
+  "<P/>",
+  "</p><p>",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.thestreet.com/story/11386556/1/which-of-these-10-dividend-stocks-is-worth-the-risk.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.thestreet.com/story/11387090/1/7-ubs-stock-picks-for-2012.html"
+  Contains = []

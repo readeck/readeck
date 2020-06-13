@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//link[@rel='canonical']/@href"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.readability.com/read?url=http://feeds.gawker.com/~r/lifehacker/full/~3/jaxAjSay_Rw/add-a-rain-gutter-to-a-picnic-table-for-a-built+in-drink-cooler"
+  Contains = []

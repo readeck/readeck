@@ -1,0 +1,24 @@
+title_selectors = ["//h1[@class='title']"]
+body_selectors = ["//div[@id='itemBody']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = ["itemFooter"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "90%;\">Lees ook",
+  "0%;\"></h3></div></body></html>",
+]]
+
+[http_headers]
+  user-agent = "Googlebot/2.1"
+
+[[tests]]
+  URL = "http://sport.fok.nl/nieuws/548725/1/1/50/rosicky-traint-weer-mee-bij-tsjechie.html"
+  Contains = []

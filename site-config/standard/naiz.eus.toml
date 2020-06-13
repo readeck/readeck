@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class,'widget full_article')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.naiz.eus/eu/actualidad/noticia/20151002/adegi-afirma-que-los-jovenes-viven-una-vida-muy-comoda-y-no-tienen-hambre-para-emprender#"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.naiz.eus/eu/actualidad/noticia/20151012/podemos-euskadi-critica-que-otegi-y-sus-companeros-quieran-pasar-por-grandes-pacifistas"
+  Contains = []

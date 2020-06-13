@@ -1,0 +1,62 @@
+title_selectors = ["//h1[@class='article__title']"]
+body_selectors = [
+  "//section[contains(concat(' ',normalize-space(@class), ' '), ' article__content ')]",
+  "//section[contains(concat(' ',normalize-space(@class), ' '), ' video ')]",
+]
+date_selectors = [
+  "//time[@itemprop='dateModified']/@datetime",
+  "//time[@itemprop='datePublished']/@datetime",
+]
+author_selectors = [
+  "//span[contains(concat(' ',normalize-space(@class),' '),' author__name ')]",
+  "//div[@class=\"entry-meta\"]//a[contains(@class, \"url\")]",
+]
+strip_selectors = [
+  "//div[contains(concat(' ',normalize-space(@class), ' '), ' related-content--video ')]",
+  "//section[contains(@class, 'services')]",
+  "//section[@id=\"js-capping\"]",
+  "//footer[contains(@class, \"article__footer-single\")]",
+  "//section[contains(concat(' ',normalize-space(@class),' '),' catcher ')]",
+  "//p[contains(strong, 'Lire') and a]",
+  "//*[contains(@class, 'comments')]",
+  "//p[@class='article__status']",
+  "//p[@class='article__quote']/parent::blockquote",
+  "//ul[contains(@class, 'meta__social')]",
+  "//link[@rel='stylesheet']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<a target='_blank' onclick='return false;' class='lien_interne conjug'",
+  "<input type='hidden' style='display:none;'",
+],
+  [
+  "<a class=\"lien_interne rub\"",
+  "<input type=\"hidden\" style=\"display:none;\"",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.lemonde.fr/economie/article/2011/07/05/moody-s-abaisse-la-note-du-portugal-de-quatre-crans_1545237_3234.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.lemonde.fr/big-browser/article/2017/10/27/assassinat-de-kennedy-ce-qu-on-a-appris-dans-les-documents-declassifies_5207029_4832693.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.lemonde.fr/pixels/article/2018/07/14/douze-jeux-video-pour-s-amuser-a-plusieurs_5331269_4408996.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.lemonde.fr/sante/video/2016/04/07/diabete-pourquoi-une-telle-progression-de-l-epidemie_4898147_1651302.html"
+  Contains = []

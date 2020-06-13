@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'content_body')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = ["det_rel"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.sfweekly.com/2012-03-14/news/cia-lsd-wayne-ritchie-george-h-white-mk-ultra/"
+  Contains = []

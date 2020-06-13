@@ -1,0 +1,20 @@
+title_selectors = ["//td[@class='second_content']/h1"]
+body_selectors = ["//td[@class='second_content']/div[@class='article_text']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.vedomosti.ru/newspaper/article/259377/rasprodazha_mailru"
+  Contains = []

@@ -1,0 +1,31 @@
+title_selectors = ["//h1[contains(@class, 'article-title')]"]
+body_selectors = [
+  "//div[@id=\"article-body\"]",
+  "//section[contains(@class, 'article-body')]",
+]
+date_selectors = ["//time[@pubdate]/@datetime"]
+author_selectors = ["//article//span[contains(@class, 'byline')]"]
+strip_selectors = [
+  "//figcaption",
+  "//p[contains(., 'MORE:') and ./a]",
+  "//aside",
+]
+strip_id_or_class = [
+  "jumpstart-video",
+  "inline-recirc",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "euConsent=true"
+
+[[tests]]
+  URL = "http://time.com/14478/emotions-may-not-be-so-universal-after-all/"
+  Contains = []

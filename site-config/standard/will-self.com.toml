@@ -1,0 +1,20 @@
+title_selectors = ["//*[@class=\"entry-title\"]"]
+body_selectors = []
+date_selectors = ["//time[@class=\"entry-date\"]"]
+author_selectors = []
+strip_selectors = ["//div[@class=\"widget-area\"]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://will-self.com/2012/02/01/real-meals-dominos-pizza/"
+  Contains = []

@@ -1,0 +1,29 @@
+title_selectors = ["//h1[@id='firstHeading']"]
+body_selectors = ["//div[@id = 'bodyContent']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@id='catlinks']",
+  "//div[@id='jump-to-nav']",
+  "//div[@class='thumbcaption']//div[@class='magnify']",
+  "//table[@class='navbox']",
+]
+strip_id_or_class = [
+  "editsection",
+  "toc",
+  "vertical-navbox",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://secure.wikimedia.org/wikipedia/en/wiki/Christopher_Lloyd"
+  Contains = []

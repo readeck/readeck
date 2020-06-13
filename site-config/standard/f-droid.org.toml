@@ -1,0 +1,20 @@
+title_selectors = ["//h2[@class=\"post-title\"]"]
+body_selectors = []
+date_selectors = []
+author_selectors = ["//header[@class=\"post-header\"]//img/@alt"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://f-droid.org/en/2020/01/16/tracking-the-trackers.html"
+  Contains = []

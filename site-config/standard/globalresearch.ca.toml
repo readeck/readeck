@@ -1,0 +1,21 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  user-agent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+
+[[tests]]
+  URL = "http://www.globalresearch.ca/fallujah-is-being-slaughtered-silently/5495520"
+  Contains = ["what is unknown about this city"]

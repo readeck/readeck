@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[@property=\"content:encoded\"]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.philstar.com/headlines/2017/03/06/1678561/samuel-martires-named-new-sc-justice"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.philstar.com/rss/breakingnews"
+  Contains = []

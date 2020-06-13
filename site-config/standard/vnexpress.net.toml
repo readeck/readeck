@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//div[@cpms_content]//h2[@class='Lead'] | //div[@cpms_content]//p[@class='Normal'] | //div[@cpms_content]//table"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@class=\"box-item\"]",
+  "//div[@id=\"ARTICLE_BANNER\"]",
+  "//a",
+  "//div[@class=\"tag-parent\"]",
+  "//div[@class=\"email-print txtr\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://vnexpress.net/gl/xa-hoi/2011/04/tim-thay-nan-nhan-cuoi-cung-vu-sap-mo-da-o-len-co/"
+  Contains = []

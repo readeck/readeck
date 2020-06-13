@@ -1,0 +1,27 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' entry ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "yarpp-related",
+  "dd_button_v",
+  "c1",
+  "dd_end",
+  "dd_start",
+  "dd_outer",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://blog.xebia.fr/2015/11/18/retour-sur-dockercon-eu-2015-12/"
+  Contains = []

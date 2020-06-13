@@ -1,0 +1,34 @@
+title_selectors = ["//div[@class=\"post-title\"]//h1"]
+body_selectors = ["//article[@class='post-content']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//span[@class='summary-entry']",
+  "//footer",
+]
+strip_id_or_class = ["js-cookies-bar"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "\"</div>\"",
+  "\"&lt;/div&gt;\"",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.numerama.com/sciences/243352-hubble-detecte-un-trou-noir-supermassif-propulse-hors-de-sa-galaxie.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.numerama.com/tech/242703-free-mobile-et-la-4g-en-illimite-ce-quil-faut-savoir.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.numerama.com/business/243686-comme-convenu-quand-lenfer-dune-startup-se-transforme-en-succes-dauto-edition.html"
+  Contains = []

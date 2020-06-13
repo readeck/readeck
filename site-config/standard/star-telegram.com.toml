@@ -1,0 +1,21 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = ["(//p[contains(@class, \"byline\")])[1]"]
+strip_selectors = ["//div[contains(@class, 'lead-item') and contains(@class, 'video')]"]
+strip_id_or_class = ["related-stories"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  User-agent = "PHP/7.4"
+
+[[tests]]
+  URL = "https://www.star-telegram.com/sports/nfl/dallas-cowboys/article234782487.html"
+  Contains = []

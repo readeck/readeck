@@ -1,0 +1,20 @@
+title_selectors = ["//div[@id='frnRahmen']/div/div[@id='content']/div[2]/h2"]
+body_selectors = ["//div[@id='content']/div[2]/span"]
+date_selectors = []
+author_selectors = ["//div[@id='content']/div[1]/div/a"]
+strip_selectors = ["//div[@id='commenthead']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.planetvita.de/news/10389-psn-store-update-vom-03-april-neue-inhalte-fuer-psvita.html"
+  Contains = []

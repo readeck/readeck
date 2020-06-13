@@ -1,0 +1,23 @@
+title_selectors = ["//div[@id='contentHeader']//h1"]
+body_selectors = [
+  "//div[@id='articleBody']",
+  "//div[@id='intelliTXT']",
+]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//div[@id='longPagination']/a[@class='next']"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.popularmechanics.com/technology/aviation/crashes/what-really-happened-aboard-air-france-447-6611877"
+  Contains = []

@@ -1,0 +1,23 @@
+title_selectors = ["//title"]
+body_selectors = ["//div[@id='article-body']"]
+date_selectors = []
+author_selectors = ["substring-after(//div[@class='by-line'],'BY')"]
+strip_selectors = [
+  "//div[@class='by-line']",
+  "//div[@id='article-body']/h1",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.pittsburghmagazine.com/Pittsburgh-Magazine/May-2012/Verde-Lights-the-Night/"
+  Contains = []

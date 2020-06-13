@@ -1,0 +1,36 @@
+title_selectors = ["//header/h2"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' document-main__container ')]"]
+date_selectors = ["//meta[@property='article:modified_time']/@content"]
+author_selectors = [
+  "substring-after(//div[@class='article__header-author'], 'Von ')",
+  "substring-after(//div[@class='article__header-author'], 'Interview: ')",
+  "//div[@class='article__header-author']",
+]
+strip_selectors = [
+  "//header/h2",
+  "//ul[contains(@class, 'sharingbar')]",
+  "//ol[@class='teaser__widget']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.jetzt.de/hauptsache-reset/haeftlinge-als-unternehmensgruender"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.jetzt.de/maedchenfrage/maedchen-fragen-jungs-warum-balanciert-ihr-an-roten-ampeln-auf-dem-rad"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.jetzt.de/meine-theorie/das-perfekte-alter-ist-eine-frage-der-perspektive"
+  Contains = []

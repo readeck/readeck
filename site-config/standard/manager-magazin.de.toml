@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//link[@rel='amphtml']/@href"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.manager-magazin.de/unternehmen/autoindustrie/continental-mit-milliardenverlust-a-1305227.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.manager-magazin.de/politik/weltwirtschaft/coronavirus-was-der-lockdown-in-italien-gegen-covid-19-bringt-und-kostet-a-1305338.html"
+  Contains = []

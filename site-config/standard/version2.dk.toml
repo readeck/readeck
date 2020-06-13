@@ -1,0 +1,20 @@
+title_selectors = ["//article/header/h1"]
+body_selectors = ["//article/section[@class='body']"]
+date_selectors = ["//article/header/section[@class='byline']/span[@class='published']/span"]
+author_selectors = ["//article/header/section[@class='byline']/span[contains(@class, 'author')]/a"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.version2.dk/artikel/amerikansk-hit-investor-er-vild-med-danske-net-ivaerksaettere-17069"
+  Contains = []

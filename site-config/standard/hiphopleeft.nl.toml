@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[@class = 'pd']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@id = 'overzicht-albumrecensies']",
+  "//div[@id = 'jc']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://hiphopleeft.nl/index.php?option=com_content&view=article&id=2767:mark-ronson-record-collection&catid=66:m&Itemid=142"
+  Contains = []

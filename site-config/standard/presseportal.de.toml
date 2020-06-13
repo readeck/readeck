@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' story-text ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = ["news-bodycopy"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.presseportal.de/pm/103258/2930232/felix-neureuther-vor-der-ski-wm-ich-denke-von-rennen-zu-rennen"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.presseportal.de/pm/66749/2933779/koelner-stadt-anzeiger-bahnmitarbeiter-werden-in-nrw-immer-haeufiger-angegriffen-zahl-der/rss"
+  Contains = ["kleineren Bahnhöfen installieren und erhofft"]
+
+[[tests]]
+  URL = "http://www.presseportal.de/rss/presseportal.rss2"
+  Contains = []

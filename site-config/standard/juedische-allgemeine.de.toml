@@ -1,0 +1,36 @@
+title_selectors = ["//h1"]
+body_selectors = ["//div[@id='article_container']"]
+date_selectors = []
+author_selectors = ["//h4//a[@class='author']"]
+strip_selectors = [
+  "//img[@src='']",
+  "//h4[@id='author']",
+]
+strip_id_or_class = [
+  "share_toolbox",
+  "article_header",
+  "phototext",
+]
+strip_image_src = ["icon_author.gif"]
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "lang=\"en\"",
+  "lang=\"de\"",
+],
+  [
+  "/>1</a>",
+  "/></a>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.juedische-allgemeine.de/article/view/id/13366"
+  Contains = []

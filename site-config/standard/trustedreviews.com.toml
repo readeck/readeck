@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[@itemprop='articleBody']"]
+date_selectors = []
+author_selectors = ["//a[contains(@class, 'post-author__name')]"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.trustedreviews.com/news/azerbaijan-grand-prix-2019-schedule-3705205"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.trustedreviews.com/news/darpa-wants-make-better-secure-version-whatsapp-3696558"
+  Contains = []

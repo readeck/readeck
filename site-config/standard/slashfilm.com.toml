@@ -1,0 +1,32 @@
+title_selectors = ["substring-before(//title,'| /Film')"]
+body_selectors = []
+date_selectors = ["substring-before(substring-after(//p[@class='post-info'],'Posted on '),'by')"]
+author_selectors = []
+strip_selectors = [
+  "//div[@class='pm-left']",
+  "//div[@class='pm-right']",
+  "//h2/span",
+  "//h2/strong/a",
+  "//p[contains(text(),'we have to split this post over')]",
+  "//p[@class='post-info']",
+  "//h1/a",
+  "//img[contains(@src,'siteimages/authors')]",
+  "//div[@id='header']",
+  "//div[@class='topad-right']",
+  "//strong[contains(text(),'Cool Posts From Around the Web:')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//h2/strong/a"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.slashfilm.com/superhero-bits-206/"
+  Contains = []

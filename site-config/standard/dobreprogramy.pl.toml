@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = ["//div[@id='phContent_divMetaBody']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "block-content",
+  "social_top",
+  "bio",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.dobreprogramy.pl/Sony-konczy-z-Foldinghome-na-PS3,Aktualnosc,36899.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.dobreprogramy.pl/Wyciekly-dane-osob-na-kwarantannie.-Lista-zawiera-ponad-300-adresow,News,107502.html"
+  Contains = []

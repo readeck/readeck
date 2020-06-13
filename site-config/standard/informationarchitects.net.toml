@@ -1,0 +1,27 @@
+title_selectors = ["//h1[@class=\"post_title\"]"]
+body_selectors = ["//article[@class=\"post\"]"]
+date_selectors = ["//h1[@class=\"section_separator\"]"]
+author_selectors = ["//span[@class=\"post_author\"]"]
+strip_selectors = [
+  "//nav[@class=\"arrow_nav\"]",
+  "//section[@id=\"contact\"]",
+]
+strip_id_or_class = [
+  "post_title",
+  "post_author",
+  "section_separator",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://informationarchitects.net/blog/nzz-relaunch-a-quick-review/"
+  Contains = []

@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[@class='main']"]
+date_selectors = ["substring-before(substring-after(//div[@class='meta-single'], ' am '), ' | ')"]
+author_selectors = ["substring-before(substring-after(//div[@class='meta-single'], 'erstellt von '), ' am')"]
+strip_selectors = []
+strip_id_or_class = [
+  "pagelink",
+  "wp-polls",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//div[@class='post-page-next']/a"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.designtagebuch.de/die-gefuehlte-lesbarkeit/"
+  Contains = []

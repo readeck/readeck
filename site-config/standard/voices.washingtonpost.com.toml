@@ -1,0 +1,21 @@
+title_selectors = ["//h1"]
+body_selectors = ["//div[@class='entrytext']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "wp_devicetype=0; rplpwabt4=1; devicetype=0; osfam=0; de=; client_region=0; wp_gdpr=1|1; rplmct=1; washpost_poe=true;"
+
+[[tests]]
+  URL = "http://voices.washingtonpost.com/ezra-klein/2010/10/why_isnt_monetary_policy_discr.html"
+  Contains = []

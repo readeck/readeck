@@ -1,0 +1,30 @@
+title_selectors = ["//div[@id='divAdnetKeyword']/h1"]
+body_selectors = ["//div[@id='_middle_content_bottom']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@id='_middle_content_bottom_child1']",
+  "//div[@id='_middle_content_bottom_child4']",
+  "//div[@class='cls']",
+  "//div[@class='iphoneBox']",
+  "//ul[@class='ilgiliHaber']",
+  "//div[@class='yorumlar']",
+  "//div[@class='kategoriler']",
+  "//div[@class='textSize']",
+  "//span[@class='tarih']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.posta.com.tr/yasam/teknoloji/HaberDetay/Fedailer_Istanbul_da.htm?ArticleID=101044"
+  Contains = []

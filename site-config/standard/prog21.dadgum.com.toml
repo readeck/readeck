@@ -1,0 +1,23 @@
+title_selectors = ["//h1"]
+body_selectors = ["//div[@id='left']"]
+date_selectors = ["//div[@class = 'entry-footer']/text()"]
+author_selectors = ["string('James Hague')"]
+strip_selectors = [
+  "//h1",
+  "//h1[. = 'Previously']/following::*",
+]
+strip_id_or_class = ["entry-footer"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://prog21.dadgum.com/105.html"
+  Contains = []

@@ -1,0 +1,53 @@
+title_selectors = ["substring-before(//div[@id='content']/h1, ',')"]
+body_selectors = ["//div[@id='detail-body']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//a[@title='Seite drucken']"]
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<span class=\"description\">",
+  "<em>",
+],
+  [
+  "<p class=\"leadtext\"><small>",
+  "<p class=\"leadtext\">",
+],
+  [
+  "Patrick Hollstein",
+  "&nbsp;",
+],
+  [
+  "APOTHEKE ADHOC",
+  "&nbsp;",
+],
+  [
+  "dpa",
+  "&nbsp;",
+],
+  [
+  "Katharina Lübke",
+  "&nbsp;",
+],
+  [
+  "Julia Pradel",
+  "&nbsp;",
+],
+  [
+  "Franziska Gerhardt",
+  "&nbsp;",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.apotheke-adhoc.de/nachrichten/detail/panorama/avie-fuer-den-nachfolger/"
+  Contains = []

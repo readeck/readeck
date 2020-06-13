@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = ["//div[@class='movie_content_area']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "tomatometer_bar_help",
+  "critic-links",
+  "top-critics-numbers",
+  "fan_side",
+  "fblike",
+  "rating_widget",
+  "friend_reviews",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.rottentomatoes.com/m/thor/"
+  Contains = []

@@ -1,0 +1,32 @@
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//article[@itemprop=\"articleBody\"]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//button"]
+strip_id_or_class = [
+  "img-mask",
+  "StretchedBox",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "itemprop=\"url\" style=\"background-image:url(",
+  "itemprop=\"url\" src=\"",
+],
+  [
+  ");\" src=\"https://s.yimg.com/g/images/spaceball.gif\"",
+  "\"",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.yahoo.com/news/amazon-just-accidentally-leaked-details-145441439.html"
+  Contains = ["stereo functionality could allow"]

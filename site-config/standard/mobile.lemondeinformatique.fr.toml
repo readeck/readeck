@@ -1,0 +1,20 @@
+title_selectors = ["//h2"]
+body_selectors = ["div[@id='illustration'] | //p"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://mobile.lemondeinformatique.fr/actualites/lire-les-datacenters-d-apple-google-et-facebook-eco-responsables-selon-greenpeace-le-monde-informatique-57122.html"
+  Contains = []

@@ -1,0 +1,98 @@
+title_selectors = ["//h1[@class=\"articleHeadline\"]"]
+body_selectors = [
+  "//div[contains(concat(' ',normalize-space(@class),' '),' story-body ')]",
+  "//div[@id=\"article\"]",
+  "//*[@itemprop=\"articleBody\"]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' g-body-article-container ')]",
+  "//article[@id='story']",
+]
+date_selectors = [
+  "//meta[@property=\"article:published\"]/@content",
+  "//meta[@itemprop=\"datePublished\"]/@content",
+]
+author_selectors = ["//meta[@name=\"byl\"]/@content"]
+strip_selectors = [
+  "//div[contains(@class, \"doubleRule\")]",
+  "//div[contains(@class, \"articleInline\")]//h6",
+  "//a[contains(@href, 'nytimes.com/adx/')]",
+  "//nyt_byline",
+  "//span[contains(@class, 'slideshow') or contains(@class, 'video')]",
+  "//p[@class='caption']//a[contains(., 'More Photos')]",
+  "//figure//span[.='Image' or .='Video']",
+  "//div[@aria-labelledby=\"modal-title\"]",
+  "//button",
+  "//h6[@class = 'kicker']",
+]
+strip_id_or_class = [
+  "articleTools",
+  "readerscomment",
+  "enlargeThis",
+  "pageLinks",
+  "memberTools",
+  "articleExtras",
+  "singleAd",
+  "byline",
+  "dateline",
+  "articleheadline",
+  "articleBottomExtra",
+  "shareTools",
+  "story-meta",
+  "related-coverage",
+  "ad-header",
+  "bottom-ad",
+  "advert_item",
+  "ResponsiveAd",
+  "robots-nocontent",
+  "hidden",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//link[contains(@href, 'pagewanted=all')]"]
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "src='https://static01.nyt.com/packages/flash/multimedia/ICONS/transparent.png",
+  "ignore-src='https://static01.nyt.com/packages/flash/multimedia/ICONS/transparent.png",
+],
+  [
+  "data-mediaviewer-src='https://static01.nyt.com",
+  "src='https://static01.nyt.com",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.nytimes.com/2011/07/24/books/review/an-academic-authors-unintentional-masterpiece.html"
+  Contains = ["In this column I want to look at a not uncommon way of writing"]
+
+[[tests]]
+  URL = "http://www.nytimes.com/2012/06/10/arts/television/the-newsroom-aaron-sorkins-return-to-tv.html"
+  Contains = ["IF you’ve seen enough of Aaron Sorkin’s theater"]
+
+[[tests]]
+  URL = "https://www.nytimes.com/interactive/2016/books/review/best-books.html"
+  Contains = ["invention and speculation flow together"]
+
+[[tests]]
+  URL = "http://www.nytimes.com/2013/03/25/world/middleeast/israeli-military-responds-after-patrols-come-under-fire-from-syria.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.nytimes.com/2013/08/15/nyregion/when-the-new-york-city-subway-ran-without-rails.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.nytimes.com/2004/02/29/weekinreview/correspondence-class-consciousness-china-s-wealthy-live-creed-hobbes-darwin-meet.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.nytimes.com/2014/06/19/opinion/gail-collins-romney-and-the-2016-contenders-huddle.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.nytimes.com/interactive/2015/12/16/upshot/100000004092329.app.html?_r=2"
+  Contains = []

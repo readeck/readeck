@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//article[contains(concat(' ',normalize-space(@class),' '),' status-publish ')]//div[contains(concat(' ',normalize-space(@class),' '),' entry-container ')]"]
+date_selectors = []
+author_selectors = ["//meta[@name=\"author\"]/@content"]
+strip_selectors = []
+strip_id_or_class = ["post-categories"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://korben.info/gitcoin-aider-a-financer-les-developpements-open-source-avec-de-lethereum.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://korben.info/leon-assistant-vocal-siri.html"
+  Contains = []

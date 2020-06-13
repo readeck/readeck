@@ -1,0 +1,20 @@
+title_selectors = ["//h1"]
+body_selectors = ["//div[@class=\"content article\"]"]
+date_selectors = ["//div[@class=\"date\"]"]
+author_selectors = ["//div[@class=\"meta\"]/span/a"]
+strip_selectors = ["//div[@class=\"content article\"]/h1"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://borderhouseblog.com/?p=7832"
+  Contains = []

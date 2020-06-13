@@ -1,0 +1,29 @@
+title_selectors = ["//title"]
+body_selectors = ["//iframe"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//link[@type='application/xml+oembed']"]
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<![CDATA[",
+  "_",
+],
+  [
+  "]]>",
+  "_",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.dailymotion.com/video/x1vk5oh_before-they-were-on-game-of-thrones_people"
+  Contains = []

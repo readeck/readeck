@@ -1,0 +1,30 @@
+title_selectors = ["//h1"]
+body_selectors = ["//article[contains(@class, 'recipe')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "social-bar",
+  "social-bar-sticky",
+  "dikr-teaser-native",
+  "list--tags",
+  "nativendo-artikel",
+  "adverteaser",
+  "taboolaWrapper",
+  "dikr-responsive-ads-slot",
+  "article-header__copyright",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.lecker.de/lachstatar-mit-honig-limetten-dressing-64756.html"
+  Contains = []

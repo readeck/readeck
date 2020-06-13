@@ -1,0 +1,27 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article-widgets ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = ["related_articles"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "=s180\"",
+  "=s750\"",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.sowetanlive.co.za/rss/?publication=sowetan-live"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.sowetanlive.co.za/sundayworld/news/2017-11-08-manana-should-pay-medical-bills-for-assault-victims-court-told/"
+  Contains = []

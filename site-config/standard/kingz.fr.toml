@@ -1,0 +1,25 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' gp-entry-content ')]"]
+date_selectors = []
+author_selectors = ["//meta[@itemprop=\"author\"]/@content"]
+strip_selectors = []
+strip_id_or_class = [
+  "gp-entry-meta",
+  "gp-entry-header",
+  "gp-post-navigation",
+  "mashsb-container",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.kingz.fr/trois-nouvelles-fresques-berges-de-seine/"
+  Contains = []

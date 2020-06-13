@@ -1,0 +1,58 @@
+title_selectors = ["//meta[@property='og:title']/@content"]
+body_selectors = [
+  "//article[@id='main-article']",
+  "//div[@id='main-article']",
+  "//div[@itemprop='articleBody']",
+  "//div[@class='articleText']",
+  "//div[@class='articleContent']",
+  "//div[@id='article']",
+]
+date_selectors = ["//*[contains(@class, 'date')]"]
+author_selectors = [
+  "//meta[@name=\"author\"]/@content",
+  "//div[@id='profile']//*[@class='authors']//a[1]",
+  "//*[@class='author']/span",
+]
+strip_selectors = [
+  "//header//h1[contains(@class, 'article-header')]",
+  "//header//address",
+  "//header//time",
+  "//div[@class='moreOnBoxWithImages']",
+  "//p[contains(., 'This article available online at:')]",
+  "//p[contains(., 'This article available online at:')]/following::*",
+  "//div[@class='earthbox']",
+]
+strip_id_or_class = [
+  "share-social",
+  "c-article-writer__social",
+]
+strip_image_src = []
+native_ad_selectors = ["//meta[@property=\"og:url\" and contains(@content, '/sponsored/')]"]
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.theatlantic.com/magazine/archive/2014/12/the-real-roots-of-midlife-crisis/382235/"
+  Contains = ["The curve tends to evince itself"]
+
+[[tests]]
+  URL = "http://www.theatlantic.com/technology/archive/2011/04/want-to-see-how-crazy-a-bot-run-market-can-be/237773/"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/6342/"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.theatlantic.com/entertainment/archive/2012/04/30-rock-live-a-funny-reminder-of-why-sitcoms-arent-shot-live-anymore/256447/"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.theatlantic.com/technology/archive/2013/06/fix-things-never-force-it-lessons-from-grandpa/276873/"
+  Contains = []

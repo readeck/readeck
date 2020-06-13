@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = ["//section[contains(concat(' ',normalize-space(@class),' '),' corps ')]"]
+date_selectors = ["//time[@itemprop=\"datePublished\"]/@datetime"]
+author_selectors = []
+strip_selectors = [
+  "//div[contains(concat(' ',normalize-space(@class),' '),' plusLoin ')]",
+  "//select",
+]
+strip_id_or_class = [
+  "comments",
+  "smart-paging-pager",
+  "megaUne",
+  "pas",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' smart-paging-pager ')]//a[@title='Aller à la page suivante']"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.macg.co/aapl/2015/09/tim-cook-rassure-sur-lavenir-du-mac-90957"
+  Contains = []

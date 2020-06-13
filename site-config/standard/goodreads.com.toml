@@ -1,0 +1,51 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'mainContentFloat')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//td[@width=\"130px\"]",
+  "//div[./a[contains(@onclick, \"swapContent\")]]/span[contains(@id, 'freeTextContainer')]",
+  "//div/a[contains(@onclick, \"swapContent\")]",
+  "//table[contains(@class, 'bookDiscussions')]",
+  "//div[@id=\"friendReviews\"]",
+]
+strip_id_or_class = [
+  "wtrButtonContainer",
+  "pagination",
+  "rightContainer",
+  "flagList11",
+  "bookCoverActions",
+  "asyncPreviewButtonContainer",
+  "reviewControls",
+  "ctaBannerShown",
+  "otherEditions",
+  "add_mention_box",
+  "chooseExplanation",
+  "moreLinks",
+  "initiallyHidden",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "style=\"display:none\">",
+  ">",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.goodreads.com/list/show/19.Best_for_Book_Clubs"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.goodreads.com/review/show/66574515?book_show_action=true&from_review_page=1"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.goodreads.com/book/show/42506310-leaving-the-witness"
+  Contains = []

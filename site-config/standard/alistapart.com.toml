@@ -1,0 +1,28 @@
+title_selectors = ["//h1[@class='entry-title']"]
+body_selectors = ["//div[@itemprop='articleBody']"]
+date_selectors = ["//time[@itemprop='datePublished']"]
+author_selectors = ["//h2/a[@class='fn']"]
+strip_selectors = [
+  "//aside",
+  "//footer",
+  "//div[@class=\"utility-side-bar\"]",
+]
+strip_id_or_class = ["aside-breaker"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.alistapart.com/articles/organizing-mobile/"
+  Contains = []
+
+[[tests]]
+  URL = "https://alistapart.com/article/responsible-javascript-part-1"
+  Contains = []

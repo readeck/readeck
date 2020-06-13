@@ -1,0 +1,29 @@
+title_selectors = ["//h3"]
+body_selectors = ["//div[contains(@class, 'mcnt ztag')]"]
+date_selectors = ["//span[contains(@class, 'blogsep')]"]
+author_selectors = ["//span[contains(@class, 'ztag pre')]"]
+strip_selectors = [
+  "//*[contains(@class, 'mcnt ztag')]//span[@style = 'display:none;']",
+  "//*[contains(@id, 'divTopLink')]",
+  "//*[contains(@class, 'phide')]",
+  "//*[contains(@class, 'thide')]",
+  "//*[contains(@id, 'topbar')]",
+  "//*[contains(@class, 'tbar')]",
+  "//*[contains(@class, 'snl')]",
+  "//*[contains(@id, 'banner')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://elainejeff.blog.163.com/blog/static/167190291201381121654580/"
+  Contains = []

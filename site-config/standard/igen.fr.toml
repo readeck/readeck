@@ -1,0 +1,20 @@
+title_selectors = ["//section[@class='titre']/h1"]
+body_selectors = ["//section[@class=\"corps\"]"]
+date_selectors = ["//span[@class=\"infos\"]/time/@datetime"]
+author_selectors = ["//span[@class=\"infos\"]/span[@class=\"username\"]"]
+strip_selectors = ["//select[@id=\"news_changing_node\"]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.igen.fr/itunes/2016/05/itunes-mis-jour-la-semaine-prochaine-contre-le-bug-de-suppression-de-musique-95803"
+  Contains = []

@@ -1,0 +1,45 @@
+title_selectors = ["//div[@id='story']//h2[@class='title']"]
+body_selectors = ["//div[contains(@class,'article-content')]"]
+date_selectors = [
+  "//div[@class='byline']/span[@class='posted']//abbr/@original-title",
+  "//div[@class='byline']/span[@class='posted']//abbr",
+]
+author_selectors = ["//p[@class='byline']/a"]
+strip_selectors = [
+  "//h2[@class='title']",
+  "//div[@class='pager']",
+  "//aside",
+]
+strip_id_or_class = [
+  "byline",
+  "story-sidebar",
+]
+strip_image_src = []
+native_ad_selectors = ["//meta[@property=\"og:url\" and contains(@content, '/sponsored/')]"]
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = [
+  "//nav//a[contains(text(), 'Next')]/@href",
+  "//span[@class='numbers']//a/span[@class='next']/..",
+]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://arstechnica.com/tech-policy/news/2012/02/gigabit-internet-for-80-the-unlikely-success-of-californias-sonicnet.ars"
+  Contains = []
+
+[[tests]]
+  URL = "http://arstechnica.com/apple/2005/04/macosx-10-4/"
+  Contains = []
+
+[[tests]]
+  URL = "http://arstechnica.co.uk/science/2016/06/what-is-open-access-free-sharing-of-all-human-knowledge/"
+  Contains = []
+
+[[tests]]
+  URL = "http://arstechnica.co.uk/information-technology/2016/05/eben-moglen-gpl-online-advertising-is-becoming-a-perfect-despotism/"
+  Contains = []

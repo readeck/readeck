@@ -1,0 +1,40 @@
+title_selectors = ["//h1[@class=\"entry-title\"]"]
+body_selectors = ["//div[@class='materia-titulo']/h2 | //*[@id=\"materia-letra\"]"]
+date_selectors = [
+  "//abbr[@class=\"published\"]",
+  "//abbr[@class=\"updated\"]",
+]
+author_selectors = ["//*[@class=\"author\"]/strong"]
+strip_selectors = [
+  "//div[contains(@class,'foto')]/strong",
+  "//div[contains(@class,'frase-materia')]/div[@class='autor']",
+  "//div[contains(@class,'saibamais')]",
+  "//*[contains(text(),'Clique aqui e veja mais')]/ancestor::p",
+  "//ul[@class=\"toolbar\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "[Clique aqui e veja mais vídeos do Fluminense]",
+  "[]",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://globoesporte.globo.com/atletismo/noticia/2013/08/michael-johnson-diz-que-bolt-e-melhor-da-historia-nao-ha-duvidas.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://globoesporte.globo.com/futebol/futebol-internacional/futebol-espanhol/noticia/2013/08/barca-atropela-levante-e-neymar-passa-em-branco-em-estreia-oficial.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://globoesporte.globo.com/futebol/times/fluminense/noticia/2013/08/poupado-no-sabado-felipe-se-diz-pronto-para-ser-titular-contra-o-goias.html"
+  Contains = []

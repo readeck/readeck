@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = []
+date_selectors = ["//time[contains(@class, 'c-byline__time--article__hed')]"]
+author_selectors = ["//ol[contains(@class, 'c-meta__byline--article__hed')]"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.citylab.com/design/2018/08/the-case-for-rooms/563216/"
+  Contains = ["src=\"https://cdn.theatlantic.com/assets/media/img/posts/2018/08/AP_051007018677/01f7b92fc.jpg\""]

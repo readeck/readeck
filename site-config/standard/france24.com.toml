@@ -1,0 +1,23 @@
+title_selectors = ["//h1[@class=\"title\"]"]
+body_selectors = ["//article[contains(concat(' ',normalize-space(@class),' '),' article-long ')]//div[contains(concat(' ',normalize-space(@class),' '),' bd ')]"]
+date_selectors = ["//p[@class=\"modification\"]"]
+author_selectors = ["//p[@class=\"author\"]"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "<p class=\"modification\">Latest update :",
+  "<p class=\"modification\">",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.france24.com/en/20150427-togo-gnassingbe-poised-extend-power-election/"
+  Contains = []

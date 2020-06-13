@@ -1,0 +1,24 @@
+title_selectors = ["//head/title"]
+body_selectors = ["//div[@id=\"mvp-content-main\"]"]
+date_selectors = []
+author_selectors = ["//a[@rel=\"author\"]/text()"]
+strip_selectors = ["//p[@class=\"pc-pagination\"]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//p[@class=\"pc-pagination\"]/a[contains(text(), \"Page suivante\")]"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.presse-citron.net/voici-comment-vous-pourrez-customiser-vos-fils-dactualite-facebook/"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.presse-citron.net/netflix-liste-complete-codes-secrets-acceder-categories-cachees/"
+  Contains = []

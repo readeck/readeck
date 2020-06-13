@@ -1,0 +1,31 @@
+title_selectors = []
+body_selectors = ["//div[@id='content']"]
+date_selectors = ["//div[@id='content']//time/@datetime"]
+author_selectors = ["//div[@id='content']//a[contains(concat(' ',normalize-space(@class),' '),' author-link ')]"]
+strip_selectors = [
+  "//div[@id='content']//h1[1]",
+  "(//p//time//ancestor::p[1])[starts-with(normalize-space(.), 'Published on ')]",
+]
+strip_id_or_class = [
+  "share",
+  "tags-list",
+  "author-container",
+  "article-participate",
+  "translation-details",
+  "contributor-container",
+  "article-language-selector",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://cafebabel.com/es/article/ahmad-shamieh-el-refugiado-sirio-que-pone-en-jaque-a-eslovenia-5b20dfc7f723b325ef3dc566/"
+  Contains = []

@@ -1,0 +1,23 @@
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//h2[@class='strapline'] | //article[contains(@class, 'node-article')]"]
+date_selectors = ["//time[@pubdate]/@datetime"]
+author_selectors = ["//span[@class='author-name']"]
+strip_selectors = ["//footer"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//a[contains(@href, '?page=show')]"]
+next_page_link_selectors = []
+replace_strings = [[
+  "<p>[ pagebreak ]</p>",
+  "<!-- pagebreak -->",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.edge-online.com/features/telling-modern-warfares-story"
+  Contains = []

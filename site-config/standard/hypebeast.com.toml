@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[@id='content']//div[contains(@class, 'wp-image-') or contains(@class, 'entry')][1]"]
+date_selectors = []
+author_selectors = ["//span[@class='author']/a"]
+strip_selectors = []
+strip_id_or_class = [
+  "disqus",
+  "paginator",
+  "photo-number",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://hypebeast.com/2012/11/stussy-2012-fall-winter-november-releases/"
+  Contains = []

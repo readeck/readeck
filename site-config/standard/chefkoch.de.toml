@@ -1,0 +1,60 @@
+title_selectors = ["//h1[contains(@class, 'headline-duo__headline')]"]
+body_selectors = [
+  "//main[contains(@class, 'ds-container')]",
+  "//div[@class=article-content]",
+]
+date_selectors = []
+author_selectors = ["//div[@class='article-information__meta']/span[1]"]
+strip_selectors = [
+  "//div[contains(concat(' ', normalize-space(@class), ' '), ' ad ')]",
+  "//aside",
+  "//h3",
+  "//main[contains(@class, 'ds-container')]/div",
+]
+strip_id_or_class = [
+  "recipe-header",
+  "mobile-only",
+  "bi-form-servings",
+  "recipe-author",
+  "img-title-stars",
+  "rg-list",
+  "recipe-comments",
+  "ds-hr",
+  "ds-grid",
+  "pi-cont",
+  "recipe-servings",
+  "slider",
+  "recipe-image-voting",
+  "recipe-comments",
+  "kommentarform",
+  "responsive-ad",
+  "sg-note",
+  "simplora-widget",
+  "recipe2shoppinglist",
+  "gujAd",
+  "teaser-top-small",
+  "rezeptvideos",
+  "recipe-guide-wrapper",
+  "recipe-guide-hint-tile",
+  "container-video",
+  "recipe2shoppinglist",
+  "slick slick--thumbnail",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.chefkoch.de/rezepte/1748851284207014/Schweinefilet-mit-Apfel-Curry-Sauce.html"
+  Contains = ["Das Schweinefilet trocken tupfen und einmal quer halbieren"]
+
+[[tests]]
+  URL = "http://www.chefkoch.de/magazin/artikel/6157/Chefkoch/kamelle-selber-machen.html"
+  Contains = ["Für viele ist der Umzug am Rosenmontag die Gelegenheit, den Bonbon-Vorrat für das ganze Jahr zu sichern."]

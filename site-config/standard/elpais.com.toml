@@ -1,0 +1,45 @@
+title_selectors = [
+  "//meta[@name='DC.title']/@content",
+  "//div[contains(@class, 'cabecera_noticia')]//h1",
+]
+body_selectors = [
+  "//div[@class='columna_texto']",
+  "//div[@id='cuerpo_noticia']",
+  "//div[@class='estructura_2col_1zq']//div[@class='margen_n']",
+]
+date_selectors = [
+  "//meta[@name='DC.date']/@content",
+  "//meta[@name='date']/@content",
+]
+author_selectors = []
+strip_selectors = [
+  "//div[starts-with(@id, 'sumario') and contains(., 'más información')]",
+  "//div[@id='coment' or @id='foros_not']",
+  "//picture//source",
+]
+strip_id_or_class = [
+  "disposicion_vertical",
+  "ampliar_foto",
+  "utilidades",
+  "info_relacionada",
+  "m-kiosko",
+  "info_complementa",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://elpais.com/elpais/2012/02/06/gente/1328526783_491687.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://elpais.com/diario/2012/02/07/cultura/1328569202_850215.html"
+  Contains = []

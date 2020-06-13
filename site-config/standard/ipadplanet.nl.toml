@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//div[@id = 'post']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[@class = 'postinfo']",
+  "//div[@id = 'postmetanew']",
+  "//div[@class = 'paginator']",
+  "//div[@class = 'col-2']",
+  "//div[@id = 'adfactor-label']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.ipadplanet.nl/11723/steve-jobs-bevestigt-verdwijnen-fysieke-rotatieschakelaar-in-ios-4-2/"
+  Contains = []

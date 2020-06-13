@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[@id='article-body']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://frontburner.dmagazine.com/2015/04/23/the-barrett-brown-review-of-arts-and-letters-and-jail-a-sign-of-things-to-come/"
+  Contains = []

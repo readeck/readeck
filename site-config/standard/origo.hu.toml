@@ -1,0 +1,38 @@
+title_selectors = ["/html/body/div[5]/div[2]/h1"]
+body_selectors = [
+  "/html/body/div[5]/div[2]/div[6]/div/div",
+  "//*[@id=\"cikk\"]",
+]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "/html/body/div[5]/div[2]/h1",
+  "/html/body/div[5]/div[2]/div[4]",
+  "//*[@id=\"multidoboz\"]",
+  "/html/body/div[5]/div[2]/div[6]/div[2]",
+  "//*[@id=\"comments\"]",
+  "//*[@id=\"rating-doboz\"]",
+  "/html/body/div[5]/div[2]/div[10]",
+  "/html/body/div[5]/div[2]/a",
+  "/html/body/div[5]/div[2]/span",
+  "/html/body/div[5]/div[2]/span[2]",
+  "/html/body/div[5]/div[2]/span[3]",
+  "/html/body/div[5]/div[2]/span[4]",
+  "/html/body/div[5]/div[2]/span[5]",
+  "//*[@id=\"kommentszam\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.origo.hu/itthon/20110119-lemondott-a-kulturaert-felelos-helyettes-allamtitkar.html"
+  Contains = []

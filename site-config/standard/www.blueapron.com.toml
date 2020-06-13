@@ -1,0 +1,32 @@
+title_selectors = []
+body_selectors = ["//div[@id='main']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//svg[contains(@class, 'icon-svg')]",
+  "//section[contains(@class, 'section-recipe__sidebar')]",
+  "//div[contains(@class, 'recipe-social')]",
+  "//div[contains(@class, 'recipe-main__badges')]",
+  "//div[contains(@class, 'ing-modal')]",
+  "//a[contains(@class, 'js-StepLaunch')]",
+  "//div[contains(@class, 'step-by-step-modal')]",
+  "//section[contains(@class, 'recipe-tools')]",
+  "//section[contains(@class, 'recipe-tips')]",
+  "//section[contains(@class, 'recipe-comments')]",
+  "//a[contains(@class, 'get-cooking-btn')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.blueapron.com/recipes/roasted-cauliflower-orecchiette-with-garlic-breadcrumbs"
+  Contains = []

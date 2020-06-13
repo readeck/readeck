@@ -1,0 +1,25 @@
+title_selectors = ["//div[contains(@class, \"hentry\")]/h3"]
+body_selectors = ["//div[contains(@class, \"entry\")]"]
+date_selectors = ["substring-before(substring-after(normalize-space(//p[contains(@class, \"postmetadata\")]/small), \"was posted on \"), \" and is filed under\")"]
+author_selectors = ["//div[contains(@class, \"hentry\")]/h2[contains(@class, \"author_bio\")]"]
+strip_selectors = ["//div[contains(@class, \"hentry\")]/h3"]
+strip_id_or_class = [
+  "addtoany_share_save_container",
+  "postmetadata",
+  "author_bio",
+  "author_bio_2",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.quantumdiaries.org/2011/10/25/piling-up/"
+  Contains = []

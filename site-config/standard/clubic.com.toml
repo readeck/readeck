@@ -1,0 +1,44 @@
+title_selectors = ["//h1"]
+body_selectors = [
+  "//div[@class='editorial']",
+  "//div[@id='content']",
+  "//article",
+]
+date_selectors = []
+author_selectors = ["//a[@class='auteur']"]
+strip_selectors = [
+  "//a[contains(text(),'Page suivante')]",
+  "//a[contains(text(),'Page précédente')]",
+]
+strip_id_or_class = [
+  "breadcrumb",
+  "kadmer-ad",
+  "slideshow-head",
+  "parse-shopper-resume-produit",
+  "NlTitle",
+  "NlSubTitle",
+  "AuthorBox",
+  "maillage",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//a[contains(text(),'Page suivante')]"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.clubic.com/carte-graphique/carte-graphique-amd/radeon-hd-7770/article-478936-1-radeon-hd-7750-7770.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.clubic.com/mag/diaporama/photo-space-impressionnantes-photos-atterrissage-barge-84782/"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.clubic.com/application-mobile/actualite-825698-whatsapp-status-attaque-snapchat.html"
+  Contains = []

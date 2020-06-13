@@ -1,0 +1,27 @@
+title_selectors = []
+body_selectors = [
+  "//div[@id='artLinkAnc']",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' artAcc ')] | //div[contains(concat(' ',normalize-space(@class),' '),' artTxt ')]",
+]
+date_selectors = []
+author_selectors = ["substring-before(//label[contains(concat(' ',normalize-space(@class),' '),' artAuth ')], ', Le ')"]
+strip_selectors = ["//a[starts-with(@href, 'https://abo.socialter.fr/')]/parent::*"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.socialter.fr/fr/module/99999672/696/ynis_varoufkis__si_je_deviens_un_bon_politicien_flinguez_moi"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.socialter.fr/fr/module/99999672/659/enqute__comment_leurope_bidouille_ses_objectifs_de_transition_nergtique"
+  Contains = []

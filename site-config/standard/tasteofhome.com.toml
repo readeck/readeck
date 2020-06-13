@@ -1,0 +1,24 @@
+title_selectors = ["//div[@id='ctl00_MainContent_ctl00_Div1']//h2"]
+body_selectors = ["//div[@id='ctl00_MainContent_ctl00_Div1']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = ["tohPrintL.png"]
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//div[contains(@class, 'recipeHeader')]//a[contains(@href, '/print')]"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.tasteofhome.com/recipes/Grinch-Punch"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.tasteofhome.com/recipes/lactose-free-chocolate-chip-cookies"
+  Contains = []

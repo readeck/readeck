@@ -1,0 +1,26 @@
+title_selectors = ["//h2[@class=\"headline\"]"]
+body_selectors = ["//div[@id=\"story\"]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "shareMe",
+  "authorbox",
+  "byline",
+  "share",
+  "separator",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//h2[@class=\"headline\"]/a"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://boingboing.net/2011/10/23/understanding-the-hyperrich-through-the-lens-of-tomorrows-history.html"
+  Contains = []

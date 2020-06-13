@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//div[@class='byline' or @id='storyEmbSlide' or @id='mainBodyArea']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//p[@class='comments']",
+  "//div[@id='storyEmbSlide']//div[contains(@class, \"hide\")]",
+  "//div[@id='tmg-related-links' or @id='outbrain-related-links' or @id='onespot-related-links']",
+  "//p[@class='bbpTweet']/span[@class='timestamp']",
+  "//p[@class='bbpTweet']/span[@class='metadata']//img",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.telegraph.co.uk/news/worldnews/europe/ireland/8663451/Is-Ireland-divorcing-from-the-Catholic-Church.html"
+  Contains = []

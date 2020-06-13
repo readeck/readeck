@@ -1,0 +1,29 @@
+title_selectors = []
+body_selectors = ["//div[@id = 'content']"]
+date_selectors = ["substring-before(//meta[@name = 'dc.date']/@content,'T')"]
+author_selectors = [
+  "//span[@class = 'authors']",
+  "//span[@class = 'ht-vtag'][1]",
+]
+strip_selectors = [
+  "//div[contains(@class, 'region-ubercontent')]",
+  "//h1",
+  "//div[@id = 'ht-author']",
+  "//ul[@class = 'links inline']",
+  "//div[@id = 'ht-tools']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.historytoday.com/carol-dyhouse/skin-deep-fall-fur"
+  Contains = []

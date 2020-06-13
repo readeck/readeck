@@ -1,0 +1,43 @@
+title_selectors = ["//h1"]
+body_selectors = ["//div[@class='tagesnews-content']"]
+date_selectors = ["//p[@class='news_datum']"]
+author_selectors = ["//span[@class='author']"]
+strip_selectors = [
+  "//h3",
+  "//p[@class='bodytext']//a",
+  "//p[contains(., 'Lesen Sie')]",
+  "//p[contains(., '– in DAZ')]",
+]
+strip_id_or_class = [
+  "dachzeile",
+  "autor_datum",
+  "comments",
+  "banner-",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = true
+prune = true
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<p class=\"image_caption\">",
+  "<p><small><em>",
+],
+  [
+  "</dd>",
+  "</em></small></dd>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.deutsche-apotheker-zeitung.de/pharmazie/news/2014/09/03/weniger-nebenwirkungen-aber-kein-zusatznutzen/13715.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.deutsche-apotheker-zeitung.de/recht/news/2014/09/02/urteile-zum-cannabis-eigenanbau-bfarm-geht-in-berufung/13716.html"
+  Contains = []

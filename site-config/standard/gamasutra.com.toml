@@ -1,0 +1,23 @@
+title_selectors = [
+  "//span[@class='newsTitle']",
+  "//h3[@class='title']",
+]
+body_selectors = ["//div[contains(@class, 'hide_phone')] | //div[contains(@class, \"page_data_1\")]"]
+date_selectors = ["//td[@class='newsDate']"]
+author_selectors = ["//div[contains(class, 'comment_title')]//a[contains(@href, '/author/')]"]
+strip_selectors = ["//h3[@class='title']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["concat(//meta[@property=\"og:url\"]/@content, '?print=1')"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.gamasutra.com/view/feature/132559/staying_power_rethinking_feedback_.php"
+  Contains = []

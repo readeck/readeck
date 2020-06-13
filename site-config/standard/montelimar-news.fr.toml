@@ -1,0 +1,26 @@
+title_selectors = ["//a[contains(concat(' ',normalize-space(@class),' '),' titre_news ')]"]
+body_selectors = ["//div[@id='titre']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "titre_news",
+  "group1",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "lang=\"en-US\"",
+  "lang=\"fr-FR\"",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.montelimar-news.fr/article/parfum-de-jazz-en-drome-provencale/1/9654.html#955c5"
+  Contains = []

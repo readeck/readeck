@@ -1,0 +1,27 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' post-content ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "related-links",
+  "pagination",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//div[@class = 'pagination']/a[@class = 'next icon-circle-next']"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.dorkly.com/post/77499/geekiest-office-supplies-ever-made?ref=homepage"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.dorkly.com/post/73816/a-comic-of-ice-and-fire-a-hero-emerges"
+  Contains = []

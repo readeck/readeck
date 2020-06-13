@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//div[(@id = \"content\")]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[(@class = \"links-bar\")]",
+  "//div[(@class = \"povrzani\")]",
+  "//div[(@class = \"povrzani-dolu\")]",
+  "//div[(@class = \"tags\")]",
+  "//h1[(@id = \"page-title\")]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://off.net.mk/zhivot-i-zabava/gadzheti/dzhabe-raboti-dzhabe-ne-dishi"
+  Contains = []

@@ -1,0 +1,60 @@
+title_selectors = []
+body_selectors = [
+  "//section[contains(concat(' ',normalize-space(@class),' '),' content ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' content ')]",
+]
+date_selectors = []
+author_selectors = ["//div[@itemprop='author']//p[@itemprop='name']"]
+strip_selectors = [
+  "//h2[text()='Pour aller plus loin']/following-sibling::div[contains(concat(' ',normalize-space(@class),' '),' panel ')]",
+  "//h2[text()='Pour aller plus loin']",
+  "//h2[@id=\"cbdReview\"]",
+  "//nav",
+]
+strip_id_or_class = [
+  "social",
+  "follow",
+  "page-up",
+  "see-more",
+  "author-box",
+  "mobileHide",
+  "h-alb-titre",
+  "listComments",
+  "share-buttons",
+  "comment-form-bottom",
+  "biblio-action-buttons",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://culturebd.com/serie-17441-dept.-h"
+  Contains = []
+
+[[tests]]
+  URL = "https://culturebd.com/album-bd/les-enquetes-du-commissaire-raffini/230936-12-rue-des-souvenirs"
+  Contains = []
+
+[[tests]]
+  URL = "https://culturebd.com/actualites/interviews/2018/07/331-wesh-caribou-l-art-du-rire-par-grand-froid"
+  Contains = []
+
+[[tests]]
+  URL = "https://culturebd.com/anecdotes/the-end-l-apocalypse-selon-les-doors-255"
+  Contains = []
+
+[[tests]]
+  URL = "https://culturebd.com/auteurs/110-rodolphe"
+  Contains = []
+
+[[tests]]
+  URL = "https://culturebd.com/agenda/exposition-chapeau-bas-spirou-676"
+  Contains = []

@@ -1,0 +1,23 @@
+title_selectors = ["//div[@class=\"story\"]/h1"]
+body_selectors = ["//div[@id=\"story-body-text\"]"]
+date_selectors = ["//p[@class=\"date\"]"]
+author_selectors = ["//span[@class=\"byline\"]"]
+strip_selectors = [
+  "//*[@class='all']",
+  "//*[@class='articlerail']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//div[@class='toppaginate']//a[@rel='nofollow']"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.baltimoresun.com/news/maryland/bs-md-omalley-budget-2-20120116,0,5340585.story"
+  Contains = []

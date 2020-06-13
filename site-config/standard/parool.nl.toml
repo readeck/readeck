@@ -1,0 +1,25 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = ["//a[contains(@href, '/accept?url=')]"]
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  user-agent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+
+[[tests]]
+  URL = "http://www.parool.nl/parool/nl/4/AMSTERDAM/article/detail/4042734/2015/05/29/MRSA-bacterie-niet-verder-verspreid-in-Bijlmerbajes.dhtml"
+  Contains = ["De twee gevangenen die"]
+
+[[tests]]
+  URL = "http://www.parool.nl/amsterdam/rss.xml"
+  Contains = []

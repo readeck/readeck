@@ -1,0 +1,30 @@
+title_selectors = ["//div[@id=\"newsDetailTitle\"]"]
+body_selectors = []
+date_selectors = ["//span[@id=\"showRefDate\"]"]
+author_selectors = ["//span[@id=\"showAuthor\"]"]
+strip_selectors = [
+  "//div[@id=\"breadcrumbs\"]",
+  "//span[@id=\"PageTitle\"]",
+  "//div[@id=\"newsDetailAuthorPublish\"]",
+  "//div[@class=\"leadPix\"]",
+  "//span[@id=\"ctl00_PageTitle\"]",
+  "//div[@id=\"newsDetailTitle\"]",
+  "//div[@id=\"newsDetailCredential\"]",
+  "//div[@id=\"sidebar2\"]",
+  "//div[@id=\"footer\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.positioningmag.com/magazine/details.aspx?id=41083"
+  Contains = []

@@ -1,0 +1,25 @@
+title_selectors = ["//h1[@class='title']"]
+body_selectors = ["//div[@id='content-content']//div[@class='content']"]
+date_selectors = ["substring-after(//*[@class='submitted'],'Submitted on')"]
+author_selectors = []
+strip_selectors = [
+  "//div[@class='terms terms-inline']",
+  "//div[@class='more']",
+  "//div[@class='share-links']",
+  "//table[@id='attachments']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.laquadrature.net/en/finalization-of-eu-parliaments-weak-net-neutrality-resolution"
+  Contains = []

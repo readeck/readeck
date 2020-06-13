@@ -1,0 +1,20 @@
+title_selectors = ["//h2[@class='post-title']"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' post-smallerfont ')]"]
+date_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' post-metadata')]/small"]
+author_selectors = ["//h3[@class='header-img']"]
+strip_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' post-smallerfont')]/small"]
+strip_id_or_class = ["mid-banner"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://krebsonsecurity.com/2019/02/phishers-target-anti-money-laundering-officers-at-u-s-credit-unions/"
+  Contains = []

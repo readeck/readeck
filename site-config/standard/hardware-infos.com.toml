@@ -1,0 +1,24 @@
+title_selectors = ["//div[@class='content post']/h1"]
+body_selectors = ["//div[@class='post']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//a[preceding::div[@class='pages']]"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.hardware-infos.com/news/5646/amd-bei-next-gen-api-mit-besserer-gpu-auslastung.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.hardware-infos.com/tests/grafikkarten/sapphire-r9-280x-vapor-x-tri-x-oc.html"
+  Contains = []

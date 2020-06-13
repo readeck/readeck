@@ -1,0 +1,20 @@
+title_selectors = ["substring-before(//title, '|')"]
+body_selectors = ["//div[@id='instapaper_para1']"]
+date_selectors = ["//span[@class='instapaper_date']"]
+author_selectors = ["substring-after(//h4/a[@href='http://www.ilounge.com/index.php/ilounge/aboutus/'], 'By')"]
+strip_selectors = ["//div[@class='reviewinfo']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.ilounge.com/index.php/reviews/entry/luxa2-alum-x-for-iphone-4-4s/?utm_source=twitterfeed&utm_medium=twitter"
+  Contains = []

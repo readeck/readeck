@@ -1,0 +1,27 @@
+title_selectors = []
+body_selectors = [
+  "//div[contains(@class, 'yr-entry-text')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' entry__body ')]",
+]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "tag-cloud",
+  "below-entry",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "A3=d=AQABBHKoQl4CEIemT4yNVwXsjj9-v6PMOlMFEgABAQH4Q14LX_W6b2UB_iMAAAcIa6hCXgxb2nQ&S=AQAAAmgPcrcQNEeDSeHZkaQboZc"
+
+[[tests]]
+  URL = "http://www.huffingtonpost.co.uk/entry/edward-snowdens-david-cameron-tweet-tells-public-to-rise-up-if-they-want-him-to-resign_uk_57074b52e4b00c769e2d91a9?s481714i"
+  Contains = []

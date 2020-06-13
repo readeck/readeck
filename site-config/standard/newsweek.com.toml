@@ -1,0 +1,24 @@
+title_selectors = ["//h1[@class = 'article-title']"]
+body_selectors = ["//div[@class = 'article-body']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//aside"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.newsweek.com/day-steve-mcqueen-met-his-new-nazi-neighbor-keith-moon-229741"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.newsweek.com/2014/06/13/how-greylock-partners-finds-next-facebook-253329.html"
+  Contains = []

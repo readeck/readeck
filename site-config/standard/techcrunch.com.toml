@@ -1,0 +1,36 @@
+title_selectors = [
+  "//h1[@class=\"tweet-title\"]",
+  "//a[@class=\"sh2\"]",
+]
+body_selectors = [
+  "//div[@class='article-entry text']",
+  "//div[@id=\"singlentry\"]",
+]
+date_selectors = [
+  "//div[@class=\"byline\"]/time/@datetime",
+  "substring-before(//div[@class=\"single-post-meta-top\"],' @')",
+]
+author_selectors = [
+  "//div[@class='byline']/a",
+  "substring-after(//span[@class=\"single-post-meta-top\"],'rsaquo; ')",
+]
+strip_selectors = []
+strip_id_or_class = [
+  "module-crunchbase",
+  "aside aside-related-articles",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "A3=d=AQABBHKoQl4CEIemT4yNVwXsjj9-v6PMOlMFEgABAQH4Q14LX_W6b2UB_iMAAAcIa6hCXgxb2nQ&S=AQAAAmgPcrcQNEeDSeHZkaQboZc"
+
+[[tests]]
+  URL = "http://techcrunch.com/2016/02/02/spotcap/"
+  Contains = ["bring a high level of automation to the lending process"]

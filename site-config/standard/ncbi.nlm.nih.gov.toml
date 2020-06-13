@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[@id='maincontent']"]
+date_selectors = []
+author_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' fm-author ')]/a"]
+strip_selectors = []
+strip_id_or_class = [
+  "fm-sec",
+  "pmc-page-banner",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4157320/"
+  Contains = ["Infectious diseases continue to pose a tremendous burden of disease worldwide"]

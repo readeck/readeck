@@ -1,0 +1,20 @@
+title_selectors = ["//title"]
+body_selectors = ["//div[@class='article__text']"]
+date_selectors = ["//span[@class='article__date']"]
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.n-tv.de/politik/Die-alten-Maenner-werden-es-nie-blicken-article21447318.html"
+  Contains = []

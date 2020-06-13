@@ -1,0 +1,24 @@
+title_selectors = ["//h1[@class='title']"]
+body_selectors = ["//section[@class='section']"]
+date_selectors = ["//span[@class='published-time']"]
+author_selectors = []
+strip_selectors = ["//div[@class='swiper-wrapper']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://futurezone.at/produkte/lego-verkauft-bugatti-chiron-aus-3599-teilen/400044290"
+  Contains = []
+
+[[tests]]
+  URL = "https://futurezone.at/science/nasa-verkuendet-am-donnerstag-neue-entdeckung-am-mars/400047008"
+  Contains = []

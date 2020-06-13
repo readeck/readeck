@@ -1,0 +1,24 @@
+title_selectors = ["normalize(//h1)"]
+body_selectors = ["/table/tbody/tr[5]//table/tbody//table/tbody/tr/td"]
+date_selectors = ["normalize(//td[contains(@style, \"color: #ffffff\")])"]
+author_selectors = ["//td/p[position()=last()]/em"]
+strip_selectors = [
+  "//h1",
+  "//p[position()=last()]/em",
+  "//p[position()=last()]/child::text()",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.fnal.gov/pub/today/archive_2011/today11-11-09_MuonDepartmentReadMore.html"
+  Contains = []

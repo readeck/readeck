@@ -1,0 +1,26 @@
+title_selectors = []
+body_selectors = ["//div[@id='content']//article"]
+date_selectors = ["//time[@pubdate]/@datetime"]
+author_selectors = ["//a[contains(@class, \"url\")]"]
+strip_selectors = [
+  "//header[@class=\"cartouche\"]",
+  "//div[contains(@class, \"appel_don\")]",
+]
+strip_id_or_class = [
+  "appel-soutien",
+  "liste dossiers-content",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.bastamag.net/Pour-chaque-personne-a-la-rue-la-France-compte-trois-logements-vacants"
+  Contains = []

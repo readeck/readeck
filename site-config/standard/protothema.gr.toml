@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//a[contains(@rel, 'mainphotos')] | //div[contains(@class, 'article-content')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.protothema.gr//politics/article/326464/diamadopoulou-floridis-kaminis-kai-boutaris-se-ekdilosi-ton-europaion-fileleutheron/"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.protothema.gr/rss/news/politics/"
+  Contains = []

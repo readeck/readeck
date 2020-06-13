@@ -1,0 +1,43 @@
+title_selectors = []
+body_selectors = ["//span[@id='article_content' or @class='text16g']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[.//div[contains(@id, 'ads.')]]",
+  "//p[contains(., 'עוד בערוץ החדשות של ynet:')]",
+  "//p[contains(., 'כותרות אחרונות מהעולם בחדשות ynet:')]",
+  "//div[contains(., 'אינציקלופדיית ynet:')]",
+  "//a[@class='bluelink']",
+]
+strip_id_or_class = []
+strip_image_src = ["ynet_manual_bullet.png"]
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<script type='text/javascript'>",
+  "<div style=\"display:none;\">",
+],
+  [
+  "</script>",
+  "</div>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.ynet.co.il/articles/0,7340,L-4354266,00.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.ynet.co.il/articles/0,7340,L-4354268,00.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.ynet.co.il/Integration/StoryRss2.xml"
+  Contains = []

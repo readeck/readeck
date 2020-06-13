@@ -1,0 +1,29 @@
+title_selectors = ["//h1"]
+body_selectors = ["//article[@class='spanMain']"]
+date_selectors = ["//a[contains(@href, '/falter/ausgabe')]"]
+author_selectors = ["//a[contains(@href, '/kategorie/autoren')]"]
+strip_selectors = [
+  "//img[@src='http://www.falter.at/web/_pics/falterlogo_dblau.gif']",
+  "//br",
+]
+strip_id_or_class = [
+  "respond",
+  "meta",
+  "servicebox",
+  "related",
+  "twitter-share-button",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.falter.at/falter/2013/03/26/der-dandy-auf-der-sinkenden-galeere/"
+  Contains = []

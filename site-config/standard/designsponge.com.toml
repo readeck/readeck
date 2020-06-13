@@ -1,0 +1,35 @@
+title_selectors = ["//header/h1"]
+body_selectors = ["//article"]
+date_selectors = []
+author_selectors = ["//a[@rel='author']"]
+strip_selectors = [
+  "//header",
+  "//div[contains(@id, 'gallery-')]",
+  "//div[@class='sm']",
+  "//footer",
+]
+strip_id_or_class = [
+  "related",
+  "comments",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "<a rel=\"attachment",
+  "<p rel=\"attachment",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.designsponge.com/2010/06/seattle-design-guide.html"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.designsponge.com/2012/04/sneak-peek-liz-cook.html"
+  Contains = []

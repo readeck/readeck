@@ -1,0 +1,29 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article__content ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "article__content__social-bar",
+  "article__previous_next",
+  "pager",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//div[@class='pager']/a"]
+replace_strings = []
+
+[http_headers]
+  Cookie = "cookiebar=1;"
+
+[[tests]]
+  URL = "http://be.hardware.info/reviews/6197/game-pcs-van-0-25-en-5-jaar-oud-review-tijd-om-te-upgraden"
+  Contains = []
+
+[[tests]]
+  URL = "https://nl.hardware.info/nieuws/71789/be-quiet-maakt-pure-rock-2-in-komende-weken-beschikbaar"
+  Contains = []

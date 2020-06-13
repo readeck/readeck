@@ -1,0 +1,25 @@
+title_selectors = []
+body_selectors = []
+date_selectors = ["//li[@class='date']"]
+author_selectors = ["//div[contains(@class, 'author_text')]/h4/text()"]
+strip_selectors = [
+  "//div[contains(@class, 'entry_meta')]",
+  "//div[contains(@class, 'single_meta')]",
+  "//br[contains(@class, 'clear')]",
+  "//h3[contains(., 'Komentarz')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://rubysfera.pl/2011/09/10-porad-o-rvm/"
+  Contains = []

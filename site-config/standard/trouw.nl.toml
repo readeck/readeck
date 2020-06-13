@@ -1,0 +1,22 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  Cookie = "pwv=2; pws=functional|analytics|content_recommendation|targeted_advertising|social_media"
+  User-Agent = "PHP/7.4"
+
+[[tests]]
+  URL = "https://www.trouw.nl/buitenland/zit-trump-straks-nog-vier-jaar-in-het-witte-huis-dit-zijn-z-n-kansen~b6017d3a/"
+  Contains = []

@@ -1,0 +1,44 @@
+title_selectors = []
+body_selectors = [
+  "//figure[@class='jumbotron'] | //div[@itemprop='body']",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' post__main ')]",
+]
+date_selectors = ["//meta[@property='article:published_time']/@content"]
+author_selectors = ["//div[@class='byline']//a"]
+strip_selectors = ["//h1[@class='post__title']"]
+strip_id_or_class = [
+  "eyebrow",
+  "post__footer",
+  "social__list",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<h2 class=\"post__deck\">",
+  "<p>",
+],
+  [
+  "</h2>",
+  "</p>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.fastcompany.com/3000226/link-between-quietness-and-productivity"
+  Contains = ["Some of you may have tried to reach me this morning"]
+
+[[tests]]
+  URL = "http://www.fastcompany.com/3003586/6-simple-rituals-reach-your-potential-every-day"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.fastcompany.com/90342223/the-newest-hot-coworking-space-costs-just-2-25-an-hour-because-it-is-a-parking-spot"
+  Contains = []

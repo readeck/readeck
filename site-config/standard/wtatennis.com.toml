@@ -1,0 +1,24 @@
+title_selectors = ["//h1[contains(@class, 'header-2')]"]
+body_selectors = ["//article//*[contains(@class, 'teaserText') or contains(@class, 'lastUpdated') or contains(@class, 'image') or contains(@class, 'body')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = ["articleIndex"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.wtatennis.com/news/article/3190914"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.wtatennis.com/news/article/3190244"
+  Contains = []

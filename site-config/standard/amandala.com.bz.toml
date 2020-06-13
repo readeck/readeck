@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[@id='content']//div[contains(@class, 'content')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//a[contains(@href, 'upm_export=')]"]
+strip_id_or_class = ["widget"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://amandala.com.bz/news/feed/"
+  Contains = []
+
+[[tests]]
+  URL = "http://amandala.com.bz/news/poor-pse-results-30-raise/"
+  Contains = []

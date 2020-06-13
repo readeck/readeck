@@ -1,0 +1,20 @@
+title_selectors = ["//h1[@class=\"entry-title\"]"]
+body_selectors = []
+date_selectors = ["//header[@class=\"entry-header\"]//time[@class=\"entry-date published\"]/@datetime"]
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://histoire-filante.fr/2019/09/05/notre-itineraire/"
+  Contains = []

@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'grayshowlinks')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//div[@id='sitecontentcol']//a[.='Next >']"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.eetimes.com/document.asp?doc_id=1319966"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.eetimes.com/rss_simple.asp"
+  Contains = []

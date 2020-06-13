@@ -1,0 +1,32 @@
+title_selectors = []
+body_selectors = ["//div[@id='article-body' or contains(@class, 'articleinlinegallery')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.emaratalyoum.com/politics/news/2015-10-10-1.828836"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.emaratalyoum.com/sports/arab-and-international/2013-08-29-1.601844"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.emaratalyoum.com/sports/arab-and-international/2013-08-29-1.601842"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.emaratalyoum.com/public-sports-1.533088?ot=ot.AjaxPageLayout"
+  Contains = []

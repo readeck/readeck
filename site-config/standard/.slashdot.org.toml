@@ -1,0 +1,29 @@
+title_selectors = ["//span[starts-with(@id, 'title-')]"]
+body_selectors = ["//div[starts-with(@id, 'fhbody-')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+  user-agent = "PHP/5.3"
+
+[[tests]]
+  URL = "http://apple.slashdot.org/story/13/03/21/1736239/new-os-x-trojan-adware-injects-ads-into-chrome-firefox-safari"
+  Contains = []
+
+[[tests]]
+  URL = "http://developers.slashdot.org/story/13/03/23/1426215/will-donglegate-affect-your-decision-to-attend-pycon"
+  Contains = []
+
+[[tests]]
+  URL = "http://rss.slashdot.org/Slashdot/slashdot"
+  Contains = []

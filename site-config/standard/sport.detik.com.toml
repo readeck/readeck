@@ -1,0 +1,20 @@
+title_selectors = ["//div[@class=\"content_detail\"]/h1"]
+body_selectors = ["//div[@class='text_detail']"]
+date_selectors = ["substring-before(substring-after(//div[@class=\"content_detail\"]/*[@class=\"date\"], ','), ' WIB')"]
+author_selectors = ["//div[@class=\"author\"]/strong"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://sport.detik.com/sepakbola/read/2012/05/23/065011/1922350/71/agen-silva-ingin-bertahan-di-milan?b99220270"
+  Contains = []

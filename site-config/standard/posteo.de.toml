@@ -1,0 +1,28 @@
+title_selectors = ["//h3[@class=\"p_hx--medium\"]"]
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://posteo.de/blog/datensch%C3%BCtzer-beschlie%C3%9Fen-eu-leitlinie-zur-video%C3%BCberwachung"
+  Contains = []
+
+[[tests]]
+  URL = "https://posteo.de/blog/londoner-polizei-f%C3%BChrt-gesichtserkennung-ein"
+  Contains = []
+
+[[tests]]
+  URL = "https://posteo.de/blog/tipps-f%C3%BCr-den-pc-und-speicherverkauf"
+  Contains = []

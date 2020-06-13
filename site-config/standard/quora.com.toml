@@ -1,0 +1,41 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' Answer ')] | //div[contains(concat(' ',normalize-space(@class),' '),' header ')] | //div[contains(concat(' ',normalize-space(@class),' '),' AnswerWikiArea ')] | //hr"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "AnswerFooter",
+  "ActionBar",
+  "hidden",
+  "item_action_bar",
+  "answer_voters",
+  "question_topics",
+  "answer_header_text",
+  "editor_link",
+  "view_tag",
+  "include_details",
+  "sig_edit",
+  "profile_photo_img",
+  "question_text_icons",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "<div class=\"Answer\"",
+  "<hr /><div class=\"Answer\"",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.quora.com/What-everyday-habit-do-you-wish-you-had-developed-earlier-in-life"
+  Contains = ["overcome emotional eating"]
+
+[[tests]]
+  URL = "http://www.quora.com/What-is-the-greatest-illusion-in-life"
+  Contains = ["What is the greatest illusion in life?"]

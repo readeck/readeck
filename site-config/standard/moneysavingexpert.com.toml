@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'article-main-image') or contains(@class, 'intro ') or contains(@class, 'chapter-content')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//source"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "rendition.320.320",
+  "rendition.768.768",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.moneysavingexpert.com/news/2019/02/rail-passengers-complain-of-ticket-machine-problems/"
+  Contains = ["staffed ticket counter"]

@@ -1,0 +1,20 @@
+title_selectors = ["//div[@class=\"article_header\"]/h1"]
+body_selectors = ["//div[@class=\"article_body clear_left\"]"]
+date_selectors = ["//div[@class=\"article_pub\"]/span[@class=\"time\"]"]
+author_selectors = ["//div[@class=\"article_pub\"]/span[@class=\"editors\"]/a/text()"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.digitalspy.co.uk/movies/at-the-movies/a364066/top-5-super-bowl-movie-trailers-the-avengers-battleship-more.html"
+  Contains = []

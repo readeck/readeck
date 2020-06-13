@@ -1,0 +1,23 @@
+title_selectors = ["//h2[contains(concat(' ',normalize-space(@class),' '),' e_title ')]"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' b_single_e ')]//p | //div[contains(concat(' ',normalize-space(@class),' '),' a_single__post ')]"]
+date_selectors = ["//time[@class='e_terms_posted']"]
+author_selectors = ["//cite[contains(concat(' ',normalize-space(@class),' '),' e_author_t ')]"]
+strip_selectors = [
+  "//article[contains(concat(' ',normalize-space(@class),' '),' a_art__link ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' t_thankyou ')]//p",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://denikn.cz/3186/jsem-vnitrne-vyhorely-mam-odpracovano-cunek-je-stary-provokater-rika-belobradek/"
+  Contains = []

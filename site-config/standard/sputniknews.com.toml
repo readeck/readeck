@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' b-article__header ')] | //div[contains(@class, 'b-article__lead') or contains(@class, 'b-article__text') or contains(@class, 'b-article__videoclub_embed')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://sputniknews.com/world/201708131056427079-lefties-scientists-study/"
+  Contains = ["Lefties are luckier as"]

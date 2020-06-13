@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = []
+date_selectors = ["//div[@class=\"date\"]"]
+author_selectors = []
+strip_selectors = [
+  "//div[@id='content']/div[1][@class='full_intro']/h2",
+  "//*[(@class= \"aside\")]",
+  "//div[@class=\"date\"]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.thedailymash.co.uk/index.php?option=com_content&task=view&id=4994&Itemid=81&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+thedailymash+%28The+Daily+Mash.+It%27s+news+to+us.%29"
+  Contains = []

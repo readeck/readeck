@@ -1,0 +1,31 @@
+title_selectors = []
+body_selectors = []
+date_selectors = ["//div[@class=\"date\"]"]
+author_selectors = ["substring-after(//div[@class=\"author\"], 'by ')"]
+strip_selectors = [
+  "//h1[1]",
+  "//h2[1]",
+  "//div[@class=\"date\"]",
+  "//div[@class=\"author\"]",
+  "//blockquote[@class=\"textmessage\"]",
+  "//div[@style=\"width:500px\"]/p[last()]",
+  "//div[@style=\"width:500px\"]/p[last()-1]",
+  "//div[@style=\"width:500px\"]/h4[last()]",
+  "//div[@style=\"width:500px\"]/h4[last()-1]",
+  "//div[@style=\"width:500px\"]/div[last()]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.joelonsoftware.com/items/2011/09/15.html"
+  Contains = []

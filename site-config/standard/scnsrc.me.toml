@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[@class='storycontent']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [[
+  "height=\"240\"",
+  "width=\"240\" height=\"240\"",
+]]
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.scnsrc.me/assassins-creed-2016-720p-bluray-x264-sparks/"
+  Contains = []

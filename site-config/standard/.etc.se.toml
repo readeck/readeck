@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'body-preamble')]"]
+date_selectors = ["//meta[@name='dcterms.date']/@content"]
+author_selectors = ["//meta[@name='dcterms.creator']/@content"]
+strip_selectors = []
+strip_id_or_class = ["top-link"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://stockholm.etc.se/debatt/jobbgaraget-gav-hopp-ungdomar-i-tensta"
+  Contains = ["Jobbgaraget startades av Angeles"]
+
+[[tests]]
+  URL = "http://goteborg.etc.se/inrikes/snart-oppnar-stans-forsta-ekogalleria"
+  Contains = ["Krasnapolsky och just nu"]

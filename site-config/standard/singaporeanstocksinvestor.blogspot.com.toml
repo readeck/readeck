@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[@class='post-body']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//div[@id='lws_0']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://singaporeanstocksinvestor.blogspot.com/2011/04/aims-amp-capital-industrial-reit.html"
+  Contains = []

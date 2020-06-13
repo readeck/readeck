@@ -1,0 +1,24 @@
+title_selectors = ["//div[contain(@class, 'post-header')]"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' post-body ')]"]
+date_selectors = ["//span[contains(@class, 'byline-date')]"]
+author_selectors = ["//a[contains(@class, 'author-link')]"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://blog.trello.com/how-to-set-better-life-goals"
+  Contains = []
+
+[[tests]]
+  URL = "http://blog.trello.com/6-mistakes-when-you-work-in-office-but-have-remote-team-members"
+  Contains = []

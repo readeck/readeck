@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article__body ')] | //div[contains(concat(' ',normalize-space(@class),' '),' article-body ')]"]
+date_selectors = []
+author_selectors = ["//meta[@name='dc.creator']/@content"]
+strip_selectors = ["//div[contains(concat(' ',normalize-space(@id),' '),' further-reading-section ')]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.nature.com/articles/d41586-019-01307-2"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.nature.com/npp/journal/v42/n11/full/npp201786a.html"
+  Contains = []

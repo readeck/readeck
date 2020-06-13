@@ -1,0 +1,27 @@
+title_selectors = ["//h3[@class='episode_title']"]
+body_selectors = ["//ul[contains(@class, 'episode_imgdesc')]/li/descendant::*"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//*[contains(@class, 'plugin')]",
+  "//*[contains(@class, 'episode_keywords')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.megamp3.eu/?p=episode&name=2013-04-19_la_filiere_progressive_431.mp3"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.megamp3.eu/feed.xml"
+  Contains = []

@@ -1,0 +1,23 @@
+title_selectors = []
+body_selectors = ["//div[@class='articletext']"]
+date_selectors = [
+  "//div[@class='articledate']",
+  "//div[@class='articledate_b']",
+]
+author_selectors = ["substring-after(//div[@class='articleauthor'],'By ')"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.evo.co.uk/carreviews/evolongtermtests/280072/bmw_330d_sport_touring.html"
+  Contains = []

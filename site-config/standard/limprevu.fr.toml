@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["(//div[contains(concat(' ',normalize-space(@class),' '),' article__edito ')])[1]"]
+date_selectors = []
+author_selectors = ["(//header[contains(concat(' ',normalize-space(@class),' '),' article__header ')])[1]//p[contains(concat(' ',normalize-space(@class),' '),' author-info__content__text ')]/a"]
+strip_selectors = ["//script"]
+strip_id_or_class = [
+  "support-block",
+  "subscription-box",
+  "container_hidden",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://limprevu.fr/articles/17-05-2018/pour-embrasser-le-numerique-noubliez-pas-la-langue/"
+  Contains = []

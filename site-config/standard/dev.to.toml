@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[@id=\"article-body\"]"]
+date_selectors = ["//header[@id=\"main-title\"]//time[@itemprop=\"datePublished\"]/@datetime"]
+author_selectors = ["//header[@id=\"main-title\"]//a[@class=\"author\"]"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://dev.to/addyosmani/adaptive-loading-improving-web-performance-on-low-end-devices-1m69"
+  Contains = []

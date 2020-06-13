@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'blocks-area')]"]
+date_selectors = ["//time[@class='pub-date']/@datetime"]
+author_selectors = ["//a[@class=\"authors-detail__display-name\"]"]
+strip_selectors = ["//div[contains(@class, 'article-meta')]"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://pitchfork.com/news/the-prodigys-keith-flint-dead-at-49/"
+  Contains = []
+
+[[tests]]
+  URL = "https://pitchfork.com/features/article/queens-bohemian-rhapsody-is-now-the-biggest-music-biopic-ever-its-also-total-bullshit/"
+  Contains = []

@@ -1,0 +1,25 @@
+title_selectors = []
+body_selectors = ["//div[@id=\"content-left\"]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "recommended-video",
+  "carousel",
+  "ad-inserter",
+  "share-bar",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.thrillist.com/eat/new-york/best-greek-restaurants-in-astoria-queens"
+  Contains = []

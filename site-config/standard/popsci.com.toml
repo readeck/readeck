@@ -1,0 +1,34 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'field-body')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = ["placeholder"]
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<noscript>",
+  "<div>",
+],
+  [
+  "</noscript>",
+  "</div>",
+],
+]
+
+[http_headers]
+  cookie = "bonnier_consent=true"
+
+[[tests]]
+  URL = "http://www.popsci.com/nasa-crashed-another-plane-today"
+  Contains = []
+
+[[tests]]
+  URL = "http://www.popsci.com/rss.xml"
+  Contains = []

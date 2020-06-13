@@ -1,0 +1,30 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'body-copy')]"]
+date_selectors = ["//*[@itemprop='datePublished']/@datetime"]
+author_selectors = ["//meta[@name=\"sailthru.author\"]/@content"]
+strip_selectors = []
+strip_id_or_class = [
+  "inline-newsletter",
+  "terminal-tout-container",
+  "lede",
+  "postr-recirc",
+  "left-column",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.bloomberg.com/news/articles/2015-12-30/will-your-job-disappear-by-2024-"
+  Contains = ["Every week, hosts Tori Stilwell"]
+
+[[tests]]
+  URL = "https://www.bloomberg.com/news/articles/2016-12-06/apple-to-start-publishing-ai-research-to-hasten-deep-learning"
+  Contains = []

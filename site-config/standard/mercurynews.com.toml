@@ -1,0 +1,25 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article-content ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div[contains(concat(' ',normalize-space(@class),' '),' slideshow-ad-video ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' video-ad ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' meta ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' tags ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' twitter-follow ')]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' button-center-wrapper ')]",
+  "//img[contains(concat(' ',normalize-space(@class),' '),' avatar ')]",
+  "//h3[contains(concat(' ',normalize-space(@class),' '),' vcard ')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]

@@ -1,0 +1,33 @@
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = [
+  "//div/a",
+  "//div/b",
+  "//div/strong",
+  "//td[@width='30%']",
+  "//br[1]",
+  "//br[2]",
+  "//br[3]",
+  "//br[4]",
+  "//a[@href='http://www.moonsault.de/newzboard/index.php?act=home']",
+]
+strip_id_or_class = ["cse-branding-right"]
+strip_image_src = [
+  "menu",
+  "templates",
+]
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://www.moonsault.de/newzboard/index.php?news=22321&act=previous"
+  Contains = []

@@ -1,0 +1,24 @@
+title_selectors = ["//h1"]
+body_selectors = ["//div[@class='sa_left closetag']"]
+date_selectors = ["substring-after(//div[@class='sa_author']/span/following-sibling::span, '：')"]
+author_selectors = ["//div[@class='sa_author']/span/a"]
+strip_selectors = [
+  "//ul[@class='sa_next clearfix']",
+  "//div[@class='sa_author']",
+  "//div[@class='sa_title_box']",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://select.yeeyan.org/view/258033/333481"
+  Contains = []
