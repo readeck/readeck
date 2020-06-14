@@ -4,8 +4,10 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/readeck/readeck/pkg/auth"
+	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi"
+
+	"github.com/readeck/readeck/pkg/auth"
 )
 
 type ctxKeyUser struct{}
@@ -28,7 +30,7 @@ func (s *Server) WithAuth(next http.Handler) http.Handler {
 			return
 		}
 
-		user, err := auth.Users.ByID(userID)
+		user, err := auth.Users.GetOne(goqu.C("id").Eq(userID))
 		if err != nil {
 			sess.Options.MaxAge = -1
 			sess.Save(r, w)
@@ -73,7 +75,7 @@ func (s *Server) AuthRoutes() http.Handler {
 			return
 		}
 
-		user, err := auth.Users.ByUsername(data.Username)
+		user, err := auth.Users.GetOne(goqu.C("username").Eq(data.Username))
 		if err != nil {
 			s.TextMessage(w, r, 401, http.StatusText(401))
 			return

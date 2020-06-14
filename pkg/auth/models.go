@@ -15,14 +15,22 @@ func init() {
 	passlib.UseDefaults(passlib.Defaults20180601)
 }
 
+const (
+	// TableName is the user table name in database.
+	TableName = "user"
+)
+
 var (
-	// Users is the user manager
+	// Users is the user manager.
 	Users = UserManager{}
+
+	// ErrNotFound is returned when a user record was not found.
+	ErrNotFound = errors.New("not found")
 )
 
 // User is a user record in database
 type User struct {
-	ID       int       `db:"id" goqu:"skipinsert"`
+	ID       int       `db:"id" goqu:"skipinsert,skipupdate"`
 	Created  time.Time `db:"created" goqu:"skipupdate"`
 	Updated  time.Time `db:"updated"`
 	Username string    `db:"username"`
@@ -33,47 +41,30 @@ type User struct {
 // UserManager is a query helper for user entries.
 type UserManager struct{}
 
-// ByID returns a user by its id. If there's no such user,
-// it will return nil and an error.
-func (m *UserManager) ByID(id int) (*User, error) {
-	var user User
-	found, err := db.Q().From("user").
-		Where(goqu.C("id").Eq(id)).
-		Prepared(true).
-		ScanStruct(&user)
+// Query returns a prepared goqu SelectDataset that can be extended later.
+func (m *UserManager) Query() *goqu.SelectDataset {
+	return db.Q().From(goqu.T(TableName).As("u")).Prepared(true)
+}
+
+// GetOne executes the a select query and returns the first result or an error
+// when there's no result.
+func (m *UserManager) GetOne(expressions ...goqu.Expression) (*User, error) {
+	var u User
+	found, err := m.Query().Where(expressions...).ScanStruct(&u)
 
 	switch {
 	case err != nil:
 		return nil, err
 	case !found:
-		return nil, errors.New("not found")
+		return nil, ErrNotFound
 	}
 
-	return &user, nil
+	return &u, nil
 }
 
-// ByUsername returns a user by its username. If there's no such user,
-// it will return nil and an error.
-func (m *UserManager) ByUsername(username string) (*User, error) {
-	var user User
-	found, err := db.Q().From("user").
-		Where(goqu.C("username").Eq(username)).
-		Prepared(true).
-		ScanStruct(&user)
-
-	switch {
-	case err != nil:
-		return nil, err
-	case !found:
-		return nil, errors.New("not found")
-	}
-
-	return &user, nil
-}
-
-// CreateUser insert a new user in the database. The password
+// Create insert a new user in the database. The password
 // must be present. It will be hashed and updated before insertion.
-func (m *UserManager) CreateUser(user *User) error {
+func (m *UserManager) Create(user *User) error {
 	if strings.TrimSpace(user.Password) == "" {
 		return errors.New("password is empty")
 	}
@@ -86,7 +77,7 @@ func (m *UserManager) CreateUser(user *User) error {
 	user.Created = time.Now()
 	user.Updated = user.Created
 
-	res, err := db.Q().Insert("user").
+	res, err := db.Q().Insert(TableName).
 		Rows(user).
 		Prepared(true).Executor().Exec()
 	if err != nil {
@@ -96,6 +87,26 @@ func (m *UserManager) CreateUser(user *User) error {
 	id, _ := res.LastInsertId()
 	user.ID = int(id)
 	return nil
+}
+
+// Update updates some user values.
+func (u *User) Update(v interface{}) error {
+	if u.ID == 0 {
+		return errors.New("no ID")
+	}
+
+	_, err := db.Q().Update(TableName).Prepared(true).
+		Set(v).
+		Where(goqu.C("id").Eq(u.ID)).
+		Executor().Exec()
+
+	return err
+}
+
+// Save updates all the user values.
+func (u *User) Save() error {
+	u.Updated = time.Now()
+	return u.Update(u)
 }
 
 // CheckPassword checks if the given password matches the
@@ -108,10 +119,7 @@ func (u *User) CheckPassword(password string) bool {
 
 	// Update the password when needed
 	if newhash != "" {
-		db.Q().Update("user").
-			Set(goqu.Record{"password": newhash, "updated": time.Now()}).
-			Where(goqu.C("id").Eq(u.ID)).
-			Prepared(true).Executor().Exec()
+		u.Update(goqu.Record{"password": newhash, "updated": time.Now()})
 	}
 
 	return true
@@ -124,10 +132,5 @@ func (u *User) SetPassword(password string) error {
 		return err
 	}
 
-	_, err = db.Q().Update("user").
-		Set(goqu.Record{"password": u.Password, "updated": time.Now()}).
-		Where(goqu.C("id").Eq(u.ID)).
-		Prepared(true).Executor().Exec()
-
-	return err
+	return u.Update(goqu.Record{"password": u.Password, "updated": time.Now()})
 }

@@ -109,7 +109,7 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 		log.WithError(err).Fatal()
 	}
 	if count == 0 {
-		if err := auth.Users.CreateUser(&auth.User{
+		if err := auth.Users.Create(&auth.User{
 			Username: "admin",
 			Email:    "admin@localhost",
 			Password: "admin",
