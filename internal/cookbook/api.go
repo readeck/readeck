@@ -10,11 +10,11 @@ import (
 	"github.com/go-chi/chi"
 	log "github.com/sirupsen/logrus"
 
+	"github.com/readeck/readeck/internal/server"
 	"github.com/readeck/readeck/pkg/extract"
 	"github.com/readeck/readeck/pkg/extract/contents"
 	"github.com/readeck/readeck/pkg/extract/fftr"
 	"github.com/readeck/readeck/pkg/extract/meta"
-	"github.com/readeck/readeck/pkg/server"
 )
 
 type extractImg struct {

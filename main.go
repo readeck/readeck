@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/readeck/readeck/app"
+	"github.com/readeck/readeck/internal/app"
 )
 
 //go:generate go run -tags=!build tools/generate_assets.go

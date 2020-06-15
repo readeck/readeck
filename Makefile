@@ -21,14 +21,14 @@ build-dev:
 .PHONY: clean
 clean:
 	rm -rf dist
-	rm -f pkg/assets/assets_vfsdata.go
+	rm -f internal/assets/assets_vfsdata.go
 	rm -f pkg/extract/fftr/siteconfig_vfsdata.go
 	go clean
 
 # Launch the documentation
 .PHONY: doc
 doc:
-	@echo "Visit http://localhost:6060/pkg/github.com/readeck/readeck/"
+	@echo "Visit http://localhost:6060/pkg/github.com/readeck/readeck/?m=all"
 	godoc
 
 # Lint code

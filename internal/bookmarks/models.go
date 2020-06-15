@@ -16,8 +16,8 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/weppos/publicsuffix-go/publicsuffix"
 
-	"github.com/readeck/readeck/pkg/config"
-	"github.com/readeck/readeck/pkg/db"
+	"github.com/readeck/readeck/configs"
+	"github.com/readeck/readeck/internal/db"
 )
 
 // BookmarkState is the current bookmark state
@@ -181,7 +181,7 @@ func (b *Bookmark) getBaseFileURL() (string, error) {
 }
 
 func (b *Bookmark) getBaseFilePath() string {
-	return path.Join(config.Config.Main.DataDirectory, "files")
+	return path.Join(configs.Config.Main.DataDirectory, "files")
 }
 
 // AddFile adds a new file to the bookmark. It creates the parent directories

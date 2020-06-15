@@ -2,5 +2,5 @@
 /data
 /dist
 
-/pkg/assets/assets_vfsdata.go
+/internal/assets/assets_vfsdata.go
 /pkg/extract/fftr/siteconfig_vfsdata.go

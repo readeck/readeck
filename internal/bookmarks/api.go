@@ -10,8 +10,8 @@ import (
 	"github.com/go-chi/chi"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/readeck/readeck/pkg/config"
-	"github.com/readeck/readeck/pkg/server"
+	"github.com/readeck/readeck/configs"
+	"github.com/readeck/readeck/internal/server"
 )
 
 var validSchemes = map[string]bool{"http": true, "https": true}
@@ -22,7 +22,7 @@ func Routes(s *server.Server) http.Handler {
 	r.Use(s.WithSession(), s.WithAuth)
 
 	// Start the job workers
-	w := config.Config.Extractor.NumWorkers
+	w := configs.Config.Extractor.NumWorkers
 	StartExtractPool(w)
 	log.WithField("workers", w).Info("Started extract workers")
 

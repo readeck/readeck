@@ -7,14 +7,14 @@ import (
 
 	"github.com/shurcooL/vfsgen"
 
-	"github.com/readeck/readeck/pkg/assets"
+	"github.com/readeck/readeck/internal/assets"
 	"github.com/readeck/readeck/pkg/extract/fftr"
 )
 
 func main() {
 	var err error
 	if err = vfsgen.Generate(assets.Assets, vfsgen.Options{
-		Filename:     "pkg/assets/assets_vfsdata.go",
+		Filename:     "internal/assets/assets_vfsdata.go",
 		PackageName:  "assets",
 		BuildTags:    "assets",
 		VariableName: "Assets",

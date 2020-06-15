@@ -8,7 +8,7 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/hlandau/passlib"
 
-	"github.com/readeck/readeck/pkg/db"
+	"github.com/readeck/readeck/internal/db"
 )
 
 func init() {

@@ -12,9 +12,9 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/readeck/readeck/pkg/auth"
-	"github.com/readeck/readeck/pkg/config"
-	"github.com/readeck/readeck/pkg/db"
+	"github.com/readeck/readeck/configs"
+	"github.com/readeck/readeck/internal/auth"
+	"github.com/readeck/readeck/internal/db"
 	"github.com/readeck/readeck/pkg/extract/fftr"
 )
 
@@ -32,8 +32,8 @@ func init() {
 		"", "Configuration file",
 	)
 	rootCmd.PersistentFlags().StringVarP(
-		&config.Config.Main.LogLevel, "level", "l",
-		config.Config.Main.LogLevel, "Log level",
+		&configs.Config.Main.LogLevel, "level", "l",
+		configs.Config.Main.LogLevel, "Log level",
 	)
 }
 
@@ -45,23 +45,23 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 		}
 	}
 
-	if err := config.LoadConfiguration(configPath); err != nil {
+	if err := configs.LoadConfiguration(configPath); err != nil {
 		return fmt.Errorf("Error loading configuration (%s)", err)
 	}
 
 	if updateConfig() {
-		if err := config.WriteConfig(configPath); err != nil {
+		if err := configs.WriteConfig(configPath); err != nil {
 			return err
 		}
 	}
 
 	// Enforce debug in dev mode
-	if config.Config.Main.DevMode {
-		config.Config.Main.LogLevel = "debug"
+	if configs.Config.Main.DevMode {
+		configs.Config.Main.LogLevel = "debug"
 	}
 
 	// Setup logger
-	lvl, err := log.ParseLevel(config.Config.Main.LogLevel)
+	lvl, err := log.ParseLevel(configs.Config.Main.LogLevel)
 	if err != nil {
 		lvl = log.InfoLevel
 	}
@@ -76,24 +76,24 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 	}
 
 	// Load site-config user folders
-	for _, x := range config.Config.Extractor.SiteConfig {
+	for _, x := range configs.Config.Extractor.SiteConfig {
 		addSiteConfig(x.Name, x.Src)
 	}
 
 	// Create required folders
-	if err := createFolder(config.Config.Main.DataDirectory); err != nil {
+	if err := createFolder(configs.Config.Main.DataDirectory); err != nil {
 		log.WithError(err).Fatal("Can't create data directory")
 	}
-	if config.Config.Database.Driver == "sqlite3" {
-		if err := createFolder(path.Dir(config.Config.Database.Source)); err != nil {
+	if configs.Config.Database.Driver == "sqlite3" {
+		if err := createFolder(path.Dir(configs.Config.Database.Source)); err != nil {
 			log.WithError(err).Fatal("Can't create database directory")
 		}
 	}
 
 	// Connect to database
 	if err := db.Open(
-		config.Config.Database.Driver,
-		config.Config.Database.Source,
+		configs.Config.Database.Driver,
+		configs.Config.Database.Source,
 	); err != nil {
 		log.WithError(err).Fatal("Can't connect to database")
 	}
@@ -149,13 +149,13 @@ func createConfigFile(filename string) error {
 func updateConfig() bool {
 	updated := false
 
-	if config.Config.Main.SecretKey == "" {
-		config.Config.Main.SecretKey = config.MakeKey(64)
+	if configs.Config.Main.SecretKey == "" {
+		configs.Config.Main.SecretKey = configs.MakeKey(64)
 		updated = true
 	}
 
-	if config.Config.Main.SignKey == "" {
-		config.Config.Main.SignKey = config.MakeKey(32)
+	if configs.Config.Main.SignKey == "" {
+		configs.Config.Main.SignKey = configs.MakeKey(32)
 		updated = true
 	}
 

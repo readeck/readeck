@@ -7,7 +7,7 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi"
 
-	"github.com/readeck/readeck/pkg/auth"
+	"github.com/readeck/readeck/internal/auth"
 )
 
 type ctxKeyUser struct{}

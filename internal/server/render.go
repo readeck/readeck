@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/readeck/readeck/pkg/config"
+	"github.com/readeck/readeck/configs"
 )
 
 // Message is used by the server's Message() method.
@@ -45,7 +45,7 @@ func (s *Server) Message(w http.ResponseWriter, r *http.Request, message *Messag
 	s.Render(w, r, message.Status, message)
 
 	// Log errors only in dev mode
-	if message.Status >= 400 && config.Config.Main.DevMode {
+	if message.Status >= 400 && configs.Config.Main.DevMode {
 		s.Log(r).WithField("message", message).Warn(message.Message)
 	}
 }

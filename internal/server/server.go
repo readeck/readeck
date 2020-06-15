@@ -13,8 +13,8 @@ import (
 	"github.com/go-chi/chi/middleware"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/readeck/readeck/pkg/assets"
-	"github.com/readeck/readeck/pkg/config"
+	"github.com/readeck/readeck/configs"
+	"github.com/readeck/readeck/internal/assets"
 )
 
 // Server is a wrapper around chi router.
@@ -44,13 +44,13 @@ func New() *Server {
 // ListenAndServe starts the HTTP server
 func (s *Server) ListenAndServe() {
 	srv := &http.Server{
-		Addr:           fmt.Sprintf("%s:%d", config.Config.Server.Host, config.Config.Server.Port),
+		Addr:           fmt.Sprintf("%s:%d", configs.Config.Server.Host, configs.Config.Server.Port),
 		Handler:        s.Router,
 		MaxHeaderBytes: 1 << 20,
 	}
 
 	// Add the profiler in dev mode
-	if config.Config.Main.DevMode {
+	if configs.Config.Main.DevMode {
 		s.Router.Mount("/debug", middleware.Profiler())
 	}
 
@@ -132,7 +132,7 @@ func (s *Server) serveAssets() http.HandlerFunc {
 
 func (s *Server) serveMedia() http.HandlerFunc {
 	fs := directFileServer{
-		http.Dir(path.Join(config.Config.Main.DataDirectory, "files")),
+		http.Dir(path.Join(configs.Config.Main.DataDirectory, "files")),
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {

@@ -7,7 +7,7 @@ import (
 
 	"github.com/gorilla/sessions"
 
-	"github.com/readeck/readeck/pkg/config"
+	"github.com/readeck/readeck/configs"
 )
 
 type ctxKeySession struct{}
@@ -18,8 +18,8 @@ var (
 )
 
 func initStore() {
-	sk := sha256.Sum256([]byte(config.Config.Main.SignKey))
-	ek := sha256.Sum256([]byte(config.Config.Main.SecretKey))
+	sk := sha256.Sum256([]byte(configs.Config.Main.SignKey))
+	ek := sha256.Sum256([]byte(configs.Config.Main.SecretKey))
 
 	store = sessions.NewCookieStore(sk[:], ek[:])
 	store.Options.HttpOnly = true
