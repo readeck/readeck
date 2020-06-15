@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/antchfx/htmlquery v1.2.3
+	github.com/antchfx/xpath v1.1.8 // indirect
 	github.com/araddon/dateparse v0.0.0-20200409225146-d820a6159ab1
 	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
 	github.com/disintegration/imaging v1.6.2
@@ -20,7 +21,7 @@ require (
 	github.com/jarcoal/httpmock v1.0.5
 	github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e // indirect
 	github.com/lithammer/shortuuid/v3 v3.0.4
-	github.com/mattn/go-sqlite3 v1.11.0
+	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/pelletier/go-toml v1.8.0
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
 	github.com/shurcooL/vfsgen v0.0.0-20181202132449-6a9ea43bcacd // indirect
