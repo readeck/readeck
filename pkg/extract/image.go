@@ -4,15 +4,18 @@ import (
 	"bytes"
 	"encoding/base64"
 	"fmt"
+	"io"
+	"io/ioutil"
 
 	"net/http"
 	"net/url"
 
+	"github.com/readeck/readeck/configs"
 	"github.com/readeck/readeck/pkg/img"
 )
 
 // NewRemoteImage loads an image and returns a new img.Image instance.
-func NewRemoteImage(src string, client *http.Client) (*img.Image, error) {
+func NewRemoteImage(src string, client *http.Client) (img.Image, error) {
 	if client == nil {
 		client = http.DefaultClient
 	}
@@ -31,7 +34,7 @@ func NewRemoteImage(src string, client *http.Client) (*img.Image, error) {
 		return nil, fmt.Errorf("Invalid response status (%d)", rsp.StatusCode)
 	}
 
-	return img.New(rsp.Body)
+	return img.New(configs.Config.Images.Processor, rsp.Body)
 }
 
 // Picture is a remote picture
@@ -57,35 +60,53 @@ func NewPicture(src string, base *url.URL) (*Picture, error) {
 
 // Load loads the image remotely and fit it into the given
 // boundaries size.
-func (p *Picture) Load(client *http.Client, size int, toFormat string) error {
+func (p *Picture) Load(client *http.Client, size uint, toFormat string) error {
 	var format string
+	var r io.Reader
 	ri, err := NewRemoteImage(p.Href, client)
 	if err != nil {
 		return err
 	}
-	if p.bytes, format, err = ri.Fit(size, size).Encode(toFormat); err != nil {
+	defer ri.Close()
+	if err = ri.Fit(size, size); err != nil {
+		return err
+	}
+	ri.SetQuality(75)
+	if r, format, err = ri.Encode(toFormat); err != nil {
 		return err
 	}
 
-	p.Size = [2]int{ri.Image().Bounds().Dx(), ri.Image().Bounds().Dy()}
+	if p.bytes, err = ioutil.ReadAll(r); err != nil {
+		return err
+	}
+
+	p.Size = [2]int{int(ri.Width()), int(ri.Height())}
 	p.Type = fmt.Sprintf("image/%s", format)
 	return nil
 }
 
 // Copy returns a resized copy of the image, as a new Picture instance.
-func (p *Picture) Copy(size int, toFormat string) (*Picture, error) {
-	ri, err := img.New(bytes.NewReader(p.bytes))
+func (p *Picture) Copy(size uint, toFormat string) (*Picture, error) {
+	ri, err := img.New(configs.Config.Images.Processor, bytes.NewReader(p.bytes))
 	if err != nil {
 		return nil, err
 	}
+	defer ri.Close()
 
 	var format string
+	var r io.Reader
 	res := &Picture{Href: p.Href}
-	if res.bytes, format, err = ri.Fit(size, size).Encode(toFormat); err != nil {
+	if err = ri.Fit(size, size); err != nil {
+		return nil, err
+	}
+	if r, format, err = ri.Encode(toFormat); err != nil {
+		return nil, err
+	}
+	if res.bytes, err = ioutil.ReadAll(r); err != nil {
 		return nil, err
 	}
 
-	res.Size = [2]int{ri.Image().Bounds().Dx(), ri.Image().Bounds().Dy()}
+	res.Size = [2]int{int(ri.Width()), int(ri.Height())}
 	res.Type = fmt.Sprintf("image/%s", format)
 	return res, nil
 }

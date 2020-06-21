@@ -45,7 +45,6 @@ func EnqueueExtractPage(b *Bookmark) {
 				b.State = StateError
 				b.Errors = append(b.Errors, fmt.Sprintf("%v", r))
 				saved = false
-
 			}
 
 			// Never stay hanging

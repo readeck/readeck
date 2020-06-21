@@ -1,19 +1,27 @@
 package extract
 
 import (
-	"bytes"
 	"errors"
+	"fmt"
 	"image"
 	"net/url"
 	"testing"
 
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/readeck/readeck/configs"
 )
 
 func TestRemoteImage(t *testing.T) {
+	processor := configs.Config.Images.Processor
+	configs.Config.Images.Processor = "native"
+
 	httpmock.Activate()
-	defer httpmock.DeactivateAndReset()
+	defer func() {
+		httpmock.DeactivateAndReset()
+		configs.Config.Images.Processor = processor
+	}()
 
 	httpmock.RegisterResponder("GET", "/bogus", newFileResponder("images/bogus"))
 	httpmock.RegisterResponder("GET", "/404", httpmock.NewJsonResponderOrPanic(404, ""))
@@ -42,6 +50,9 @@ func TestRemoteImage(t *testing.T) {
 				t.Run(x.name, func(t *testing.T) {
 					ri, err := NewRemoteImage(x.path, nil)
 					assert.Nil(t, ri)
+					if ri != nil {
+						defer ri.Close()
+					}
 					assert.Equal(t, x.err, err.Error())
 				})
 			}
@@ -50,28 +61,30 @@ func TestRemoteImage(t *testing.T) {
 		for _, format := range formats {
 			t.Run(format, func(t *testing.T) {
 				ri, err := NewRemoteImage("/img."+format, nil)
+				fmt.Printf("%+v\n", ri)
 				if err != nil {
 					t.Fatal(err)
 				}
+				defer ri.Close()
 				assert.Equal(t, format, ri.Format())
-				assert.NotNil(t, ri.Image())
 			})
 		}
 
 		t.Run("fit", func(t *testing.T) {
 			ri, _ := NewRemoteImage("/img.png", nil)
-			bounds := ri.Image().Bounds()
-			w := bounds.Dx()
-			h := bounds.Dy()
-			assert.Equal(t, []int{240, 181}, []int{w, h})
+			defer ri.Close()
 
-			ri.Fit(24, 24)
-			assert.Equal(t, 24, ri.Image().Bounds().Dx())
-			assert.Equal(t, 18, ri.Image().Bounds().Dy())
+			w := ri.Width()
+			h := ri.Height()
+			assert.Equal(t, []uint{240, 181}, []uint{w, h})
+
+			ri.Fit(uint(24), uint(24))
+			assert.Equal(t, uint(24), ri.Width())
+			assert.Equal(t, uint(18), ri.Height())
 
 			ri.Fit(240, 240)
-			assert.Equal(t, 24, ri.Image().Bounds().Dx())
-			assert.Equal(t, 18, ri.Image().Bounds().Dy())
+			assert.Equal(t, uint(24), ri.Width())
+			assert.Equal(t, uint(18), ri.Height())
 		})
 
 		t.Run("encode", func(t *testing.T) {
@@ -90,12 +103,13 @@ func TestRemoteImage(t *testing.T) {
 
 			for _, x := range tests {
 				t.Run(x.format, func(t *testing.T) {
-					ri, _ := NewRemoteImage(x.path, nil)
-
-					b, f, err := ri.Encode(x.format)
+					ri, err := NewRemoteImage(x.path, nil)
+					defer ri.Close()
 					assert.Nil(t, err)
 
-					r := bytes.NewReader(b)
+					r, f, err := ri.Encode(x.format)
+					assert.Nil(t, err)
+
 					_, format, _ := image.DecodeConfig(r)
 					assert.Equal(t, format, f)
 				})

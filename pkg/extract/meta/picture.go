@@ -32,7 +32,7 @@ func ExtractPicture(m *extract.ProcessMessage, next extract.Processor) extract.P
 		return next
 	}
 
-	size := 800
+	size := uint(800)
 	if d.DocumentType == "photo" {
 		size = 1280
 	}
