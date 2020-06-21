@@ -118,7 +118,7 @@ func Routes(s *server.Server) http.Handler {
 			fftr.GoToNextPage,
 			contents.Readability,
 			contents.Text,
-			contents.Archive,
+			archiveProcessor,
 		)
 		ex.Run()
 		runtime.GC()
