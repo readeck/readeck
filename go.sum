@@ -265,6 +265,8 @@ gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 h1:qIbj1fsPNlZgppZ+VLlY7N33q108Sa+fhmuc+sWQYwY=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+gopkg.in/gographics/imagick.v2 v2.6.0 h1:ewRsUQk3QkjGumERlndbFn/kTYRjyMaPY5gxwpuAhik=
+gopkg.in/gographics/imagick.v2 v2.6.0/go.mod h1:/QVPLV/iKdNttRKthmDkeeGg+vdHurVEPc8zkU0XgBk=
 gopkg.in/hlandau/easymetric.v1 v1.0.0 h1:ZbfbH7W3giuVDjWUoFhDOjjv20hiPr5HZ2yMV5f9IeE=
 gopkg.in/hlandau/easymetric.v1 v1.0.0/go.mod h1:yh75hypuFzAxmvECh3ZKGCvFnIfapYJh2wv7ASaX2RE=
 gopkg.in/hlandau/measurable.v1 v1.0.1 h1:wH5UZKCRUnRr1iD+xIZfwhtxhmr+bprRJttqA1Rklf4=
