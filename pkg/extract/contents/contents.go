@@ -2,19 +2,16 @@ package contents
 
 import (
 	"bytes"
-	"context"
 	"regexp"
 	"sort"
 	"strconv"
 	"strings"
-	"time"
 
 	"golang.org/x/net/html"
 
 	"github.com/antchfx/htmlquery"
 	"github.com/go-shiori/dom"
 	"github.com/go-shiori/go-readability"
-	"github.com/go-shiori/obelisk"
 
 	"github.com/readeck/readeck/pkg/extract"
 )
@@ -77,60 +74,6 @@ func Readability(m *extract.ProcessMessage, next extract.Processor) extract.Proc
 	encloseArticle(body)
 
 	m.Dom = doc
-
-	return next
-}
-
-// Archive is a processor that executes obelisk archiver on the final
-// content.
-func Archive(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Step() != extract.StepPostProcess {
-		return next
-	}
-
-	if len(m.Extractor.HTML) == 0 {
-		return next
-	}
-	if !m.Extractor.Drop().IsHTML() {
-		return next
-	}
-
-	m.Log.Debug("create archive")
-
-	tr := m.Extractor.Client().Transport.(*extract.Transport)
-
-	req := obelisk.Request{
-		Input: bytes.NewReader(m.Extractor.HTML),
-		URL:   m.Extractor.Drop().URL.String(),
-	}
-	arc := obelisk.Archiver{
-		EnableLog:             true,
-		EnableVerboseLog:      true,
-		MaxConcurrentDownload: 5,
-		UserAgent:             tr.GetHeader("user-agent"),
-		DisableCSS:            true,
-		DisableEmbeds:         true,
-		DisableJS:             true,
-		DisableMedias:         false,
-		RequestTimeout:        15 * time.Second,
-	}
-	arc.Validate()
-
-	result, _, err := arc.Archive(context.Background(), req)
-	if err != nil {
-		m.Log.WithError(err).Error("archive error")
-		return next
-	}
-
-	// And a new parsing pass...
-	doc, _ := html.Parse(bytes.NewBuffer(result))
-	body := dom.GetElementsByTagName(doc, "body")[0]
-	buf := &bytes.Buffer{}
-	for child := body.FirstChild; child != nil; child = child.NextSibling {
-		html.Render(buf, child)
-	}
-
-	m.Extractor.HTML = buf.Bytes()
 
 	return next
 }
