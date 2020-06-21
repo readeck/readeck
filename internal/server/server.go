@@ -118,6 +118,7 @@ func (s *Server) serveAssets() http.HandlerFunc {
 		"default-src 'self'",
 		"img-src 'self' data:",
 		"media-src 'self' data:",
+		"style-src 'self' 'unsafe-inline'",
 		"child-src *", // Allow iframes for videos
 	}, "; ")
 
