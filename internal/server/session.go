@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/sha256"
 	"net/http"
+	"path"
 
 	"github.com/gorilla/sessions"
 
@@ -32,6 +33,7 @@ func initStore() {
 func (s *Server) WithSession() func(next http.Handler) http.Handler {
 	if store == nil {
 		initStore()
+		store.Options.Path = path.Join(s.BasePath, "api")
 	}
 
 	return func(next http.Handler) http.Handler {

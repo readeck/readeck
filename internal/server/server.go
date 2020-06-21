@@ -19,26 +19,38 @@ import (
 
 // Server is a wrapper around chi router.
 type Server struct {
-	Router *chi.Mux
+	Router   *chi.Mux
+	BasePath string
 }
 
 // New create a new server. Routes must be added manually before
 // calling ListenAndServe.
-func New() *Server {
-	router := chi.NewRouter()
-	router.Use(middleware.Recoverer)
-	router.Use(middleware.RealIP)
-	router.Use(middleware.RequestID)
-	router.Use(Logger())
-	router.Use(SetRequestInfo)
+func New(basePath string) *Server {
+	if basePath == "" {
+		basePath = "/"
+	}
 
-	router.Use(middleware.SetHeader("Referrer-Policy", "same-origin"))
+	router := chi.NewRouter()
+	router.Use(
+		middleware.Recoverer,
+		middleware.RealIP,
+		middleware.RequestID,
+		Logger(),
+		SetRequestInfo,
+	)
 
 	s := &Server{
-		Router: router,
+		Router:   router,
+		BasePath: basePath,
 	}
 
 	return s
+}
+
+// AddRoute adds a new route to the server, prefixed with
+// the BasePath.
+func (s *Server) AddRoute(pattern string, handler http.Handler) {
+	s.Router.Mount(path.Join(s.BasePath, pattern), handler)
 }
 
 // ListenAndServe starts the HTTP server
@@ -81,18 +93,33 @@ func (s *Server) Log(r *http.Request) *log.Entry {
 	return middleware.GetLogEntry(r).(*structuredLoggerEntry).l
 }
 
-// BaseRoutes returns the common routes for SPA assets
-// and user media resources.
-func (s *Server) BaseRoutes() http.Handler {
-	r := chi.NewRouter()
-	r.Handle("/*", s.serveAssets())
-	r.Handle("/media/*", s.serveMedia())
+// SetupRoutes mounts the common server routes: All the assets for
+// the web app, the authentication and profile routes, and the system
+// information route.
+func (s *Server) SetupRoutes() {
+	// First, serve the SPA assets
+	s.AddRoute("/", func() http.Handler {
+		r := chi.NewRouter()
+		r.Handle("/*", s.serveAssets())
+		return r
+	}())
 
-	return r
+	// Auth and profile routes
+	s.AddRoute("/api", s.AuthRoutes())
+
+	// System routes
+	s.AddRoute("/api/sys", s.SysRoutes())
 }
 
 func (s *Server) serveAssets() http.HandlerFunc {
 	fs := directFileServer{assets.Assets}
+
+	cspHeader := strings.Join([]string{
+		"default-src 'self'",
+		"img-src 'self' data:",
+		"media-src 'self' data:",
+		"child-src *", // Allow iframes for videos
+	}, "; ")
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		p := chi.URLParam(r, "*")
@@ -126,25 +153,8 @@ func (s *Server) serveAssets() http.HandlerFunc {
 			f.Close()
 		}
 
-		fs.ServeHTTP(w, r2)
-	}
-}
-
-func (s *Server) serveMedia() http.HandlerFunc {
-	fs := directFileServer{
-		http.Dir(path.Join(configs.Config.Main.DataDirectory, "files")),
-	}
-
-	return func(w http.ResponseWriter, r *http.Request) {
-		p := chi.URLParam(r, "*")
-		p = strings.TrimLeft(p, "/")
-		p = path.Clean(p)
-
-		r2 := new(http.Request)
-		*r2 = *r
-		r2.URL = new(url.URL)
-		*r2.URL = *r.URL
-		r2.URL.Path = p
+		w.Header().Set("Referrer-Policy", "same-origin")
+		w.Header().Add("Content-Security-Policy", cspHeader)
 
 		fs.ServeHTTP(w, r2)
 	}
@@ -166,7 +176,7 @@ func (f *directFileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	st, err := fd.Stat()
 	if st.IsDir() {
-		http.Error(w, http.StatusText(404), 404)
+		http.Error(w, http.StatusText(http.StatusForbidden), http.StatusForbidden)
 		return
 	}
 
