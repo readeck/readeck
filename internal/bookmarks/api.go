@@ -1,8 +1,13 @@
 package bookmarks
 
 import (
+	"context"
+	"io"
 	"net/http"
 	"net/url"
+	"path"
+	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -12,12 +17,27 @@ import (
 
 	"github.com/readeck/readeck/configs"
 	"github.com/readeck/readeck/internal/server"
+	"github.com/readeck/readeck/pkg/zipfs"
 )
 
 var validSchemes = map[string]bool{"http": true, "https": true}
 
-// Routes returns the routes for the bookmarks domain.
-func Routes(s *server.Server) http.Handler {
+type ctxKey struct{}
+
+var (
+	ctxBookmarkKey = &ctxKey{}
+)
+
+// SetupRoutes mounts the routes for the bookmarks domain.
+// "/bm" is a public route outside the api scope in order to avoid
+// sending the session cookie.
+func SetupRoutes(s *server.Server) {
+	s.AddRoute("/api/bookmarks", apiRoutes(s))
+	s.AddRoute("/bm", mediaRoutes(s))
+}
+
+// apiRoutes returns the API routes for the bookmarks domain.
+func apiRoutes(s *server.Server) http.Handler {
 	r := chi.NewRouter()
 	r.Use(s.WithSession(), s.WithAuth)
 
@@ -51,14 +71,13 @@ func Routes(s *server.Server) http.Handler {
 		Tags         []string               `json:"tags"`
 		Resources    map[string]*resultFile `json:"resources"`
 		Embed        string                 `json:"embed,omitempty"`
-		Logs         []string               `json:"logs,omitempty"`
 		Errors       []string               `json:"errors,omitempty"`
 	}
 
-	serializeResult := func(b *Bookmark, r *http.Request) resultItem {
+	serializeResult := func(b *Bookmark, r *http.Request, base string) resultItem {
 		res := resultItem{
 			ID:           b.UID,
-			Href:         s.AbsoluteURL(r, ".", b.UID).String(),
+			Href:         s.AbsoluteURL(r, base, b.UID).String(),
 			Created:      b.Created,
 			Updated:      b.Updated,
 			State:        b.State,
@@ -81,12 +100,28 @@ func Routes(s *server.Server) http.Handler {
 		}
 
 		for k, v := range b.Files {
-			f := &resultFile{Src: s.AbsoluteURL(r, "/media", v.Name).String()}
+			if path.Dir(v.Name) != "img" {
+				continue
+			}
+
+			f := &resultFile{
+				Src: s.AbsoluteURL(r, path.Join(s.BasePath, "bm", b.FilePath, v.Name)).String(),
+			}
 			if v.Size != [2]int{0, 0} {
 				f.Width = v.Size[0]
 				f.Height = v.Size[1]
 			}
 			res.Resources[k] = f
+		}
+
+		if v, ok := b.Files["props"]; ok {
+			res.Resources["props"] = &resultFile{Src: s.AbsoluteURL(r, base, b.UID, "x", v.Name).String()}
+		}
+		if v, ok := b.Files["log"]; ok {
+			res.Resources["log"] = &resultFile{Src: s.AbsoluteURL(r, base, b.UID, "x", v.Name).String()}
+		}
+		if _, ok := b.Files["article"]; ok {
+			res.Resources["article"] = &resultFile{Src: s.AbsoluteURL(r, base, b.UID, "article").String()}
 		}
 
 		return res
@@ -95,6 +130,35 @@ func Routes(s *server.Server) http.Handler {
 	type searchParams struct {
 		Query string `json:"q" schema:"q"`
 	}
+
+	// rb is a router that will fetch a bookmark and add it into the
+	// request's context. It also deals with if-modified-since header.
+	var rb = r.With(func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			uid := chi.URLParam(r, "uid")
+
+			b, err := Bookmarks.GetOne(
+				goqu.C("uid").Eq(uid),
+				goqu.C("user_id").Eq(s.GetUser(r).ID),
+			)
+			if err != nil {
+				s.Status(w, r, 404)
+				return
+			}
+
+			if r.Method == "GET" && s.CheckIfModifiedSince(r, b.Updated) {
+				w.WriteHeader(http.StatusNotModified)
+				return
+			}
+
+			ctx := context.WithValue(r.Context(), ctxBookmarkKey, b)
+
+			if b.State == StateLoaded {
+				w.Header().Set("Last-Modified", b.Updated.Format(http.TimeFormat))
+			}
+			next.ServeHTTP(w, r.WithContext(ctx))
+		})
+	})
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		pageParams, msg := s.GetPageParams(r)
@@ -117,7 +181,7 @@ func Routes(s *server.Server) http.Handler {
 			Select(
 				"b.id", "b.uid", "b.created", "b.updated", "b.state", "b.url", "b.title",
 				"b.site_name", "b.site", "b.authors", "b.lang", "b.type",
-				"b.is_marked", "b.tags", "b.description", "b.files").
+				"b.is_marked", "b.tags", "b.description", "b.file_path", "b.files").
 			Where(goqu.C("user_id").Eq(s.GetUser(r).ID))
 
 		ds = ds.Order(goqu.I("created").Desc())
@@ -143,7 +207,7 @@ func Routes(s *server.Server) http.Handler {
 
 		res := make([]resultItem, len(items))
 		for i, item := range items {
-			res[i] = serializeResult(item, r)
+			res[i] = serializeResult(item, r, ".")
 		}
 
 		s.SendPaginationHeaders(w, r, int(count), pageParams.Limit, pageParams.Offset)
@@ -197,22 +261,12 @@ func Routes(s *server.Server) http.Handler {
 		})
 	})
 
-	r.Get("/{uid}", func(w http.ResponseWriter, r *http.Request) {
-		uid := chi.URLParam(r, "uid")
+	rb.Get("/{uid}", func(w http.ResponseWriter, r *http.Request) {
+		b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
 
-		b, err := Bookmarks.GetOne(
-			goqu.C("uid").Eq(uid),
-			goqu.C("user_id").Eq(s.GetUser(r).ID),
-		)
-		if err != nil {
-			s.Status(w, r, 404)
-			return
-		}
-
-		res := serializeResult(b, r)
+		res := serializeResult(b, r, "./..")
 		res.Href = s.AbsoluteURL(r).String()
 		res.Embed = b.Embed
-		res.Logs = b.Logs
 		res.Errors = b.Errors
 
 		s.Render(w, r, 200, res)
@@ -224,23 +278,14 @@ func Routes(s *server.Server) http.Handler {
 		Tags     Strings `json:"tags"`
 	}
 
-	r.Patch("/{uid}", func(w http.ResponseWriter, r *http.Request) {
-		uid := chi.URLParam(r, "uid")
-
+	rb.Patch("/{uid}", func(w http.ResponseWriter, r *http.Request) {
 		data := &updatePayload{}
 		if msg := s.LoadJSON(r, data); msg != nil {
 			s.Message(w, r, msg)
 			return
 		}
 
-		b, err := Bookmarks.GetOne(
-			goqu.C("uid").Eq(uid),
-			goqu.C("user_id").Eq(s.GetUser(r).ID),
-		)
-		if err != nil {
-			s.Status(w, r, 404)
-			return
-		}
+		b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
 
 		updated := map[string]interface{}{}
 		if data.IsMarked != nil {
@@ -257,7 +302,7 @@ func Routes(s *server.Server) http.Handler {
 		}
 
 		if len(updated) > 0 {
-			if err = b.Update(updated); err != nil {
+			if err := b.Update(updated); err != nil {
 				s.Error(w, r, err)
 				return
 			}
@@ -280,23 +325,74 @@ func Routes(s *server.Server) http.Handler {
 		s.Render(w, r, rspStatus, updated)
 	})
 
-	r.Delete("/{uid}", func(w http.ResponseWriter, r *http.Request) {
-		uid := chi.URLParam(r, "uid")
-
-		b, err := Bookmarks.GetOne(
-			goqu.C("uid").Eq(uid),
-			goqu.C("user_id").Eq(s.GetUser(r).ID),
-		)
-		if err != nil {
-			s.TextMessage(w, r, 404, http.StatusText(404))
-			return
-		}
+	rb.Delete("/{uid}", func(w http.ResponseWriter, r *http.Request) {
+		b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
 
 		if err := b.Delete(); err != nil {
 			s.Error(w, r, err)
 			return
 		}
 		w.WriteHeader(204)
+	})
+
+	rb.Get("/{uid}/article", func(w http.ResponseWriter, r *http.Request) {
+		b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+
+		baseURL := s.AbsoluteURL(r, path.Join(s.BasePath, "bm", b.FilePath)).Path
+		buf, err := b.getArticle(baseURL)
+		if err != nil {
+			s.Error(w, r, err)
+			return
+		}
+
+		w.Header().Set("Content-Length", strconv.Itoa(buf.Len()))
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.WriteHeader(200)
+		io.Copy(w, buf)
+	})
+
+	rb.HandleFunc("/{uid}/x/*", func(w http.ResponseWriter, r *http.Request) {
+		b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+
+		p := path.Clean(chi.URLParam(r, "*"))
+
+		r2 := new(http.Request)
+		*r2 = *r
+		r2.URL = new(url.URL)
+		*r2.URL = *r.URL
+		r2.URL.Path = p
+
+		fs := zipfs.HTTPZipFile(b.getFilePath())
+		fs.ServeHTTP(w, r2)
+	})
+
+	return r
+}
+
+func mediaRoutes(s *server.Server) http.Handler {
+	r := chi.NewRouter()
+	r.HandleFunc("/{dom}/{d}/{uid}/{p:^(img|_resources)$}/{name}", func(w http.ResponseWriter, r *http.Request) {
+		p := path.Join(
+			chi.URLParam(r, "p"),
+			chi.URLParam(r, "name"),
+		)
+		p = path.Clean(p)
+
+		r2 := new(http.Request)
+		*r2 = *r
+		r2.URL = new(url.URL)
+		*r2.URL = *r.URL
+		r2.URL.Path = p
+
+		zipfile := filepath.Join(
+			StoragePath(),
+			chi.URLParam(r, "dom"),
+			chi.URLParam(r, "d"),
+			chi.URLParam(r, "uid")+".zip",
+		)
+
+		fs := zipfs.HTTPZipFile(zipfile)
+		fs.ServeHTTP(w, r2)
 	})
 
 	return r

@@ -1,12 +1,16 @@
 package bookmarks
 
 import (
+	"archive/zip"
 	"database/sql/driver"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"path"
+	"path/filepath"
+	"strings"
 	"time"
 
 	"golang.org/x/net/idna"
@@ -48,6 +52,11 @@ var (
 	ErrNotFound = errors.New("not found")
 )
 
+// StoragePath returns the storage base directory for bookmark files
+func StoragePath() string {
+	return filepath.Join(configs.Config.Main.DataDirectory, "bookmarks")
+}
+
 // Bookmark is a bookmark record in database
 type Bookmark struct {
 	ID           int           `db:"id" goqu:"skipinsert,skipupdate"`
@@ -66,10 +75,9 @@ type Bookmark struct {
 	DocumentType string        `db:"type"`
 	Description  string        `db:"description"`
 	Text         string        `db:"text"`
-	Meta         BookmarkMeta  `db:"meta"`
 	Embed        string        `db:"embed"`
+	FilePath     string        `db:"file_path"`
 	Files        BookmarkFiles `db:"files"`
-	Logs         Strings       `db:"logs"`
 	Errors       Strings       `db:"errors"`
 	Tags         Strings       `db:"tags"`
 	IsMarked     bool          `db:"is_marked"`
@@ -180,85 +188,89 @@ func (b *Bookmark) getBaseFileURL() (string, error) {
 	return path.Join(res, b.Created.Format("20060102"), b.UID), nil
 }
 
-func (b *Bookmark) getBaseFilePath() string {
-	return path.Join(configs.Config.Main.DataDirectory, "files")
-}
-
-// AddFile adds a new file to the bookmark. It creates the parent directories
-// when they're missing and writes the file. The file information is then added
-// to the bookmark that needs to be saved later on.
-func (b *Bookmark) AddFile(id string, f *BookmarkFile, data []byte) error {
-	base, err := b.getBaseFileURL()
-	if err != nil {
-		return err
-	}
-	name := path.Join(base, path.Base(f.Name))
-	filename := path.Join(b.getBaseFilePath(), name)
-	dirname := path.Dir(filename)
-
-	stat, err := os.Stat(dirname)
-	if err != nil {
-		if errors.Is(err, os.ErrNotExist) {
-			if err := os.MkdirAll(dirname, 0750); err != nil {
-				return err
-			}
-		} else {
-			return err
-		}
-	} else if !stat.IsDir() {
-		return fmt.Errorf(`"%s" is not a directory`, dirname)
-	}
-
-	fd, err := os.Create(filename)
-	if err != nil {
-		return err
-	}
-
-	if _, err = fd.Write(data); err != nil {
-		fd.Close()
-		return err
-	} else if err := fd.Close(); err != nil {
-		return err
-	}
-
-	f.Name = name
-	if b.Files == nil {
-		b.Files = make(BookmarkFiles)
-	}
-	b.Files[id] = f
-	return nil
-}
-
 func (b *Bookmark) removeFiles() {
-	if b.Files == nil {
+	filename := b.getFilePath()
+	if filename == "" {
 		return
 	}
-	for _, v := range b.Files {
-		// Remove the file
-		filename := path.Join(b.getBaseFilePath(), v.Name)
-		if stat, _ := os.Stat(filename); stat != nil {
-			l := log.WithField("path", filename)
-			if err := os.Remove(filename); err != nil {
-				l.WithError(err).Error()
-			} else {
-				l.Debug("removed")
-			}
-		}
 
-		// Remove empty directories up to the base
-		dirname := path.Dir(v.Name)
-		if stat, _ := os.Stat(path.Join(b.getBaseFilePath(), dirname)); stat == nil {
+	l := log.WithField("path", filename)
+	if err := os.Remove(filename); err != nil {
+		l.WithError(err).Error()
+	} else {
+		l.Debug("file removed")
+	}
+
+	// Remove empty directories up to the base
+	dirname := path.Dir(filename)
+	if stat, _ := os.Stat(dirname); stat == nil {
+		return
+	}
+	for dirname != "." {
+		// Just try to remove and if it's not empty it will complain
+		d := dirname
+		if err := os.Remove(d); err != nil {
+			break
+		}
+		log.WithField("dir", dirname).Debug("directory removed")
+		dirname = path.Dir(dirname)
+	}
+}
+
+func (b *Bookmark) getFilePath() string {
+	if b.FilePath == "" {
+		return ""
+	}
+	return filepath.Join(StoragePath(), b.FilePath+".zip")
+}
+
+// getArticle returns the article content
+func (b *Bookmark) getArticle(baseURL string) (*strings.Reader, error) {
+	a, ok := b.Files["article"]
+	if !ok {
+		return nil, os.ErrNotExist
+	}
+
+	p := b.getFilePath()
+	if p == "" {
+		return nil, os.ErrNotExist
+	}
+
+	z, err := zip.OpenReader(p)
+	if err != nil {
+		return nil, err
+	}
+	defer z.Close()
+
+	resourceList := []string{}
+	buf := new(strings.Builder)
+
+	for _, entry := range z.File {
+		if !strings.HasSuffix(entry.Name, "/") && strings.HasPrefix(entry.Name, resourceDirName) {
+			resourceList = append(resourceList, entry.Name)
 			continue
 		}
-		for dirname != "." {
-			// Just try to remove and if it's not empty it will complain
-			d := path.Join(b.getBaseFilePath(), dirname)
-			if err := os.Remove(d); err != nil {
-				break
+
+		if entry.Name == a.Name {
+			fp, err := entry.Open()
+			if err != nil {
+				return nil, err
 			}
-			dirname = path.Dir(dirname)
+			if _, err := io.Copy(buf, fp); err != nil {
+				return nil, err
+			}
 		}
 	}
+
+	args := []string{}
+	for _, x := range resourceList {
+		args = append(args, "./"+x, baseURL+"/"+x)
+	}
+
+	replacer := strings.NewReplacer(args...)
+	res := replacer.Replace(buf.String())
+
+	return strings.NewReader(res), nil
 }
 
 // Strings is a list of strings stored in a column.
@@ -279,31 +291,6 @@ func (s *Strings) Scan(value interface{}) error {
 
 // Value encode a Strings instance for storage.
 func (s Strings) Value() (driver.Value, error) {
-	v, err := json.Marshal(s)
-	if err != nil {
-		return "", err
-	}
-	return string(v), nil
-}
-
-// BookmarkMeta is a map of list of strings.
-type BookmarkMeta map[string][]string
-
-// Scan loads a BookmarkMeta instance from a column.
-func (s *BookmarkMeta) Scan(value interface{}) error {
-	if value == nil {
-		return nil
-	}
-	v, ok := value.(string)
-	if !ok {
-		return fmt.Errorf("Can't cast %+v", value)
-	}
-	json.Unmarshal([]byte(v), s)
-	return nil
-}
-
-// Value encodes a BookmarkMeta instance for storage.
-func (s BookmarkMeta) Value() (driver.Value, error) {
 	v, err := json.Marshal(s)
 	if err != nil {
 		return "", err

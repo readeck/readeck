@@ -1,12 +1,19 @@
 package bookmarks
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"path"
+	"path/filepath"
 	"runtime"
+	"strings"
+	"time"
 
 	"github.com/gammazero/workerpool"
 	log "github.com/sirupsen/logrus"
 
+	"github.com/readeck/readeck/pkg/archiver"
 	"github.com/readeck/readeck/pkg/extract"
 	"github.com/readeck/readeck/pkg/extract/contents"
 	"github.com/readeck/readeck/pkg/extract/fftr"
@@ -77,7 +84,6 @@ func EnqueueExtractPage(b *Bookmark) {
 			fftr.GoToNextPage,
 			contents.Readability,
 			contents.Text,
-			contents.Archive,
 		)
 
 		ex.Run()
@@ -86,6 +92,7 @@ func EnqueueExtractPage(b *Bookmark) {
 			return
 		}
 
+		b.Updated = time.Now()
 		b.URL = drop.UnescapedURL()
 		b.State = StateLoaded
 		b.Title = drop.Title
@@ -96,15 +103,9 @@ func EnqueueExtractPage(b *Bookmark) {
 		b.DocumentType = drop.DocumentType
 		b.Description = drop.Description
 		b.Text = ex.Text
-		b.Meta = make(BookmarkMeta)
-		b.Logs = ex.Logs
 
 		for _, x := range drop.Authors {
 			b.Authors = append(b.Authors, x)
-		}
-
-		for k, v := range drop.Meta {
-			b.Meta[k] = v
 		}
 
 		for _, x := range ex.Errors() {
@@ -119,32 +120,111 @@ func EnqueueExtractPage(b *Bookmark) {
 			b.Embed = drop.Meta.LookupGet("oembed.html")
 		}
 
-		// Save HTML
-		if len(ex.HTML) > 0 {
-			if err := b.AddFile("article", &BookmarkFile{
-				Name: "article.html",
-				Type: "text/html",
-			}, ex.HTML); err != nil {
-				log.WithError(err).Error()
-			}
+		// Run archiver & zipper
+		err = jobPostProcess(b, ex)
+		if err != nil {
+			log.WithError(err).Error()
+			b.Errors = append(b.Errors, err.Error())
 		}
 
-		// Save images
-		for k, p := range drop.Pictures {
-			name := p.Name(k)
-			if err := b.AddFile(k, &BookmarkFile{
-				Name: name,
-				Type: p.Type,
-				Size: p.Size,
-			}, p.Bytes()); err != nil {
-				log.WithError(err).Error()
-			}
-		}
-
+		// All good? Save now
 		if err := b.Save(); err != nil {
 			log.WithError(err).Error()
 			return
 		}
 		saved = true
 	})
+}
+
+func jobPostProcess(b *Bookmark, ex *extract.Extractor) error {
+	var (
+		err error
+		arc *archiver.Archiver
+	)
+
+	// Fail fast
+	fileURL, err := b.getBaseFileURL()
+	if err != nil {
+		return err
+	}
+	zipFile := filepath.Join(StoragePath(), fileURL+".zip")
+
+	files := BookmarkFiles{}
+
+	// Create the zip file
+	z, err := newZipper(zipFile)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		err := z.close()
+		if err != nil {
+			panic(err)
+		}
+	}()
+
+	// Add images to the zipfile
+	if err = z.addDirectory("img"); err != nil {
+		return err
+	}
+
+	for k, p := range ex.Drop().Pictures {
+		name := path.Join("img", p.Name(k))
+		if err = z.addFile(name, p.Bytes()); err != nil {
+			return err
+		}
+		files[k] = &BookmarkFile{name, p.Type, p.Size}
+	}
+
+	// Run the archiver
+	if len(ex.HTML) > 0 && ex.Drop().IsHTML() {
+		arc, err = NewArchive(ex, log.NewEntry(log.StandardLogger()))
+		if err != nil {
+			return err
+		}
+	}
+
+	// Add HTML content
+	if arc != nil && len(arc.Result) > 0 {
+		if err = z.addCompressedFile("index.html", arc.Result); err != nil {
+			return err
+		}
+		files["article"] = &BookmarkFile{Name: "index.html"}
+	}
+
+	// Add assets
+	if arc != nil && len(arc.Cache) > 0 {
+		if err = z.addDirectory(resourceDirName); err != nil {
+			return err
+		}
+
+		for uri, asset := range arc.Cache {
+			fname := path.Join(resourceDirName, getURLfilename(uri, asset.ContentType))
+			if err = z.addFile(fname, asset.Data); err != nil {
+				return err
+			}
+		}
+	}
+
+	// Add the log
+	if err = z.addCompressedFile("log", []byte(strings.Join(ex.Logs, "\n"))); err != nil {
+		return err
+	}
+	files["log"] = &BookmarkFile{Name: "log"}
+
+	// Add the metadata
+	buf := new(bytes.Buffer)
+	enc := json.NewEncoder(buf)
+	enc.SetIndent("", "  ")
+	if err = enc.Encode(ex.Drop()); err != nil {
+		return err
+	}
+	if err = z.addCompressedFile("props.json", buf.Bytes()); err != nil {
+		return err
+	}
+	files["props"] = &BookmarkFile{Name: "props.json"}
+
+	b.FilePath = fileURL
+	b.Files = files
+	return nil
 }

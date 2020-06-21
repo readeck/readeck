@@ -108,9 +108,8 @@ CREATE TABLE IF NOT EXISTS bookmark (
   description text     NOT NULL DEFAULT "",
   text        text     NOT NULL DEFAULT "",
   embed       text     NOT NULL DEFAULT "",
-  meta        json     NOT NULL DEFAULT "",
+  file_path   text     NOT NULL DEFAULT "",
   files       json     NOT NULL DEFAULT "",
-  logs        json     NOT NULL DEFAULT "",
   errors      json     NOT NULL DEFAULT "",
   tags        json     NOT NULL DEFAULT "",
 
