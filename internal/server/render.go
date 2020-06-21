@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/readeck/readeck/configs"
 )
@@ -70,4 +71,24 @@ func (s *Server) Status(w http.ResponseWriter, r *http.Request, status int) {
 func (s *Server) Error(w http.ResponseWriter, r *http.Request, err error) {
 	s.Log(r).WithError(err).Error("server error")
 	s.Status(w, r, 500)
+}
+
+// CheckIfModifiedSince checks a if-modified-since header
+// against "modtime" and returns true when it's before
+// or equal the received time in the header.
+func (s *Server) CheckIfModifiedSince(r *http.Request, modtime time.Time) bool {
+	ius := r.Header.Get("If-Modified-Since")
+	if ius == "" {
+		return false
+	}
+	t, err := http.ParseTime(ius)
+	if err != nil {
+		return false
+	}
+
+	modtime = modtime.Truncate(time.Second)
+	if modtime.Before(t) || modtime.Equal(t) {
+		return true
+	}
+	return false
 }
