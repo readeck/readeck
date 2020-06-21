@@ -3,7 +3,6 @@ package app
 import (
 	"fmt"
 
-	"github.com/go-chi/chi"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
@@ -30,22 +29,21 @@ var serveCmd = &cobra.Command{
 }
 
 func runServe(c *cobra.Command, args []string) {
-	s := server.New()
+	s := server.New("/")
 
-	s.Router.Route("/", func(r chi.Router) {
-		r.Mount("/", s.BaseRoutes())
+	// Base routes (assets, auth, system info...)
+	s.SetupRoutes()
 
-		r.Route("/api", func(r chi.Router) {
-			r.Mount("/", s.AuthRoutes())
-			r.Mount("/sys", s.SysRoutes())
+	// Bookmark routes
+	// - /api/bookmarks/*
+	// - /bm/* (for bookmark media files)
+	bookmarks.SetupRoutes(s)
 
-			r.Mount("/bookmarks", bookmarks.Routes(s))
-
-			if configs.Config.Main.DevMode {
-				r.Mount("/cookbook", cookbook.Routes(s))
-			}
-		})
-	})
+	// Only in dev mode
+	if configs.Config.Main.DevMode {
+		// Cookbook routes
+		cookbook.SetupRoutes(s)
+	}
 
 	log.WithField("url", fmt.Sprintf("http://%s:%d/",
 		configs.Config.Server.Host, configs.Config.Server.Port),

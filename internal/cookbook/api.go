@@ -41,8 +41,13 @@ type extractResult struct {
 	Images       map[string]*extractImg `json:"images"`
 }
 
-// Routes returns the routes for the cookbook domain.
-func Routes(s *server.Server) http.Handler {
+// SetupRoutes setup the cookbook routes on /api/cookbook
+func SetupRoutes(s *server.Server) {
+	s.AddRoute("/api/cookbook", apiRoutes(s))
+}
+
+// apiRoutes returns the API routes for the cookbook domain.
+func apiRoutes(s *server.Server) http.Handler {
 	r := chi.NewRouter()
 	r.Use(s.WithSession(), s.WithAuth)
 
