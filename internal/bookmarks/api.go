@@ -273,7 +273,6 @@ func apiRoutes(s *server.Server) http.Handler {
 	})
 
 	type updatePayload struct {
-		Refresh  *bool   `json:"refresh"`
 		IsMarked *bool   `json:"is_marked"`
 		Tags     Strings `json:"tags"`
 	}
@@ -296,23 +295,12 @@ func apiRoutes(s *server.Server) http.Handler {
 			b.Tags = data.Tags
 			updated["tags"] = b.Tags
 		}
-		if data.Refresh != nil && *data.Refresh {
-			b.State = StateLoading
-			updated["state"] = b.State
-		}
 
 		if len(updated) > 0 {
 			if err := b.Update(updated); err != nil {
 				s.Error(w, r, err)
 				return
 			}
-		}
-
-		// Start the extraction job
-		rspStatus := 200
-		if b.State == StateLoading {
-			EnqueueExtractPage(b)
-			rspStatus = 202
 		}
 
 		updated["id"] = b.UID
@@ -322,7 +310,7 @@ func apiRoutes(s *server.Server) http.Handler {
 			"location",
 			s.AbsoluteURL(r).String(),
 		)
-		s.Render(w, r, rspStatus, updated)
+		s.Render(w, r, 200, updated)
 	})
 
 	rb.Delete("/{uid}", func(w http.ResponseWriter, r *http.Request) {
