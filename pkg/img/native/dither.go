@@ -2,7 +2,7 @@
 // The original code, MIT licensed was found on:
 // https://github.com/esimov/dithergo/
 
-package img
+package native
 
 import (
 	"image"
