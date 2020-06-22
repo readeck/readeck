@@ -5,9 +5,9 @@ go 1.14
 require (
 	github.com/antchfx/htmlquery v1.2.3
 	github.com/antchfx/xpath v1.1.8 // indirect
+	github.com/anthonynsimon/bild v0.12.0
 	github.com/araddon/dateparse v0.0.0-20200409225146-d820a6159ab1
 	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
-	github.com/disintegration/imaging v1.6.2
 	github.com/doug-martin/goqu/v9 v9.9.0
 	github.com/gammazero/workerpool v0.0.0-20200608033439-1a5ca90a5753
 	github.com/go-chi/chi v4.1.2+incompatible
@@ -36,7 +36,6 @@ require (
 	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a
 	golang.org/x/sys v0.0.0-20200413165638-669c56c373c4 // indirect
 	golang.org/x/text v0.3.2
-	gopkg.in/gographics/imagick.v2 v2.6.0
 	gopkg.in/hlandau/easymetric.v1 v1.0.0 // indirect
 	gopkg.in/hlandau/measurable.v1 v1.0.1 // indirect
 	gopkg.in/hlandau/passlib.v1 v1.0.10 // indirect

@@ -1,6 +1,7 @@
 package extract
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"image"
@@ -9,19 +10,11 @@ import (
 
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
-
-	"github.com/readeck/readeck/configs"
 )
 
 func TestRemoteImage(t *testing.T) {
-	processor := configs.Config.Images.Processor
-	configs.Config.Images.Processor = "native"
-
 	httpmock.Activate()
-	defer func() {
-		httpmock.DeactivateAndReset()
-		configs.Config.Images.Processor = processor
-	}()
+	defer httpmock.DeactivateAndReset()
 
 	httpmock.RegisterResponder("GET", "/bogus", newFileResponder("images/bogus"))
 	httpmock.RegisterResponder("GET", "/404", httpmock.NewJsonResponderOrPanic(404, ""))
@@ -107,11 +100,14 @@ func TestRemoteImage(t *testing.T) {
 					defer ri.Close()
 					assert.Nil(t, err)
 
-					r, f, err := ri.Encode(x.format)
+					ri.SetFormat(x.format)
+
+					var buf bytes.Buffer
+					err = ri.Encode(&buf)
 					assert.Nil(t, err)
 
-					_, format, _ := image.DecodeConfig(r)
-					assert.Equal(t, format, f)
+					_, format, _ := image.DecodeConfig(bytes.NewReader(buf.Bytes()))
+					assert.Equal(t, format, ri.Format())
 				})
 			}
 		})

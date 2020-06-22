@@ -1,37 +1,76 @@
 package img
 
 import (
-	"fmt"
+	"image"
+	"image/color"
 	"io"
+)
+
+// Gray16Palette is a 16 level b&w palette.
+var Gray16Palette = []color.Color{
+	color.RGBA{0x00, 0x00, 0x00, 0xff},
+	color.RGBA{0x11, 0x11, 0x11, 0xff},
+	color.RGBA{0x22, 0x22, 0x22, 0xff},
+	color.RGBA{0x33, 0x33, 0x33, 0xff},
+	color.RGBA{0x44, 0x44, 0x44, 0xff},
+	color.RGBA{0x55, 0x55, 0x55, 0xff},
+	color.RGBA{0x66, 0x66, 0x66, 0xff},
+	color.RGBA{0x77, 0x77, 0x77, 0xff},
+	color.RGBA{0x88, 0x88, 0x88, 0xff},
+	color.RGBA{0x99, 0x99, 0x99, 0xff},
+	color.RGBA{0xaa, 0xaa, 0xaa, 0xff},
+	color.RGBA{0xbb, 0xbb, 0xbb, 0xff},
+	color.RGBA{0xcc, 0xcc, 0xcc, 0xff},
+	color.RGBA{0xdd, 0xdd, 0xdd, 0xff},
+	color.RGBA{0xee, 0xee, 0xee, 0xff},
+	color.RGBA{0xff, 0xff, 0xff, 0xff},
+}
+
+// ImageCompression is the compression level used for PNG images
+type ImageCompression uint8
+
+const (
+	// CompressionFast is a fast method.
+	CompressionFast ImageCompression = iota
+
+	// CompressionBest is the best space saving method.
+	CompressionBest
 )
 
 // Image describes the interface of an image manipulation object.
 type Image interface {
 	Close() error
-	Encode(format string) (io.Reader, string, error)
 	Format() string
 	Width() uint
 	Height() uint
-	SetQuality(uint)
-	Fit(w, h uint) error
+	SetFormat(string) error
+	SetCompression(ImageCompression) error
+	SetQuality(uint8) error
+	Resize(uint, uint) error
+	Fit(uint, uint) error
 	Grayscale() error
-	Dither(numColors uint) error
-	DitherMono(numColors uint) error
+	Gray16() error
+	Pipeline(...ImageFilter) error
+	Encode(io.Writer) error
 }
 
-var loaders = map[string]func(io.Reader) (Image, error){}
+// ImageFilter is a filter application function used by the
+// Pipeline method of an Image instance.
+type ImageFilter func(Image) error
 
-// AddLoader adds a new image loader to the available loaders.
-func AddLoader(name string, fn func(io.Reader) (Image, error)) {
-	loaders[name] = fn
-}
-
-// New loads an image using the given loader.
-func New(loader string, r io.Reader) (Image, error) {
-	fn, ok := loaders[loader]
-	if !ok {
-		return nil, fmt.Errorf("loaders %s not found", loader)
+// New create a new Image instance, using the ImageNative implementation.
+// Since there's no other implementation at the moment,
+// let's keep it this way for now.
+func New(r io.Reader) (Image, error) {
+	m, format, err := image.Decode(r)
+	if err != nil {
+		return nil, err
 	}
 
-	return fn(r)
+	return &NativeImage{
+		m:           m,
+		format:      format,
+		compression: CompressionFast,
+		quality:     80,
+	}, nil
 }

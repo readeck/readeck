@@ -14,7 +14,6 @@ import (
 	"github.com/lithammer/shortuuid"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/readeck/readeck/configs"
 	"github.com/readeck/readeck/pkg/archiver"
 	"github.com/readeck/readeck/pkg/extract"
 	"github.com/readeck/readeck/pkg/img"
@@ -129,40 +128,32 @@ func imageProcessor(ctx context.Context, arc *archiver.Archiver, input io.Reader
 		return r, contentType, nil
 	}
 
-	data, err := ioutil.ReadAll(input)
+	im, err := img.New(input)
+	// If for any reason, we can't read the image, just return it
+	if err != nil {
+		arc.Request.Logger.Warn(err)
+		return nil, "", err
+	}
+	defer im.Close()
+
+	err = im.Pipeline(
+		func(im img.Image) error { return im.SetQuality(75) },
+		func(im img.Image) error { return im.SetCompression(img.CompressionBest) },
+		func(im img.Image) error { return im.Fit(1280, 1920) },
+	)
 	if err != nil {
 		arc.Request.Logger.Warn(err)
 		return nil, "", err
 	}
 
-	im, err := img.New(configs.Config.Images.Processor, bytes.NewReader(data))
-
-	// If for any reason, we can't read the image, just return it
+	var buf bytes.Buffer
+	err = im.Encode(&buf)
 	if err != nil {
 		arc.Request.Logger.Warn(err)
-		return data, contentType, nil
-	}
-	defer func() {
-		im.Close()
-	}()
-
-	im.SetQuality(75)
-	if err = im.Fit(1920, 1920); err != nil {
-		arc.Request.Logger.Warn(err)
-		return data, contentType, nil
+		return nil, "", err
 	}
 
-	r, format, err := im.Encode("")
-	if err != nil {
-		arc.Request.Logger.Warn(err)
-		return data, contentType, nil
-	}
-	res, err := ioutil.ReadAll(r)
-	if err != nil {
-		arc.Request.Logger.Warn(err)
-		return data, contentType, nil
-	}
-	return res, "image/" + format, nil
+	return buf.Bytes(), "image/" + im.Format(), nil
 }
 
 // Note: we skip gif files since they're usually optimized already

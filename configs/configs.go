@@ -18,7 +18,6 @@ type config struct {
 	Server    configServer    `toml:"server"`
 	Database  configDB        `toml:"database"`
 	Extractor configExtractor `toml:"extractor"`
-	Images    configImages    `toml:"images"`
 }
 
 type configMain struct {
@@ -49,10 +48,6 @@ type configSiteConfig struct {
 	Src  string `toml:"src"`
 }
 
-type configImages struct {
-	Processor string `toml:"processor"`
-}
-
 // Config holds the configuration data from configuration files
 // or flags.
 //
@@ -74,9 +69,6 @@ var Config = config{
 	},
 	Extractor: configExtractor{
 		NumWorkers: runtime.NumCPU(),
-	},
-	Images: configImages{
-		Processor: "native",
 	},
 }
 
