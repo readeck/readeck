@@ -13,6 +13,7 @@ import (
 
 	"github.com/lithammer/shortuuid"
 	log "github.com/sirupsen/logrus"
+	"golang.org/x/sync/semaphore"
 
 	"github.com/readeck/readeck/pkg/archiver"
 	"github.com/readeck/readeck/pkg/extract"
@@ -21,6 +22,14 @@ import (
 
 const (
 	resourceDirName = "_resources"
+)
+
+var (
+	// We can't process too many images at the same time if we don't want to overload
+	// the system and freeze everything just because the image processing has way
+	// too much work to do.
+	imgSem = semaphore.NewWeighted(2)
+	imgCtx = context.TODO()
 )
 
 var lock sync.Mutex
@@ -114,11 +123,11 @@ func urlProcessor(uri string, content []byte, contentType string) string {
 }
 
 func imageProcessor(ctx context.Context, arc *archiver.Archiver, input io.Reader, contentType string, uri *url.URL) ([]byte, string, error) {
-	// Force image processing one by one to avoid a whole host of problems
-	// with the native image library that doesn't deal very well with very big
-	// images.
-	lock.Lock()
-	defer lock.Unlock()
+	err := imgSem.Acquire(imgCtx, 1)
+	if err != nil {
+		return nil, "", err
+	}
+	defer imgSem.Release(1)
 
 	if _, ok := imageTypes[contentType]; !ok {
 		r, err := ioutil.ReadAll(input)
