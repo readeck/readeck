@@ -49,13 +49,13 @@ func (arc *Archiver) processCSS(ctx context.Context, input io.Reader, baseURL *u
 			cssURL = createAbsoluteURL(cssURL, baseURL)
 			content, contentType, err := arc.processURL(ctx, cssURL, baseURL.String())
 			if err != nil && err != errSkippedURL {
-				arc.error(err, uri)
+				arc.SendEvent(ctx, &EventError{err, uri})
 				return err
 			}
 
 			var result string
 			if err == errSkippedURL {
-				arc.error(errSkippedURL, uri)
+				arc.SendEvent(ctx, &EventError{err, uri})
 				result = `url("` + cssURL + `")`
 			} else {
 				result = fmt.Sprintf(`url("%s")`, arc.URLProcessor(uri, content, contentType))

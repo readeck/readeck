@@ -3,12 +3,9 @@ package archiver
 import (
 	"context"
 	"errors"
-	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
-	"os"
 	"sync"
 	"time"
 
@@ -36,34 +33,11 @@ const (
 	EnableImages
 )
 
-// Logger is the interface that must implement the archiver
-// logger.
-type Logger interface {
-	Info(...interface{})
-	Debug(...interface{})
-	Warn(...interface{})
-}
-
-type defaultLogger struct {
-	*log.Logger
-}
-
-func (l *defaultLogger) Info(args ...interface{}) {
-	l.Print(args...)
-}
-func (l *defaultLogger) Debug(args ...interface{}) {
-	l.Print(args...)
-}
-func (l *defaultLogger) Warn(args ...interface{}) {
-	l.Print(args...)
-}
-
 // Request is data of archival request.
 type Request struct {
 	Input  io.Reader
 	URL    *url.URL
 	Client *http.Client
-	Logger Logger
 }
 
 // Asset is asset that used in a web page.
@@ -85,9 +59,7 @@ type Archiver struct {
 
 	ImageProcessor imageProcessor
 	URLProcessor   urlProcessor
-
-	EnableLog bool
-	DebugLog  bool
+	EventHandler   eventHandler
 
 	RequestTimeout        time.Duration
 	SkipTLSVerification   bool
@@ -108,9 +80,6 @@ func New(req *Request) (*Archiver, error) {
 	if req.Client == nil {
 		req.Client = http.DefaultClient
 	}
-	if req.Logger == nil {
-		req.Logger = &defaultLogger{log.New(os.Stdout, "[archiver] ", log.LstdFlags)}
-	}
 
 	return &Archiver{
 		Cache:   make(map[string]Asset),
@@ -121,9 +90,6 @@ func New(req *Request) (*Archiver, error) {
 
 		ImageProcessor: DefaultImageProcessor,
 		URLProcessor:   DefaultURLProcessor,
-
-		EnableLog: true,
-		DebugLog:  false,
 
 		RequestTimeout:        20 * time.Second,
 		SkipTLSVerification:   false,
@@ -145,36 +111,6 @@ func (arc *Archiver) Archive(ctx context.Context) error {
 
 	arc.Result = []byte(res)
 	return nil
-}
-
-func (arc *Archiver) log(format string, v ...interface{}) {
-	if !arc.EnableLog {
-		return
-	}
-	arc.Request.Logger.Info(fmt.Sprintf(format, v...))
-}
-
-func (arc *Archiver) debug(format string, v ...interface{}) {
-	if !arc.EnableLog || !arc.DebugLog {
-		return
-	}
-	arc.Request.Logger.Debug(fmt.Sprintf(format, v...))
-}
-
-func (arc *Archiver) error(err error, args ...interface{}) {
-	if !arc.EnableLog {
-		return
-	}
-	args = append(args, err.Error())
-	arc.Request.Logger.Warn(args...)
-}
-
-func (arc *Archiver) logURL(url, parentURL string, isCached bool) {
-	cached := ""
-	if isCached {
-		cached = " (cached)"
-	}
-	arc.debug("%s%s (from %s)", url, cached, parentURL)
 }
 
 func (arc *Archiver) downloadFile(url string, parentURL string) (*http.Response, error) {

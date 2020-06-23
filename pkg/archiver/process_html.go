@@ -28,7 +28,7 @@ func (arc *Archiver) processHTML(ctx context.Context, input io.Reader, baseURL *
 		return "", err
 	}
 
-	arc.debug("Starting archiver on %s", arc.Request.URL.String())
+	arc.SendEvent(ctx, EventStartHTML(arc.Request.URL.String()))
 
 	// Prepare documents by doing these steps :
 	// - Set charset

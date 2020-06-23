@@ -36,7 +36,7 @@ func (arc *Archiver) processURL(ctx context.Context, uri string, parentURL strin
 	// Make sure this URL is not empty, data or hash. If yes, just skip it.
 	uri = strings.TrimSpace(uri)
 	if uri == "" || strings.HasPrefix(uri, "data:") || strings.HasPrefix(uri, "#") {
-		arc.error(errSkippedURL, uri)
+		arc.SendEvent(ctx, &EventError{errSkippedURL, uri})
 		return nil, "", errSkippedURL
 	}
 
@@ -44,7 +44,7 @@ func (arc *Archiver) processURL(ctx context.Context, uri string, parentURL strin
 	// some error while preparing document, so just skip this URL
 	parsedURL, err := url.ParseRequestURI(uri)
 	if err != nil || parsedURL.Scheme == "" || parsedURL.Hostname() == "" {
-		arc.error(errSkippedURL, uri)
+		arc.SendEvent(ctx, &EventError{errSkippedURL, uri})
 		return nil, "", errSkippedURL
 	}
 
@@ -54,22 +54,22 @@ func (arc *Archiver) processURL(ctx context.Context, uri string, parentURL strin
 	arc.RUnlock()
 
 	if cacheExist {
-		arc.logURL(uri, parentURL, true)
+		arc.SendEvent(ctx, &EventFetchURL{uri, parentURL, true})
 		return cache.Data, cache.ContentType, nil
 	}
 
 	// Download the resource, use semaphore to limit concurrent downloads
-	arc.logURL(uri, parentURL, false)
+	arc.SendEvent(ctx, &EventFetchURL{uri, parentURL, false})
 	err = arc.dlSemaphore.Acquire(ctx, 1)
 	if err != nil {
-		arc.error(err, uri)
+		arc.SendEvent(ctx, &EventError{err, uri})
 		return nil, "", nil
 	}
 
 	resp, err := arc.downloadFile(uri, parentURL)
 	arc.dlSemaphore.Release(1)
 	if err != nil {
-		arc.error(err, uri)
+		arc.SendEvent(ctx, &EventError{err, uri})
 		return nil, "", fmt.Errorf("download failed: %w", err)
 	}
 	defer resp.Body.Close()
@@ -92,7 +92,7 @@ func (arc *Archiver) processURL(ctx context.Context, uri string, parentURL strin
 		if err == nil {
 			bodyContent = []byte(newHTML)
 		} else {
-			arc.error(err, uri)
+			arc.SendEvent(ctx, &EventError{err, uri})
 			return nil, "", err
 		}
 
@@ -101,19 +101,19 @@ func (arc *Archiver) processURL(ctx context.Context, uri string, parentURL strin
 		if err == nil {
 			bodyContent = []byte(newCSS)
 		} else {
-			arc.error(err, uri)
+			arc.SendEvent(ctx, &EventError{err, uri})
 			return nil, "", err
 		}
 	case mainType == "image":
 		bodyContent, contentType, err = arc.ImageProcessor(ctx, arc, resp.Body, contentType, parsedURL)
 		if err != nil {
-			arc.error(err, uri)
+			arc.SendEvent(ctx, &EventError{err, uri})
 			return nil, "", err
 		}
 	default:
 		bodyContent, err = ioutil.ReadAll(resp.Body)
 		if err != nil {
-			arc.error(errSkippedURL, uri)
+			arc.SendEvent(ctx, &EventError{err, uri})
 			return nil, "", err
 		}
 	}
