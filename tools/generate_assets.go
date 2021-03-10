@@ -8,6 +8,7 @@ import (
 	"github.com/shurcooL/vfsgen"
 
 	"github.com/readeck/readeck/internal/assets"
+	"github.com/readeck/readeck/internal/templates"
 	"github.com/readeck/readeck/pkg/extract/fftr"
 )
 
@@ -18,6 +19,15 @@ func main() {
 		PackageName:  "assets",
 		BuildTags:    "assets",
 		VariableName: "Assets",
+	}); err != nil {
+		log.Fatalln(err)
+	}
+
+	if err = vfsgen.Generate(templates.Templates, vfsgen.Options{
+		Filename:     "internal/templates/templates_vfsdata.go",
+		PackageName:  "templates",
+		BuildTags:    "assets",
+		VariableName: "Templates",
 	}); err != nil {
 		log.Fatalln(err)
 	}
