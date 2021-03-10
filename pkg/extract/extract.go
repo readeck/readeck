@@ -2,6 +2,7 @@ package extract
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"fmt"
 	"net/http"
@@ -27,9 +28,10 @@ type (
 	// ProcessMessage holds the process message that is passed (and changed)
 	// by the subsequent processes.
 	ProcessMessage struct {
+		Context   context.Context
 		Extractor *Extractor
 		Position  int
-		Log       *log.Logger
+		Log       *log.Entry
 		Dom       *html.Node
 
 		step   ProcessStep
@@ -116,6 +118,8 @@ type Extractor struct {
 	processors ProcessList
 	errors     Error
 	drops      []*Drop
+	Context    context.Context
+	LogFields  *log.Fields
 }
 
 // New returns an Extractor instance for a given URL,
@@ -128,12 +132,15 @@ func New(src string) (*Extractor, error) {
 	URL.Fragment = ""
 
 	res := &Extractor{
-		URL:        URL,
-		Visited:    URLList{},
+		URL:     URL,
+		Visited: URLList{},
+		Context: context.TODO(),
+		// Logs:       []string{},
 		client:     NewClient(),
 		processors: ProcessList{},
+		// errors:     Error{},
+		drops: []*Drop{NewDrop(URL)},
 	}
-	res.drops = []*Drop{NewDrop(URL)}
 
 	return res, nil
 }
@@ -188,12 +195,29 @@ func (e *Extractor) AddProcessors(p ...Processor) {
 
 // NewProcessMessage returns a new ProcessMessage for a given step.
 func (e *Extractor) NewProcessMessage(step ProcessStep) *ProcessMessage {
+	logEntry := log.NewEntry(e.GetLogger())
+	if e.LogFields != nil {
+		logEntry = logEntry.WithFields(*e.LogFields)
+	}
+
 	return &ProcessMessage{
 		Extractor: e,
-		Log:       log.StandardLogger(),
+		Log:       logEntry,
 		step:      step,
 		values:    make(map[string]interface{}),
 	}
+}
+
+// GetLogger returns a logger for the extractor.
+// This standard logger will copy everything to the
+// extractor Log slice.
+func (e *Extractor) GetLogger() *log.Logger {
+	logger := log.New()
+	logger.Formatter = log.StandardLogger().Formatter
+	logger.Level = log.StandardLogger().Level
+	logger.AddHook(&messageLogHook{e})
+
+	return logger
 }
 
 // Run start the extraction process.
@@ -213,11 +237,6 @@ func (e *Extractor) Run() {
 		e.Visited.Add(d.URL)
 
 		m.Position = i
-
-		m.Log = log.New()
-		m.Log.Formatter = log.StandardLogger().Formatter
-		m.Log.Level = log.StandardLogger().Level
-		m.Log.AddHook(&messageLogHook{m})
 
 		// Start extraction
 		m.Log.WithField("idx", i).WithField("url", d.URL.String()).Info("start")
