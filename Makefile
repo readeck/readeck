@@ -1,10 +1,14 @@
 #!/usr/bin/make
 
-TAGS := omit_load_extension foreign_keys icu json1 fts5 secure_delete
+TAGS := omit_load_extension foreign_keys json1 fts5 secure_delete
 BUILD_TAGS := assets $(TAGS)
 
 SITECONFIG_GIT=https://github.com/j0k3r/graby-site-config.git
 SITECONFIG=graby-site-config
+
+# Build the app
+.PHONY: all
+all: web-build build
 
 # Build the server
 .PHONY: build
@@ -22,6 +26,7 @@ build-dev:
 clean:
 	rm -rf dist
 	rm -f internal/assets/assets_vfsdata.go
+	rm -f internal/templates/templates_vfsdata.go
 	rm -f pkg/extract/fftr/siteconfig_vfsdata.go
 	go clean
 
@@ -41,10 +46,15 @@ lint:
 vet:
 	go vet -tags "$(TAGS)" -ldflags="-s -w" ./...
 
+# Check
+.PHONY: check
+check:
+	golangci-lint run
+
 # Launch tests
 .PHONY: test
 test:
-	go test -v -cover ./...
+	go test -tags "$(TAGS)" -cover ./...
 
 # Start the HTTP server
 .PHONY: serve
@@ -60,3 +70,15 @@ update-site-config:
 	rm -rf site-config/standard
 	go run tools/fftr_convert.go $(SITECONFIG) site-config/standard
 	rm -rf $(SITECONFIG)
+
+.PHONY: dev
+dev:
+	${MAKE} -j2 serve web-watch
+
+.PHONY: web-build
+web-build:
+	@$(MAKE) -C web build
+
+.PHONY: web-watch
+web-watch:
+	@$(MAKE) -C web watch
