@@ -1,0 +1,259 @@
+@use "../config" as *
+
+$-content-font-size: 18px
+$-content-line-height: 1.5
+
+@function unitless($size)
+    @return $size / ($size * 0 + 1)
+
+@mixin vertical_flow($line-height, $font-size: 1em)
+    $min-line-height: 0.85
+
+    // Lines covered
+    $covers: ceil(unitless($font-size) / $line-height)
+
+    // See if we can use one less line
+    @if $covers > 1 and ($covers - 1) * $line-height / $font-size >= $min-line-height
+        $covers: $covers - 1
+
+    // Set line-height
+    $lh: $covers * $line-height / unitless($font-size)
+    @if $lh != $line-height
+        line-height: $lh
+
+    // Move block on baseline
+    @if unitless($font-size) > $line-height and $line-height * $covers != unitless($font-size)
+        position: relative
+        top: 0.9 - (1em * $line-height / unitless($font-size))
+
+@mixin flow_block($line-height, $font-size: 1em)
+    @include vertical_flow($line-height, $font-size)
+    margin: 0 0 1em * $line-height / unitless($font-size) 0
+
+@mixin padded_box($line-height, $factor: 0.5, $border: 0)
+    $_p : 1em * $factor * $line-height
+    padding: $_p
+    @if $border > 0
+        padding: calc(#{$_p} - #{$border}) $_p
+
+
+=content
+    // background-image: linear-gradient(#F5D6F5 1px, transparent 1px)
+    // background-size: 100% $-content-line-height * 1em
+
+    $_fs: $-content-font-size
+    $_lh: $-content-line-height
+
+    font-size: $_fs
+    line-height: $_lh
+
+    *
+        max-width: 100%
+        margin: 0
+        padding: 0
+
+    h1
+        $fs: 2.4em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+
+    h2
+        $fs: 2.2em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+
+    h3
+        $fs: 1.6em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+
+    h4
+        $fs: 1.2em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+
+    h5
+        $fs: 1em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+        font-weight: bold
+
+    h6
+        $fs: 0.9em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+        font-weight: bold
+
+    p,
+    ul,
+    ol,
+    dl,
+    blockquote,
+    address,
+    table,
+    figure,
+    hr
+        @include flow_block($_lh)
+        padding: 0
+
+
+    p, li, dd
+        text-align: justify
+
+    strong, time, b
+        font-weight: bold
+
+    em, dfn, i
+        font-style: italic
+
+    sub, sup
+        font-size: 75%
+        line-height: 0
+        position: relative
+        vertical-align: baseline
+
+    sup
+        top: -.5em
+
+    sub
+        bottom: -.25em
+
+    small
+        font-size: 80%
+
+    blockquote
+        background: $white-ter
+        border-left: 5px solid $border
+        @include padded_box($_lh)
+
+        & *:last-child
+            margin-bottom: 0
+
+    cite
+        font-style: italic
+
+    q
+        &:before
+            content: open-quote
+        &:after
+            content: close-quote
+
+    pre
+        font-size: 0.9em
+        @include flow_block($_lh, $font-size: 0.9em)
+
+        border: 1px solid $grey-lighter
+        @include padded_box($_lh / 0.9, $border: 1px)
+
+        background-color: $code-background
+        color: $grey-darker
+        white-space: pre-wrap
+
+        code
+            padding: 0
+            border: 0
+            background-color: inherit
+            color: inherit
+
+    code, kbd, samp, var
+        font-size: 0.875em
+        line-height: 1
+        background-color: $background
+        padding: 1px 3px
+        border-radius: 3px
+
+    kbd, samp, var
+        border: 1px solid $grey-lighter
+
+    mark
+        padding: 1px 3px
+        background-color: $mark
+
+    hr
+        box-sizing: content-box
+        border: 0
+        border-top: 1px solid $grey
+        height: 0
+        width: 50%
+        margin-left: auto
+        margin-right: auto
+        margin-top: -1px
+
+    img
+        max-width: 100%
+
+    figure
+        display: inline-block
+        width: auto
+        margin-left: auto
+        margin-right: auto
+
+        border: 1px solid $border-light
+        @include padded_box($_lh, $border: 1px)
+
+        img, svg, pre
+            display: block
+            margin: 0 auto
+
+        figcaption
+            font-size: 0.9em
+            @include vertical_flow($_lh, 0.9em)
+
+        & *:last-child
+            marin-bottom: 0
+
+    ul, ol
+        padding-left: 1.5em
+    ul
+        list-style: disc
+    ol
+        list-style: decimal
+
+    li
+        p, ul, ol
+            margin-top: 0
+            margin-bottom: 0
+
+    dl
+        dt
+            font-weight: bold
+            margin: 0
+
+        dd
+            margin: 0
+            padding: 0
+            margin-left: 1.5em
+
+            & > ul, & > ol
+                padding-left: 1em
+
+    table
+        table-layout: fixed
+        border-collapse: collapse
+        border-spacing: 0
+        margin-top: -1px
+
+    caption
+        color:  $grey-dark
+        font-style: italic
+        margin-bottom: 0
+
+    td, th
+        @include padded_box($_lh, $factor: 0.25, $border: 0.5px)
+
+        vertical-align: top
+        min-width: 2em
+        cursor: default
+        text-align: left
+        border: 1px solid $border
+
+    th
+        font-weight: bold
+        background-color: $background
+
+    thead tr:last-child th
+        border-bottom-color: $grey-dark
+
+    tfoot
+        td, th
+            font-style: italic

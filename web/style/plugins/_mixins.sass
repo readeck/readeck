@@ -1,0 +1,32 @@
+@use "config" as *
+
+=control
+  appearance: none
+  align-items: center
+  display: inline-flex
+  justify-content: flex-start
+  padding: .3rem
+  position: relative
+  vertical-align: top
+
+  border: 1px solid $primary
+  border-radius: $radius
+  background-color: $primary
+  color: $primary-invert
+
+
+%control
+  +control
+
+%control-hover
+  &:hover,
+  &:focus
+    border-color: $primary-accent
+    background-color: $primary-accent
+    color: $primary-invert
+
+=unselectable
+  user-select: none
+
+%unselectable
+  +unselectable

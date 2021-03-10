@@ -1,0 +1,239 @@
+@use "config" as *
+@use "plugins/content" as *
+
+// Bookmark creation form
+// ------------------------------------------------------------------
+.bookmark-form-new
+    display: flex
+    margin-bottom: 1.5rem
+
+    h1
+        flex-grow: 0
+        margin: 0 1rem 0 0
+        line-height: 1
+
+    form
+      flex-grow: 1
+
+      & > .compound
+        display: flex
+
+        input
+          flex-grow: 1
+
+      & > p.text-danger
+        margin: 0 0 0 1rem
+
+
+// Bookmark list
+// ------------------------------------------------------------------
+.bookmark-list
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr))
+  grid-gap: $block-spacing
+  margin-bottom: $block-spacing
+
+  .card
+    display: flex
+    position: relative
+    flex-direction: column
+    border-radius: $radius
+    box-shadow: 2px 2px 8px rgba(0,0,0, .2)
+
+    &.state-deleted
+      .card-image, .card-content, .item-site
+        opacity: 0.3
+
+  .card-image
+    width: 100%
+    border-radius: $radius $radius 0 0
+
+    img
+      width: 100%
+      max-height: 16rem
+      object-fit: cover
+      object-position: 100% 0
+      border-radius: $radius $radius 0 0
+      image-rendering: smooth
+
+  .card-content
+    flex-grow: 1
+    padding: .5rem
+
+    h3
+      font-size: 1em
+      font-weight: 400
+      line-height: 1.2
+      margin: 0 0 $block-spacing/2 0
+
+  .card-bottom
+    padding: 0 .5rem
+    font-size: .8em
+
+    .item-site
+      display: flex
+      align-items: center
+      justify-content: flex-start
+
+      img
+        height: 1.8rem
+        width: auto
+        margin-right: .25rem
+
+    .item-actions
+      margin-top: .25rem
+      padding-bottom: .25rem
+      border-top: 1px solid $white-ter
+      display: flex
+      align-items: center
+
+      & > :last-child
+        margin-left: auto
+        margin-right: 0
+
+      button
+        padding: 1rem 0
+        margin: 0 .5rem 0 0
+
+
+.shrinked-read
+  max-width: 80rem
+  margin: 0 auto
+
+.page
+    .summary,
+    &.page-article
+        max-width: 80rem
+        margin-left: auto
+        margin-right: auto
+
+    .summary
+        margin-bottom: $block-spacing
+
+        & > h1
+            font-family: $alt-font
+            font-weight: 300
+
+        & > .subtitle
+            font-family: $alt-font
+            font-weight: 400
+            font-style: italic
+            margin-bottom: $block-spacing
+
+        .box
+          box-shadow: 2px 2px 8px rgba(0,0,0, .2)
+          border-radius: $radius
+
+          .box-wrap
+            display: flex
+
+            .box-content
+              flex-grow: 1
+              padding: $block-spacing/2
+
+              & > ul
+                li
+                  display: flex
+                  margin-bottom: $block-spacing/4
+                  line-height: 1
+                  align-items: center
+
+                  span
+                    width: 30px
+
+                  img.site-icon
+                    max-height: 24px
+                    width: auto
+
+              & > form
+                margin-top: $block-spacing
+
+                .compound
+                  input, button
+                    font-size: 0.875em
+                    height: 3rem
+
+
+            .box-image
+              flex-grow: 0
+              margin-left: $block-spacing/2
+              img
+                width: auto
+                height: auto
+                max-width: 18rem
+                max-height: 6em
+                border-radius: 0 $radius 0
+
+        .item-actions
+          display: flex
+          align-items: center
+          background: $white-ter
+          padding: $block-spacing/4 $block-spacing/2
+
+          &>:last-child
+            margin-left: auto
+
+          button.delete
+            border-color: $danger
+            color: $danger
+
+            &:focus,
+            &:hover
+              background-color: $danger
+              color: $danger-invert
+
+
+
+    &.page-photo > figure > img
+        display: block
+        margin: 0 auto
+
+.reader-content
+  +content
+  font-family: $alt-font
+
+
+.video-player
+    background-color: #000
+    position: relative
+    padding-top: 56.25%
+    height: 0
+    overflow: hidden
+
+    img,
+    iframe,
+    .play-button
+        position: absolute
+        display: block
+
+    img,
+    iframe
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+
+    .play-button
+        width: 90px
+        height: 90px
+        background-color: #222
+        z-index: 1
+        opacity: 0.9
+        border-radius: 100%
+        cursor: pointer
+
+        &:before
+            position: absolute
+            content: ""
+            line-height: 0
+            border-style: solid
+            border-width: 15px 0 15px 26px
+            border-color: transparent transparent transparent #fff
+
+        &, &:before
+            top: 50%
+            left: 50%
+            transform: translate3d(-50%, -50%, 0)
+
+        &:hover
+            background-color: #000
