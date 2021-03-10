@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS bookmark (
   is_marked   integer  NOT NULL DEFAULT 0,
   is_archived integer  NOT NULL DEFAULT 0,
   is_read     integer  NOT NULL DEFAULT 0,
+  is_deleted  integer  NOT NULL DEFAULT 0,
   state       integer  NOT NULL DEFAULT 0,
   url         text     NOT NULL,
   title       text     NOT NULL,
