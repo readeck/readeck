@@ -8,7 +8,6 @@ import (
 	"net/url"
 	"path"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/lithammer/shortuuid"
@@ -24,6 +23,8 @@ const (
 	resourceDirName = "_resources"
 )
 
+var ctxLogger = struct{}{}
+
 var (
 	// We can't process too many images at the same time if we don't want to overload
 	// the system and freeze everything just because the image processing has way
@@ -32,15 +33,12 @@ var (
 	imgCtx = context.TODO()
 )
 
-var lock sync.Mutex
-
-// NewArchive runs the archiver and returns a BookmarkArchive instance.
-func NewArchive(ex *extract.Extractor, logger *log.Entry) (*archiver.Archiver, error) {
+// newArchive runs the archiver and returns a BookmarkArchive instance.
+func newArchive(ctx context.Context, ex *extract.Extractor) (*archiver.Archiver, error) {
 	req := &archiver.Request{
-		Client: ex.Client(),
-		Logger: logger,
-		Input:  bytes.NewReader(ex.HTML),
-		URL:    ex.Drop().URL,
+		// Client: ex.Client(),
+		Input: bytes.NewReader(ex.HTML),
+		URL:   ex.Drop().URL,
 	}
 
 	arc, err := archiver.New(req)
@@ -48,11 +46,11 @@ func NewArchive(ex *extract.Extractor, logger *log.Entry) (*archiver.Archiver, e
 		return nil, err
 	}
 
-	arc.EnableLog = true
-	arc.DebugLog = true
 	arc.MaxConcurrentDownload = 4
 	arc.Flags = archiver.EnableImages
 	arc.RequestTimeout = 45 * time.Second
+
+	arc.EventHandler = eventHandler(ex)
 
 	arc.ImageProcessor = imageProcessor
 	arc.URLProcessor = urlProcessor
@@ -109,6 +107,23 @@ var (
 	}
 )
 
+func eventHandler(ex *extract.Extractor) func(ctx context.Context, arc *archiver.Archiver, evt archiver.Event) {
+	entry := log.NewEntry(ex.GetLogger()).WithFields(*ex.LogFields)
+
+	return func(ctx context.Context, arc *archiver.Archiver, evt archiver.Event) {
+		switch evt.(type) {
+		case *archiver.EventError:
+			entry.WithFields(evt.Fields()).Warn("archive error")
+		case archiver.EventStartHTML:
+			entry.WithFields(evt.Fields()).Info("start archive")
+		case *archiver.EventFetchURL:
+			entry.WithFields(evt.Fields()).Debug("load archive resource")
+		default:
+			entry.WithFields(evt.Fields()).Debug("archiver")
+		}
+	}
+}
+
 func getURLfilename(uri string, contentType string) string {
 	ext, ok := mimeTypes[strings.Split(contentType, ";")[0]]
 	if !ok {
@@ -140,7 +155,7 @@ func imageProcessor(ctx context.Context, arc *archiver.Archiver, input io.Reader
 	im, err := img.New(input)
 	// If for any reason, we can't read the image, just return it
 	if err != nil {
-		arc.Request.Logger.Warn(err)
+		arc.SendEvent(ctx, &archiver.EventError{Err: err, URI: uri.String()})
 		return nil, "", err
 	}
 	defer im.Close()
@@ -151,17 +166,18 @@ func imageProcessor(ctx context.Context, arc *archiver.Archiver, input io.Reader
 		func(im img.Image) error { return im.Fit(1280, 1920) },
 	)
 	if err != nil {
-		arc.Request.Logger.Warn(err)
+		arc.SendEvent(ctx, &archiver.EventError{Err: err, URI: uri.String()})
 		return nil, "", err
 	}
 
 	var buf bytes.Buffer
 	err = im.Encode(&buf)
 	if err != nil {
-		arc.Request.Logger.Warn(err)
+		arc.SendEvent(ctx, &archiver.EventError{Err: err, URI: uri.String()})
 		return nil, "", err
 	}
 
+	arc.SendEvent(ctx, archiver.EventInfo{"uri": uri.String(), "format": im.Format()})
 	return buf.Bytes(), "image/" + im.Format(), nil
 }
 

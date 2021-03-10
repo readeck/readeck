@@ -10,6 +10,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 
@@ -44,12 +45,22 @@ const (
 	TableName = "bookmark"
 )
 
+// StateNames returns a string with the state name.
+var StateNames = map[BookmarkState]string{
+	StateLoaded:  "loaded",
+	StateError:   "error",
+	StateLoading: "loading",
+}
+
 var (
 	// Bookmarks is the bookmark query manager
 	Bookmarks = BookmarkManager{}
 
-	// ErrNotFound is returned when a user record was not found.
+	// ErrNotFound is returned when a bookmark record was not found.
 	ErrNotFound = errors.New("not found")
+
+	rxHTMLStart = regexp.MustCompile(`^(.*?)<body>`)
+	rxHTMLEnd   = regexp.MustCompile(`</body>\s*</html>\s*$`)
 )
 
 // StoragePath returns the storage base directory for bookmark files
@@ -80,6 +91,9 @@ type Bookmark struct {
 	Files        BookmarkFiles `db:"files"`
 	Errors       Strings       `db:"errors"`
 	Tags         Strings       `db:"tags"`
+	IsDeleted    bool          `db:"is_deleted"`
+	IsRead       bool          `db:"is_read"`
+	IsArchived   bool          `db:"is_archived"`
 	IsMarked     bool          `db:"is_marked"`
 }
 
@@ -173,6 +187,11 @@ func (b *Bookmark) Delete() error {
 	return nil
 }
 
+// StateName returns the current bookmark state name.
+func (b *Bookmark) StateName() string {
+	return StateNames[b.State]
+}
+
 func (b *Bookmark) getBaseFileURL() (string, error) {
 	var res string
 	var err error
@@ -242,15 +261,19 @@ func (b *Bookmark) getArticle(baseURL string) (*strings.Reader, error) {
 	}
 	defer z.Close()
 
-	resourceList := []string{}
+	replaceArgs := []string{}
 	buf := new(strings.Builder)
 
 	for _, entry := range z.File {
+		// Build the resource url replacement list
 		if !strings.HasSuffix(entry.Name, "/") && strings.HasPrefix(entry.Name, resourceDirName) {
-			resourceList = append(resourceList, entry.Name)
+			replaceArgs = append(replaceArgs,
+				"./"+entry.Name,
+				baseURL+"/"+entry.Name)
 			continue
 		}
 
+		// Extract document
 		if entry.Name == a.Name {
 			fp, err := entry.Open()
 			if err != nil {
@@ -262,13 +285,13 @@ func (b *Bookmark) getArticle(baseURL string) (*strings.Reader, error) {
 		}
 	}
 
-	args := []string{}
-	for _, x := range resourceList {
-		args = append(args, "./"+x, baseURL+"/"+x)
-	}
-
-	replacer := strings.NewReplacer(args...)
+	// Replace resource links
+	replacer := strings.NewReplacer(replaceArgs...)
 	res := replacer.Replace(buf.String())
+
+	// Extract the content body by removing the outter parts
+	res = rxHTMLStart.ReplaceAllString(res, "")
+	res = rxHTMLEnd.ReplaceAllString(res, "")
 
 	return strings.NewReader(res), nil
 }

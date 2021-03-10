@@ -2,6 +2,7 @@ package bookmarks
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"path"
@@ -20,22 +21,24 @@ import (
 	"github.com/readeck/readeck/pkg/extract/meta"
 )
 
-var extractPool *workerpool.WorkerPool
+var workerPool *workerpool.WorkerPool
 
-// StartExtractPool start the worker pool that performs
+var ctxJobRequestID = struct{}{}
+
+// StartWorkerPool start the worker pool that performs
 // page extraction.
-func StartExtractPool(workers int) {
-	if extractPool != nil {
+func StartWorkerPool(workers int) {
+	if workerPool != nil {
 		panic("ExtractPool is already started")
 	}
 
-	extractPool = workerpool.New(workers)
+	workerPool = workerpool.New(workers)
 }
 
-// EnqueueExtractPage sends a new bookmark to the extraction
+// enqueueExtractPage sends a new bookmark to the extraction
 // workers.
-func EnqueueExtractPage(b *Bookmark) {
-	extractPool.Submit(func() {
+func enqueueExtractPage(ctx context.Context, b *Bookmark) {
+	workerPool.Submit(func() {
 		// Always set state to loaded, even if there are errors
 		saved := false
 		defer func() {
@@ -65,6 +68,8 @@ func EnqueueExtractPage(b *Bookmark) {
 			log.WithError(err).Error()
 			return
 		}
+
+		ex.LogFields = &log.Fields{"@id": ctx.Value(ctxJobRequestID).(string)}
 
 		ex.AddProcessors(
 			meta.ExtractMeta,
@@ -119,11 +124,24 @@ func EnqueueExtractPage(b *Bookmark) {
 			b.Embed = drop.Meta.LookupGet("oembed.html")
 		}
 
-		// Run archiver & zipper
-		err = jobPostProcess(b, ex)
+		// Run the archiver
+		var arc *archiver.Archiver
+		logEntry := log.NewEntry(ex.GetLogger()).WithFields(*ex.LogFields)
+		if len(ex.HTML) > 0 && ex.Drop().IsHTML() {
+			arc, err = newArchive(context.TODO(), ex)
+			if err != nil {
+				logEntry.WithError(err).Error("archiver error")
+			}
+		}
+
+		// Create the zip file
+		err = createZipFile(b, ex, arc)
 		if err != nil {
-			log.WithError(err).Error()
+			// If something goes really wrong, cleanup after ourselves
 			b.Errors = append(b.Errors, err.Error())
+			b.removeFiles()
+			b.FilePath = ""
+			b.Files = BookmarkFiles{}
 		}
 
 		// All good? Save now
@@ -135,12 +153,7 @@ func EnqueueExtractPage(b *Bookmark) {
 	})
 }
 
-func jobPostProcess(b *Bookmark, ex *extract.Extractor) error {
-	var (
-		err error
-		arc *archiver.Archiver
-	)
-
+func createZipFile(b *Bookmark, ex *extract.Extractor, arc *archiver.Archiver) error {
 	// Fail fast
 	fileURL, err := b.getBaseFileURL()
 	if err != nil {
@@ -148,7 +161,8 @@ func jobPostProcess(b *Bookmark, ex *extract.Extractor) error {
 	}
 	zipFile := filepath.Join(StoragePath(), fileURL+".zip")
 
-	files := BookmarkFiles{}
+	b.FilePath = fileURL
+	b.Files = BookmarkFiles{}
 
 	// Create the zip file
 	z, err := newZipper(zipFile)
@@ -172,15 +186,7 @@ func jobPostProcess(b *Bookmark, ex *extract.Extractor) error {
 		if err = z.addFile(name, p.Bytes()); err != nil {
 			return err
 		}
-		files[k] = &BookmarkFile{name, p.Type, p.Size}
-	}
-
-	// Run the archiver
-	if len(ex.HTML) > 0 && ex.Drop().IsHTML() {
-		arc, err = NewArchive(ex, log.NewEntry(log.StandardLogger()))
-		if err != nil {
-			return err
-		}
+		b.Files[k] = &BookmarkFile{name, p.Type, p.Size}
 	}
 
 	// Add HTML content
@@ -188,7 +194,7 @@ func jobPostProcess(b *Bookmark, ex *extract.Extractor) error {
 		if err = z.addCompressedFile("index.html", arc.Result); err != nil {
 			return err
 		}
-		files["article"] = &BookmarkFile{Name: "index.html"}
+		b.Files["article"] = &BookmarkFile{Name: "index.html"}
 	}
 
 	// Add assets
@@ -209,7 +215,7 @@ func jobPostProcess(b *Bookmark, ex *extract.Extractor) error {
 	if err = z.addCompressedFile("log", []byte(strings.Join(ex.Logs, "\n"))); err != nil {
 		return err
 	}
-	files["log"] = &BookmarkFile{Name: "log"}
+	b.Files["log"] = &BookmarkFile{Name: "log"}
 
 	// Add the metadata
 	buf := new(bytes.Buffer)
@@ -221,9 +227,7 @@ func jobPostProcess(b *Bookmark, ex *extract.Extractor) error {
 	if err = z.addCompressedFile("props.json", buf.Bytes()); err != nil {
 		return err
 	}
-	files["props"] = &BookmarkFile{Name: "props.json"}
+	b.Files["props"] = &BookmarkFile{Name: "props.json"}
 
-	b.FilePath = fileURL
-	b.Files = files
 	return nil
 }
