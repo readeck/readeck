@@ -1,0 +1,11 @@
+{{ extends "app.gohtml" }}
+
+{{ define "aside" }}
+<aside class="sidebar">
+<h3>User settings</h3>
+<ul>
+  <li><a href="{{ urlFor $ "/profile" }}">Profile</a></li>
+  <li><a href="{{ urlFor $ "/profile/password" }}">Password</a></li>
+</ul>
+</aside>
+{{ end }}

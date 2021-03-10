@@ -1,0 +1,8 @@
+{{- define "_photo" -}}
+{{- if .Resources.image -}}
+<figure>
+  <img alt="" src="{{ .Resources.image.Src }}"
+   width="{{ .Resources.image.Width }}" height="{{ .Resources.image.Height }}">
+</figure>
+{{- end -}}
+{{- end -}}

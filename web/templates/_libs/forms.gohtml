@@ -1,0 +1,37 @@
+{{ define "formErrors" -}}
+{{ if not .IsValid -}}
+<div class="message error">
+  <strong>Errors</strong>
+  {{ range .Errors }}
+    <p>{{ . }}</p>
+  {{ else }}
+    <p>Some data are not valid.</p>
+  {{ end }}
+</div>
+{{- end }}
+{{- end }}
+
+{{ define "csrfField" -}}
+<span style="display:none;"><input type="hidden" name="{{ .csrfName }}" value="{{ .csrfToken }}"></span>
+{{- end }}
+
+{{ define "textField" -}}
+{{- $type := or .type "text" -}}
+{{- $value := (eq $type "password" | ternary "" .field.Value) -}}
+{{- $class := or .class "" -}}
+{{- if .field.Errors -}}{{ $class = cat $class "with-errors" }}{{ end -}}
+<div class="field {{ $class }}">
+  <label class="label" for="{{ .name }}">{{ .label }}:</label>
+  <div class="control">
+    <input type="{{ $type }}" id="{{ .name }}" name="{{ .name }}"
+     value="{{ $value }}" />
+    {{- if .field.Errors -}}
+    <ul class="errors">
+      {{- range .field.Errors }}
+        <li>{{ . }}</li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </div>
+</div>
+{{- end }}

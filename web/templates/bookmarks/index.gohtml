@@ -1,0 +1,95 @@
+{{ extends "app.gohtml" }}
+
+{{ define "title" }}Bookmarks{{ end }}
+
+{{ define "content" }}
+
+<div class="bookmark-form-new">
+  <h1 class="title">Bookmarks</h1>
+
+  <form action="{{ urlFor $ "/bookmarks" }}" method="POST">
+    {{ template "csrfField" . }}
+    <div class="compound">
+      <input class="rounded" type="text" name="url"
+      value="{{ .form.Fields.url.Value }}" placeholder="https://" />
+      <button class="rounded" type="submit">Add link</button>
+    </div>
+
+    {{ range .form.Errors }}<p class="text-danger"><strong>{{ . }}</strong></p>{{ end }}
+  </form>
+</div>
+
+{{ template "pagination" .pagination }}
+
+<div class="bookmark-list">
+{{ range .bookmarks }}
+  {{- $url := urlFor $ "." .ID -}}
+  <div class="card state-{{ .StateName }}{{ .IsDeleted | ternary " state-deleted" "" }}">
+    <div class="card-image">
+    {{- if .Resources.thumbnail }}
+    <img src="{{ .Resources.thumbnail.Src }}" alt=""
+     width="{{ .Resources.thumbnail.Width }}" height="{{ .Resources.thumbnail.Height }}">
+    {{ end -}}
+    </div>
+    <div class="card-content">
+      <h3 class="title"><a href="{{ $url }}">{{ default "untitled" .Title }}</a></h3>
+      {{- if .Tags }}
+      <ul class="badges">{{ range .Tags }}
+          <li class="badge">{{ . }}</li>
+      {{ end }}</ul>
+      {{ end -}}
+    </div>
+    <div class="card-bottom">
+      <strong class="item-site">
+      {{- if .Resources.icon -}}
+        <img src="{{ .Resources.icon.Src }}" alt=""
+         width="{{ .Resources.icon.Width }}" height="{{ .Resources.icon.Height }}">
+      {{- end }} {{ .SiteName }}
+      <a href="{{ .URL }}">{{ icon $ "bx-link" }}</a>
+      </strong>
+      <div class="item-actions">
+        {{- if .IsDeleted }}
+          <span>
+            This bookmark will be removed in a few seconds.
+          </span>
+          <form action="{{ $url }}/delete" method="post">
+            {{ template "csrfField" $ }}
+            <input type="hidden" name="cancel" value="1" />
+            <input type="hidden" name="_to" value="{{ $.currentPath }}" />
+            <button type="submit">Cancel</button>
+          </form>
+        {{- else -}}
+        <form action="{{ $url }}" method="post">
+          {{ template "csrfField" $ }}
+          <input type="hidden" name="_to" value="{{ $.currentPath }}" />
+          <button class="button-clear"
+          name="is_read" value="{{ .IsRead | ternary 0 1 }}">
+          {{ icon $ (.IsRead | ternary "bxs-check-circle" "bx-check-circle") }}
+          </button>
+          <button class="button-clear"
+          name="is_marked" value="{{ .IsMarked | ternary 0 1 }}">
+          {{ icon $ (.IsMarked | ternary "bxs-heart" "bx-heart") }}
+          </button>
+          <button class="button-clear"
+          name="is_archived" value="{{ .IsArchived | ternary 0 1 }}">
+          {{ icon $ (.IsArchived | ternary "bxs-archive" "bx-archive") }}
+          </button>
+        </form>
+
+        <form action="{{ $url }}/delete" method="post">
+          {{ template "csrfField" $ }}
+          <input type="hidden" name="_to" value="{{ $.currentPath }}" />
+          <button class="button-clear">
+            {{ icon $ "bx-trash" }}
+          </button>
+        </form>
+        {{ end -}}
+      </div>
+    </div>
+  </div>
+{{ end }}
+</div>
+
+{{ template "pagination" .pagination }}
+
+{{ end }}
