@@ -3,11 +3,13 @@ package zipfs
 import (
 	"archive/zip"
 	"bytes"
+	"errors"
 	"io"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -129,6 +131,9 @@ func (f HTTPZipFile) serveEntry(w http.ResponseWriter, r *http.Request, fd *os.F
 	ae := r.Header.Get("Accept-Encoding")
 	if strings.Contains(ae, "deflate") && z.Method == zip.Deflate {
 		offset, err := z.DataOffset()
+		if err != nil {
+			panic(err)
+		}
 		if err == nil {
 			if _, err := fd.Seek(offset, 0); err != nil {
 				panic(err)
@@ -148,7 +153,7 @@ func (f HTTPZipFile) serveEntry(w http.ResponseWriter, r *http.Request, fd *os.F
 	w.Header().Set("Content-Length", strconv.FormatUint(z.UncompressedSize64, 10))
 	w.WriteHeader(http.StatusOK)
 	_, err = io.Copy(w, io.MultiReader(bytes.NewReader(buf[:n]), fp))
-	if err != nil {
+	if err != nil && !errors.Is(err, syscall.EPIPE) {
 		panic(err)
 	}
 }
