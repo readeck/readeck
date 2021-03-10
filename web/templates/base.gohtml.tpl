@@ -16,9 +16,6 @@
 <body>
 {{ block "body" . }}{{ end }}
 
-<script type="text/javascript">
-basePath = "{{ .basePath }}";
-</script>
 <% for (var i in htmlWebpackPlugin.files.js) { %>
 <script src="{{ .basePath }}<%= htmlWebpackPlugin.files.js[i] %>"></script>
 <% } %>

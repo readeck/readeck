@@ -75,7 +75,6 @@ func (s *Server) SetSecurity() func(next http.Handler) http.Handler {
 		"default-src 'self'",
 		"img-src 'self' data:",
 		"media-src 'self' data:",
-		"script-src 'self' 'unsafe-inline'",
 		"style-src 'self' 'unsafe-inline'",
 		"child-src *", // Allow iframes for videos
 	}, "; ")
