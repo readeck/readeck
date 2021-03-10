@@ -7,8 +7,12 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/readeck/readeck/configs"
+	"github.com/readeck/readeck/internal/assets"
 	"github.com/readeck/readeck/internal/bookmarks"
 	"github.com/readeck/readeck/internal/cookbook"
+	"github.com/readeck/readeck/internal/dashboard"
+	"github.com/readeck/readeck/internal/logon"
+	"github.com/readeck/readeck/internal/profile"
 	"github.com/readeck/readeck/internal/server"
 )
 
@@ -24,20 +28,32 @@ func init() {
 }
 
 var serveCmd = &cobra.Command{
-	Use: "serve",
-	Run: runServe,
+	Use:  "serve",
+	RunE: runServe,
 }
 
-func runServe(c *cobra.Command, args []string) {
-	s := server.New("/")
+func runServe(c *cobra.Command, args []string) error {
+	s := server.New("/app/")
 
 	// Base routes (assets, auth, system info...)
-	s.SetupRoutes()
+	// s.SetupRoutes()
+
+	// Static asserts
+	assets.SetupRoutes(s)
+
+	// Auth routes
+	logon.SetupRoutes(s)
+
+	// Dashboard routes
+	dashboard.SetupRoutes(s)
 
 	// Bookmark routes
-	// - /api/bookmarks/*
+	// - /bookmarks/*
 	// - /bm/* (for bookmark media files)
 	bookmarks.SetupRoutes(s)
+
+	// User routes
+	profile.SetupRoutes(s)
 
 	// Only in dev mode
 	if configs.Config.Main.DevMode {
@@ -48,5 +64,5 @@ func runServe(c *cobra.Command, args []string) {
 	log.WithField("url", fmt.Sprintf("http://%s:%d/",
 		configs.Config.Server.Host, configs.Config.Server.Port),
 	).Info("Starting server")
-	s.ListenAndServe()
+	return s.ListenAndServe()
 }

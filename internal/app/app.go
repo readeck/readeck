@@ -9,12 +9,13 @@ import (
 	"path"
 	"syscall"
 
+	"github.com/mattn/go-colorable"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
 	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/auth"
 	"github.com/readeck/readeck/internal/db"
+	"github.com/readeck/readeck/internal/users"
 	"github.com/readeck/readeck/pkg/extract/fftr"
 )
 
@@ -67,11 +68,11 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 	}
 	log.SetLevel(lvl)
 	log.WithField("log_level", lvl).Debug()
-	if log.IsLevelEnabled(log.DebugLevel) {
+	if configs.Config.Main.DevMode {
 		log.SetFormatter(&log.TextFormatter{
 			ForceColors: true,
 		})
-		log.SetOutput(os.Stdout)
+		log.SetOutput(colorable.NewColorableStdout())
 		log.SetLevel(log.TraceLevel)
 	}
 
@@ -109,7 +110,7 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 		log.WithError(err).Fatal()
 	}
 	if count == 0 {
-		if err := auth.Users.Create(&auth.User{
+		if err := users.Users.Create(&users.User{
 			Username: "admin",
 			Email:    "admin@localhost",
 			Password: "admin",
@@ -221,5 +222,5 @@ func Run() error {
 		os.Exit(1)
 	}
 
-	return rootCmd.Execute()
+	return nil
 }
