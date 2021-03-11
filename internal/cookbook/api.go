@@ -141,7 +141,9 @@ func (api *cookbookAPI) loadURLs() {
 			}
 			cfg, err := fftr.NewConfig(f)
 			if err != nil {
-				log.WithError(err).Error("error parsing file")
+				log.WithField(
+					"cf", fmt.Sprintf("%s/%s", configFS.Name, x.Name()),
+				).WithError(err).Error("error parsing file")
 			}
 			f.Close()
 

@@ -8,8 +8,6 @@
 !/assets/www/.keep
 /assets/templates/base.gohtml
 
-/pkg/extract/fftr/siteconfig_vfsdata.go
-
 /web/dist
 /web/node_modules
 

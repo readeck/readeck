@@ -3,8 +3,9 @@
 TAGS := omit_load_extension foreign_keys json1 fts5 secure_delete
 BUILD_TAGS := $(TAGS)
 
-SITECONFIG_GIT=https://github.com/j0k3r/graby-site-config.git
-SITECONFIG=graby-site-config
+SITECONFIG_REPO=https://github.com/j0k3r/graby-site-config.git
+SITECONFIG_CLONE=graby-site-config
+SITECONFIG_DEST=pkg/extract/fftr/site-config/standard
 
 # Build the app
 .PHONY: all
@@ -63,11 +64,11 @@ serve:
 # graby git repository
 .PHONY: update-site-config
 update-site-config:
-	git clone $(SITECONFIG_GIT) $(SITECONFIG)
+	git clone $(SITECONFIG_REPO) $(SITECONFIG_CLONE)
 
-	rm -rf site-config/standard
-	go run tools/fftr_convert.go $(SITECONFIG) site-config/standard
-	rm -rf $(SITECONFIG)
+	rm -rf $(SITECONFIG_DEST)
+	go run tools/fftr_convert.go $(SITECONFIG_CLONE) $(SITECONFIG_DEST)
+	rm -rf $(SITECONFIG_CLONE)
 
 .PHONY: dev
 dev:
