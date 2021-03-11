@@ -24,7 +24,7 @@ module.exports = {
     mainFields: ["browser", "module", "main"],
   },
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.join(__dirname, "../assets/www"),
     publicPath: "assets",
     filename: "[name].[hash:8].js",
   },
@@ -92,7 +92,12 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        '**\/*',
+        '!.keep'
+      ]
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].[hash:8].css",
     }),

@@ -25,7 +25,7 @@ build-dev:
 .PHONY: clean
 clean:
 	rm -rf dist
-	rm -f internal/assets/assets_vfsdata.go
+	rm -rf assets/www/*
 	rm -f internal/templates/templates_vfsdata.go
 	rm -f pkg/extract/fftr/siteconfig_vfsdata.go
 	go clean
