@@ -1,4 +1,4 @@
-package auth
+package users
 
 import (
 	"errors"
@@ -22,7 +22,7 @@ const (
 
 var (
 	// Users is the user manager.
-	Users = UserManager{}
+	Users = Manager{}
 
 	// ErrNotFound is returned when a user record was not found.
 	ErrNotFound = errors.New("not found")
@@ -38,17 +38,17 @@ type User struct {
 	Password string    `db:"password"`
 }
 
-// UserManager is a query helper for user entries.
-type UserManager struct{}
+// Manager is a query helper for user entries.
+type Manager struct{}
 
 // Query returns a prepared goqu SelectDataset that can be extended later.
-func (m *UserManager) Query() *goqu.SelectDataset {
+func (m *Manager) Query() *goqu.SelectDataset {
 	return db.Q().From(goqu.T(TableName).As("u")).Prepared(true)
 }
 
 // GetOne executes the a select query and returns the first result or an error
 // when there's no result.
-func (m *UserManager) GetOne(expressions ...goqu.Expression) (*User, error) {
+func (m *Manager) GetOne(expressions ...goqu.Expression) (*User, error) {
 	var u User
 	found, err := m.Query().Where(expressions...).ScanStruct(&u)
 
@@ -64,7 +64,7 @@ func (m *UserManager) GetOne(expressions ...goqu.Expression) (*User, error) {
 
 // Create insert a new user in the database. The password
 // must be present. It will be hashed and updated before insertion.
-func (m *UserManager) Create(user *User) error {
+func (m *Manager) Create(user *User) error {
 	if strings.TrimSpace(user.Password) == "" {
 		return errors.New("password is empty")
 	}

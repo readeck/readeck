@@ -1,0 +1,137 @@
+{{ extends "app.gohtml" }}
+
+{{- define "title" -}}
+{{ if not .item.Loaded }}Bookmark loading{{ else }}{{ .item.Title }}{{ end -}}
+- Bookmarks
+{{- end -}}
+
+{{- define "head" -}}
+  {{- if not .item.Loaded -}}
+  <meta http-equiv="refresh" content="5">
+  {{- end -}}
+{{- end -}}
+
+{{ define "content" }}
+{{ if not .item.Loaded }}
+<div class="page page-article">
+  <p><span class="loader"></span> Bookmark is loading...</p>
+</div>
+{{ else }}
+<div class="page page-{{ .item.Type }}">
+  <div class="summary">
+    <h1 class="title is-h2">{{ .item.Title }}</h1>
+
+    {{ if .item.Description -}}
+    <p class="subtitle">{{ .item.Description }}</p>
+    {{- end }}
+
+    <div class="box">
+      <div class="box-wrap">
+        <div class="box-content">
+          <ul>
+            <li>
+              {{- if .item.Resources.icon }}
+              <span><img class="site-icon" alt=""
+                src="{{ .item.Resources.icon.Src }}"
+                width="{{ .item.Resources.icon.Width }}"
+                height="{{ .item.Resources.icon.Height }}"></span>
+              {{- end }}
+              <strong>{{ default "no site name" .item.SiteName }}</strong>
+            </li>
+            {{ if .item.Published }}
+              <li>{{ icon $ "bx-calendar" }} Published on
+                {{ .item.Published | date "02 January 2006" }}</li>
+            {{ end }}
+            {{ if .item.Authors }}
+              <li>{{ icon $ "bx-pen" }} By {{ .item.Authors | join ", " }}</li>
+            {{ end }}
+            <li>{{ icon $ "bx-link" }} <a href="{{ .item.URL }}">{{ .item.URL }}</a></li>
+          </ul>
+
+          <form action="" method="post">
+            {{ template "csrfField" . }}
+            <input type="hidden" name="_to" value="{{ $.currentPath }}" />
+            <button type="submit" style="display: none"></button>
+            {{- if .item.Tags }}
+            <ul class="badges">{{ range .item.Tags }}
+              <li class="badge">{{ . }}
+              <button class="button-clear button-delete" type="submit"
+                name="remove_tags" value="{{ . }}"></button>
+              </li>
+            {{ end }}</ul>
+            {{ end -}}
+            <div class="compound">
+                <input type="text" name="add_tags"
+                  placeholder="Add a new tag" />
+                <button type="submit">Add tag</button>
+            </div>
+          </form>
+        </div>
+
+        {{- if .item.Resources.thumbnail }}
+        <div class="box-image">
+          <img src="{{ .item.Resources.thumbnail.Src }}" alt=""
+            width="{{ .item.Resources.thumbnail.Width }}"
+            height="{{ .item.Resources.thumbnail.Height }}">
+        </div>
+        {{- end }}
+      </div>
+
+      <div class="item-actions">
+        {{- if .item.IsDeleted }}
+          <span class="text-danger">
+            This bookmark will be removed in a few seconds.
+          </span>
+          <form action="{{ urlFor $ "." "delete" }}" method="post">
+            {{ template "csrfField" $ }}
+            <input type="hidden" name="cancel" value="1" />
+            <input type="hidden" name="_to" value="{{ $.currentPath }}" />
+            <button type="submit">Cancel</button>
+          </form>
+        {{- else -}}
+          <form action="" method="post">
+            {{ template "csrfField" . }}
+            <div class="compound">
+              <button class="outlined rounded icon" name="is_read" value="{{ .item.IsRead | ternary 0 1 }}">
+              {{ icon $ (.item.IsRead | ternary "bxs-check-circle" "bx-check-circle") }}
+              </button>
+              <button class="outlined rounded icon" name="is_marked" value="{{ .item.IsMarked | ternary 0 1 }}">
+              {{ icon $ (.item.IsMarked | ternary "bxs-heart" "bx-heart") }}
+              </button>
+              <button class="outlined rounded icon" name="is_archived" value="{{ .item.IsArchived | ternary 0 1 }}">
+              {{ icon $ (.item.IsArchived | ternary "bxs-archive" "bx-archive") }}
+              </button>
+            </div>
+          </form>
+
+          <form action="{{ urlFor $ "." "delete" }}" method="post">
+            {{ template "csrfField" $ }}
+            <input type="hidden" name="_to" value="{{ $.currentPath }}" />
+            <button class="outlined rounded icon delete">
+              {{ icon $ "bx-trash" }}
+            </button>
+          </form>
+        {{ end -}}
+      </div>
+    </div>
+  </div>
+
+  {{ if and .item.Errors -}}
+  <div class="content notification is-warning is-light">
+    <p>Errors were encountered during extraction</p>
+    <ul>{{ range .item.Errors }}
+      <li>{{ . }}</li>
+    {{ end }}</ul>
+  </div>
+  {{- end }}
+
+  {{- if eq .item.Type "article" -}}
+    {{ template "_article" . }}
+  {{- else if eq .item.Type "photo" -}}
+    {{ template "_photo" .item }}
+  {{- else if eq .item.Type "video" -}}
+    {{ template "_video" .item }}
+  {{- end -}}
+</div>
+{{ end }}
+{{ end }}

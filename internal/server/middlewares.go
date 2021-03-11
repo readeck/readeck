@@ -2,53 +2,20 @@ package server
 
 import (
 	"net/http"
-	"time"
+	"path"
+	"strings"
 
-	"github.com/go-chi/chi/middleware"
-	log "github.com/sirupsen/logrus"
+	"github.com/gorilla/csrf"
+
+	"github.com/readeck/readeck/configs"
+	"github.com/readeck/readeck/internal/auth"
 )
 
-// Logger is a middleware that logs requests.
-func Logger() func(next http.Handler) http.Handler {
-	return middleware.RequestLogger(newLogger())
-}
-
-func newLogger() *structuredLogger {
-	return &structuredLogger{}
-}
-
-type structuredLogger struct{}
-
-func (l *structuredLogger) NewLogEntry(r *http.Request) middleware.LogEntry {
-	le := log.WithField("@id", middleware.GetReqID(r.Context()))
-	e := &structuredLoggerEntry{r, le}
-
-	le.WithFields(log.Fields{
-		"http_method": r.Method,
-		"http_proto":  r.Proto,
-		"remote_addr": r.RemoteAddr,
-		"path":        r.RequestURI,
-		"ua":          r.UserAgent(),
-	}).Info("request started")
-
-	return e
-}
-
-type structuredLoggerEntry struct {
-	r *http.Request
-	l *log.Entry
-}
-
-func (l *structuredLoggerEntry) Write(status, bytes int, header http.Header, elapsed time.Duration, extra interface{}) {
-	l.l.WithFields(log.Fields{
-		"status":     status,
-		"length":     bytes,
-		"elapsed_ms": float64(elapsed.Nanoseconds()) / 1000000.0,
-	}).Info("request completed")
-}
-
-func (l *structuredLoggerEntry) Panic(v interface{}, stack []byte) {
-}
+const (
+	csrfCookieName = "__csrf_key"
+	csrfFieldName  = "__csrf__"
+	csrfHeaderName = "X-CSRF-Token"
+)
 
 // SetRequestInfo update the scheme and host on the incoming
 // HTTP request URL (r.URL), based on provided headers and/or
@@ -72,4 +39,52 @@ func SetRequestInfo(next http.Handler) http.Handler {
 	}
 
 	return http.HandlerFunc(fn)
+}
+
+// Csrf setup the CSRF protection.
+func (s *Server) Csrf() func(next http.Handler) http.Handler {
+	CSRF := csrf.Protect([]byte(configs.Config.Main.SecretKey),
+		csrf.CookieName(csrfCookieName),
+		csrf.Path(path.Join(s.BasePath)),
+		csrf.HttpOnly(true),
+		csrf.MaxAge(3600*12),
+		csrf.SameSite(csrf.SameSiteStrictMode),
+		csrf.FieldName(csrfFieldName),
+		csrf.RequestHeader(csrfHeaderName),
+	)
+
+	return func(next http.Handler) http.Handler {
+		fn := func(w http.ResponseWriter, r *http.Request) {
+			// Always enable CSRF protection, unless the current auth provider
+			// states otherwise.
+			p, ok := auth.GetRequestProvider(r).(auth.ProviderFeatureCsrf)
+			if ok && p.CsrfExempt(r) {
+				next.ServeHTTP(w, r)
+				return
+			}
+			CSRF(next).ServeHTTP(w, r)
+		}
+
+		return http.HandlerFunc(fn)
+	}
+}
+
+// SetSecurity adds some headers to improve client side security.
+func (s *Server) SetSecurity() func(next http.Handler) http.Handler {
+	cspHeader := strings.Join([]string{
+		"default-src 'self'",
+		"img-src 'self' data:",
+		"media-src 'self' data:",
+		"style-src 'self' 'unsafe-inline'",
+		"child-src *", // Allow iframes for videos
+	}, "; ")
+
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Referrer-Policy", "same-origin")
+			w.Header().Add("Content-Security-Policy", cspHeader)
+
+			next.ServeHTTP(w, r)
+		})
+	}
 }

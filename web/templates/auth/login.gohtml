@@ -1,0 +1,17 @@
+{{ extends "base.gohtml" }}
+
+{{ define "title" }}Login{{ end }}
+
+{{ define "body" }}
+<main class="login">
+  <form action="" method="POST">
+    {{ template "formErrors" .Form }}
+    {{ template "csrfField" . }}
+
+    {{ template "textField" (dict "field" .Form.Fields.username "name" "username" "label" "Username" "class" "max") }}
+    {{ template "textField" (dict "field" .Form.Fields.password "name" "password" "label" "Password" "class" "max" "type" "password") }}
+
+    <div><button type="submit" class="button is-link">Login</button></div>
+  </form>
+</main>
+{{ end }}

@@ -1,0 +1,52 @@
+{{ extends "base.gohtml" }}
+
+{{ define "body" }}
+<div class="app">
+  <nav class="navbar">
+    <div class="main-nav">
+      <a class="active" href="{{ urlFor $ "/bookmarks" }}">
+      {{ icon . "bxs-bookmarks" }} Bookmarks</a>
+    </div>
+
+    <div class="user-menu">
+      <a class="rounded icon" href="{{ urlFor $ "/profile" }}">{{ icon . "bx-user-circle" }}</a>
+
+
+    </div>
+
+    <form action="{{ urlFor $ "/logout" }}" method="post">
+      {{ template "csrfField" $ }}
+      <button type="submit">
+        {{ icon . "bx-log-out" }} Logout
+      </button>
+    </form>
+
+    {{/* <div>
+      <div>
+        <a href="#" class="navbar-link">{{ (user $).Username }}</a>
+        <div class="navbar-dropdown is-right">
+          <div class="navbar-item">
+            <form action="{{ urlFor $ "/logout" }}" method="post">
+            {{ template "csrfField" $ }}
+            <button type="submit" class="button is-bare">
+              {{ icon . "bx-log-out" }}
+              <span>Logout</span>
+            </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> */}}
+  </nav>
+
+  {{ block "main" . }}
+  {{ block "aside" . }}{{ end }}
+  <div class="main">
+    <div class="content">
+    {{ template "flashes" . }}
+    {{ block "content" . }}{{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,74 @@
+@use "config" as *
+@use "plugins/form"
+
+// Login screen
+main.login
+  max-width: 30rem
+  margin: 2rem auto
+  padding: $block-spacing/2
+  border: 1px solid $grey-light
+  border-radius: $radius
+
+
+// Main app container
+div.app
+  height: 100vh
+  display: grid
+  grid-template-rows: auto 1fr
+  grid-template-columns: auto 1fr
+  grid-template-areas: "header header" "sidebar main"
+
+
+// Main content
+div.main
+  grid-area: main
+  overflow-y: auto
+  padding: $block-spacing/2
+
+  & > div.content
+    padding-bottom: $block-spacing
+
+
+// Sidebar
+aside.sidebar
+  grid-area: sidebar
+  width: 20rem
+  overflow-y: auto
+  padding: $block-spacing/2
+
+
+// Navigation bar
+nav.navbar
+  grid-area: header
+  display: flex
+  gap: $block-spacing/2
+  padding: $block-spacing/2
+  background: $grey-darker
+  color: $white
+
+  a
+    @extend %button
+
+  a, button
+    align-items: center
+    line-height: 1
+    font-weight: 600
+
+    &, &:visited
+      background-color: $grey-darker
+      border-color: $grey-darker
+      color: $grey-lighter
+
+    &:hover, &:focus,
+    &.active:hover, &.active:focus
+      background-color: $grey-dark
+      border-color: $grey-dark
+      color: $white
+
+    &.active
+      background-color: $black-bis
+      border-color: $black-bis
+      color: $white
+
+  .main-nav
+    flex-grow: 1

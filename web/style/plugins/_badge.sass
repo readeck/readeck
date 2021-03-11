@@ -1,0 +1,33 @@
+@use "../config" as *
+@use "sass:color"
+
+.badges
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+
+  .badge
+    display: inline-flex
+    font-size: 1.4rem
+    align-items: center
+    vertical-align: middle
+    justify-content: center
+    padding: .1rem .4rem
+    border-radius: $radius
+    background: color.adjust($primary, $lightness: 47%, $saturation: -20%)
+    color: color.adjust($primary, $lightness: -10%)
+
+    margin-bottom: .5rem
+
+    &:not(:last-child)
+      margin-right: .5rem
+
+    button.button-delete
+      background-color: $grey
+      border-radius: $radius-rounded
+      font-size: 1.6rem
+      margin-left: .5rem
+
+      &::before,
+      &::after
+        background-color: $white

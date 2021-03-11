@@ -127,6 +127,12 @@ func (arc *Archiver) downloadFile(url string, parentURL string) (*http.Response,
 		req.AddCookie(cookie)
 	}
 
+	timeout := arc.Request.Client.Timeout
+	arc.Request.Client.Timeout = arc.RequestTimeout
+	defer func() {
+		arc.Request.Client.Timeout = timeout
+	}()
+
 	resp, err := arc.Request.Client.Do(req)
 	if err != nil {
 		return nil, err

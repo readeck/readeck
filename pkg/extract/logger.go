@@ -9,11 +9,11 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type messageFormater struct {
+type messageFormatter struct {
 	withPrefix bool
 }
 
-func (f *messageFormater) Format(entry *log.Entry) ([]byte, error) {
+func (f *messageFormatter) Format(entry *log.Entry) ([]byte, error) {
 	data := make(log.Fields)
 	for k, v := range entry.Data {
 		data[k] = v
@@ -40,11 +40,11 @@ func (f *messageFormater) Format(entry *log.Entry) ([]byte, error) {
 	return b.Bytes(), nil
 }
 
-var messageLogFormat = messageFormater{withPrefix: true}
-var errorLogFormat = messageFormater{withPrefix: false}
+var messageLogFormat = messageFormatter{withPrefix: true}
+var errorLogFormat = messageFormatter{withPrefix: false}
 
 type messageLogHook struct {
-	m *ProcessMessage
+	e *Extractor
 }
 
 func (h *messageLogHook) Levels() []log.Level {
@@ -52,11 +52,11 @@ func (h *messageLogHook) Levels() []log.Level {
 }
 func (h *messageLogHook) Fire(entry *log.Entry) error {
 	b, _ := messageLogFormat.Format(entry)
-	h.m.Extractor.Logs = append(h.m.Extractor.Logs, strings.TrimSpace(string(b)))
+	h.e.Logs = append(h.e.Logs, strings.TrimSpace(string(b)))
 
 	if entry.Level <= log.ErrorLevel {
 		b, _ = errorLogFormat.Format(entry)
-		h.m.Extractor.errors = append(h.m.Extractor.errors, errors.New(strings.TrimSpace(string(b))))
+		h.e.errors = append(h.e.errors, errors.New(strings.TrimSpace(string(b))))
 	}
 
 	return nil

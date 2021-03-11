@@ -180,7 +180,7 @@ func fixNoscriptImages(top *html.Node) {
 		nextElement := dom.NextElementSibling(noscript)
 		if nextElement != nil && isSingleImage(nextElement) {
 			if noscript.Parent != nil {
-				noscript.Parent.InsertBefore(dom.CloneNode(nextElement), noscript)
+				noscript.Parent.InsertBefore(dom.Clone(nextElement, true), noscript)
 				noscript.Parent.RemoveChild(nextElement)
 			}
 		}

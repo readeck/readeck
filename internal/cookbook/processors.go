@@ -5,6 +5,8 @@ import (
 	"context"
 	"time"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/readeck/readeck/pkg/archiver"
 	"github.com/readeck/readeck/pkg/extract"
 )
@@ -25,7 +27,6 @@ func archiveProcessor(m *extract.ProcessMessage, next extract.Processor) extract
 
 	req := &archiver.Request{
 		Client: m.Extractor.Client(),
-		Logger: m.Log,
 		Input:  bytes.NewReader(m.Extractor.HTML),
 		URL:    m.Extractor.Drop().URL,
 	}
@@ -34,13 +35,15 @@ func archiveProcessor(m *extract.ProcessMessage, next extract.Processor) extract
 		m.Log.WithError(err).Error("archive error")
 		return next
 	}
-	arc.EnableLog = true
-	arc.DebugLog = true
+
 	arc.MaxConcurrentDownload = 5
 	arc.Flags = archiver.EnableImages
-	arc.RequestTimeout = 20 * time.Second
+	arc.RequestTimeout = 45 * time.Second
+	arc.EventHandler = eventHandler
 
-	if err := arc.Archive(context.Background()); err != nil {
+	ctx := context.WithValue(context.Background(), ctxLogger, m.Log)
+
+	if err := arc.Archive(ctx); err != nil {
 		m.Log.WithError(err).Error("archive error")
 		return next
 	}
@@ -49,3 +52,19 @@ func archiveProcessor(m *extract.ProcessMessage, next extract.Processor) extract
 
 	return next
 }
+
+func eventHandler(ctx context.Context, arc *archiver.Archiver, evt archiver.Event) {
+	log := ctx.Value(ctxLogger).(*log.Entry)
+	switch evt.(type) {
+	case *archiver.EventError:
+		log.WithFields(evt.Fields()).Warn("archive error")
+	case archiver.EventStartHTML:
+		log.WithFields(evt.Fields()).Info("start archive")
+	case *archiver.EventFetchURL:
+		log.WithFields(evt.Fields()).Debug("load archive resource")
+	default:
+		log.WithFields(evt.Fields()).Debug("archiver")
+	}
+}
+
+var ctxLogger = struct{}{}
