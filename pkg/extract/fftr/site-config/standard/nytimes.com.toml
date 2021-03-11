@@ -1,5 +1,9 @@
-title_selectors = ["//h1[@class=\"articleHeadline\"]"]
+title_selectors = [
+  "//h1[@class=\"articleHeadline\"]",
+  "//meta[@property=\"og:title\"]/@content",
+]
 body_selectors = [
+  "//section[@name=\"articleBody\"] | //p[@id=\"article-summary\"] | //header/figure[contains(@class, 'sizeMedium')]",
   "//div[contains(concat(' ',normalize-space(@class),' '),' story-body ')]",
   "//div[@id=\"article\"]",
   "//*[@itemprop=\"articleBody\"]",
@@ -21,6 +25,18 @@ strip_selectors = [
   "//figure//span[.='Image' or .='Video']",
   "//div[@aria-labelledby=\"modal-title\"]",
   "//button",
+  "//div[starts-with(@id, 'story-ad-')]",
+  "//aside",
+  "//div[@data-test-id=\"RecommendedNewsletter\"]",
+  "//div[@data-test-id=\"share-tools\"]",
+  "//div[@role=\"complementary\"]",
+  "//video",
+  "//span/span[contains(text(), 'Credit')]",
+  "//span/span/span[contains(text(), 'Credit')]",
+  "//img[contains(@class, 'post-screenshot')]",
+  "//div[contains(@style, \"visibility: hidden\")]//picture",
+  "//div[contains(@style, \"visibility: hidden\")]//div[@data-testid=\"lazyimage-container\"]",
+  "//div[@data-testid=\"inline-message\"]",
   "//h6[@class = 'kicker']",
 ]
 strip_id_or_class = [
@@ -44,6 +60,8 @@ strip_id_or_class = [
   "ResponsiveAd",
   "robots-nocontent",
   "hidden",
+  "NYT_MAIN_CONTENT_1_REGION",
+  "related-links-block",
 ]
 strip_image_src = []
 native_ad_selectors = []

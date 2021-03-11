@@ -1,0 +1,20 @@
+title_selectors = ["//h2[contains(concat(' ',normalize-space(@class),' '),' entry-title ')]"]
+body_selectors = ["//section[@id='content']"]
+date_selectors = ["//footer/time/@datetime"]
+author_selectors = ["//footer/address"]
+strip_selectors = []
+strip_id_or_class = ["published"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://blog.shaunfinglas.co.uk/2015/04/cqrs-simplest-introduction.html"
+  Contains = []

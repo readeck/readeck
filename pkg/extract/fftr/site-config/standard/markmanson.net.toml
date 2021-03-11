@@ -1,0 +1,39 @@
+title_selectors = ["//h1[contains(concat(' ',normalize-space(@class),' '),' entry-title ')]"]
+body_selectors = ["//article//div[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]"]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = ["//meta[@property=\"article:author\"]/@content"]
+strip_selectors = ["//img[@data-lazy-src]"]
+strip_id_or_class = [
+  "article-audio-player",
+  "in-article-opt-in",
+  "footer-opt-in",
+  "no-print",
+  "lazyloaded",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<noscript>",
+  "<div>",
+],
+  [
+  "</noscript>",
+  "</div>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://markmanson.net/how-to-be-insanely-successful"
+  Contains = ["you see everyone around you obsessed"]
+
+[[tests]]
+  URL = "https://markmanson.net/feed"
+  Contains = []

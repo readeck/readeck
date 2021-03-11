@@ -1,0 +1,29 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article-content ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<img src=",
+  "<img notused=",
+],
+  [
+  "ix-path=\"",
+  "src=\"https://krautreporter.imgix.net",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://krautreporter.de/2244-stell-dir-vor-du-erbst-nazi-geld-was-machst-du?shared=c30432e7-4d96-42c5-85d3-354e1f90482d"
+  Contains = []

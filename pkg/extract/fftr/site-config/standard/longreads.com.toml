@@ -1,0 +1,24 @@
+title_selectors = []
+body_selectors = ["//section[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]"]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "pullquote",
+  "jp-post-flair",
+  "sharedaddy",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://longreads.com/2019/10/22/the-final-five-percent/"
+  Contains = []

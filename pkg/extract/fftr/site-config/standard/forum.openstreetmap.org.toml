@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = ["//section[contains(concat(' ',normalize-space(@class),' '),' content ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' postright ')]/h3"]
+strip_id_or_class = [
+  "brdwelcome",
+  "usercontacts",
+  "usertitle",
+  "postfootleft",
+  "postfootright",
+  "postsignature",
+  "crumbsplus",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = ["//link[@rel='next']/@href"]
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://forum.openstreetmap.org/viewtopic.php?id=69069"
+  Contains = ["I also experience heavy lags in refreshing standard layer"]

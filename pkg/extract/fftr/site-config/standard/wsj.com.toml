@@ -1,5 +1,6 @@
 title_selectors = ["//meta[@property=\"og:title\"]/@content"]
 body_selectors = [
+  "//main[@id=\"main\"]//div[@itemprop=\"articleLead\" or @itemprop=\"articleBody\"]",
   "//div[@id='wsj-article-wrap']",
   "//div[@id='article_story_body']",
   "//ul[@id='imageSlide']//li[@class='firstSlide']//img | (//div[@class='txt_body']//p)[1]",
@@ -7,28 +8,33 @@ body_selectors = [
 date_selectors = ["//meta[@itemprop=\"dateCreated\"]/@content"]
 author_selectors = ["//meta[@name=\"author\"]/@content"]
 strip_selectors = [
+  "//amp-iframe",
+  "//*[@amp-access-hide]",
   "//div[contains(@class, 'insetContent')]//cite",
   "//*[contains(@style, 'visibility: hidden;')]",
   "//div[contains(@class, 'insetContent') and not(contains(@class, 'image'))]",
   "//div[contains(@class, 'carousel')]",
+  "//div[div[contains(@class, 'media-object-rich-text') and h4 and ul[@class=\"articleList\"]]]",
 ]
 strip_id_or_class = [
   "insetFullBracket",
   "insettipBox",
   "recipeACShopAndBuyText",
+  "article__byline",
+  "type-InsetMediaVideo",
+  "wsj-ad",
+  "bylineWrap",
 ]
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
 prune = false
 autodetect_on_failure = true
-single_page_link_selectors = []
+single_page_link_selectors = ["//link[@rel=\"amphtml\"]/@href"]
 next_page_link_selectors = []
 replace_strings = []
 
 [http_headers]
-  referer = "https://t.co/T1323aaaa"
-  user-agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 10_2 like Mac OS X) AppleWebKit/602.1.32 (KHTML, like Gecko) Mobile/14C92 Twitter for iPhone"
 
 [[tests]]
   URL = "http://www.wsj.com/articles/airasia-flight-8501-tail-recovered-1420878809"
@@ -44,4 +50,16 @@ replace_strings = []
 
 [[tests]]
   URL = "http://www.wsj.com/article/SB10001424052970204791104577110550376458164.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.wsj.com/articles/what-the-world-will-speak-in-2115-1420234648"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.wsj.com/articles/our-amazingly-plastic-brains-1423262095"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.wsj.com/articles/the-biggest-money-mistakes-we-makedecade-by-decade-1477275181"
   Contains = []

@@ -1,0 +1,37 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' left ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//link"]
+strip_id_or_class = [
+  "native-ad",
+  "newsletter_youngtimer",
+  "block-auteur",
+  "title-block",
+  "teaser-x-items",
+  "newsletter-atp",
+  "occasion",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = [
+  [
+  "<h2",
+  "<p",
+],
+  [
+  "</h2>",
+  "</p>",
+],
+]
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.autoplus.fr/peugeot/3008/actualite/Peugeot-3008-SUV-Scoop-Equipements-1549589.html"
+  Contains = []

@@ -1,0 +1,28 @@
+title_selectors = ["/html/head/title"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article-body ')]"]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = []
+strip_selectors = ["//footer"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.crikey.com.au/2021/03/05/nuclear-energy-australia-2021/"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.crikey.com.au/2021/03/05/christian-porter-rule-of-law-2/"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.crikey.com.au/2021/03/05/nuclear-energy-australia-2021/"
+  Contains = []

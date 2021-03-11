@@ -1,0 +1,20 @@
+title_selectors = ["//header/h1"]
+body_selectors = ["//div[@id='article-body-content']"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//section[@class='rel-news']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.elespanol.com/omicrono/hardware/20180807/samsung-comienza-producir-discos-ssd-capacidad-masa/328468284_0.html"
+  Contains = []

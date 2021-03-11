@@ -2,7 +2,10 @@ title_selectors = ["//div[@class='news-header-tit-box']//h1"]
 body_selectors = ["//div[@id='news-body-center']"]
 date_selectors = ["//time"]
 author_selectors = ["//a[@class='news-def-author']"]
-strip_selectors = ["//div[@id='news-body-center']//article"]
+strip_selectors = [
+  "//div[@id='news-body-center']//article",
+  "//section[contains(@class, 'inTextNews')]",
+]
 strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []

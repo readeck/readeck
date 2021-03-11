@@ -1,0 +1,20 @@
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[contains(@class, 'essay-body') or contains(@class, 'essay-intro')]"]
+date_selectors = ["//div[@class=\"essay-intro\"]/p[@class=\"date\"]"]
+author_selectors = ["//div[@class=\"essay-header\"]/p[@class=\"byline\"]/a"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://publicdomainreview.org/essay/fungi-folklore-and-fairyland"
+  Contains = ["By chance a physician named Everard Brande"]

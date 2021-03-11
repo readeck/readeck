@@ -1,0 +1,35 @@
+title_selectors = [
+  "//h1[contains(@class, 'interview-title']",
+  "//meta[@property=\"og:title\"]/@content",
+]
+body_selectors = ["//article[contains(@class, 'complete-interview')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//ul[contains(@class, 'book-covers')][.//div[contains(@class, 'picture')]]"]
+strip_id_or_class = [
+  "hideNoLink",
+  "dynamic-bookshelf",
+  "hide-for-small",
+  "buy-button",
+  "listen-button",
+  "social-buttons",
+  "show-for-small-only",
+  "-donate",
+  "interview-tags",
+  "interview-social",
+  "interview-related",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://fivebooks.com/best-books/nietzsche-brian-leiter/"
+  Contains = []

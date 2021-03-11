@@ -14,6 +14,8 @@ next_page_link_selectors = []
 replace_strings = []
 
 [http_headers]
+  Cookie = "personalization_id=1;"
+  User-Agent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 
 [[tests]]
   URL = "https://mobile.twitter.com/medialens/status/216883678582804480"

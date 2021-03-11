@@ -1,6 +1,9 @@
 title_selectors = []
-body_selectors = ["//article"]
-date_selectors = ["//time[@itemprop=\"datePublished\"]/@datetime"]
+body_selectors = [
+  "//article//div[contains(concat(' ',normalize-space(@class),' '),' gtm-story-text ')]",
+  "//article",
+]
+date_selectors = ["//meta[@name=\"datePublished\"]/@content"]
 author_selectors = ["//a[contains(concat(' ',normalize-space(@class),' '),' gtm-author-byline ')]"]
 strip_selectors = [
   "//time[@itemprop=\"datePublished\"]",

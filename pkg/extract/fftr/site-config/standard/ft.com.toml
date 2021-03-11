@@ -1,11 +1,22 @@
-title_selectors = []
-body_selectors = ["//div[@id='storyContent']"]
-date_selectors = []
-author_selectors = []
-strip_selectors = []
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = [
+  "//div[contains(concat(' ',normalize-space(@class),' '),' article__content-body ')]",
+  "//div[@id='storyContent']",
+]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = [
+  "//p[contains(@class, 'article-info__byline')]",
+  "//meta[@property=\"article:author\"]/@content",
+]
+strip_selectors = [
+  "//aside",
+  "//experimental",
+]
 strip_id_or_class = [
   "shareArt",
   "promobox",
+  "n-content-pullquote__content",
+  "in-article-advert",
 ]
 strip_image_src = []
 native_ad_selectors = []
@@ -20,4 +31,8 @@ replace_strings = []
 
 [[tests]]
   URL = "http://www.ft.com/cms/s/2/19fe32bc-d6db-11e5-8887-98e7feb46f27.html"
+  Contains = ["The French president said compromises"]
+
+[[tests]]
+  URL = "https://www.ft.com/content/b053f55b-2a8b-436c-8154-0e93dcdb3c1a"
   Contains = []

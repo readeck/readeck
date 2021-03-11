@@ -1,14 +1,13 @@
-title_selectors = ["//h2[@class='zm-item-title']"]
-body_selectors = []
-date_selectors = ["//a[@class='answer-date-link meta-item']"]
-author_selectors = ["//h3[@class='zm-item-answer-author-wrap']"]
-strip_selectors = [
-  "//div[@class='zh-answers-title']",
-  "///div[@class='zm-item-vote-info ']",
-  "//div[@class='zm-item-answer-author-info']",
-  "//div[@class='zu-blue-info-board zg-r3px']",
+title_selectors = ["//h1[contains(@class, \"QuestionHeader-title\")]"]
+body_selectors = ["//div[@id=\"QuestionAnswers-answers\"]//div[contains(@class, 'List-item')]"]
+date_selectors = ["(//meta[@itemProp=\"dateCreated\"])[1]/@content"]
+author_selectors = ["(//span[contains(@class, 'AuthorInfo-name')])[1]"]
+strip_selectors = []
+strip_id_or_class = [
+  "ModalWrap",
+  "ContentItem-actions",
+  "RichContent-actions",
 ]
-strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
 tidy = false

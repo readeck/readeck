@@ -1,0 +1,24 @@
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[@data-test=\"articleBody\"]"]
+date_selectors = ["//meta[@property=\"article:published\"]/@content"]
+author_selectors = ["//section[@data-test=\"articleLayoutRow\"]//address//a[contains(@href, '/misc/writers/')]"]
+strip_selectors = [
+  "//ul[@data-test=\"relatedArticles\"]",
+  "//div[contains(@id, 'newsletter')]",
+  "//button",
+]
+strip_id_or_class = ["trinity-player-iframe-wrapper"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.haaretz.com/israel-news/.premium-with-israel-s-encouragement-nso-sold-spyware-to-uae-and-other-gulf-states-1.9093465"
+  Contains = []

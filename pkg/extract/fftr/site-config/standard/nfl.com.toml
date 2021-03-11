@@ -1,8 +1,8 @@
-title_selectors = ["//div[@id=\"article-hdr\"]/h1"]
-body_selectors = ["//div[@class=\"articleText\"]"]
-date_selectors = ["//abbr[@id=\"article-time\"]"]
-author_selectors = ["substring-after(//li[@id=\"article-hdr-meta-author\"]/text(), \"By \")"]
-strip_selectors = ["//div[@class=\"removeformobile\"]"]
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'nfl-c-article__body')]"]
+date_selectors = []
+author_selectors = ["//article//a[contains(@class, 'nfl-o-author__name')]"]
+strip_selectors = []
 strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
@@ -16,5 +16,5 @@ replace_strings = []
 [http_headers]
 
 [[tests]]
-  URL = "http://www.nfl.com/news/story/09000d5d82388707/article/close-shave-chiefs-haley-perseveres-through-rough-start?module=HP11_content_stream"
-  Contains = []
+  URL = "https://www.nfl.com/news/ravens-release-earl-thomas-sorting-out-winners-losers"
+  Contains = ["loss to the defense of a Super Bowl contender"]

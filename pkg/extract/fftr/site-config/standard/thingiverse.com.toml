@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["/html/head/title"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = true
+prune = true
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.thingiverse.com/thing:3868321"
+  Contains = ["Panther Origami"]

@@ -1,0 +1,19 @@
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = [
+  "//div[@id=\"jsStoryContentContainer\"]",
+  "//div[contains(@class, 'article__content__blocks')]",
+]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = ["article-footnote"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]

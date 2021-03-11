@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//body"]
+date_selectors = []
+author_selectors = []
+strip_selectors = ["//div[contains(@class, 'vue-app')]"]
+strip_id_or_class = ["download-pdf-row"]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "http://dispatchesjournal.org/articles/blackout-the-necropolitics-of-extraction/"
+  Contains = ["one would be right to question if these instances of volunteerist"]

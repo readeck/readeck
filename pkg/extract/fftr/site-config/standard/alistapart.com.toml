@@ -1,11 +1,13 @@
-title_selectors = ["//h1[@class='entry-title']"]
-body_selectors = ["//div[@itemprop='articleBody']"]
-date_selectors = ["//time[@itemprop='datePublished']"]
-author_selectors = ["//h2/a[@class='fn']"]
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//main/article//div[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]"]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = ["//main/article/header//span[@itemprop=\"author\"]"]
 strip_selectors = [
   "//aside",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' ala-single-sidebar-wrapper ')]",
+  "//a[contains(@class, 'subhead-anchor')]",
   "//footer",
-  "//div[@class=\"utility-side-bar\"]",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' utility-side-bar ')]",
 ]
 strip_id_or_class = ["aside-breaker"]
 strip_image_src = []
@@ -25,4 +27,4 @@ replace_strings = []
 
 [[tests]]
   URL = "https://alistapart.com/article/responsible-javascript-part-1"
-  Contains = []
+  Contains = ["Modern layout engines like Flexbox and Grid"]

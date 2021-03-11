@@ -3,9 +3,9 @@ body_selectors = [
   "//div[@id='collection-items-container']",
   "//div[contains(@class, 'article-content')]",
 ]
-date_selectors = []
-author_selectors = []
-strip_selectors = []
+date_selectors = ["//meta[@name=\"cXenseParse:recs:publishtime\"]/@content"]
+author_selectors = ["//meta[@name=\"cXenseParse:author\"]/@content"]
+strip_selectors = ["//footer"]
 strip_id_or_class = [
   "module-more-news",
   "module-related",

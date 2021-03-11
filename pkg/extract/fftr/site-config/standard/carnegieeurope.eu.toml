@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article-body ')]"]
+date_selectors = []
+author_selectors = ["//span[@class='author-box__heading']"]
+strip_selectors = ["//div[@class='author-box no-print']"]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://carnegieeurope.eu/strategiceurope/?fa=82949"
+  Contains = []

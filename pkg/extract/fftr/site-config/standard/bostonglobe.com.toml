@@ -1,6 +1,6 @@
 title_selectors = ["//article//h1[contains(@class, 'title')]"]
-body_selectors = ["//article//h2[contains(@class, 'subheader')] | (//article//div[contains(@class, 'image')])[1] | //div[@id=\"article-body\"]"]
-date_selectors = []
+body_selectors = ["//article//h2[contains(@class, 'subheader')] | (//article//div[contains(@class, 'image')])[1] | //article[@id=\"article-body\"]"]
+date_selectors = ["//meta[@name=\"datePublished\"]/@content"]
 author_selectors = ["//div[contains(@class, \"byline\")]//span[contains(@class, 'author')]"]
 strip_selectors = ["//img[contains(@src, '/20x0/')]"]
 strip_id_or_class = [
@@ -11,6 +11,11 @@ strip_id_or_class = [
   "article-more",
   "article-bar",
   "post-comment",
+  "link-related_links_link",
+  "newsletter",
+  "arc_ad",
+  "teads-inread",
+  "continue_button",
   "figure",
 ]
 strip_image_src = []
@@ -26,4 +31,8 @@ replace_strings = []
 
 [[tests]]
   URL = "https://www.bostonglobe.com/2020/04/07/metro/coronavirus-cases-surge-citys-safety-net-hospital-four-out-10-cases-are-now-related-pandemic/"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.bostonglobe.com/2021/03/01/metro/charlie-youre-making-big-mistake-experts-criticize-states-monday-reopening/"
   Contains = []

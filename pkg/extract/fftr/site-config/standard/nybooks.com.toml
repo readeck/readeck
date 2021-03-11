@@ -1,20 +1,18 @@
-title_selectors = ["//div[@id='page-title-wrapper']/div[@id='page-title']/h2"]
-body_selectors = ["//div[@id = 'article-body']"]
-date_selectors = ["//div[@id = 'page-title']/h5/a[starts-with(@href,'/issues/')]"]
-author_selectors = ["//div[@id = 'page-title']/h3"]
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//article//div[contains(@class, 'review-items')] | //div[contains(@class, 'article-main-content')]"]
+date_selectors = []
+author_selectors = ["//meta[@name=\"author\"]/@content"]
 strip_selectors = []
 strip_id_or_class = [
-  "sIFR-alternate",
-  "article-tools",
-  "js_target",
-  "marker",
+  "inline-ad",
+  "read-more",
 ]
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
 prune = false
 autodetect_on_failure = true
-single_page_link_selectors = ["//a[contains(@href, 'pagination=false') and not(contains(@href, 'printpage=true'))]"]
+single_page_link_selectors = []
 next_page_link_selectors = []
 replace_strings = []
 
@@ -23,3 +21,7 @@ replace_strings = []
 [[tests]]
   URL = "http://www.nybooks.com/articles/archives/2012/feb/23/were-more-unequal-you-think/"
   Contains = []
+
+[[tests]]
+  URL = "https://www.nybooks.com/articles/2020/11/05/the-hide-that-binds/"
+  Contains = ["She had suspected this, since its story was so distinctive."]

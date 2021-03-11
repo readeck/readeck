@@ -2,7 +2,7 @@ title_selectors = ["//h1"]
 body_selectors = ["//div[@id='article-content']"]
 date_selectors = ["//time[@itemprop='datePublished']/@datetime"]
 author_selectors = ["//div[@class='author-name-short']"]
-strip_selectors = []
+strip_selectors = ["//aside"]
 strip_id_or_class = [
   "article-aside",
   "article-headlines",

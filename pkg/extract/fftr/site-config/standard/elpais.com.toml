@@ -3,6 +3,7 @@ title_selectors = [
   "//div[contains(@class, 'cabecera_noticia')]//h1",
 ]
 body_selectors = [
+  "//div[contains(@class, 'article_body')]",
   "//div[@class='columna_texto']",
   "//div[@id='cuerpo_noticia']",
   "//div[@class='estructura_2col_1zq']//div[@class='margen_n']",
@@ -11,7 +12,7 @@ date_selectors = [
   "//meta[@name='DC.date']/@content",
   "//meta[@name='date']/@content",
 ]
-author_selectors = []
+author_selectors = ["//meta[@name=\"author\"]/@content"]
 strip_selectors = [
   "//div[starts-with(@id, 'sumario') and contains(., 'más información')]",
   "//div[@id='coment' or @id='foros_not']",
@@ -24,6 +25,7 @@ strip_id_or_class = [
   "info_relacionada",
   "m-kiosko",
   "info_complementa",
+  "more_info",
 ]
 strip_image_src = []
 native_ad_selectors = []
@@ -35,6 +37,10 @@ next_page_link_selectors = []
 replace_strings = []
 
 [http_headers]
+
+[[tests]]
+  URL = "https://elpais.com/educacion/2020-08-20/el-empeoramiento-de-la-epidemia-empuja-a-las-comunidades-a-endurecer-sus-planes-para-el-nuevo-curso.html"
+  Contains = []
 
 [[tests]]
   URL = "http://elpais.com/elpais/2012/02/06/gente/1328526783_491687.html"

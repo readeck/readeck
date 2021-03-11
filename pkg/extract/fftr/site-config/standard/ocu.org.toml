@@ -1,12 +1,14 @@
 title_selectors = ["//h1"]
-body_selectors = ["//div[@class='constrained']"]
+body_selectors = ["//main"]
 date_selectors = ["//meta[@name='PublishedDate']/@content"]
 author_selectors = []
 strip_selectors = []
 strip_id_or_class = [
+  "breadcrumbs",
   "mobile-only",
   "hide-on-mobile",
   "panel--related-content",
+  "community-entry-point",
   "relative",
   "yellow-boutique",
 ]

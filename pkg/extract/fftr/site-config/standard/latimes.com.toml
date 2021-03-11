@@ -1,26 +1,30 @@
-title_selectors = []
-body_selectors = ["//div[@class='story']"]
-date_selectors = []
-author_selectors = []
-strip_selectors = [
-  "//div[@id=\"tugs_story_display\"]",
-  "//div[@id=\"search_overlay\"]",
-  "//div[@id=\"adv_search\"]",
-  "//p[starts-with(., 'latimes.com')]",
-  "//h1[starts-with(., 'latimes.com')]",
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = [
+  "//div[contains(@class, 'page-article-body-inner')]",
+  "//div[contains(@class, 'page-article-body')]",
 ]
-strip_id_or_class = ["cubead"]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = ["//div[contains(@class, \"author-bio\")]//div[contains(@class, \"author-name\")]"]
+strip_selectors = []
+strip_id_or_class = [
+  "google-dfp-ad-wrapper",
+  "promo-large",
+]
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
 prune = false
 autodetect_on_failure = true
-single_page_link_selectors = ["//a[contains(@href, ',print.')]"]
+single_page_link_selectors = []
 next_page_link_selectors = []
 replace_strings = []
 
 [http_headers]
 
 [[tests]]
-  URL = "http://www.latimes.com/news/opinion/commentary/la-oe-gartonash-wilders-20110512,0,2876761.story"
+  URL = "https://www.latimes.com/opinion/la-xpm-2011-may-12-la-oe-gartonash-wilders-20110512-story.html"
   Contains = []
+
+[[tests]]
+  URL = "https://www.latimes.com/world-nation/story/2020-10-22/china-xi-jinping-mao-zedong-communist-party"
+  Contains = ["Xi Zhongxun lived through hellish periods of internal party factionalism"]

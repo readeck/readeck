@@ -1,5 +1,8 @@
 title_selectors = []
-body_selectors = ["//article[contains(@class, 'main-content')]"]
+body_selectors = [
+  "//article[contains(@class, 'main-content')]",
+  "//div[@id='articleBody']",
+]
 date_selectors = ["//article//time[contains(@class, 'content-header__publish-date')]"]
 author_selectors = ["//meta[@name=\"author\"]/@content"]
 strip_selectors = []
@@ -11,6 +14,11 @@ strip_id_or_class = [
   "consumer-marketing-unit",
   "ad--in-content",
   "ad--rail",
+  "article__social-share",
+  "cne-interlude-embed",
+  "social-icons",
+  "split-screen-content-header__rubric",
+  "split-screen-content-header__rubric-issue-date",
 ]
 strip_image_src = []
 native_ad_selectors = []
@@ -33,4 +41,8 @@ replace_strings = []
 
 [[tests]]
   URL = "https://www.newyorker.com/reporting/2013/04/22/130422fa_fact_bilger?currentPage=all&mobify=0"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.newyorker.com/cartoons/blitts-kvetchbook/a-man-of-substance"
   Contains = []

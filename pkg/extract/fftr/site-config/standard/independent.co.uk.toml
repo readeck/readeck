@@ -1,21 +1,29 @@
 title_selectors = ["//meta[@property='og:title']/@content"]
 body_selectors = [
-  "//div[@itemprop=\"articleBody\"]",
-  "//img[contains(@class, 'FirstImage')] | //div[contains(@class, 'articleContent')]",
+  "//div[@id='main']//div[contains(concat(' ',normalize-space(@class),' '),' body-content ')]",
+  "//div[@id='main']",
 ]
 date_selectors = ["//meta[@property='article:published_time']/@content"]
-author_selectors = ["//div[@id='main']//div[@class='byline']//span[@class='authorName']"]
+author_selectors = [
+  "//meta[@property=\"article:author_name\"]/@content",
+  "//div[@id='main']//div[@class='byline']//span[@class='authorName']",
+]
 strip_selectors = [
+  "//svg",
+  "//aside",
   "//amp-carousel",
   "//amp-lightbox",
   "//h5[contains(., 'READ MORE:')]",
   "//h5[contains(., 'Read more:')]",
 ]
 strip_id_or_class = [
+  "mobile-only",
+  "gallery-btn",
   "RelatedArtTag",
   "syndication-btn",
   "inline-related",
   "inline-prompt",
+  "sub-message",
   "icon-chevron",
 ]
 strip_image_src = []

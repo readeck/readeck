@@ -1,5 +1,5 @@
 title_selectors = []
-body_selectors = ["//div[contains(@class, 'ads--reviewPage')]"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' page-content ')]"]
 date_selectors = ["//div[contains(@class, 'page-content--byline-share--byline')]//time"]
 author_selectors = ["//meta[@name='author']/@content"]
 strip_selectors = []
@@ -21,3 +21,7 @@ replace_strings = []
 [[tests]]
   URL = "https://www.rogerebert.com/reviews/great-movie-blade-runner-the-final-cut-1982"
   Contains = []
+
+[[tests]]
+  URL = "https://www.rogerebert.com/far-flung-correspondents/a-little-black-dress-makes-the-world-go-round"
+  Contains = ["With the passing of Andy Williams"]

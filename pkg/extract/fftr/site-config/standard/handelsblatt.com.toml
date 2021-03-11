@@ -1,31 +1,27 @@
-title_selectors = ["//span[@class='hcf-headline']"]
-body_selectors = ["//div[@class='article']"]
-date_selectors = ["//div[@class='hcf-article-date']"]
-author_selectors = [
-  "//div[@class=\"hcf-author\"]/a/text()",
-  "substring-after(//div[@class='hcf-author'], 'von ')",
-]
-strip_selectors = [
-  "//div[contains(@class,\"hcf-smartbox\")]",
-  "//div[contains(@class,\"hcf-stopper\")]",
-  "//div[contains(@class,\"hcf-img-controls\")]",
-  "//span[@class='hcf-location-mark']",
-  "//span[@class='hcf-copyright']",
-  "//div[@class='hcf-copyright']",
-  "//div[@class='hcf-origin']",
-]
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[@itemprop=\"articleBody\"]"]
+date_selectors = ["//span[@itemprop=\"datePublished\"]/@content"]
+author_selectors = ["//meta[@name=\"vr:author\"]/@content"]
+strip_selectors = []
 strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
 prune = false
 autodetect_on_failure = true
-single_page_link_selectors = ["//li[contains(@class,\"hcf-print\")]/a"]
+single_page_link_selectors = []
 next_page_link_selectors = []
-replace_strings = []
+replace_strings = [[
+  "data-src=\"",
+  "src=\"",
+]]
 
 [http_headers]
 
 [[tests]]
   URL = "http://www.handelsblatt.com/meinung/gastbeitraege/gastkommentar-zum-emissionshandel-kurskorrekturen-fuehren-zum-kentern/8044326.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.handelsblatt.com/politik/deutschland/flughafen-berlin-brandenburg-vier-milliarden-euro-mehr-neun-jahre-zu-spaet-die-wichtigsten-fakten-zum-start-des-ber/26205178.html"
   Contains = []

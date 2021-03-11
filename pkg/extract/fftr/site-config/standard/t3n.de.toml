@@ -1,5 +1,5 @@
 title_selectors = []
-body_selectors = []
+body_selectors = ["//div[@id='main-content']"]
 date_selectors = []
 author_selectors = []
 strip_selectors = []

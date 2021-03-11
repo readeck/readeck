@@ -1,5 +1,5 @@
 title_selectors = []
-body_selectors = ["//div[@class='td-post-content']"]
+body_selectors = []
 date_selectors = []
 author_selectors = []
 strip_selectors = []
@@ -11,7 +11,16 @@ prune = false
 autodetect_on_failure = true
 single_page_link_selectors = []
 next_page_link_selectors = ["//link[@rel=\"next\"]"]
-replace_strings = []
+replace_strings = [
+  [
+  "<style ",
+  "<!--",
+],
+  [
+  "</style>",
+  "-->",
+],
+]
 
 [http_headers]
 

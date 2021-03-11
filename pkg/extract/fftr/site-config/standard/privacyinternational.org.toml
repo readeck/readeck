@@ -16,5 +16,5 @@ replace_strings = []
 [http_headers]
 
 [[tests]]
-  URL = "https://privacyinternational.org/feature/2433/i-asked-online-tracking-company-all-my-data-and-heres-what-i-found"
+  URL = "https://privacyinternational.org/news-analysis/4118/our-response-google-privacy-isnt-luxury"
   Contains = []

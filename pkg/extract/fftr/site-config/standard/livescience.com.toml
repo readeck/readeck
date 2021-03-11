@@ -1,20 +1,13 @@
-title_selectors = ["//div[@class=\"album_title\"]//h1"]
-body_selectors = ["//div[@class=\"about_text\"]"]
-date_selectors = ["substring-after(substring-before(//div[@class=\"album_time\"], ' Time'), 'Date: ')"]
-author_selectors = ["substring-before(//div[@class='by_line'], ',')"]
-strip_selectors = [
-  "//div[@class='large_popper']",
-  "//span[contains(@id, 'mag_glass')]",
-  "//span[contains(@class, 'img_overlay')]",
-  "//td//span",
-  "//div[@class=\"center_adsense\"]",
-  "//div[@class=\"article_info\"]//div[@class='asset_section']",
-  "//div[@class=\"article_additional\"]",
-  "//div[contains(@style, 'overflow:hidden')]",
-  "//div[@class=\"aa_text\"]",
-  "//div[@id='nointelliTXT']",
+title_selectors = []
+body_selectors = []
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "fancy-box",
+  "ad-unit",
+  "product",
 ]
-strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
@@ -27,5 +20,9 @@ replace_strings = []
 [http_headers]
 
 [[tests]]
-  URL = "http://www.livescience.com/34569-why-flowers-close-at-night-nyctinasty.html"
+  URL = "https://www.livescience.com/34569-why-flowers-close-at-night-nyctinasty.html"
+  Contains = []
+
+[[tests]]
+  URL = "https://www.livescience.com/magic-mushroom-injection-case-report.html"
   Contains = []

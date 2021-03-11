@@ -6,7 +6,7 @@ strip_selectors = [
   "//figure[0]",
   "//aside",
 ]
-strip_id_or_class = []
+strip_id_or_class = ["ue-c-article__trust"]
 strip_image_src = []
 native_ad_selectors = []
 tidy = false

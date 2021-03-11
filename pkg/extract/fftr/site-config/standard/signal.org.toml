@@ -1,7 +1,7 @@
 title_selectors = ["//h2[@class=\"post-title\"]"]
 body_selectors = []
 date_selectors = []
-author_selectors = ["//h3[@class=\"post-subtitle\"]//a"]
+author_selectors = ["//p[contains(@class, \"body2\")]//a"]
 strip_selectors = []
 strip_id_or_class = []
 strip_image_src = []

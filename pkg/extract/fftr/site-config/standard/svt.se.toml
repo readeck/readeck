@@ -31,9 +31,5 @@ replace_strings = [
 [http_headers]
 
 [[tests]]
-  URL = "http://www.svt.se/ug/framtidsdrommar-om-jobb-blev-lackande-gifthal"
-  Contains = ["Det pågår alltså en gruvboom i Sverige"]
-
-[[tests]]
   URL = "http://www.svt.se/nyheter/het-debatt-mellan-borg-och-andersson"
   Contains = ["Anders Borg (M) började med"]

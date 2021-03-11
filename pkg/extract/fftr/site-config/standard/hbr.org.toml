@@ -1,9 +1,19 @@
-title_selectors = ["//div[@id='article-title']"]
-body_selectors = ["//div[@id='article']"]
-date_selectors = []
-author_selectors = ["//div[@id='articleAuthors']"]
-strip_selectors = ["//div[@class='module wide']"]
-strip_id_or_class = []
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article ')]"]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = ["//div[@class=\"article-byline detached\"]/ul[@class=\"article-byline-list\"]/li[@class=\"article-author\"]/a"]
+strip_selectors = [
+  "//article-ideainbrief",
+  "//div[@class=\"article-summary\"]/text()",
+]
+strip_id_or_class = [
+  "hide-for-print",
+  "is-hidden",
+  "translate-message",
+  "translate-message-narrow-art",
+  "left-rail--container",
+  "article-promo",
+]
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
@@ -11,7 +21,16 @@ prune = false
 autodetect_on_failure = true
 single_page_link_selectors = []
 next_page_link_selectors = []
-replace_strings = []
+replace_strings = [
+  [
+  "<article-promo class",
+  "<div class",
+],
+  [
+  "</article-promo>",
+  "</div>",
+],
+]
 
 [http_headers]
 
@@ -21,4 +40,16 @@ replace_strings = []
 
 [[tests]]
   URL = "http://hbr.org/2013/03/big-bang-disruption/ar/"
+  Contains = []
+
+[[tests]]
+  URL = "https://hbr.org/2020/11/how-apple-is-organized-for-innovation"
+  Contains = ["individual and team reputations act as a control mechanism"]
+
+[[tests]]
+  URL = "https://hbr.org/2015/09/to-become-a-leader-think-beyond-your-role"
+  Contains = []
+
+[[tests]]
+  URL = "https://hbr.org/2017/05/your-brain-can-only-take-so-much-focus"
   Contains = []

@@ -1,7 +1,13 @@
-title_selectors = []
-body_selectors = ["//div[contains(@class, 'blocks-area')]"]
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = [
+  "//article[contains(@class, 'main-content')]",
+  "//div[contains(@class, 'blocks-area')]",
+]
 date_selectors = ["//time[@class='pub-date']/@datetime"]
-author_selectors = ["//a[@class=\"authors-detail__display-name\"]"]
+author_selectors = [
+  "//meta[@name=\"author\"]/@content",
+  "//a[@class=\"authors-detail__display-name\"]",
+]
 strip_selectors = ["//div[contains(@class, 'article-meta')]"]
 strip_id_or_class = []
 strip_image_src = []
@@ -22,3 +28,7 @@ replace_strings = []
 [[tests]]
   URL = "https://pitchfork.com/features/article/queens-bohemian-rhapsody-is-now-the-biggest-music-biopic-ever-its-also-total-bullshit/"
   Contains = []
+
+[[tests]]
+  URL = "https://pitchfork.com/thepitch/alex-ross-wagnerism-book-interview/"
+  Contains = ["has been translated and contested"]

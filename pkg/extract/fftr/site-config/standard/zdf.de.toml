@@ -1,0 +1,23 @@
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' b-post-content ')]"]
+date_selectors = ["//meta[@name=\"zdf:publicationDate\"]/@content"]
+author_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' author-wrap ')]//div//span"]
+strip_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' content-item ') and (contains(concat(' ',normalize-space(@class),' '),' grid-x ')) and (contains(concat(' ',normalize-space(@class),' '),' m-clickarea '))]"]
+strip_id_or_class = [
+  "b-heute-video",
+  "b-content-module",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.zdf.de/nachrichten/politik/coronavirus-maskenpflicht-draussen-faktencheck-100.html"
+  Contains = ["Entsprechend deuteten Untersuchungen"]

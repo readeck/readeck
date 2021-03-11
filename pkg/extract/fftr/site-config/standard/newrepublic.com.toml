@@ -1,11 +1,8 @@
 title_selectors = []
-body_selectors = ["//div[@class=\"primary\"]"]
-date_selectors = ["//span[@class=\"date\"]"]
-author_selectors = ["//span[@class=\"authors\"]"]
-strip_selectors = [
-  "//div[@id=\"controls\"]",
-  "//div[@id=\"read-next\"]",
-]
+body_selectors = ["//div[contains(@class, 'article-body-wrap')]"]
+date_selectors = ["//article//time[@itemprop=\"datePublished\"]/@content"]
+author_selectors = ["//article//a[@itemprop=\"author\"]"]
+strip_selectors = []
 strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
@@ -17,6 +14,10 @@ next_page_link_selectors = []
 replace_strings = []
 
 [http_headers]
+
+[[tests]]
+  URL = "https://newrepublic.com/article/120178/problem-international-development-and-plan-fix-it"
+  Contains = ["It seemed like such a good idea at the time"]
 
 [[tests]]
   URL = "http://www.newrepublic.com/article/112731/moocs-will-online-education-ruin-university-experience"

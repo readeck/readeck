@@ -22,6 +22,8 @@ strip_selectors = [
   "//div[contains(@class, 'content-footer')]",
   "//footer",
   "//form",
+  "//div[starts-with(@id, \"qanda-\")]",
+  "//figure[@data-atom-type=\"qanda\" or @data-atom-type=\"profile\"]",
   "//figcaption",
   "//article//div[contains(@class, 'content__meta-container')]",
   "//iframe[@srcdoc]",
@@ -33,6 +35,7 @@ strip_id_or_class = [
   "submeta",
   "site-message",
   "contributions__epic",
+  "youtube-media-atom__overlay",
 ]
 strip_image_src = []
 native_ad_selectors = [

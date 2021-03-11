@@ -1,0 +1,24 @@
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[contains(@class, 'guides__SectionsContainer')]"]
+date_selectors = ["//div[contains(@class, 'guides__PublishedDate')]"]
+author_selectors = []
+strip_selectors = [
+  "//*[contains(@class, 'styled__Sidebar)]",
+  "//*[contains(@class, 'styled__GuideNav)]",
+  "//*[contains(@class, 'SocialMetaWrapper')]",
+]
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://psyche.co/guides/use-mediation-techniques-to-overcome-the-muck-of-blame-and-anger"
+  Contains = ["I have helped people have difficult conversations for more than 20 years"]

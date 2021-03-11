@@ -1,12 +1,9 @@
-title_selectors = ["concat(//article[@class='sectbody']/h4,': ',//article[@class='sectbody']/h1)"]
-body_selectors = ["(//article[@class='sectbody'])[1]"]
+title_selectors = []
+body_selectors = []
 date_selectors = ["//li[@class='date']"]
-author_selectors = ["//a[@class='author']/h4"]
-strip_selectors = [
-  "//h4[@xmlns]",
-  "//p[@class='caption']",
-]
-strip_id_or_class = ["ad_bin"]
+author_selectors = ["(//h4[@itemprop='name'])[1]"]
+strip_selectors = []
+strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
@@ -20,4 +17,8 @@ replace_strings = []
 
 [[tests]]
   URL = "https://www.taz.de/!5504959/"
+  Contains = []
+
+[[tests]]
+  URL = "https://taz.de/!5708122"
   Contains = []

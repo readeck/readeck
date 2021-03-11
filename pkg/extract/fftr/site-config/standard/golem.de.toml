@@ -32,6 +32,7 @@ next_page_link_selectors = ["//a[@id='atoc_next']"]
 replace_strings = []
 
 [http_headers]
+  Cookie = "golem_consent20=cmp|210127"
 
 [[tests]]
   URL = "http://www.golem.de/news/intel-core-i7-5960x-im-test-die-pc-revolution-beginnt-mit-octacore-und-ddr4-1408-108893.html"

@@ -1,14 +1,8 @@
-title_selectors = []
-body_selectors = ["//div[@class='byline' or @id='storyEmbSlide' or @id='mainBodyArea']"]
-date_selectors = []
-author_selectors = []
-strip_selectors = [
-  "//p[@class='comments']",
-  "//div[@id='storyEmbSlide']//div[contains(@class, \"hide\")]",
-  "//div[@id='tmg-related-links' or @id='outbrain-related-links' or @id='onespot-related-links']",
-  "//p[@class='bbpTweet']/span[@class='timestamp']",
-  "//p[@class='bbpTweet']/span[@class='metadata']//img",
-]
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[@itemprop=\"articleBody\"]"]
+date_selectors = ["//meta[@name=\"DCSext.articleFirstPublished\"]/@content"]
+author_selectors = ["//meta[@name=\"DCSext.author\"]/@content"]
+strip_selectors = []
 strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
@@ -22,5 +16,5 @@ replace_strings = []
 [http_headers]
 
 [[tests]]
-  URL = "http://www.telegraph.co.uk/news/worldnews/europe/ireland/8663451/Is-Ireland-divorcing-from-the-Catholic-Church.html"
+  URL = "https://www.telegraph.co.uk/news/2021/02/16/covidlockdown-continue-cases-drop-1000-day/"
   Contains = []

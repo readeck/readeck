@@ -1,9 +1,12 @@
 title_selectors = []
-body_selectors = ["//div[@class=\"articleTeaser\"] | //section[@class=\"contentSection\"]"]
+body_selectors = ["//main"]
 date_selectors = []
-author_selectors = ["//div[@class=\"articleAuthor\"]"]
-strip_selectors = ["//section[@class=\"greenBox italic\"]"]
-strip_id_or_class = []
+author_selectors = []
+strip_selectors = ["//aside"]
+strip_id_or_class = [
+  "breadcrumbs-absolute",
+  "iqadtile16",
+]
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
@@ -18,3 +21,7 @@ replace_strings = []
 [[tests]]
   URL = "http://www.brandeins.de/archiv/2015/fuehrung/ministry-group-mach-doch-mal-ne-ansage/"
   Contains = []
+
+[[tests]]
+  URL = "https://www.brandeins.de/magazine/brand-eins-wirtschaftsmagazin/2020/unterhaltung/explosion-der-kreativitaet"
+  Contains = ["Disney und Warner mit HBO Max"]

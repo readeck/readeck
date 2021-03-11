@@ -3,10 +3,15 @@ body_selectors = ["//div[contains(@class,'article-content')]"]
 date_selectors = [
   "//div[@class='byline']/span[@class='posted']//abbr/@original-title",
   "//div[@class='byline']/span[@class='posted']//abbr",
+  "//*[@class='byline']//time[@class='date']",
 ]
-author_selectors = ["//p[@class='byline']/a"]
+author_selectors = [
+  "//p[@class='byline']/span[@class='author']",
+  "//p[@class='byline']/a",
+]
 strip_selectors = [
   "//h2[@class='title']",
+  "//div[contains(@class, 'pullbox')]",
   "//div[@class='pager']",
   "//aside",
 ]
@@ -23,8 +28,22 @@ single_page_link_selectors = []
 next_page_link_selectors = [
   "//nav//a[contains(text(), 'Next')]/@href",
   "//span[@class='numbers']//a/span[@class='next']/..",
+  "//nav//a/span[contains(text(), 'Next')]/../@href",
 ]
-replace_strings = []
+replace_strings = [
+  [
+  "\" data-src=\"",
+  "\"><img src=\"",
+],
+  [
+  "\" data-responsive=\"",
+  "\" /><span \"",
+],
+  [
+  "<figure style=\"",
+  "</span><figure style=\"",
+],
+]
 
 [http_headers]
 
@@ -37,9 +56,9 @@ replace_strings = []
   Contains = []
 
 [[tests]]
-  URL = "http://arstechnica.co.uk/science/2016/06/what-is-open-access-free-sharing-of-all-human-knowledge/"
+  URL = "https://arstechnica.com/features/2020/10/the-space-operating-systems-booting-up-where-no-one-has-gone-before"
   Contains = []
 
 [[tests]]
-  URL = "http://arstechnica.co.uk/information-technology/2016/05/eben-moglen-gpl-online-advertising-is-becoming-a-perfect-despotism/"
+  URL = "https://arstechnica.com/gaming/2021/02/coders-reverse-engineer-grand-theft-autos-raw-pc-source-code/"
   Contains = []

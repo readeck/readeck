@@ -1,8 +1,11 @@
-title_selectors = ["//h1[@class = 'article-title']"]
-body_selectors = ["//div[@class = 'article-body']"]
-date_selectors = []
-author_selectors = []
-strip_selectors = ["//aside"]
+title_selectors = ["//meta[@property=\"og:title\"]/@content"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' article-body ')]"]
+date_selectors = ["//meta[@property=\"article:published_time\"]/@content"]
+author_selectors = ["//header[contains(concat(' ',normalize-space(@class),' '),' article-header ')]//span[contains(concat(' ',normalize-space(@class),' '),' author ')]"]
+strip_selectors = [
+  "//aside",
+  "//div[starts-with(@id, 'dfp-ad-')]",
+]
 strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []

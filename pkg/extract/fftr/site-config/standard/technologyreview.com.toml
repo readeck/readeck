@@ -1,32 +1,20 @@
-title_selectors = ["//header[@class='article-topper__title']"]
-body_selectors = ["//section[contains(@class, 'body')]"]
-date_selectors = [
-  "substring-after(//ul[@class='byline']/li, 'on ')",
-  "//div[@class='view-byline']/div[@class='meta']/h2[2]",
-]
-author_selectors = [
-  "//ul[@class='byline']/li/a",
-  "substring-before(substring-after(//ul[@class='byline']/li, 'By '), ' on')",
-  "//div[@class='view-byline']/div[@class='meta']/h2[1]",
-]
+title_selectors = []
+body_selectors = ["//div[@id='content--body']"]
+date_selectors = ["//div[contains(@class, 'contentHeader__publishDate')]"]
+author_selectors = []
 strip_selectors = []
-strip_id_or_class = [
-  "l-article-list",
-  "l-automated-related--single",
-  "l-cta--left",
-  "l-automated-trending--ordered",
-]
+strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
 tidy = false
 prune = false
 autodetect_on_failure = true
 single_page_link_selectors = []
-next_page_link_selectors = ["//section[@class='pagination']/a[contains(@class, 'continue')]"]
+next_page_link_selectors = []
 replace_strings = []
 
 [http_headers]
 
 [[tests]]
-  URL = "http://www.technologyreview.com/news/427567/facebooks-telescope-on-human-behavior/"
-  Contains = []
+  URL = "https://www.technologyreview.com/2020/09/10/1008282/north-korea-hackers-money-laundering-cryptocurrency-bitcoin/"
+  Contains = ["raise false alarms for investigators"]

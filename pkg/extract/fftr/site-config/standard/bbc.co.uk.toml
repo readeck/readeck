@@ -1,15 +1,27 @@
-title_selectors = ["//h1[@class=\"story-header\"]"]
+title_selectors = [
+  "//meta[@property=\"og:title\"]/@content",
+  "//h1[@class=\"story-header\"]",
+]
 body_selectors = [
-  "//div[@id=\"story-body\"]",
+  "//article[contains(@class, \"-ArticleWrapper\")]",
+  "(//div[contains(@class, 'article__body-content')])[1]",
+  "(//div[@id=\"story-body\"])[1]",
   "//div[contains(@class, \"videoInStory\") or @id=\"meta-information\"]",
   "//div[contains(@class, 'hrecipe')]//div[@id='subcolumn-1']",
 ]
 date_selectors = [
+  "//article//div[contains(@class, 'author-unit__container')]//span",
   "//span[@class=\"story-date\"]/span[@class='date']",
   "//meta[@name='DCTERMS.created']/@content",
 ]
-author_selectors = ["//div[@id='headline']//span[@class='byline-name']"]
+author_selectors = [
+  "//meta[@name=\"author\"]/@content",
+  "//div[@id='headline']//span[@class='byline-name']",
+]
 strip_selectors = [
+  "//article//header",
+  "//div[contains(@class, \"CommentsWrapper\")]",
+  "//*[contains(@class, 'VisuallyHidden')]",
   "//div[contains(@class, \"story-feature\") and not(contains(@class, 'full-width'))]",
   "//span[@class=\"story-date\"]",
   "//div[@class=\"warning\"]//p",
@@ -25,11 +37,15 @@ strip_selectors = [
   "//div[contains(@class, 'comment-introduction')]",
   "//div[contains(@class, 'share-tools')]",
   "//div[@id='also-related-links']",
+  "//div[contains(concat(' ',normalize-space(@class),' '),' drop-capped ')]",
+  "//section[@data-component=\"tag-list\"]",
+  "//section[@data-component=\"see-alsos\"]",
   "//figcaption",
   "//aside[contains(@class, 'sp-pullout')]",
 ]
 strip_id_or_class = [
   "image-and-copyright-container",
+  "article-body__pull-quote",
   "share-help",
   "comments_module",
 ]

@@ -1,14 +1,20 @@
 title_selectors = []
-body_selectors = ["//article | //div[@class='meldung_wrapper'] | //section[@id='artikel_text']"]
-date_selectors = ["//p[@class='news_datum']"]
+body_selectors = [
+  "//article[contains(@class, 'printversion')]",
+  "//article[@id=\"meldung\"] | //div[@class='meldung_wrapper'] | //section[@id='artikel_text']",
+]
+date_selectors = [
+  "//article//time[@itemprop=\"datePublished\"]/@datetime",
+  "//p[@class='news_datum']",
+]
 author_selectors = [
+  "//article//span[@itemprop=\"author\"]",
   "//span[@class='author']",
   "//div[@class=\"article__author\"]",
 ]
 strip_selectors = [
   "//nav",
   "//time",
-  "//header",
   "//h4[@class='author']",
   "//div[@class='gallery compact']/h3",
   "//div[@class='gallery compact']/figcaption",
@@ -22,6 +28,9 @@ strip_selectors = [
   "//style",
   "//span[@class='source']",
   "//figure[@class='printversion__logo']",
+  "//a-ad",
+  "//footer",
+  "//a-collapse",
 ]
 strip_id_or_class = [
   "comments",
@@ -35,6 +44,10 @@ strip_id_or_class = [
   "a-pvgs",
   "a-pvg__body",
   "teaser_adliste",
+  "a-article-header__service",
+  "legacy-img",
+  "opinary-widget-embed",
+  "article-sidebar",
   "ad_",
 ]
 strip_image_src = []
@@ -45,6 +58,7 @@ autodetect_on_failure = true
 single_page_link_selectors = [
   "//a[contains(@href, '?view=print')]",
   "//a[contains(@title, 'Druck')]",
+  "//a[contains(@href, '?seite=all')]/@href",
 ]
 next_page_link_selectors = [
   "//a[@class='next' and not(contains(text(), 'Artikel'))]",

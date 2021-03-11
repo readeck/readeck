@@ -9,7 +9,7 @@ native_ad_selectors = []
 tidy = false
 prune = false
 autodetect_on_failure = true
-single_page_link_selectors = ["//div[@class='pagination']/a[.='全文']"]
+single_page_link_selectors = ["//div[@class='pagination-inner']/a[.='全文']"]
 next_page_link_selectors = []
 replace_strings = []
 

@@ -5,6 +5,10 @@ author_selectors = []
 strip_selectors = [
   "//span[@class='summary-entry']",
   "//footer",
+  "//noscript",
+  "//div[@class=\"embedded-tag-container\"]",
+  "//p[contains(@class, 'humanoid-videos--title')]",
+  "//a[contains(@class, 'humanoid-videos__video-title')]",
 ]
 strip_id_or_class = ["js-cookies-bar"]
 strip_image_src = []

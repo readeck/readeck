@@ -52,7 +52,3 @@ replace_strings = []
 [[tests]]
   URL = "http://www.networkworld.com/article/2960522/wi-fi/best-wi-fi-stumblers-for-the-mac.html"
   Contains = []
-
-[[tests]]
-  URL = "http://www.networkworld.com/article/2969669/email-services/outlook-2016-review-a-new-coat-of-paint-on-the-same-reliable-personal-information-manager.html"
-  Contains = []

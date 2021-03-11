@@ -1,7 +1,7 @@
 title_selectors = ["//div[contains(@class, 'storytitle')]//h1"]
 body_selectors = ["//div[@id='primaryaudio']//*[@class='duration' or @class='download' or contains(@class, 'photo')] | //div[@id='storytext' or @id='supplementarycontent' or contains(@class, 'transcript')]"]
 date_selectors = ["//meta[@name=\"date\"]/@content"]
-author_selectors = ["//p[@class=\"byline\"]/span"]
+author_selectors = ["//div[@aria-label=\"Byline\"]"]
 strip_selectors = [
   "//a[contains(@class, 'enlargeicon')]",
   "//div[contains(@class, 'bookedition')]",
@@ -9,6 +9,7 @@ strip_selectors = [
   "//ul[@class='genres']",
   "//span[@class='bull']",
   "//h3[@class='conheader']",
+  "//button",
   "//div[@class=\"ecommercepop\"]",
   "//span[@class=\"bull\"]",
   "//span[@class=\"purchaseLink\"]",
@@ -23,6 +24,8 @@ strip_id_or_class = [
   "enlarge_html",
   "secondary",
   "con1col",
+  "hide-caption",
+  "toggle-caption",
 ]
 strip_image_src = []
 native_ad_selectors = []
@@ -59,8 +62,4 @@ replace_strings = [
 
 [[tests]]
   URL = "http://www.npr.org/2012/12/13/166480907/the-years-best-sci-fi-crosses-galaxies-and-genres"
-  Contains = []
-
-[[tests]]
-  URL = "http://www.npr.org/templates/story/story.php?storyId=229103221"
   Contains = []

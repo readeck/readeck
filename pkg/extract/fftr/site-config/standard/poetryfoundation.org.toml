@@ -1,0 +1,20 @@
+title_selectors = []
+body_selectors = ["//div[contains(@class, 'o-titleBar-summary') or contains(concat(' ',normalize-space(@class),' '),' c-userContent ') or contains(concat(' ',normalize-space(@class),' '),' c-auxContent ')]"]
+date_selectors = ["//meta[@name=\"dcterms.Date\"]/@content"]
+author_selectors = ["//meta[@property=\"article:author\"]/@content"]
+strip_selectors = []
+strip_id_or_class = []
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://www.poetryfoundation.org/poetrymagazine/articles/154200/impossible-word-toward-a-poetics-of-aphasia"
+  Contains = []

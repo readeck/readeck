@@ -1,7 +1,7 @@
 title_selectors = []
-body_selectors = ["//div[@class=\"content\"]"]
+body_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' content ')]"]
 date_selectors = []
-author_selectors = []
+author_selectors = ["//div[contains(concat(' ',normalize-space(@class),' '),' author ')]/a[1]"]
 strip_selectors = []
 strip_id_or_class = []
 strip_image_src = []
@@ -10,11 +10,11 @@ tidy = false
 prune = false
 autodetect_on_failure = true
 single_page_link_selectors = []
-next_page_link_selectors = ["//a[@title='Go To Next Page']"]
+next_page_link_selectors = ["//div[@id='content-bg']/div/div[@id='main-wrap']/div/article/div[@class=\"foot\"]/div/a[@title=\"Go To Next Page\"]"]
 replace_strings = []
 
 [http_headers]
 
 [[tests]]
-  URL = "http://www.phoronix.com/scan.php?page=article&item=amazon_ec2_bare&num=1"
+  URL = "https://www.phoronix.com/scan.php?page=article&item=clear-fall-2020&num=8"
   Contains = []

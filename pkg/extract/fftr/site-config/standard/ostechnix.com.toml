@@ -1,0 +1,28 @@
+title_selectors = []
+body_selectors = ["//article[contains(concat(' ',normalize-space(@class),' '),' type-post ')]"]
+date_selectors = []
+author_selectors = []
+strip_selectors = []
+strip_id_or_class = [
+  "penci-wrap-gprd-law",
+  "after-post-box",
+  "penci-single-link-pages",
+  "post-tags",
+  "post-related",
+  "post-pagination",
+  "tags-share-box",
+]
+strip_image_src = []
+native_ad_selectors = []
+tidy = false
+prune = false
+autodetect_on_failure = true
+single_page_link_selectors = []
+next_page_link_selectors = []
+replace_strings = []
+
+[http_headers]
+
+[[tests]]
+  URL = "https://ostechnix.com/cronopete-apples-time-machine-clone-linux/"
+  Contains = []

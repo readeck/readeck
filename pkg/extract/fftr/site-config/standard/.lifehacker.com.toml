@@ -2,7 +2,10 @@ title_selectors = ["//head/title"]
 body_selectors = ["//div[contains(@class, 'post-content')]"]
 date_selectors = []
 author_selectors = ["//meta[@name=\"author\"]/@content"]
-strip_selectors = ["//div[contains(@class, 'content-summary')]"]
+strip_selectors = [
+  "//div[contains(@class, 'content-summary')]",
+  "//aside",
+]
 strip_id_or_class = []
 strip_image_src = []
 native_ad_selectors = []
