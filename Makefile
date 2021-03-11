@@ -1,7 +1,7 @@
 #!/usr/bin/make
 
 TAGS := omit_load_extension foreign_keys json1 fts5 secure_delete
-BUILD_TAGS := assets $(TAGS)
+BUILD_TAGS := $(TAGS)
 
 SITECONFIG_GIT=https://github.com/j0k3r/graby-site-config.git
 SITECONFIG=graby-site-config
@@ -13,7 +13,6 @@ all: web-build build
 # Build the server
 .PHONY: build
 build:
-	go generate
 	go build -tags "$(BUILD_TAGS)" -ldflags="-s -w" -o dist/readeck
 
 # Build the server in dev mode, without compiling the assets
@@ -27,7 +26,6 @@ clean:
 	rm -rf dist
 	rm -rf assets/www/*
 	rm -f  assets/templates/base.gohtml
-	rm -f  pkg/extract/fftr/siteconfig_vfsdata.go
 	go clean
 
 # Launch the documentation

@@ -2,6 +2,7 @@ package cookbook
 
 import (
 	"fmt"
+	"io/fs"
 	"net/http"
 	"path"
 	"runtime"
@@ -123,13 +124,8 @@ func (api *cookbookAPI) extract(w http.ResponseWriter, r *http.Request) {
 func (api *cookbookAPI) loadURLs() {
 	api.urls = map[string][]string{}
 
-	for i, configRoot := range fftr.DefaultConfigurationFolders {
-		root, err := configRoot.Open("/")
-		if err != nil {
-			panic(err)
-		}
-		defer root.Close()
-		files, err := root.Readdir(-1)
+	for i, configFS := range fftr.DefaultConfigurationFolders {
+		files, err := fs.ReadDir(configFS, ".")
 		if err != nil {
 			panic(err)
 		}
@@ -139,7 +135,7 @@ func (api *cookbookAPI) loadURLs() {
 			if x.IsDir() || path.Ext(x.Name()) != ".toml" {
 				continue
 			}
-			f, err := configRoot.Open(x.Name())
+			f, err := configFS.Open(x.Name())
 			if err != nil {
 				panic(err)
 			}
@@ -150,7 +146,7 @@ func (api *cookbookAPI) loadURLs() {
 			f.Close()
 
 			if cfg != nil && len(cfg.Tests) > 0 {
-				name := fmt.Sprintf("%d - %s - %s", i, configRoot.Name,
+				name := fmt.Sprintf("%d - %s - %s", i, configFS.Name,
 					path.Base(x.Name()))
 				api.urls[name] = make([]string, len(cfg.Tests))
 				for i := range cfg.Tests {

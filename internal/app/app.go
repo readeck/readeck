@@ -3,7 +3,6 @@ package app
 import (
 	"errors"
 	"fmt"
-	"net/http"
 	"os"
 	"os/signal"
 	"path"
@@ -193,9 +192,8 @@ func addSiteConfig(name, src string) {
 	}
 
 	f := &fftr.ConfigFolder{
-		FileSystem: http.Dir(src),
-		Name:       name,
-		Dir:        "./",
+		FS:   os.DirFS(src),
+		Name: name,
 	}
 
 	fftr.DefaultConfigurationFolders = append(fftr.ConfigFolderList{f}, fftr.DefaultConfigurationFolders...)

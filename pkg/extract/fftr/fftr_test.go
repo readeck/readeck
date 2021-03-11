@@ -1,8 +1,8 @@
 package fftr
 
 import (
-	"net/http"
 	"net/url"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,9 +10,9 @@ import (
 
 func TestFftr(t *testing.T) {
 	folders := ConfigFolderList{
-		{http.Dir("./"), "fixtures", "test-fixtures"},
-		{http.Dir("../../../site-config"), "custom", "custom"},
-		{http.Dir("../../../site-config"), "standard", "standard"},
+		{os.DirFS("./test-fixtures"), "fixtures"},
+		{os.DirFS("./site-config/custom"), "custom"},
+		{os.DirFS("./site-config/standard"), "standard"},
 	}
 
 	t.Run("merge", func(t *testing.T) {

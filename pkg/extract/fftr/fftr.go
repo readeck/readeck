@@ -3,7 +3,7 @@ package fftr
 import (
 	"fmt"
 	"io"
-	"net/http"
+	"io/fs"
 	"net/url"
 	"path"
 	"strings"
@@ -14,9 +14,8 @@ import (
 
 // ConfigFolder is an http.FileSystem with a name.
 type ConfigFolder struct {
-	http.FileSystem
+	fs.FS
 	Name string
-	Dir  string
 }
 
 // ConfigFolderList is a list of configuration folders.
@@ -25,8 +24,8 @@ type ConfigFolderList []*ConfigFolder
 // DefaultConfigurationFolders is a list of default locations with
 // configuration files.
 var DefaultConfigurationFolders ConfigFolderList = ConfigFolderList{
-	{SiteConfigFolder, "custom", "custom"},
-	{SiteConfigFolder, "standard", "standard"},
+	{siteConfigFS("custom"), "custom"},
+	{siteConfigFS("standard"), "standard"},
 }
 
 // Config holds the fivefilters configuration.
@@ -128,19 +127,11 @@ func (cf *Config) Merge(new *Config) {
 	}
 }
 
-// Open opens a file path with the given "Dir" prefix.
-func (cf *ConfigFolder) Open(name string) (http.File, error) {
-	return cf.FileSystem.Open(path.Join(cf.Dir, name))
-}
-
 func (cf *ConfigFolder) fileExists(name string) bool {
-	f, err := cf.Open(name)
+	s, err := fs.Stat(cf.FS, name)
 	if err != nil {
 		return false
 	}
-	defer f.Close()
-
-	s, _ := f.Stat()
 	return !s.IsDir()
 }
 
