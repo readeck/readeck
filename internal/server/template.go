@@ -6,7 +6,7 @@ import (
 
 	"github.com/gorilla/csrf"
 
-	"github.com/readeck/readeck/internal/templates"
+	"github.com/readeck/readeck/assets"
 	"github.com/readeck/readeck/internal/xtemplate"
 )
 
@@ -23,12 +23,7 @@ func (s *Server) RenderTemplate(w http.ResponseWriter, r *http.Request,
 		w.WriteHeader(status)
 	}
 
-	xt, err := s.getTemplates()
-	if err != nil {
-		panic(err)
-	}
-
-	err = xt.ExecuteTemplate(w, name, s.templatePayload(r, context))
+	err := xt.ExecuteTemplate(w, name, s.templatePayload(r, context))
 	if err != nil {
 		panic(err)
 	}
@@ -40,19 +35,12 @@ type TC map[string]interface{}
 var templateFuncs = template.FuncMap{}
 
 func (s *Server) initTemplates() {
-	var err error
-	xt, err = s.newTemplates()
-	if err != nil {
+	xt = xtemplate.New()
+	xt.Funcs(templateFuncs)
+
+	if err := xt.ParseFs(assets.TemplatesFS(), []string{".gohtml"}); err != nil {
 		panic(err)
 	}
-}
-
-func (s *Server) getTemplates() (*xtemplate.Xtemplate, error) {
-	if xt != nil {
-		return xt, nil
-	}
-
-	return s.newTemplates()
 }
 
 // TemplateFuncs adds a new function map to the template engine.
@@ -62,15 +50,8 @@ func (s *Server) TemplateFuncs(funcMap template.FuncMap) {
 	}
 }
 
-func (s *Server) newTemplates() (*xtemplate.Xtemplate, error) {
-	xt := xtemplate.New()
-	xt.Funcs(templateFuncs)
-
-	err := xt.ParseFs(templates.Templates, []string{".gohtml"})
-
-	return xt, err
-}
-
+// templatePayload return a prefiled payload with some basic variables
+// and extends it with the given template context.
 func (s *Server) templatePayload(r *http.Request, context TC) TC {
 	res := TC{
 		"basePath":    s.BasePath,

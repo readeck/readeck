@@ -8,7 +8,8 @@ import (
 
 // Assets contains all the static files needed by the app
 //
-//go:embed www
+//go:embed templates templates/**/*
+//go:embed www www/**/*
 var Assets embed.FS
 
 // StaticFilesFS returns the assets "www" subfolder as an HTTP
@@ -19,4 +20,13 @@ func StaticFilesFS() http.FileSystem {
 		panic(err)
 	}
 	return http.FS(sub)
+}
+
+// TemplatesFS returns the assets "templates" subfolder as an fs.FS
+func TemplatesFS() fs.FS {
+	sub, err := fs.Sub(Assets, "templates")
+	if err != nil {
+		panic(err)
+	}
+	return sub
 }

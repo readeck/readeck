@@ -26,8 +26,8 @@ build-dev:
 clean:
 	rm -rf dist
 	rm -rf assets/www/*
-	rm -f internal/templates/templates_vfsdata.go
-	rm -f pkg/extract/fftr/siteconfig_vfsdata.go
+	rm -f  assets/templates/base.gohtml
+	rm -f  pkg/extract/fftr/siteconfig_vfsdata.go
 	go clean
 
 # Launch the documentation
@@ -73,7 +73,7 @@ update-site-config:
 
 .PHONY: dev
 dev:
-	${MAKE} -j2 serve web-watch
+	${MAKE} -j2 web-watch serve
 
 .PHONY: web-build
 web-build:

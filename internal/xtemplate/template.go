@@ -2,18 +2,16 @@ package xtemplate
 
 // Inspired by https://github.com/dannyvankooten/extemplate
 // released under MIT license.
-// This fork adds support for http.FileSystem so we can bundle
-// the template collection in the distributed binary file.
+// This fork adds support for fs.FS so it plays nicely with embed files.
 
 import (
 	"bytes"
 	"fmt"
 	"html/template"
 	"io"
+	"io/fs"
 	"io/ioutil"
-	"net/http"
 	"os"
-	"path"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -89,7 +87,7 @@ func (x *Xtemplate) ExecuteTemplate(wr io.Writer, name string, data interface{})
 // Default extensions are .html and .tmpl
 // If a template file has {{/* extends "other-file.tmpl" */}} as its first line it will parse that file for base templates.
 // Parsed templates are named relative to the given root directory
-func (x *Xtemplate) ParseFs(root http.FileSystem, extensions []string) error {
+func (x *Xtemplate) ParseFs(root fs.FS, extensions []string) error {
 	var b []byte
 	// var err error
 
@@ -150,49 +148,9 @@ func (x *Xtemplate) ParseFs(root http.FileSystem, extensions []string) error {
 
 type walkFn func(path string, info os.FileInfo, err error) error
 
-func stat(fs http.FileSystem, name string) (os.FileInfo, error) {
-	f, err := fs.Open(name)
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close()
-	return f.Stat()
-}
-
-func walk(fs http.FileSystem, pathname string, fn walkFn) error {
-	info, err := stat(fs, pathname)
-	if err != nil {
-		return fn(pathname, nil, err)
-	}
-
-	if info.IsDir() {
-		f, err := fs.Open(pathname)
-		if err != nil {
-			return fn(pathname, nil, err)
-		}
-		defer f.Close()
-		items, err := f.Readdir(-1)
-		if err != nil {
-			return fn(pathname, nil, err)
-		}
-
-		for _, x := range items {
-			err = walk(fs, path.Join(pathname, x.Name()), fn)
-			if err != nil {
-				return fn(pathname, nil, err)
-			}
-		}
-	}
-
-	return fn(pathname, info, nil)
-}
-
-func findTemplateFiles(root http.FileSystem, extensions []string) (map[string]*templatefile, error) {
+func findTemplateFiles(root fs.FS, extensions []string) (map[string]*templatefile, error) {
 	var files = map[string]*templatefile{}
 	var exts = map[string]bool{}
-
-	// ensure root has trailing slash
-	// root = strings.TrimSuffix(root, "/") + "/"
 
 	// create map of allowed extensions
 	for _, e := range extensions {
@@ -200,11 +158,10 @@ func findTemplateFiles(root http.FileSystem, extensions []string) (map[string]*t
 	}
 
 	// find all template files
-	err := walk(root, "/", func(name string, info os.FileInfo, err error) error {
+	err := fs.WalkDir(root, ".", func(name string, info fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
-
 		// Skip directories
 		if info.IsDir() {
 			return nil
