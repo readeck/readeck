@@ -28,20 +28,15 @@ require (
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/jarcoal/httpmock v1.0.8
 	github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e // indirect
-	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
 	github.com/leebenson/conform v1.2.2
 	github.com/lithammer/shortuuid v3.0.0+incompatible
 	github.com/lithammer/shortuuid/v3 v3.0.6
 	github.com/mattn/go-colorable v0.1.8
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/mitchellh/copystructure v1.1.1 // indirect
-	github.com/pelletier/go-toml v1.8.1
-	github.com/sergi/go-diff v1.1.0 // indirect
-	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
-	github.com/shurcooL/vfsgen v0.0.0-20200824052919-0d455de96546 // indirect
+	github.com/pelletier/go-toml v1.8.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.1.3
-	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.7.0
 	github.com/tdewolff/parse/v2 v2.5.12
 	github.com/thoas/go-funk v0.8.0

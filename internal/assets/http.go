@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
+	"github.com/readeck/readeck/assets"
 	"github.com/readeck/readeck/internal/server"
 )
 
@@ -17,7 +18,7 @@ func SetupRoutes(s *server.Server) {
 }
 
 func serveAssets() http.HandlerFunc {
-	fs := directFileServer{Assets}
+	fs := directFileServer{assets.StaticFilesFS()}
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		rctx := chi.RouteContext(r.Context())

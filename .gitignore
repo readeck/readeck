@@ -4,13 +4,12 @@
 
 /.vscode
 
-/internal/assets/assets_vfsdata.go
-/internal/templates/templates_vfsdata.go
-/pkg/extract/fftr/siteconfig_vfsdata.go
+/assets/www/*
+!/assets/www/.keep
+/assets/templates/base.gohtml
 
 /web/dist
 /web/node_modules
-/web/templates/base.gohtml
 
 /web-spa/
 /web-spa/node_modules

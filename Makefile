@@ -1,10 +1,11 @@
 #!/usr/bin/make
 
 TAGS := omit_load_extension foreign_keys json1 fts5 secure_delete
-BUILD_TAGS := assets $(TAGS)
+BUILD_TAGS := $(TAGS)
 
-SITECONFIG_GIT=https://github.com/j0k3r/graby-site-config.git
-SITECONFIG=graby-site-config
+SITECONFIG_REPO=https://github.com/j0k3r/graby-site-config.git
+SITECONFIG_CLONE=graby-site-config
+SITECONFIG_DEST=pkg/extract/fftr/site-config/standard
 
 # Build the app
 .PHONY: all
@@ -13,7 +14,6 @@ all: web-build build
 # Build the server
 .PHONY: build
 build:
-	go generate
 	go build -tags "$(BUILD_TAGS)" -ldflags="-s -w" -o dist/readeck
 
 # Build the server in dev mode, without compiling the assets
@@ -25,9 +25,8 @@ build-dev:
 .PHONY: clean
 clean:
 	rm -rf dist
-	rm -f internal/assets/assets_vfsdata.go
-	rm -f internal/templates/templates_vfsdata.go
-	rm -f pkg/extract/fftr/siteconfig_vfsdata.go
+	rm -rf assets/www/*
+	rm -f  assets/templates/base.gohtml
 	go clean
 
 # Launch the documentation
@@ -65,15 +64,15 @@ serve:
 # graby git repository
 .PHONY: update-site-config
 update-site-config:
-	git clone $(SITECONFIG_GIT) $(SITECONFIG)
+	git clone $(SITECONFIG_REPO) $(SITECONFIG_CLONE)
 
-	rm -rf site-config/standard
-	go run tools/fftr_convert.go $(SITECONFIG) site-config/standard
-	rm -rf $(SITECONFIG)
+	rm -rf $(SITECONFIG_DEST)
+	go run tools/fftr_convert.go $(SITECONFIG_CLONE) $(SITECONFIG_DEST)
+	rm -rf $(SITECONFIG_CLONE)
 
 .PHONY: dev
 dev:
-	${MAKE} -j2 serve web-watch
+	${MAKE} -j2 web-watch serve
 
 .PHONY: web-build
 web-build:

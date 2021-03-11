@@ -116,9 +116,7 @@ func (s *Server) ListenAndServe() error {
 	}
 
 	// Init templates
-	if !configs.Config.Main.DevMode {
-		s.initTemplates()
-	}
+	s.initTemplates()
 
 	return srv.ListenAndServe()
 }
