@@ -10,6 +10,7 @@ import (
 	"golang.org/x/net/html"
 	"golang.org/x/sync/errgroup"
 
+	"github.com/antchfx/htmlquery"
 	"github.com/go-shiori/dom"
 )
 
@@ -111,6 +112,12 @@ func (arc *Archiver) processHTML(ctx context.Context, input io.Reader, baseURL *
 
 	// Revert the converted noscripts
 	arc.revertConvertedNoScript(doc)
+
+	// Remove data attributes
+	arc.removeDataAttributes(doc)
+
+	// Set all image to be lazy
+	arc.setLazyImages(doc)
 
 	// Convert document back to string
 	return dom.OuterHTML(doc), nil
@@ -444,6 +451,34 @@ func (arc *Archiver) convertRelativeURLs(doc *html.Node, baseURL *url.URL) {
 func (arc *Archiver) removeLinkIntegrityAttr(doc *html.Node) {
 	for _, link := range dom.GetElementsByTagName(doc, "link") {
 		dom.RemoveAttribute(link, "integrity")
+	}
+}
+
+// removeDataAttributes removes all "data-" attributes from all tags
+func (arc *Archiver) removeDataAttributes(doc *html.Node) {
+	nodes, err := htmlquery.QueryAll(doc, "//*[@*[starts-with(name(), 'data-')]]")
+	if err != nil {
+		return
+	}
+
+	dom.ForEachNode(nodes, func(node *html.Node, _ int) {
+		keys := []string{}
+		for _, attr := range node.Attr {
+			if strings.HasPrefix(attr.Key, "data-") {
+				keys = append(keys, attr.Key)
+			}
+		}
+		for _, key := range keys {
+			dom.RemoveAttribute(node, key)
+		}
+	})
+}
+
+// setLazyImages adds a loading="lazy" attribute to every image
+// in the document.
+func (arc *Archiver) setLazyImages(doc *html.Node) {
+	for _, node := range dom.GetElementsByTagName(doc, "img") {
+		dom.SetAttribute(node, "loading", "lazy")
 	}
 }
 
