@@ -19,6 +19,16 @@
   </form>
 </div>
 
+{{- if eq .count 0 }}
+{{/* ----------------------------------------------------------------
+Placeholder when no bookmarks 
+*/}}
+<div class="placeholder">
+  <p>You don't have any bookmark yet. Start saving pages now!</p>
+</div>
+{{- else -}}
+{{/* ----------------------------------------------------------------
+Bookmark list */}}
 {{ template "pagination" .pagination }}
 
 <div class="bookmark-list">
@@ -27,7 +37,7 @@
   <div class="card state-{{ .StateName }}{{ .IsDeleted | ternary " state-deleted" "" }}">
     <div class="card-image">
     {{- if .Resources.thumbnail }}
-    <img src="{{ .Resources.thumbnail.Src }}" alt=""
+    <img loading="lazy" src="{{ .Resources.thumbnail.Src }}" alt=""
      width="{{ .Resources.thumbnail.Width }}" height="{{ .Resources.thumbnail.Height }}">
     {{ end -}}
     </div>
@@ -42,7 +52,7 @@
     <div class="card-bottom">
       <strong class="item-site">
       {{- if .Resources.icon -}}
-        <img src="{{ .Resources.icon.Src }}" alt=""
+        <img loading="lazy" src="{{ .Resources.icon.Src }}" alt=""
          width="{{ .Resources.icon.Width }}" height="{{ .Resources.icon.Height }}">
       {{- end }} {{ .SiteName }}
       <a href="{{ .URL }}">{{ icon $ "bx-link" }}</a>
@@ -89,6 +99,7 @@
   </div>
 {{ end }}
 </div>
+{{ end }}
 
 {{ template "pagination" .pagination }}
 
