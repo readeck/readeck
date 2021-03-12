@@ -1,4 +1,4 @@
-{{ define "pagination" -}}
+{{ define "pagination" -}}{{ if gt .TotalPages 1 -}}
 <nav class="pagination">
 {{ if .PreviousPage }}
   <a href="{{ .PreviousPage }}" class="pagination-previous">Previous</a>
@@ -24,4 +24,4 @@
 </ul>
 
 </nav>
-{{- end }}
+{{- end }}{{- end }}
