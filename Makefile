@@ -1,7 +1,12 @@
 #!/usr/bin/make
+VERSION := dev
+DATE := $(shell date -u +%Y-%m-%dT%H:%M:%S)
 
 TAGS := omit_load_extension foreign_keys json1 fts5 secure_delete
 BUILD_TAGS := $(TAGS)
+VERSION_FLAGS := \
+	-X 'github.com/readeck/readeck/configs.version=$(VERSION)' \
+	-X 'github.com/readeck/readeck/configs.buildTimeStr=$(DATE)'
 
 SITECONFIG_REPO=https://github.com/j0k3r/graby-site-config.git
 SITECONFIG_CLONE=graby-site-config
@@ -14,7 +19,10 @@ all: web-build build
 # Build the server
 .PHONY: build
 build:
-	go build -tags "$(BUILD_TAGS)" -ldflags="-s -w" -o dist/readeck
+	go build \
+		-tags "$(BUILD_TAGS)" \
+		-ldflags="$(VERSION_FLAGS) -s -w" \
+		-o dist/readeck
 
 # Build the server in dev mode, without compiling the assets
 .PHONY: build-dev

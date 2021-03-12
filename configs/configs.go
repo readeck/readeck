@@ -9,7 +9,18 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
-var keyChars = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890&~@#$%")
+var (
+	version      string = "dev"
+	buildTimeStr string
+	buildTime    time.Time
+	startTime    time.Time = time.Now().UTC()
+
+	keyChars = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890&~@#$%")
+)
+
+func init() {
+	buildTime, _ = time.Parse("2006-01-02T15:04:05", buildTimeStr)
+}
 
 // Because we don't need viper's mess for just storing configuration from
 // a source.
@@ -121,4 +132,18 @@ func MakeKey(length int) string {
 		b[i] = keyChars[rand.Intn(len(keyChars))]
 	}
 	return string(b)
+}
+
+// Version returns the current readeck version
+func Version() string {
+	return version
+}
+
+// BuildTime returns the build time or, if empty, the time
+// when the application started
+func BuildTime() time.Time {
+	if buildTime.IsZero() {
+		return startTime
+	}
+	return buildTime
 }
