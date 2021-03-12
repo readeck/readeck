@@ -10,6 +10,7 @@ import (
 	"path"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/Masterminds/sprig"
 	"github.com/go-chi/chi/v5"
@@ -210,12 +211,14 @@ func (s *Server) SysRoutes() http.Handler {
 	}
 
 	type sysInfo struct {
-		OS        string  `json:"os"`
-		Platform  string  `json:"platform"`
-		Hostname  string  `json:"hostname"`
-		CPUs      int     `json:"cpus"`
-		GoVersion string  `json:"go_version"`
-		Mem       memInfo `json:"mem"`
+		Version   string    `json:"version"`
+		BuildDate time.Time `json:"build_date"`
+		OS        string    `json:"os"`
+		Platform  string    `json:"platform"`
+		Hostname  string    `json:"hostname"`
+		CPUs      int       `json:"cpus"`
+		GoVersion string    `json:"go_version"`
+		Mem       memInfo   `json:"mem"`
 	}
 
 	bToMb := func(b uint64) uint64 {
@@ -228,6 +231,8 @@ func (s *Server) SysRoutes() http.Handler {
 		host, _ := os.Hostname()
 
 		res := sysInfo{
+			Version:   configs.Version(),
+			BuildDate: configs.BuildTime(),
 			OS:        runtime.GOOS,
 			Platform:  runtime.GOARCH,
 			Hostname:  host,
