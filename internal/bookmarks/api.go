@@ -194,7 +194,10 @@ func (api *bookmarkAPI) withBookmark(next http.Handler) http.Handler {
 			return
 		}
 
-		if r.Method == "GET" && len(r.URL.Query()) == 0 && api.srv.CheckIfModifiedSince(r, b.Updated) {
+		dates := []time.Time{configs.BuildTime(), b.Updated}
+		if r.Method == "GET" && len(r.URL.Query()) == 0 && api.srv.CheckIfModifiedSince(
+			r, dates...,
+		) {
 			w.WriteHeader(http.StatusNotModified)
 			return
 		}
@@ -202,7 +205,7 @@ func (api *bookmarkAPI) withBookmark(next http.Handler) http.Handler {
 		ctx := context.WithValue(r.Context(), ctxBookmarkKey, b)
 
 		if b.State == StateLoaded {
-			w.Header().Set("Last-Modified", b.Updated.Format(http.TimeFormat))
+			api.srv.SetLastModified(w, dates...)
 		}
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
