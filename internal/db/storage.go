@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS token (
 
 CREATE TABLE IF NOT EXISTS bookmark (
   id          integer  PRIMARY KEY AUTOINCREMENT,
-  uid         text     NOT NULL,
+  uid         text     UNIQUE NOT NULL,
   user_id     integer  NOT NULL,
   created     datetime NOT NULL,
   updated     datetime NOT NULL,
@@ -127,8 +127,6 @@ CREATE TABLE IF NOT EXISTS bookmark (
 
   CONSTRAINT fk_bookmark_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
-
-CREATE INDEX IF NOT EXISTS idx_bookmark_uid ON bookmark(uid);
 
 CREATE VIRTUAL TABLE IF NOT EXISTS bookmark_idx USING fts5(
 	tokenize='unicode61 remove_diacritics 2',
