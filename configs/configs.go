@@ -2,6 +2,7 @@ package configs
 
 import (
 	"crypto/ed25519"
+	"crypto/hmac"
 	"crypto/sha256"
 	"crypto/sha512"
 	"math/rand"
@@ -63,26 +64,35 @@ type configSiteConfig struct {
 }
 
 type configKeys struct {
-	CookieSk [32]byte
-	CookieEk [32]byte
+	CookieHk []byte
+	CookieBk []byte
 	CsrfKey  []byte
 	JwtSk    ed25519.PrivateKey
 	JwtPk    ed25519.PublicKey
 }
 
 func newConfigKeys(sk string) configKeys {
-	k1 := []byte(sk)
-	k2 := sha512.Sum512(k1)
+	seed := sha512.Sum512([]byte(sk))
 
-	res := configKeys{
-		CookieSk: sha512.Sum512_256(k1),
-		CookieEk: sha256.Sum256(k1),
-		CsrfKey:  k2[40:64],
-		JwtSk:    ed25519.NewKeyFromSeed(k2[8:40]),
+	hash := func(k [64]byte, m string) []byte {
+		mac := hmac.New(sha256.New, k[:])
+		mac.Write([]byte(m))
+		return mac.Sum(nil)
 	}
-	res.JwtPk = res.JwtSk.Public().(ed25519.PublicKey)
 
-	return res
+	cookieHk := hash(seed, "cookie-hash-key")
+	cookieBk := hash(seed, "cookie-block-key")
+	csrfKey := hash(seed, "csrf-key")
+
+	jwtSK := ed25519.NewKeyFromSeed(seed[32:64])
+
+	return configKeys{
+		CookieHk: cookieBk,
+		CookieBk: cookieHk,
+		CsrfKey:  csrfKey,
+		JwtSk:    jwtSK,
+		JwtPk:    jwtSK.Public().(ed25519.PublicKey),
+	}
 }
 
 // Config holds the configuration data from configuration files
