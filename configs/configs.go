@@ -1,6 +1,9 @@
 package configs
 
 import (
+	"crypto/ed25519"
+	"crypto/sha256"
+	"crypto/sha512"
 	"math/rand"
 	"os"
 	"runtime"
@@ -29,12 +32,12 @@ type config struct {
 	Server    configServer    `toml:"server"`
 	Database  configDB        `toml:"database"`
 	Extractor configExtractor `toml:"extractor"`
+	Keys      configKeys      `toml:"-"`
 }
 
 type configMain struct {
 	LogLevel      string `toml:"log_level"`
 	DevMode       bool   `toml:"dev_mode"`
-	SignKey       string `toml:"sign_key"`
 	SecretKey     string `toml:"secret_key"`
 	DataDirectory string `toml:"data_directory"`
 }
@@ -57,6 +60,29 @@ type configExtractor struct {
 type configSiteConfig struct {
 	Name string `toml:"name"`
 	Src  string `toml:"src"`
+}
+
+type configKeys struct {
+	CookieSk [32]byte
+	CookieEk [32]byte
+	CsrfKey  []byte
+	JwtSk    ed25519.PrivateKey
+	JwtPk    ed25519.PublicKey
+}
+
+func newConfigKeys(sk string) configKeys {
+	k1 := []byte(sk)
+	k2 := sha512.Sum512(k1)
+
+	res := configKeys{
+		CookieSk: sha512.Sum512_256(k1),
+		CookieEk: sha256.Sum256(k1),
+		CsrfKey:  k2[40:64],
+		JwtSk:    ed25519.NewKeyFromSeed(k2[8:40]),
+	}
+	res.JwtPk = res.JwtSk.Public().(ed25519.PublicKey)
+
+	return res
 }
 
 // Config holds the configuration data from configuration files
@@ -99,6 +125,8 @@ func LoadConfiguration(configPath string) error {
 	if err := dec.Decode(&Config); err != nil {
 		return err
 	}
+
+	Config.Keys = newConfigKeys(Config.Main.SecretKey)
 
 	return nil
 }

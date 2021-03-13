@@ -154,11 +154,6 @@ func updateConfig() bool {
 		updated = true
 	}
 
-	if configs.Config.Main.SignKey == "" {
-		configs.Config.Main.SignKey = configs.MakeKey(32)
-		updated = true
-	}
-
 	return updated
 }
 

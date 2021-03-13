@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"crypto/sha256"
 	"encoding/gob"
 	"net/http"
 	"path"
@@ -28,10 +27,10 @@ type FlashMessage struct {
 }
 
 func initStore() {
-	sk := sha256.Sum256([]byte(configs.Config.Main.SignKey))
-	ek := sha256.Sum256([]byte(configs.Config.Main.SecretKey))
-
-	store = sessions.NewCookieStore(sk[:], ek[:])
+	store = sessions.NewCookieStore(
+		configs.Config.Keys.CookieSk[:],
+		configs.Config.Keys.CookieEk[:],
+	)
 	store.Options.HttpOnly = true
 	store.Options.MaxAge = 86400 * 7
 	store.Options.SameSite = http.SameSiteStrictMode
