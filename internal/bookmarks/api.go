@@ -535,18 +535,9 @@ type createForm struct {
 }
 
 func (cf *createForm) Validate(f *form.Form) {
-	r := errors.New("Invalid URL")
-	u, err := url.Parse(cf.URL)
-
-	if err != nil {
-		f.Errors.Add(r)
-		return
-	}
-
-	if !validSchemes[u.Scheme] {
-		f.Errors.Add(r)
-		return
-	}
+	// An empty value yields an error, so form.Required is
+	// not needed in this case.
+	form.IsValidURL(f.Fields["url"], validSchemes)
 }
 
 type updateForm struct {

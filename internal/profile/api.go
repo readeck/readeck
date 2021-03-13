@@ -8,8 +8,8 @@ import (
 	"github.com/go-chi/chi/v5"
 
 	"github.com/readeck/readeck/internal/auth"
-	"github.com/readeck/readeck/internal/server"
 	"github.com/readeck/readeck/internal/auth/users"
+	"github.com/readeck/readeck/internal/server"
 	"github.com/readeck/readeck/pkg/form"
 )
 
@@ -134,7 +134,7 @@ type profileForm struct {
 func (sf *profileForm) Validate(f *form.Form) {
 	form.RequiredOrNull(f.Fields["username"])
 	form.RequiredOrNull(f.Fields["email"])
-	form.IsEmail(f.Fields["email"])
+	form.IsValidEmail(f.Fields["email"])
 }
 
 // passwordForm is the form used by the password update routes.

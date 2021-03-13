@@ -15,7 +15,7 @@
       <button class="rounded" type="submit">Add link</button>
     </div>
 
-    {{ range .form.Errors }}<p class="text-danger"><strong>{{ . }}</strong></p>{{ end }}
+    {{ range .form.Fields.url.Errors }}<p class="text-danger"><strong>{{ . }}</strong></p>{{ end }}
   </form>
 </div>
 

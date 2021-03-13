@@ -2,6 +2,7 @@ package form
 
 import (
 	"errors"
+	"net/url"
 	"reflect"
 	"time"
 
@@ -60,9 +61,23 @@ func RequiredOrNull(f *Field) {
 	}
 }
 
-// IsEmail adds an error to the field if it's not a valid email address
-func IsEmail(f *Field) {
+// IsValidEmail adds an error to the field if it's not a valid email address
+func IsValidEmail(f *Field) {
 	if err := validation.Validate(f.Value(), is.Email); err != nil {
 		f.Errors.Add(errors.New("Invalid email address"))
+	}
+}
+
+func IsValidURL(f *Field, schemes map[string]bool) {
+	e := errors.New("Invalid URL")
+	u, err := url.Parse(f.Value().(string))
+
+	if err != nil {
+		f.Errors.Add(e)
+		return
+	}
+
+	if !schemes[u.Scheme] {
+		f.Errors.Add(e)
 	}
 }
