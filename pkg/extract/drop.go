@@ -73,6 +73,15 @@ func (d *Drop) Load(client *http.Client) error {
 		return fmt.Errorf("No document URL")
 	}
 
+	if len(d.Body) > 0 {
+		// If we have a body already, we don't load anything and
+		// just go with it.
+		d.Site = d.URL.Hostname()
+		d.ContentType = "text/html"
+		d.Charset = "utf-8"
+		return nil
+	}
+
 	if client == nil {
 		client = http.DefaultClient
 	}

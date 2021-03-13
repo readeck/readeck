@@ -42,14 +42,14 @@ func newFileResponder(name string) httpmock.Responder {
 func TestMeta(t *testing.T) {
 	t.Run("ExtractMeta", func(t *testing.T) {
 		t.Run("bad step", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepBody)
 			ExtractMeta(pm, nil)
 			assert.Equal(t, extract.DropMeta{}, ex.Drop().Meta)
 		})
 
 		t.Run("process", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
 
@@ -100,14 +100,14 @@ func TestMeta(t *testing.T) {
 			httpmock.NewErrorResponder(errors.New("HTTP")))
 
 		t.Run("bad step", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepBody)
 			ExtractOembed(pm, nil)
 			assert.Equal(t, extract.DropMeta{}, ex.Drop().Meta)
 		})
 
 		t.Run("nil meta", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
 			ex.Drop().Meta = nil
@@ -117,7 +117,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("no meta", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
 
@@ -126,7 +126,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("meta error", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/video.html")))
 
@@ -152,7 +152,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("process", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/video.html")))
 
@@ -186,14 +186,14 @@ func TestMeta(t *testing.T) {
 			newFileResponder("meta/oembed-photo.json"))
 
 		t.Run("bad step", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepBody)
 			SetDropProperties(pm, nil)
 			assert.Equal(t, extract.DropMeta{}, ex.Drop().Meta)
 		})
 
 		t.Run("process", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
 
@@ -205,7 +205,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("process video", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/video.html")))
 
@@ -274,7 +274,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("process photo", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/photo.html")))
 
@@ -320,14 +320,14 @@ func TestMeta(t *testing.T) {
 			httpmock.NewJsonResponderOrPanic(404, ""))
 
 		t.Run("bad step", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepBody)
 			ExtractPicture(pm, nil)
 			assert.Equal(t, 0, len(ex.Drop().Pictures))
 		})
 
 		t.Run("errors", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
 
@@ -349,7 +349,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("process", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
 
@@ -364,7 +364,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("process photo", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
 
@@ -381,7 +381,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("process vimeo", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
 
@@ -481,7 +481,7 @@ func TestMeta(t *testing.T) {
 		})
 
 		t.Run("bad step", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepBody)
 			ExtractFavicon(pm, nil)
 			assert.Equal(t, 0, len(ex.Drop().Pictures))
@@ -496,7 +496,7 @@ func TestMeta(t *testing.T) {
 			httpmock.RegisterResponder("GET", "/favicon.png",
 				httpmock.NewJsonResponderOrPanic(404, ""))
 
-			ex, _ := extract.New("http://example.net/")
+			ex, _ := extract.New("http://example.net/", nil)
 			pm := ex.NewProcessMessage(extract.StepDom)
 			pm.Dom = doc
 

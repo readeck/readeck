@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"io"
+	"io/ioutil"
+	"mime"
 	"net/http"
 	"net/url"
 	"path"
@@ -14,6 +16,7 @@ import (
 
 	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi/v5"
+	"github.com/leebenson/conform"
 	log "github.com/sirupsen/logrus"
 	"github.com/thoas/go-funk"
 
@@ -99,16 +102,35 @@ func (api *bookmarkAPI) bookmarkArticle(w http.ResponseWriter, r *http.Request) 
 
 // bookmarkCreate creates a new bookmark.
 func (api *bookmarkAPI) bookmarkCreate(w http.ResponseWriter, r *http.Request) {
-	cf := &createForm{}
-	f := form.NewForm(cf)
+	var uri string
+	var html []byte
+	var err error
+	ct, _, _ := mime.ParseMediaType(r.Header.Get("content-type"))
 
-	form.Bind(f, r)
-	if !f.IsValid() {
-		api.srv.Render(w, r, http.StatusBadRequest, f)
-		return
+	if ct == "multipart/form-data" {
+		// A multipart form must provide a section with the url and
+		// another one with the html source.
+		uri, html, err = api.loadCreateParamsHTML(w, r)
+		if err != nil {
+			api.srv.Message(w, r, &server.Message{
+				Status:  http.StatusBadRequest,
+				Message: err.Error(),
+			})
+			return
+		}
+	} else {
+		cf := &createForm{}
+		f := form.NewForm(cf)
+
+		form.Bind(f, r)
+		if !f.IsValid() {
+			api.srv.Render(w, r, http.StatusBadRequest, f)
+			return
+		}
+		uri = cf.URL
 	}
 
-	b, err := api.createBookmark(r, cf)
+	b, err := api.createBookmark(r, uri, html)
 	if err != nil {
 		api.srv.Error(w, r, err)
 		return
@@ -294,8 +316,8 @@ func (api *bookmarkAPI) getBookmarkArticle(b *bookmarkItem) (*strings.Reader, er
 }
 
 // createBookmark creates a new bookmark and starts the extraction process.
-func (api *bookmarkAPI) createBookmark(r *http.Request, cf *createForm) (*Bookmark, error) {
-	uri, _ := url.Parse(cf.URL)
+func (api *bookmarkAPI) createBookmark(r *http.Request, u string, html []byte) (*Bookmark, error) {
+	uri, _ := url.Parse(u)
 
 	b := &Bookmark{
 		UserID:   &auth.GetRequestUser(r).ID,
@@ -315,8 +337,41 @@ func (api *bookmarkAPI) createBookmark(r *http.Request, cf *createForm) (*Bookma
 		ctxJobRequestID,
 		api.srv.GetReqID(r),
 	)
-	enqueueExtractPage(ctx, b)
+	enqueueExtractPage(ctx, b, html)
 	return b, nil
+}
+
+// loadCreateParamsHTML return the url and html passed in a multi-part form.
+// The content is then passed to the extractor which won't fetch the HTML from
+// the provided url.
+func (api *bookmarkAPI) loadCreateParamsHTML(w http.ResponseWriter, r *http.Request) (uri string, html []byte, err error) {
+	const maxMemory = 8 << 20
+	err = r.ParseMultipartForm(maxMemory)
+	if err != nil {
+		return
+	}
+
+	cf := &createForm{r.FormValue("url")}
+	f := form.NewForm(cf)
+	conform.Strings(cf)
+	f.Validate()
+
+	if !f.IsValid() {
+		err = errors.New("Invalid URL")
+		return
+	}
+	uri = cf.URL
+
+	reader, _, err := r.FormFile("src")
+	if errors.Is(err, http.ErrMissingFile) {
+		err = errors.New(`File "src" not found`)
+		return
+	} else if err != nil {
+		return
+	}
+
+	html, err = ioutil.ReadAll(reader)
+	return
 }
 
 // updateBookmark update a bookmark and returns the fields

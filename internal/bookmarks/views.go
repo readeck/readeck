@@ -44,7 +44,7 @@ func (h *bookmarkViews) bookmarkList(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		form.Bind(f, r)
 		if f.IsValid() {
-			if b, err := h.createBookmark(r, cf); err != nil {
+			if b, err := h.createBookmark(r, cf.URL, nil); err != nil {
 				f.Errors.Add(err)
 			} else {
 				h.srv.Redirect(w, r, "/bookmarks", b.UID)

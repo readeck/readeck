@@ -37,7 +37,7 @@ func StartWorkerPool(workers int) {
 
 // enqueueExtractPage sends a new bookmark to the extraction
 // workers.
-func enqueueExtractPage(ctx context.Context, b *Bookmark) {
+func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 	workerPool.Submit(func() {
 		// Always set state to loaded, even if there are errors
 		saved := false
@@ -63,7 +63,7 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark) {
 			runtime.GC()
 		}()
 
-		ex, err := extract.New(b.URL)
+		ex, err := extract.New(b.URL, html)
 		if err != nil {
 			log.WithError(err).Error()
 			return
@@ -79,10 +79,15 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark) {
 			meta.ExtractPicture,
 			fftr.LoadConfiguration,
 			fftr.ReplaceStrings,
-			fftr.FindContentPage,
+		)
+
+		if len(html) == 0 {
+			ex.AddProcessors(fftr.FindContentPage, fftr.FindNextPage)
+		}
+
+		ex.AddProcessors(
 			fftr.ExtractAuthor,
 			fftr.ExtractDate,
-			fftr.FindNextPage,
 			fftr.ExtractBody,
 			fftr.StripTags,
 			fftr.GoToNextPage,

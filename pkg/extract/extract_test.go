@@ -26,13 +26,13 @@ func TestURLList(t *testing.T) {
 
 func TestExtractor(t *testing.T) {
 	t.Run("new with error", func(t *testing.T) {
-		ex, err := New("http://example.net/\b0x7f")
+		ex, err := New("http://example.net/\b0x7f", nil)
 		assert.Nil(t, ex)
 		assert.Contains(t, err.Error(), "invalid control")
 	})
 
 	t.Run("new", func(t *testing.T) {
-		ex, _ := New("http://example.net/#frag")
+		ex, _ := New("http://example.net/#frag", nil)
 		assert.Equal(t, "http://example.net/", ex.URL.String())
 		assert.Equal(t, 1, len(ex.Drops()))
 
@@ -120,21 +120,21 @@ func TestExtractorRun(t *testing.T) {
 	}
 
 	t.Run("simple", func(t *testing.T) {
-		ex, _ := New("http://example.net/page1")
+		ex, _ := New("http://example.net/page1", nil)
 		ex.Run()
 		assert.Equal(t, 0, len(ex.Errors()))
 		assert.Contains(t, string(ex.Drop().Body), "Otters have long, slim bodies")
 	})
 
 	t.Run("load error", func(t *testing.T) {
-		ex, _ := New("http://example.net/404")
+		ex, _ := New("http://example.net/404", nil)
 		ex.Run()
 		assert.Equal(t, 1, len(ex.Errors()))
 		assert.Equal(t, `cannot load resource error="Invalid status code (404)"`, ex.Errors().Error())
 	})
 
 	t.Run("process body", func(t *testing.T) {
-		ex, _ := New("http://example.net/page1")
+		ex, _ := New("http://example.net/page1", nil)
 		ex.AddProcessors(p1)
 		ex.Run()
 		assert.Equal(t, 0, len(ex.Errors()))
@@ -144,7 +144,7 @@ func TestExtractorRun(t *testing.T) {
 	})
 
 	t.Run("process passing values", func(t *testing.T) {
-		ex, _ := New("http://example.net/page1")
+		ex, _ := New("http://example.net/page1", nil)
 		ex.AddProcessors(p2a, p2b)
 		ex.Run()
 		assert.Equal(t, 0, len(ex.Errors()))
@@ -154,7 +154,7 @@ func TestExtractorRun(t *testing.T) {
 	})
 
 	t.Run("process add drop", func(t *testing.T) {
-		ex, _ := New("http://example.net/page1")
+		ex, _ := New("http://example.net/page1", nil)
 		ex.AddProcessors(p3)
 		ex.Run()
 		assert.Equal(t, 0, len(ex.Errors()))

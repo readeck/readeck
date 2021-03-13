@@ -124,7 +124,7 @@ type Extractor struct {
 
 // New returns an Extractor instance for a given URL,
 // with a default HTTP client.
-func New(src string) (*Extractor, error) {
+func New(src string, html []byte) (*Extractor, error) {
 	URL, err := url.Parse(src)
 	if err != nil {
 		return nil, err
@@ -132,14 +132,16 @@ func New(src string) (*Extractor, error) {
 	URL.Fragment = ""
 
 	res := &Extractor{
-		URL:     URL,
-		Visited: URLList{},
-		Context: context.TODO(),
-		// Logs:       []string{},
+		URL:        URL,
+		Visited:    URLList{},
+		Context:    context.TODO(),
 		client:     NewClient(),
 		processors: ProcessList{},
-		// errors:     Error{},
-		drops: []*Drop{NewDrop(URL)},
+		drops:      []*Drop{NewDrop(URL)},
+	}
+
+	if len(html) > 0 {
+		res.drops[0].Body = html
 	}
 
 	return res, nil

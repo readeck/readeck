@@ -116,6 +116,9 @@ func ExtractBody(m *extract.ProcessMessage, next extract.Processor) extract.Proc
 		if node == nil {
 			continue
 		}
+		if len(dom.Children(node)) == 0 {
+			continue
+		}
 
 		// First match, replace the root node and stop
 		m.Log.WithField("nodes", len(dom.Children(node))).Debug("fftr body found")

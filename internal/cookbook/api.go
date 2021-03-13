@@ -49,7 +49,7 @@ func (api *cookbookAPI) extract(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ex, err := extract.New(src)
+	ex, err := extract.New(src, nil)
 	if err != nil {
 		panic(err)
 	}
