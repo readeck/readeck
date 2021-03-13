@@ -5,7 +5,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/readeck/readeck/internal/users"
+	"github.com/readeck/readeck/internal/auth/users"
 )
 
 type ctxKeyProvider struct{}

@@ -14,7 +14,7 @@ import (
 
 	"github.com/readeck/readeck/configs"
 	"github.com/readeck/readeck/internal/db"
-	"github.com/readeck/readeck/internal/users"
+	"github.com/readeck/readeck/internal/auth/users"
 	"github.com/readeck/readeck/pkg/extract/fftr"
 )
 

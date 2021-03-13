@@ -8,10 +8,10 @@ import (
 
 	"github.com/readeck/readeck/configs"
 	"github.com/readeck/readeck/internal/assets"
+	"github.com/readeck/readeck/internal/auth/signin"
 	"github.com/readeck/readeck/internal/bookmarks"
 	"github.com/readeck/readeck/internal/cookbook"
 	"github.com/readeck/readeck/internal/dashboard"
-	"github.com/readeck/readeck/internal/logon"
 	"github.com/readeck/readeck/internal/profile"
 	"github.com/readeck/readeck/internal/server"
 )
@@ -42,7 +42,7 @@ func runServe(c *cobra.Command, args []string) error {
 	assets.SetupRoutes(s)
 
 	// Auth routes
-	logon.SetupRoutes(s)
+	signin.SetupRoutes(s)
 
 	// Dashboard routes
 	dashboard.SetupRoutes(s)

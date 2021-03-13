@@ -9,7 +9,7 @@ import (
 
 	"github.com/readeck/readeck/internal/auth"
 	"github.com/readeck/readeck/internal/server"
-	"github.com/readeck/readeck/internal/users"
+	"github.com/readeck/readeck/internal/auth/users"
 	"github.com/readeck/readeck/pkg/form"
 )
 
