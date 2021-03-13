@@ -159,6 +159,11 @@ func (b *Bookmark) Update(v interface{}) error {
 		return errors.New("No ID")
 	}
 
+	switch v.(type) {
+	case map[string]interface{}:
+		v.(map[string]interface{})["updated"] = time.Now()
+	}
+
 	_, err := db.Q().Update(TableName).Prepared(true).
 		Set(v).
 		Where(goqu.C("id").Eq(b.ID)).

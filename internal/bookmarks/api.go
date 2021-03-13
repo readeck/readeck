@@ -462,7 +462,7 @@ func (api *bookmarkAPI) deleteBookmark(b *Bookmark) error {
 }
 
 func (api *bookmarkAPI) deleteBookmarkCancel(b *Bookmark) error {
-	return b.Update(map[string]bool{
+	return b.Update(map[string]interface{}{
 		"is_deleted": false,
 	})
 }
