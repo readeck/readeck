@@ -87,6 +87,17 @@ CREATE TABLE IF NOT EXISTS user (
   password text     NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS token (
+	id          integer  PRIMARY KEY AUTOINCREMENT,
+	uid         text     UNIQUE NOT NULL,
+	user_id     integer  NOT NULL,
+	created     datetime NOT NULL,
+	expires     datetime NULL,
+	is_enabled  integer  NOT NULL DEFAULT 1,
+
+	CONSTRAINT fk_token_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS bookmark (
   id          integer  PRIMARY KEY AUTOINCREMENT,
   uid         text     NOT NULL,

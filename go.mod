@@ -12,6 +12,7 @@ require (
 	github.com/araddon/dateparse v0.0.0-20210207001429-0eec95c9db7e
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
 	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
+	github.com/cristalhq/jwt/v3 v3.0.12 // indirect
 	github.com/doug-martin/goqu/v9 v9.11.0
 	github.com/fatih/color v1.10.0
 	github.com/gammazero/deque v0.0.0-20201010052221-3932da5530cc // indirect

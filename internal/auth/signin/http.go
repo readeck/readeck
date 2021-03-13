@@ -15,6 +15,9 @@ import (
 // SetupRoutes mounts the routes for the auth domain.
 func SetupRoutes(s *server.Server) {
 	newAuthHandler(s)
+
+	api := newAuthAPI(s)
+	s.AddRoute("/api/auth", api)
 }
 
 type authHandler struct {

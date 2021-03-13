@@ -48,6 +48,7 @@ func New(basePath string) *Server {
 		SetRequestInfo,
 		auth.Init(
 			&auth.BasicAuthProvider{},
+			&auth.TokenAuthProvider{},
 			&auth.SessionAuthProvider{
 				GetSession: s.GetSession,
 				Redirect: func(w http.ResponseWriter, r *http.Request) {
