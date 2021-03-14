@@ -13,8 +13,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/db"
 	"github.com/readeck/readeck/internal/auth/users"
+	"github.com/readeck/readeck/internal/db"
 	"github.com/readeck/readeck/pkg/extract/fftr"
 )
 
@@ -150,7 +150,7 @@ func updateConfig() bool {
 	updated := false
 
 	if configs.Config.Main.SecretKey == "" {
-		configs.Config.Main.SecretKey = configs.MakeKey(64)
+		configs.Config.Main.SecretKey = configs.GenerateKey(48, 64)
 		updated = true
 	}
 

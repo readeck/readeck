@@ -19,7 +19,17 @@ var (
 	buildTime    time.Time
 	startTime    time.Time = time.Now().UTC()
 
-	keyChars = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890&~@#$%")
+	keyChars = [][2]rune{
+		{33, 124},                                      // latin set (symbols, numbers, alphabet)
+		{161, 187}, {191, 214}, {216, 246}, {248, 255}, // latin supplement
+		{128512, 128584}, // emojis
+	}
+
+	cookieHk []byte
+	cookieBk []byte
+	csrfKey  []byte
+	jwtSk    ed25519.PrivateKey
+	jwtPk    ed25519.PublicKey
 )
 
 func init() {
@@ -33,7 +43,6 @@ type config struct {
 	Server    configServer    `toml:"server"`
 	Database  configDB        `toml:"database"`
 	Extractor configExtractor `toml:"extractor"`
-	Keys      configKeys      `toml:"-"`
 }
 
 type configMain struct {
@@ -61,38 +70,6 @@ type configExtractor struct {
 type configSiteConfig struct {
 	Name string `toml:"name"`
 	Src  string `toml:"src"`
-}
-
-type configKeys struct {
-	CookieHk []byte
-	CookieBk []byte
-	CsrfKey  []byte
-	JwtSk    ed25519.PrivateKey
-	JwtPk    ed25519.PublicKey
-}
-
-func newConfigKeys(sk string) configKeys {
-	seed := sha512.Sum512([]byte(sk))
-
-	hash := func(k [64]byte, m string) []byte {
-		mac := hmac.New(sha256.New, k[:])
-		mac.Write([]byte(m))
-		return mac.Sum(nil)
-	}
-
-	cookieHk := hash(seed, "cookie-hash-key")
-	cookieBk := hash(seed, "cookie-block-key")
-	csrfKey := hash(seed, "csrf-key")
-
-	jwtSK := ed25519.NewKeyFromSeed(seed[32:64])
-
-	return configKeys{
-		CookieHk: cookieBk,
-		CookieBk: cookieHk,
-		CsrfKey:  csrfKey,
-		JwtSk:    jwtSK,
-		JwtPk:    jwtSK.Public().(ed25519.PublicKey),
-	}
 }
 
 // Config holds the configuration data from configuration files
@@ -136,7 +113,7 @@ func LoadConfiguration(configPath string) error {
 		return err
 	}
 
-	Config.Keys = newConfigKeys(Config.Main.SecretKey)
+	loadKeys(Config.Main.SecretKey)
 
 	return nil
 }
@@ -161,15 +138,76 @@ func WriteConfig(filename string) error {
 	return fd.Close()
 }
 
-// MakeKey returns a random key
-func MakeKey(length int) string {
+// GenerateKey returns a random key
+func GenerateKey(minLen, maxLen int) string {
+	if minLen >= maxLen {
+		panic("maxLen must be greater then minLen")
+	}
 	rand.Seed(time.Now().UnixNano())
 
-	b := make([]rune, length)
+	runes := []rune{}
+	for _, table := range keyChars {
+		for i := table[0]; i <= table[1]; i++ {
+			if i == 34 || i == 92 { // exclude " and \
+				continue
+			}
+			runes = append(runes, i)
+		}
+	}
+
+	l := rand.Intn(maxLen-minLen) + minLen
+	b := make([]rune, l)
 	for i := range b {
-		b[i] = keyChars[rand.Intn(len(keyChars))]
+		b[i] = runes[rand.Intn(len(runes))]
 	}
 	return string(b)
+}
+
+// loadKeys prepares all the keys derivated from the configuration's
+// secret key.
+func loadKeys(sk string) {
+	// Pad the secret key with its own checksum to have a
+	// long enough byte list.
+	h := sha512.Sum512([]byte(sk))
+	seed := append([]byte(sk), h[:]...)
+
+	hashMsg := func(k []byte, m string) []byte {
+		mac := hmac.New(sha256.New, k[:])
+		mac.Write([]byte(m))
+		return mac.Sum(nil)
+	}
+
+	cookieHk = hashMsg(seed, "cookie-hash-key")
+	cookieBk = hashMsg(seed, "cookie-block-key")
+	csrfKey = hashMsg(seed, "csrf-key")
+
+	jwtSk = ed25519.NewKeyFromSeed(seed[32:64])
+	jwtPk = jwtSk.Public().(ed25519.PublicKey)
+}
+
+// CookieHashKey returns the key used by session cookies
+func CookieHashKey() []byte {
+	return cookieHk
+}
+
+// CookieBlockKey returns the key used by session cookies
+func CookieBlockKey() []byte {
+	return cookieBk
+}
+
+// CsrfKey returns the key used by CSRF protection
+func CsrfKey() []byte {
+	return csrfKey
+}
+
+// JwtSk returns the private key for JWT handlers
+func JwtSk() ed25519.PrivateKey {
+	return jwtSk
+}
+
+// JwtPk returns the public key for JWT handlers
+func JwtPk() ed25519.PublicKey {
+	return jwtPk
 }
 
 // Version returns the current readeck version

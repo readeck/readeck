@@ -11,7 +11,7 @@ import (
 // NewJwtToken returns a new JWT token instance using
 // a given ID and signing with the configuration's JWT secret key.
 func NewJwtToken(UID string) (*jwt.Token, error) {
-	signer, err := jwt.NewSignerEdDSA(configs.Config.Keys.JwtSk)
+	signer, err := jwt.NewSignerEdDSA(configs.JwtSk())
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ func NewJwtToken(UID string) (*jwt.Token, error) {
 func GetJwtClaims(data string) (jwt.StandardClaims, error) {
 	var claims jwt.StandardClaims
 
-	verifier, err := jwt.NewVerifierEdDSA(configs.Config.Keys.JwtPk)
+	verifier, err := jwt.NewVerifierEdDSA(configs.JwtPk())
 	if err != nil {
 		return claims, err
 	}

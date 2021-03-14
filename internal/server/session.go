@@ -28,8 +28,8 @@ type FlashMessage struct {
 
 func initStore() {
 	store = sessions.NewCookieStore(
-		configs.Config.Keys.CookieHk,
-		configs.Config.Keys.CookieBk,
+		configs.CookieHashKey(),
+		configs.CookieBlockKey(),
 	)
 	store.Options.HttpOnly = true
 	store.Options.MaxAge = 86400 * 7
