@@ -9,16 +9,31 @@ import (
 )
 
 type ctxKeyProvider struct{}
-type ctxKeyUser struct{}
+type ctxKeyAuth struct{}
 
 var (
 	ctxProviderKey = &ctxKeyProvider{}
-	ctxUserKey     = &ctxKeyUser{}
+	ctxAuthKey     = &ctxKeyAuth{}
 )
+
+// Info is the payload with the currently authenticated user
+// and some information about the provider
+type Info struct {
+	Provider *ProviderInfo
+	User     *users.User
+}
+
+// ProviderInfo contains information about the provider.
+type ProviderInfo struct {
+	Name string
+}
 
 // Provider is the interface that must implement any authentication
 // provider.
 type Provider interface {
+	// Returns the provider information
+	Info() *ProviderInfo
+
 	// Must return true to enable the provider for the current request.
 	IsActive(r *http.Request) bool
 
@@ -27,9 +42,9 @@ type Provider interface {
 	Authenticate(http.ResponseWriter, *http.Request) (*users.User, error)
 }
 
-// ProviderFeatureCsrf allows a provider to implement a method
+// FeatureCsrfProvider allows a provider to implement a method
 // to bypass all CSRF protection.
-type ProviderFeatureCsrf interface {
+type FeatureCsrfProvider interface {
 	// Must return true to disable CSRF protection for the request.
 	CsrfExempt(r *http.Request) bool
 }
@@ -37,6 +52,13 @@ type ProviderFeatureCsrf interface {
 // NullProvider is the provider returned when no other provider
 // could be activated.
 type NullProvider struct{}
+
+// Info return information about the provider.
+func (p *NullProvider) Info() *ProviderInfo {
+	return &ProviderInfo{
+		Name: "null",
+	}
+}
 
 // IsActive is always false
 func (p *NullProvider) IsActive(r *http.Request) bool {
@@ -97,7 +119,10 @@ func Required(next http.Handler) http.Handler {
 			return
 		}
 
-		r = setRequestUser(r, u)
+		r = setRequestAuthInfo(r, &Info{
+			Provider: provider.Info(),
+			User:     u,
+		})
 		next.ServeHTTP(w, r)
 	}
 
@@ -116,13 +141,18 @@ func GetRequestProvider(r *http.Request) Provider {
 	return r.Context().Value(ctxProviderKey).(Provider)
 }
 
-// setRequestUser stores the request's user.
-func setRequestUser(r *http.Request, u *users.User) *http.Request {
-	ctx := context.WithValue(r.Context(), ctxUserKey, u)
+// setRequestAuthInfo stores the request's user.
+func setRequestAuthInfo(r *http.Request, info *Info) *http.Request {
+	ctx := context.WithValue(r.Context(), ctxAuthKey, info)
 	return r.WithContext(ctx)
+}
+
+// GetRequestAuthInfo returns the current request's auth info
+func GetRequestAuthInfo(r *http.Request) *Info {
+	return r.Context().Value(ctxAuthKey).(*Info)
 }
 
 // GetRequestUser returns the current request's user.
 func GetRequestUser(r *http.Request) *users.User {
-	return r.Context().Value(ctxUserKey).(*users.User)
+	return GetRequestAuthInfo(r).User
 }

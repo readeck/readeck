@@ -14,6 +14,13 @@ import (
 // "Bearer".
 type TokenAuthProvider struct{}
 
+// Info return information about the provider.
+func (p *TokenAuthProvider) Info() *ProviderInfo {
+	return &ProviderInfo{
+		Name: "bearer token",
+	}
+}
+
 // IsActive returns true when the client submits a bearer token.
 func (p *TokenAuthProvider) IsActive(r *http.Request) bool {
 	_, ok := p.getToken(r)

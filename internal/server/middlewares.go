@@ -57,7 +57,7 @@ func (s *Server) Csrf() func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
 			// Always enable CSRF protection, unless the current auth provider
 			// states otherwise.
-			p, ok := auth.GetRequestProvider(r).(auth.ProviderFeatureCsrf)
+			p, ok := auth.GetRequestProvider(r).(auth.FeatureCsrfProvider)
 			if ok && p.CsrfExempt(r) {
 				next.ServeHTTP(w, r)
 				return

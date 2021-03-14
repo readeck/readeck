@@ -14,6 +14,13 @@ import (
 // with "Authorization: Basic {payload}" header.
 type BasicAuthProvider struct{}
 
+// Info return information about the provider.
+func (p *BasicAuthProvider) Info() *ProviderInfo {
+	return &ProviderInfo{
+		Name: "basic auth",
+	}
+}
+
 // IsActive returns true when the client submits basic HTTP authorization
 // header.
 func (p *BasicAuthProvider) IsActive(r *http.Request) bool {
