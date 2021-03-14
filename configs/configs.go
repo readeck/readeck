@@ -53,13 +53,19 @@ type configMain struct {
 }
 
 type configServer struct {
-	Host string
-	Port int
+	Host    string
+	Port    int
+	Session configSession `toml:"session"`
 }
 
 type configDB struct {
 	Driver string `toml:"driver"`
 	Source string `toml:"source"`
+}
+
+type configSession struct {
+	CookieName string `toml:"cookie_name"`
+	MaxAge     int    `toml:"max_age"` // in minutes
 }
 
 type configExtractor struct {
@@ -86,6 +92,10 @@ var Config = config{
 	Server: configServer{
 		Host: "127.0.0.1",
 		Port: 5000,
+		Session: configSession{
+			CookieName: "sxid",
+			MaxAge:     86400 * 30,
+		},
 	},
 	Database: configDB{
 		Driver: "sqlite3",

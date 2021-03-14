@@ -75,6 +75,8 @@ func (h *authHandler) login(w http.ResponseWriter, r *http.Request) {
 	// User is authenticated, let's carry on
 	sess := h.srv.GetSession(r)
 	sess.Values["user_id"] = user.ID
+	sess.Values["check_code"] = user.CheckCode()
+
 	if err := sess.Save(r, w); err != nil {
 		panic(err)
 	}

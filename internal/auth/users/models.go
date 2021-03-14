@@ -2,6 +2,7 @@ package users
 
 import (
 	"errors"
+	"hash/crc32"
 	"strings"
 	"time"
 
@@ -133,4 +134,15 @@ func (u *User) SetPassword(password string) error {
 	}
 
 	return u.Update(goqu.Record{"password": u.Password, "updated": time.Now()})
+}
+
+// CheckCode returns a crc32 checksum of combined user information
+// (username, email, password).
+// This value is stored by the session and then validated on
+// each request. This allows to invalidate every session when the user
+// changes any of this information.
+func (u *User) CheckCode() uint32 {
+	return crc32.Checksum([]byte(
+		u.Username+u.Email+u.Password,
+	), crc32.IEEETable)
 }

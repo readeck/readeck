@@ -6,6 +6,7 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/gorilla/sessions"
 
+	"github.com/readeck/readeck/configs"
 	"github.com/readeck/readeck/internal/auth/users"
 )
 
@@ -47,6 +48,16 @@ func (p *SessionAuthProvider) Authenticate(w http.ResponseWriter, r *http.Reques
 		return nil, err
 	}
 
+	chk, _ := sess.Values["check_code"].(uint32)
+	if chk != u.CheckCode() {
+		p.clearSession(sess, w, r)
+		return nil, err
+	}
+
+	// At this point, the user is granted access.
+	// We renew its cookie for another max age duration.
+	p.resendCookie(sess, w, r)
+
 	return u, nil
 }
 
@@ -55,4 +66,17 @@ func (p *SessionAuthProvider) clearSession(sess *sessions.Session, w http.Respon
 	delete(sess.Values, "user_id")
 	sess.Save(r, w)
 	p.Redirect(w, r)
+}
+
+// resendCookie sends a new session cookie so it increases its expiration time.
+// We could save the session with the same effect but since the data doesn't
+// change, it's not needed.
+func (p *SessionAuthProvider) resendCookie(sess *sessions.Session, w http.ResponseWriter, r *http.Request) {
+	if c, err := r.Cookie(configs.Config.Server.Session.CookieName); err == nil {
+		http.SetCookie(w, sessions.NewCookie(
+			configs.Config.Server.Session.CookieName,
+			c.Value,
+			sess.Options,
+		))
+	}
 }

@@ -46,6 +46,10 @@ func (v *profileViews) userProfile(w http.ResponseWriter, r *http.Request) {
 			if _, err := v.UpdateProfile(user, pf); err != nil {
 				v.srv.AddFlash(w, r, "error", "Error while updating profile")
 			} else {
+				// Renew the check code in this user's session.
+				// We needn't save the session since AddFlash does it already.
+				sess := v.srv.GetSession(r)
+				sess.Values["check_code"] = user.CheckCode()
 				v.srv.AddFlash(w, r, "info", "Profile updated")
 			}
 
@@ -73,6 +77,10 @@ func (v *profileViews) userPassword(w http.ResponseWriter, r *http.Request) {
 			if err := v.UpdatePassword(user, pf); err != nil {
 				v.srv.AddFlash(w, r, "error", "Error while updating your password")
 			} else {
+				// Renew the check code in this user's session.
+				// We needn't save the session since AddFlash does it already.
+				sess := v.srv.GetSession(r)
+				sess.Values["check_code"] = user.CheckCode()
 				v.srv.AddFlash(w, r, "info", "Your password was changed.")
 			}
 

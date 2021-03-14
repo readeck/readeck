@@ -47,7 +47,7 @@ func (s *Server) Csrf() func(next http.Handler) http.Handler {
 		csrf.CookieName(csrfCookieName),
 		csrf.Path(path.Join(s.BasePath)),
 		csrf.HttpOnly(true),
-		csrf.MaxAge(3600*12),
+		csrf.MaxAge(0),
 		csrf.SameSite(csrf.SameSiteStrictMode),
 		csrf.FieldName(csrfFieldName),
 		csrf.RequestHeader(csrfHeaderName),

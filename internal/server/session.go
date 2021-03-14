@@ -15,7 +15,7 @@ type ctxKeySession struct{}
 type ctxKeyFlash struct{}
 
 var (
-	store         *sessions.CookieStore
+	store         sessions.Store
 	ctxSessionKey = &ctxKeySession{}
 	ctxFlashKey   = &ctxKeyFlash{}
 )
@@ -27,13 +27,11 @@ type FlashMessage struct {
 }
 
 func initStore() {
-	store = sessions.NewCookieStore(
+	store = sessions.NewFilesystemStore(
+		path.Join(configs.Config.Main.DataDirectory, "sessions"),
 		configs.CookieHashKey(),
 		configs.CookieBlockKey(),
 	)
-	store.Options.HttpOnly = true
-	store.Options.MaxAge = 86400 * 7
-	store.Options.SameSite = http.SameSiteStrictMode
 
 	// Register flash message type
 	gob.Register(FlashMessage{})
@@ -44,13 +42,17 @@ func initStore() {
 func (s *Server) WithSession() func(next http.Handler) http.Handler {
 	if store == nil {
 		initStore()
-		store.Options.Path = path.Join(s.BasePath)
 	}
 
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// Store session
-			session, _ := store.Get(r, "sxid")
+			session, _ := store.Get(r, configs.Config.Server.Session.CookieName)
+			session.Options.HttpOnly = true
+			session.Options.MaxAge = configs.Config.Server.Session.MaxAge
+			session.Options.SameSite = http.SameSiteStrictMode
+			session.Options.Path = path.Join(s.BasePath)
+
 			ctx := r.Context()
 			ctx = context.WithValue(ctx, ctxSessionKey, session)
 
