@@ -69,6 +69,7 @@ func (api *bookmarkAPI) bookmarkList(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		api.srv.Error(w, r, err)
+		return
 	}
 
 	api.srv.SendPaginationHeaders(w, r, bl.Pagination.TotalCount, bl.Pagination.Limit, bl.Pagination.Offset)

@@ -61,6 +61,7 @@ func (h *bookmarkViews) bookmarkList(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		h.srv.Error(w, r, err)
+		return
 	}
 
 	ctx := server.TC{
