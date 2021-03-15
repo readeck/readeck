@@ -121,6 +121,9 @@ select
     border-color: $primary
     outline: 0
 
+textarea
+  height: auto
+
 select
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 8" width="30"><path fill="%23' + str-slice(inspect($grey), 2) + '" d="M0,0l6,8l6-8"/></svg>') center right no-repeat
   padding-right: 3rem
@@ -151,7 +154,13 @@ fieldset
 
 input[type='checkbox'],
 input[type='radio']
-  display: inline
+  width: auto
+  border: 0
+  vertical-align: middle
+  position: relative
+  bottom: 2px
+  line-height: 1
+  cursor: pointer
 
 .label-inline
   display: inline-block
@@ -174,11 +183,15 @@ input, button, .button, %button
     background-color: transparent
     border-color: $primary
     color: $primary
-s
+
     &:focus,
     &:hover
       background-color: $primary
       color: $primary-invert
+
+  &.small
+    height: 2.2rem
+    vertical-align: baseline
 
 
 // Field
@@ -190,20 +203,23 @@ s
     margin-bottom: 0
 
   &.max
-    input
+    input,
+    textarea
       width: 100%
 
   &.horizontal
     display: flex
     align-items: baseline
 
-    & > label:first-child
+    & > label:first-child,
+    & > .spacer:first-child
       width: 15rem
       margin-right: 1rem
       text-align: left
 
   .errors
     color: $danger
+    margin: 0 !important
 
   &.with-errors
     input[type='color'],

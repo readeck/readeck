@@ -42,10 +42,10 @@
   {{ block "main" . }}
   {{ block "aside" . }}{{ end }}
   <div class="main">
-    <div class="content">
+    <main class="{{ block "content_class" . }}{{ end }}">
     {{ template "flashes" . }}
     {{ block "content" . }}{{ end }}
-    </div>
+    </main>
   </div>
   {{ end }}
 </div>

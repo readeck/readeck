@@ -1,7 +1,7 @@
 @use "../config" as *
 
-$-content-font-size: 18px
-$-content-line-height: 1.5
+$content-font-size: 18px
+$content-line-height: 1.5
 
 @function unitless($size)
     @return $size / ($size * 0 + 1)
@@ -37,60 +37,10 @@ $-content-line-height: 1.5
         padding: calc(#{$_p} - #{$border}) $_p
 
 
-=content
-    // background-image: linear-gradient(#F5D6F5 1px, transparent 1px)
-    // background-size: 100% $-content-line-height * 1em
-
-    $_fs: $-content-font-size
-    $_lh: $-content-line-height
-
-    font-size: $_fs
-    line-height: $_lh
-
-    *
-        max-width: 100%
-        margin: 0
-        padding: 0
-
-    h1
-        $fs: 2.4em
-        font-size: $fs
-        @include flow_block($_lh, $fs)
-
-    h2
-        $fs: 2.2em
-        font-size: $fs
-        @include flow_block($_lh, $fs)
-
-    h3
-        $fs: 1.6em
-        font-size: $fs
-        @include flow_block($_lh, $fs)
-
-    h4
-        $fs: 1.2em
-        font-size: $fs
-        @include flow_block($_lh, $fs)
-
-    h5
-        $fs: 1em
-        font-size: $fs
-        @include flow_block($_lh, $fs)
-        font-weight: bold
-
-    h6
-        $fs: 0.9em
-        font-size: $fs
-        @include flow_block($_lh, $fs)
-        font-weight: bold
-
+=content_base($_lh)
     p,
-    ul,
-    ol,
-    dl,
     blockquote,
     address,
-    table,
     figure,
     hr
         @include flow_block($_lh)
@@ -202,6 +152,46 @@ $-content-line-height: 1.5
         & *:last-child
             marin-bottom: 0
 
+=content_titles($_lh)
+    h1
+        $fs: 2.4em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+
+    h2
+        $fs: 2.2em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+
+    h3
+        $fs: 1.6em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+
+    h4
+        $fs: 1.2em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+
+    h5
+        $fs: 1em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+        font-weight: bold
+
+    h6
+        $fs: 0.9em
+        font-size: $fs
+        @include flow_block($_lh, $fs)
+        font-weight: bold
+
+=content_lists($_lh)
+    ul,
+    ol,
+    dl
+        @include flow_block($_lh)
+        padding: 0
+
     ul, ol
         padding-left: 1.5em
     ul
@@ -227,7 +217,9 @@ $-content-line-height: 1.5
             & > ul, & > ol
                 padding-left: 1em
 
+=content_tables($_lh)
     table
+        @include flow_block($_lh)
         table-layout: fixed
         border-collapse: collapse
         border-spacing: 0
@@ -257,3 +249,24 @@ $-content-line-height: 1.5
     tfoot
         td, th
             font-style: italic
+
+
+=content
+    // background-image: linear-gradient(#F5D6F5 1px, transparent 1px)
+    // background-size: 100% $content-line-height * 1em
+
+    $_fs: $content-font-size
+    $_lh: $content-line-height
+
+    font-size: $_fs
+    line-height: $_lh
+
+    *
+        max-width: 100%
+        margin: 0
+        padding: 0
+
+    +content_titles($_lh)
+    +content_base($_lh)
+    +content_lists($_lh)
+    +content_tables($_lh)
