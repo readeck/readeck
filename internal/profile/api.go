@@ -60,28 +60,39 @@ func (api *profileAPI) UpdatePassword(u *users.User, pf *passwordForm) error {
 }
 
 // userProfile is the mapping returned by the profileInfo route.
-type userProfile struct {
+type profileInfoProvider struct {
+	Name        string `json:"name"`
+	Application string `json:"application"`
+}
+type profileInfoUser struct {
 	Username string    `json:"username"`
 	Email    string    `json:"email"`
 	Created  time.Time `json:"created"`
 	Updated  time.Time `json:"updated"`
 }
-
-// newUserProfile creates a new userProfile from a user instance.
-func newUserProfile(user *users.User) userProfile {
-	return userProfile{
-		Username: user.Username,
-		Email:    user.Email,
-		Created:  user.Created,
-		Updated:  user.Updated,
-	}
+type profileInfo struct {
+	Provider profileInfoProvider `json:"provider"`
+	User     profileInfoUser     `json:"user"`
 }
 
 // profileInfo returns the current user information.
 func (api *profileAPI) profileInfo(w http.ResponseWriter, r *http.Request) {
-	user := auth.GetRequestUser(r)
+	info := auth.GetRequestAuthInfo(r)
 
-	api.srv.Render(w, r, 200, newUserProfile(user))
+	res := profileInfo{
+		Provider: profileInfoProvider{
+			Name:        info.Provider.Name,
+			Application: info.Provider.Application,
+		},
+		User: profileInfoUser{
+			Username: info.User.Username,
+			Email:    info.User.Email,
+			Created:  info.User.Created,
+			Updated:  info.User.Updated,
+		},
+	}
+
+	api.srv.Render(w, r, 200, res)
 }
 
 // profileUpdate updates the current user profile information.

@@ -2,6 +2,7 @@ package tokens
 
 import (
 	"errors"
+	"strings"
 	"time"
 
 	"github.com/doug-martin/goqu/v9"
@@ -25,12 +26,13 @@ var (
 
 // Token is a token record in database
 type Token struct {
-	ID        int        `db:"id" goqu:"skipinsert,skipupdate"`
-	UID       string     `db:"uid"`
-	UserID    *int       `db:"user_id"`
-	Created   time.Time  `db:"created" goqu:"skipupdate"`
-	Expires   *time.Time `db:"expires"`
-	IsEnabled bool       `db:"is_enabled"`
+	ID          int        `db:"id" goqu:"skipinsert,skipupdate"`
+	UID         string     `db:"uid"`
+	UserID      *int       `db:"user_id"`
+	Created     time.Time  `db:"created" goqu:"skipupdate"`
+	Expires     *time.Time `db:"expires"`
+	IsEnabled   bool       `db:"is_enabled"`
+	Application string     `db:"application"`
 }
 
 // Manager is a query helper for token entries.
@@ -86,6 +88,9 @@ func (m *Manager) Create(token *Token) error {
 	if token.UserID == nil {
 		return errors.New("no token user")
 	}
+	if strings.TrimSpace(token.Application) == "" {
+		return errors.New("no application")
+	}
 
 	token.Created = time.Now()
 	token.UID = shortuuid.New()
@@ -94,12 +99,31 @@ func (m *Manager) Create(token *Token) error {
 		Rows(token).
 		Prepared(true).Executor().Exec()
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	id, _ := res.LastInsertId()
 	token.ID = int(id)
 	return nil
+}
+
+// Update updates some bookmark values.
+func (t *Token) Update(v interface{}) error {
+	if t.ID == 0 {
+		return errors.New("No ID")
+	}
+
+	_, err := db.Q().Update(TableName).Prepared(true).
+		Set(v).
+		Where(goqu.C("id").Eq(t.ID)).
+		Executor().Exec()
+
+	return err
+}
+
+// Save updates all the bookmark values.
+func (t *Token) Save() error {
+	return t.Update(t)
 }
 
 // IsExpired returns true if the token has an expiration date and the

@@ -22,7 +22,7 @@ type SessionAuthProvider struct {
 }
 
 // Info return information about the provider.
-func (p *SessionAuthProvider) Info() *ProviderInfo {
+func (p *SessionAuthProvider) Info(r *http.Request) *ProviderInfo {
 	return &ProviderInfo{
 		Name: "http session",
 	}
@@ -36,36 +36,36 @@ func (p *SessionAuthProvider) IsActive(r *http.Request) bool {
 
 // Authenticate checks if the request's session cookie is valid and
 // the user exists.
-func (p *SessionAuthProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*users.User, error) {
+func (p *SessionAuthProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*http.Request, *users.User, error) {
 	sess := p.GetSession(r)
 	if sess.IsNew {
 		p.clearSession(sess, w, r)
-		return nil, nil
+		return r, nil, nil
 	}
 
 	userID, ok := sess.Values["user_id"].(int)
 	if !ok {
 		p.clearSession(sess, w, r)
-		return nil, nil
+		return r, nil, nil
 	}
 
 	u, err := users.Users.GetOne(goqu.C("id").Eq(userID))
 	if err != nil {
 		p.clearSession(sess, w, r)
-		return nil, err
+		return r, nil, err
 	}
 
 	chk, _ := sess.Values["check_code"].(uint32)
 	if chk != u.CheckCode() {
 		p.clearSession(sess, w, r)
-		return nil, err
+		return r, nil, err
 	}
 
 	// At this point, the user is granted access.
 	// We renew its cookie for another max age duration.
 	p.resendCookie(sess, w, r)
 
-	return u, nil
+	return r, u, nil
 }
 
 func (p *SessionAuthProvider) clearSession(sess *sessions.Session, w http.ResponseWriter, r *http.Request) {

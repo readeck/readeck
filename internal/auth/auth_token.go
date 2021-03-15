@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"context"
 	"errors"
 	"net/http"
 	"strings"
@@ -9,15 +10,24 @@ import (
 	"github.com/readeck/readeck/internal/auth/users"
 )
 
+type ctxKeyAuthToken struct{}
+
+var (
+	ctxAuthToken = &ctxKeyAuthToken{}
+)
+
 // TokenAuthProvider handles authentication using a bearer token
 // passed in the request "Authorization" header with the scheme
 // "Bearer".
 type TokenAuthProvider struct{}
 
 // Info return information about the provider.
-func (p *TokenAuthProvider) Info() *ProviderInfo {
+func (p *TokenAuthProvider) Info(r *http.Request) *ProviderInfo {
+	token := r.Context().Value(ctxAuthToken).(*tokens.Token)
+
 	return &ProviderInfo{
-		Name: "bearer token",
+		Name:        "bearer token",
+		Application: token.Application,
 	}
 }
 
@@ -29,31 +39,32 @@ func (p *TokenAuthProvider) IsActive(r *http.Request) bool {
 
 // Authenticate performs the authentication using the "Authorization: Bearer"
 // header provided.
-func (p *TokenAuthProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*users.User, error) {
+func (p *TokenAuthProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*http.Request, *users.User, error) {
 	token, ok := p.getToken(r)
 	if !ok {
 		p.denyAccess(w)
-		return nil, errors.New("Invalid authentication header")
+		return r, nil, errors.New("invalid authentication header")
 	}
 
 	claims, err := tokens.GetJwtClaims(token)
 	if err != nil {
 		p.denyAccess(w)
-		return nil, err
+		return r, nil, err
 	}
 
 	res, err := tokens.Tokens.GetUser(claims.ID)
 	if err != nil {
 		p.denyAccess(w)
-		return nil, err
+		return r, nil, err
 	}
 
 	if res.Token.IsExpired() {
 		p.denyAccess(w)
-		return nil, nil
+		return r, nil, nil
 	}
 
-	return res.User, nil
+	ctx := context.WithValue(r.Context(), ctxAuthToken, res.Token)
+	return r.WithContext(ctx), res.User, nil
 }
 
 // CsrfExempt is always true for this provider.

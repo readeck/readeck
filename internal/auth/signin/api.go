@@ -29,8 +29,8 @@ func newAuthAPI(s *server.Server) *authAPI {
 // auth performs the user authentication with its username and
 // password and then, returns a JWT token tied to this user.
 func (api *authAPI) auth(w http.ResponseWriter, r *http.Request) {
-	u := &loginForm{}
-	f := form.NewForm(u)
+	tf := &tokenLoginForm{}
+	f := form.NewForm(tf)
 
 	form.Bind(f, r)
 
@@ -39,8 +39,8 @@ func (api *authAPI) auth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := users.Users.GetOne(goqu.C("username").Eq(u.Username))
-	if err != nil || !user.CheckPassword(u.Password) {
+	user, err := users.Users.GetOne(goqu.C("username").Eq(tf.Username))
+	if err != nil || !user.CheckPassword(tf.Password) {
 		api.srv.Message(w, r, &server.Message{
 			Status:  http.StatusForbidden,
 			Message: "Invalid user and/or password",
@@ -48,7 +48,11 @@ func (api *authAPI) auth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	t := &tokens.Token{UserID: &user.ID, IsEnabled: true}
+	t := &tokens.Token{
+		UserID:      &user.ID,
+		IsEnabled:   true,
+		Application: tf.Application,
+	}
 	if err := tokens.Tokens.Create(t); err != nil {
 		api.srv.Error(w, r, err)
 		return
@@ -69,4 +73,16 @@ func (api *authAPI) auth(w http.ResponseWriter, r *http.Request) {
 type tokenReturn struct {
 	UID   string `json:"id"`
 	Token string `json:"token"`
+}
+
+type tokenLoginForm struct {
+	Username    string `json:"username" conform:"trim"`
+	Password    string `json:"password"`
+	Application string `json:"application"`
+}
+
+func (lf *tokenLoginForm) Validate(f *form.Form) {
+	form.Required(f.Fields["username"])
+	form.Required(f.Fields["password"])
+	form.Required(f.Fields["application"])
 }

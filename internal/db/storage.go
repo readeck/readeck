@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS token (
 	created     datetime NOT NULL,
 	expires     datetime NULL,
 	is_enabled  integer  NOT NULL DEFAULT 1,
+	application text	 NOT NULL,
 
 	CONSTRAINT fk_token_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );

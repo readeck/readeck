@@ -25,21 +25,22 @@ type Info struct {
 
 // ProviderInfo contains information about the provider.
 type ProviderInfo struct {
-	Name string
+	Name        string
+	Application string
 }
 
 // Provider is the interface that must implement any authentication
 // provider.
 type Provider interface {
 	// Returns the provider information
-	Info() *ProviderInfo
+	Info(r *http.Request) *ProviderInfo
 
 	// Must return true to enable the provider for the current request.
 	IsActive(r *http.Request) bool
 
 	// Must return the currently logged in user when authentication is
 	// successful.
-	Authenticate(http.ResponseWriter, *http.Request) (*users.User, error)
+	Authenticate(http.ResponseWriter, *http.Request) (*http.Request, *users.User, error)
 }
 
 // FeatureCsrfProvider allows a provider to implement a method
@@ -54,7 +55,7 @@ type FeatureCsrfProvider interface {
 type NullProvider struct{}
 
 // Info return information about the provider.
-func (p *NullProvider) Info() *ProviderInfo {
+func (p *NullProvider) Info(r *http.Request) *ProviderInfo {
 	return &ProviderInfo{
 		Name: "null",
 	}
@@ -66,8 +67,8 @@ func (p *NullProvider) IsActive(r *http.Request) bool {
 }
 
 // Authenticate always return an error and no user.
-func (p *NullProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*users.User, error) {
-	return nil, errors.New("No authentication provider")
+func (p *NullProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*http.Request, *users.User, error) {
+	return r, nil, errors.New("No authentication provider")
 }
 
 // Init returns an http.Handler that will try to find a suitable
@@ -109,7 +110,7 @@ func Init(providers ...Provider) func(next http.Handler) http.Handler {
 func Required(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		provider := GetRequestProvider(r)
-		u, err := provider.Authenticate(w, r)
+		r, u, err := provider.Authenticate(w, r)
 		if err != nil {
 			w.WriteHeader(http.StatusForbidden)
 			return
@@ -120,7 +121,7 @@ func Required(next http.Handler) http.Handler {
 		}
 
 		r = setRequestAuthInfo(r, &Info{
-			Provider: provider.Info(),
+			Provider: provider.Info(r),
 			User:     u,
 		})
 		next.ServeHTTP(w, r)
