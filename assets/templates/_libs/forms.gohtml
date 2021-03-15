@@ -5,7 +5,7 @@
   {{ range .Errors }}
     <p>{{ . }}</p>
   {{ else }}
-    <p>Some data are not valid.</p>
+    <p>Please check your form for errors.</p>
   {{ end }}
 </div>
 {{- end }}
@@ -15,16 +15,20 @@
 <span style="display:none;"><input type="hidden" name="{{ .csrfName }}" value="{{ .csrfToken }}"></span>
 {{- end }}
 
+{{ define "attrList" -}}
+{{ range $k, $v := . -}}{{ $k|safeAttr }}="{{ $v }}" {{- end }}
+{{- end }}
+
 {{ define "textField" -}}
 {{- $type := or .type "text" -}}
-{{- $value := (eq $type "password" | ternary "" .field.Value) -}}
+{{- $value := eq $type "password" | ternary "" (or .value .field.Value "") -}}{{/* the final "" empties nil values */}}
 {{- $class := or .class "" -}}
 {{- if .field.Errors -}}{{ $class = cat $class "with-errors" }}{{ end -}}
 <div class="field {{ $class }}">
-  <label class="label" for="{{ .name }}">{{ .label }}:</label>
-  <div class="control">
+  <label for="{{ .name }}">{{ .label }}:</label>
+  <div class="control" {{ template "attrList" .controlAttrs }}>
     <input type="{{ $type }}" id="{{ .name }}" name="{{ .name }}"
-     value="{{ $value }}" />
+     value="{{ $value }}" {{ template "attrList" .inputAttrs }}/>
     {{- if .field.Errors -}}
     <ul class="errors">
       {{- range .field.Errors }}
@@ -32,6 +36,31 @@
       {{- end }}
     </ul>
     {{- end }}
+  </div>
+</div>
+{{- end }}
+
+{{ define "dateField" -}}
+{{ $value := (empty .field.Value) | ternary "" (htmlDate (or .field.Value (toDate "" "2006-01-02"))) }}
+{{ template "textField" (dict "field" .field
+                              "value" $value
+                              "type" "date"
+                              "name" .name
+                              "label" .label
+                              "class" .class
+                              ) }}
+{{- end }}
+
+{{ define "checkboxField" -}}
+{{- $checked := or .checked .field.Value false -}}
+{{- $class := or .class "" -}}
+{{- if .field.Errors -}}{{ $class = cat $class "with-errors" }}{{ end -}}
+<div class="field {{ $class }}">
+  <span class="spacer">&nbsp;</span>
+  <div class="control">
+    <input type="checkbox" id="{{ .name }}" name="{{ .name }}"
+     {{- if $checked }}checked="checked"{{ end -}} />
+    <label class="label-inline" for="{{ .name }}">{{ .label }}</label>
   </div>
 </div>
 {{- end }}

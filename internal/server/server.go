@@ -75,9 +75,16 @@ func New(basePath string) *Server {
 			r := ctx["request"].(*http.Request)
 			return s.AbsoluteURL(r, name...).String()
 		},
+		"iconURL": func(ctx TC, name string) string {
+			uri := ctx["assets"].(map[string]string)["icons"]
+			return fmt.Sprintf("%s#%s", uri, name)
+		},
 		"icon": func(ctx TC, name string) template.HTML {
 			uri := ctx["assets"].(map[string]string)["icons"]
 			return template.HTML(fmt.Sprintf(svgTemplate, uri, name))
+		},
+		"safeAttr": func(val string) template.HTMLAttr {
+			return template.HTMLAttr(val)
 		},
 	})
 

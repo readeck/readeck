@@ -9,7 +9,9 @@ import (
 	"net/url"
 	"reflect"
 	"strings"
+	"time"
 
+	"github.com/araddon/dateparse"
 	"github.com/gorilla/schema"
 	"github.com/leebenson/conform"
 )
@@ -42,6 +44,21 @@ type (
 		Validate(*Form)
 	}
 )
+
+func init() {
+	decoder.IgnoreUnknownKeys(true)
+	decoder.SetAliasTag("json")
+	decoder.RegisterConverter(time.Time{}, func(value string) reflect.Value {
+		if value == "" {
+			return reflect.ValueOf(time.Time{})
+		}
+		t, err := dateparse.ParseLocal(value)
+		if err != nil {
+			return reflect.Value{}
+		}
+		return reflect.ValueOf(t)
+	})
+}
 
 // MarshalJSON performs the field's JSON serialization.
 func (f *Field) MarshalJSON() ([]byte, error) {
@@ -155,9 +172,6 @@ func (f *Form) IsValid() bool {
 
 // BindValues binds the values from any URL encoded value list.
 func (f *Form) BindValues(values url.Values) {
-	decoder.IgnoreUnknownKeys(true)
-	decoder.SetAliasTag("json")
-
 	err := decoder.Decode(f.instance, values)
 	if err != nil {
 		if err, ok := err.(schema.MultiError); ok {
