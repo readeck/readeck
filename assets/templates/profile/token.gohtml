@@ -1,0 +1,58 @@
+{{ extends "profile/base.gohtml" }}
+
+{{ define "title" }}API Token{{ end }}
+
+{{ define "content" }}
+{{- $url := urlFor $ .Token.UID -}}
+
+<h1 class="title">API Token</h1>
+
+<h2 class="title">Properties</h2>
+
+<form action="{{ $url }}" method="POST">
+  {{ template "formErrors" .Form }}
+  {{ template "csrfField" . }}
+
+  <div class="field horizontal">
+    <label>Token ID:</label>
+    <div class="control">{{ .Token.UID }}</div>
+  </div>
+
+  <div class="field horizontal">
+    <label>Application:</label>
+    <div class="control">{{ .Token.Application }}</div>
+  </div>
+
+  {{ template "checkboxField" (dict "field" .Form.Fields.is_enabled
+                                    "name" "is_enabled"
+                                    "label" "Enabled"
+                                    "class" "horizontal"
+                                    )}}
+  {{ template "dateField" (dict "field" .Form.Fields.expires
+                           "type" "text"
+                           "name" "expires"
+                           "label" "Expires at"
+                           "class" "horizontal"
+                           ) }}
+
+  <p><button type="submit">Save</button></p>
+</form>
+
+<h2 class="title">API authentication</h2>
+
+<div class="field max" data-controller="clipboard" data-clipboard-jwt-value="{{ .JWT }}">
+  <label>Your API token</label>
+  <textarea readonly="1" style="height:5em; max-width:40em">{{ .JWT }}</textarea>
+  <p><button class="small outlined" data-action="clipboard#copy">Copy Token</button></p>
+</div>
+
+<div class="field max" data-controller="clipboard" data-clipboard-jwt-value="Authorization: Bearer {{ .JWT }}">
+  <p>You can use this token by passing as an <code>Authorization: Bearer</code>
+  HTTP header.</p>
+
+  <label>HTTP Header</label>
+  <textarea readonly="1" style="height:5em; max-width:40em">Authorization: Bearer {{ .JWT }}</textarea>
+  <p><button class="small outlined" data-action="clipboard#copy">Copy Header</button></p>
+</div>
+
+{{ end }}

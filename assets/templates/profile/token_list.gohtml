@@ -1,0 +1,42 @@
+{{ extends "profile/base.gohtml" }}
+
+{{ define "title" }}API Tokens{{ end }}
+
+{{ define "content" }}
+
+<h1 class="title">Your API Tokens</h1>
+
+<form action="{{ urlFor $ "tokens" }}" method="POST">
+  {{ template "csrfField" . }}
+  <p><button type="submit">Create a new API token</button></p>
+</form>
+
+{{ template "pagination" .Pagination }}
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Enabled</th>
+      <th>Application</th>
+      <th>Created on</th>
+      <th>Expires on</th>
+      <th>ID</th>
+    </tr>
+  </thead>
+  <tbody>
+{{ range .Tokens }}
+    {{- $url := urlFor $ "." .ID -}}
+    <tr>
+      <td>{{ .IsEnabled }}</td>
+      <td>{{ .Application }}</td>
+      <td>{{ .Created | date "2006-01-02" }}</td>
+      <td>{{- if not .Expires|empty }}{{ .Expires | date "2006-01-02" }}{{ end -}}</td>
+      <td><a href="{{ $url }}">{{ .ID }}</a></td>
+    </tr>
+{{ end }}
+  </tbody>
+</table>
+
+{{ template "pagination" .Pagination }}
+
+{{ end }}
