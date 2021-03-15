@@ -5,9 +5,11 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi/v5"
 
 	"github.com/readeck/readeck/internal/auth"
+	"github.com/readeck/readeck/internal/auth/tokens"
 	"github.com/readeck/readeck/internal/auth/users"
 	"github.com/readeck/readeck/internal/server"
 	"github.com/readeck/readeck/pkg/form"
@@ -27,6 +29,7 @@ func newProfileAPI(s *server.Server) *profileAPI {
 	r.Get("/", api.profileInfo)
 	r.Patch("/", api.profileUpdate)
 	r.Put("/password", api.passwordUpdate)
+	r.Get("/tokens", api.tokenList)
 
 	return api
 }
@@ -136,6 +139,60 @@ func (api *profileAPI) passwordUpdate(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+func (api *profileAPI) tokenList(w http.ResponseWriter, r *http.Request) {
+	tl, err := api.getTokens(r, ".")
+	if err != nil {
+		if errors.Is(err, tokens.ErrNotFound) {
+			api.srv.TextMessage(w, r, http.StatusNotFound, "not found")
+			return
+		}
+		api.srv.Error(w, r, err)
+		return
+	}
+
+	api.srv.SendPaginationHeaders(w, r, tl.Pagination.TotalCount, tl.Pagination.Limit, tl.Pagination.Offset)
+	api.srv.Render(w, r, http.StatusOK, tl.Items)
+}
+
+func (api *profileAPI) getTokens(r *http.Request, base string) (tokenList, error) {
+	res := tokenList{}
+
+	pf, _ := api.srv.GetPageParams(r)
+	if pf == nil {
+		return res, tokens.ErrNotFound
+	}
+	if pf.Limit == 0 {
+		pf.Limit = 30
+	}
+
+	ds := tokens.Tokens.Query().
+		Where(
+			goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
+		).
+		Order(goqu.I("created").Desc()).
+		Limit(uint(pf.Limit)).
+		Offset(uint(pf.Offset))
+
+	count, err := ds.ClearOrder().ClearLimit().ClearOffset().Count()
+	if err != nil {
+		return res, err
+	}
+
+	items := []*tokens.Token{}
+	if err := ds.ScanStructs(&items); err != nil {
+		return res, err
+	}
+
+	res.Pagination = api.srv.NewPagination(r, int(count), pf.Limit, pf.Offset)
+
+	res.Items = make([]tokenItem, len(items))
+	for i, item := range items {
+		res.Items[i] = newTokenItem(api.srv, r, item, base)
+	}
+
+	return res, nil
+}
+
 // profileForm is the form used by the profile update routes.
 type profileForm struct {
 	Username *string `json:"username" conform:"trim"`
@@ -172,4 +229,35 @@ func (pf *passwordForm) validateForView(f *form.Form, u *users.User) bool {
 	}
 
 	return true
+}
+
+type tokenList struct {
+	Pagination server.Pagination
+	Items      []tokenItem
+}
+
+type tokenItem struct {
+	*tokens.Token `json:"-"`
+
+	ID        string     `json:"id"`
+	Href      string     `json:"href"`
+	Created   time.Time  `json:"created" goqu:"skipupdate"`
+	Expires   *time.Time `json:"expires"`
+	IsEnabled bool       `json:"is_enabled"`
+}
+
+func newTokenItem(s *server.Server, r *http.Request, t *tokens.Token, base string) tokenItem {
+	return tokenItem{
+		Token:     t,
+		ID:        t.UID,
+		Href:      s.AbsoluteURL(r, base, t.UID).String(),
+		Created:   t.Created,
+		Expires:   t.Expires,
+		IsEnabled: t.IsEnabled,
+	}
+}
+
+type tokenForm struct {
+	Expires   *time.Time `json:"expires"`
+	IsEnabled bool       `json:"is_enabled"`
 }
