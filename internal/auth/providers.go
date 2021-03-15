@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"errors"
 	"net/http"
 
 	"github.com/readeck/readeck/internal/auth/users"
@@ -32,15 +31,11 @@ type ProviderInfo struct {
 // Provider is the interface that must implement any authentication
 // provider.
 type Provider interface {
-	// Returns the provider information
-	Info(r *http.Request) *ProviderInfo
-
 	// Must return true to enable the provider for the current request.
 	IsActive(r *http.Request) bool
 
-	// Must return the currently logged in user when authentication is
-	// successful.
-	Authenticate(http.ResponseWriter, *http.Request) (*http.Request, *users.User, error)
+	// Must return a request with the Info provided when successful.
+	Authenticate(http.ResponseWriter, *http.Request) (*http.Request, error)
 }
 
 // FeatureCsrfProvider allows a provider to implement a method
@@ -67,8 +62,9 @@ func (p *NullProvider) IsActive(r *http.Request) bool {
 }
 
 // Authenticate always return an error and no user.
-func (p *NullProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*http.Request, *users.User, error) {
-	return r, nil, errors.New("No authentication provider")
+func (p *NullProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*http.Request, error) {
+	return r, nil
+	// return r, nil, errors.New("no authentication provider")
 }
 
 // Init returns an http.Handler that will try to find a suitable
@@ -103,27 +99,29 @@ func Init(providers ...Provider) func(next http.Handler) http.Handler {
 
 // Required returns an http.Handler that will enforce authentication
 // on the request. It uses the request authentication provider to perform
-// the authentication. WWhen it's successful, it stores the user in the
-// request's context. Otherwise it stops the response with a 403 error.
+// the authentication.
+//
+// A provider performing a successful authentication must store
+// its authentication information using SetRequestAuthInfo.
+
+// When the request has this attribute it will carry on.
+// Otherwise it stops the response with a 403 error.
 //
 // The logged in user can be retrieved with GetRequestUser().
 func Required(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		provider := GetRequestProvider(r)
-		r, u, err := provider.Authenticate(w, r)
+		r, err := provider.Authenticate(w, r)
 		if err != nil {
 			w.WriteHeader(http.StatusForbidden)
 			return
 		}
-		if u == nil {
+
+		if !HasRequestAuthInfo(r) {
 			w.WriteHeader(http.StatusForbidden)
 			return
 		}
 
-		r = setRequestAuthInfo(r, &Info{
-			Provider: provider.Info(r),
-			User:     u,
-		})
 		next.ServeHTTP(w, r)
 	}
 
@@ -142,10 +140,17 @@ func GetRequestProvider(r *http.Request) Provider {
 	return r.Context().Value(ctxProviderKey).(Provider)
 }
 
-// setRequestAuthInfo stores the request's user.
-func setRequestAuthInfo(r *http.Request, info *Info) *http.Request {
+// SetRequestAuthInfo stores the request's user.
+func SetRequestAuthInfo(r *http.Request, info *Info) *http.Request {
 	ctx := context.WithValue(r.Context(), ctxAuthKey, info)
 	return r.WithContext(ctx)
+}
+
+func HasRequestAuthInfo(r *http.Request) bool {
+	if _, ok := r.Context().Value(ctxAuthKey).(*Info); ok {
+		return true
+	}
+	return false
 }
 
 // GetRequestAuthInfo returns the current request's auth info

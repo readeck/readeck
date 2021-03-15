@@ -14,13 +14,6 @@ import (
 // with "Authorization: Basic {payload}" header.
 type BasicAuthProvider struct{}
 
-// Info return information about the provider.
-func (p *BasicAuthProvider) Info(r *http.Request) *ProviderInfo {
-	return &ProviderInfo{
-		Name: "basic auth",
-	}
-}
-
 // IsActive returns true when the client submits basic HTTP authorization
 // header.
 func (p *BasicAuthProvider) IsActive(r *http.Request) bool {
@@ -30,30 +23,35 @@ func (p *BasicAuthProvider) IsActive(r *http.Request) bool {
 
 // Authenticate performs the authentication using the HTTP basic authentication
 // information provided.
-func (p *BasicAuthProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*http.Request, *users.User, error) {
+func (p *BasicAuthProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*http.Request, error) {
 	username, password, ok := r.BasicAuth()
 	if !ok {
 		p.denyAccess(w)
-		return r, nil, errors.New("invalid authentication header")
+		return r, errors.New("invalid authentication header")
 	}
 
 	if strings.TrimSpace(username) == "" || strings.TrimSpace(password) == "" {
 		p.denyAccess(w)
-		return r, nil, errors.New("no username and/or password provided")
+		return r, errors.New("no username and/or password provided")
 	}
 
 	u, err := users.Users.GetOne(goqu.C("username").Eq(username))
 	if err != nil {
 		p.denyAccess(w)
-		return r, nil, err
+		return r, err
 	}
 
 	if u.CheckPassword(password) {
-		return r, u, nil
+		return SetRequestAuthInfo(r, &Info{
+			Provider: &ProviderInfo{
+				Name: "basic auth",
+			},
+			User: u,
+		}), nil
 	}
 
 	p.denyAccess(w)
-	return r, nil, nil
+	return r, nil
 }
 
 // CsrfExempt is always true for this provider.
