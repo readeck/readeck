@@ -31,6 +31,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.m?js$/,
+        exclude: /(node_modules)/,
+        use: ["babel-loader"],
+      },
+      {
         test: /\.css$/,
         use: [
           {
@@ -94,9 +99,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
-        '**\/*',
-        '!.keep'
-      ]
+        "**\/*",
+        "!.keep",
+      ],
     }),
     new MiniCssExtractPlugin({
       filename: "[name].[hash:8].css",

@@ -6,20 +6,18 @@ module.exports = {
   },
   extends: [
   ],
+  parser: "@babel/eslint-parser",
   parserOptions: {
-    // parser: "babel-eslint",
-    ecmaVersion: 2019,
     sourceType: "module",
   },
-  plugins: [
-  ],
+  plugins: [],
   overrides: [
   ],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
 
-    "quotes": ["error", "double"],
+    "quotes": ["error", "double", {"avoidEscape": true}],
     "semi": ["error", "never"],
     "comma-dangle": ["error", {
       "arrays": "always-multiline",
