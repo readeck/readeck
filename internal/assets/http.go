@@ -22,6 +22,7 @@ var (
 // SetupRoutes setup the static asset routes on /assets
 func SetupRoutes(s *server.Server) {
 	s.AddRoute("/assets", serveAssets())
+	s.AddRoute("/assets/rnd/{name}.svg", randomSvg(s))
 }
 
 func serveAssets() http.HandlerFunc {
