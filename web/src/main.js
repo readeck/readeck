@@ -28,6 +28,7 @@ import "@box/solid/bxs-show.svg"
 import "@box/solid/bxs-hide.svg"
 
 
+// Launch stimulus controllers
 import "regenerator-runtime/runtime"
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"

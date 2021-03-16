@@ -21,7 +21,7 @@
 
 {{- if eq .count 0 }}
 {{/* ----------------------------------------------------------------
-Placeholder when no bookmarks 
+Placeholder when no bookmarks
 */}}
 <div class="placeholder">
   <p>You don't have any bookmark yet. Start saving pages now!</p>
@@ -72,16 +72,28 @@ Bookmark list */}}
         <form action="{{ $url }}" method="post">
           {{ template "csrfField" $ }}
           <input type="hidden" name="_to" value="{{ $.currentPath }}" />
-          <button class="button-clear"
-          name="is_read" value="{{ .IsRead | ternary 0 1 }}">
+          <button class="button-clear" name="is_read" value="{{ .IsRead | ternary 0 1 }}"
+           data-controller="bk-attr-update"
+           data-bk-attr-update-id-value="{{ .ID }}"
+           data-bk-attr-update-icon-on-value="bxs-check-circle"
+           data-bk-attr-update-icon-off-value="bx-check-circle"
+           data-action="click->bk-attr-update#toggle">
           {{ icon $ (.IsRead | ternary "bxs-check-circle" "bx-check-circle") }}
           </button>
-          <button class="button-clear"
-          name="is_marked" value="{{ .IsMarked | ternary 0 1 }}">
+          <button class="button-clear" name="is_marked" value="{{ .IsMarked | ternary 0 1 }}"
+           data-controller="bk-attr-update"
+           data-bk-attr-update-id-value="{{ .ID }}"
+           data-bk-attr-update-icon-on-value="bxs-heart"
+           data-bk-attr-update-icon-off-value="bx-heart"
+           data-action="click->bk-attr-update#toggle">
           {{ icon $ (.IsMarked | ternary "bxs-heart" "bx-heart") }}
           </button>
-          <button class="button-clear"
-          name="is_archived" value="{{ .IsArchived | ternary 0 1 }}">
+          <button class="button-clear" name="is_archived" value="{{ .IsArchived | ternary 0 1 }}"
+           data-controller="bk-attr-update"
+           data-bk-attr-update-id-value="{{ .ID }}"
+           data-bk-attr-update-icon-on-value="bxs-archive"
+           data-bk-attr-update-icon-off-value="bx-archive"
+           data-action="click->bk-attr-update#toggle">
           {{ icon $ (.IsArchived | ternary "bxs-archive" "bx-archive") }}
           </button>
         </form>

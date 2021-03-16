@@ -92,13 +92,28 @@
           <form action="" method="post">
             {{ template "csrfField" . }}
             <div class="compound">
-              <button class="outlined rounded icon" name="is_read" value="{{ .item.IsRead | ternary 0 1 }}">
+              <button class="outlined rounded icon" name="is_read" value="{{ .item.IsRead | ternary 0 1 }}"
+               data-controller="bk-attr-update"
+               data-bk-attr-update-id-value="{{ .item.ID }}"
+               data-bk-attr-update-icon-on-value="bxs-check-circle"
+               data-bk-attr-update-icon-off-value="bx-check-circle"
+               data-action="click->bk-attr-update#toggle">
               {{ icon $ (.item.IsRead | ternary "bxs-check-circle" "bx-check-circle") }}
               </button>
-              <button class="outlined rounded icon" name="is_marked" value="{{ .item.IsMarked | ternary 0 1 }}">
+              <button class="outlined rounded icon" name="is_marked" value="{{ .item.IsMarked | ternary 0 1 }}"
+               data-controller="bk-attr-update"
+               data-bk-attr-update-id-value="{{ .item.ID }}"
+               data-bk-attr-update-icon-on-value="bxs-heart"
+               data-bk-attr-update-icon-off-value="bx-heart"
+               data-action="click->bk-attr-update#toggle">
               {{ icon $ (.item.IsMarked | ternary "bxs-heart" "bx-heart") }}
               </button>
-              <button class="outlined rounded icon" name="is_archived" value="{{ .item.IsArchived | ternary 0 1 }}">
+              <button class="outlined rounded icon" name="is_archived" value="{{ .item.IsArchived | ternary 0 1 }}"
+               data-controller="bk-attr-update"
+               data-bk-attr-update-id-value="{{ .item.ID }}"
+               data-bk-attr-update-icon-on-value="bxs-archive"
+               data-bk-attr-update-icon-off-value="bx-archive"
+               data-action="click->bk-attr-update#toggle">
               {{ icon $ (.item.IsArchived | ternary "bxs-archive" "bx-archive") }}
               </button>
             </div>
