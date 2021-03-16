@@ -5,9 +5,6 @@ import "fontsource-merriweather"
 // Style
 import "../style/index.sass"
 
-// Scripts
-import "./video"
-
 // Icons
 // They are all combined into a big SVG file that's included
 // in the main template.
