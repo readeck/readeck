@@ -5,12 +5,12 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"crypto/sha512"
-	"math/rand"
+	"encoding/json"
 	"os"
 	"runtime"
 	"time"
 
-	"github.com/pelletier/go-toml"
+	"github.com/komkom/toml"
 )
 
 var (
@@ -18,12 +18,6 @@ var (
 	buildTimeStr string
 	buildTime    time.Time
 	startTime    time.Time = time.Now().UTC()
-
-	keyChars = [][2]rune{
-		{33, 124},                                      // latin set (symbols, numbers, alphabet)
-		{161, 187}, {191, 214}, {216, 246}, {248, 255}, // latin supplement
-		{128512, 128584}, // emojis
-	}
 
 	cookieHk []byte
 	cookieBk []byte
@@ -53,8 +47,8 @@ type configMain struct {
 }
 
 type configServer struct {
-	Host    string
-	Port    int
+	Host    string        `json:"host"`
+	Port    int           `json:"port"`
 	Session configSession `json:"session"`
 }
 
@@ -118,7 +112,7 @@ func LoadConfiguration(configPath string) error {
 	}
 	defer fd.Close()
 
-	dec := toml.NewDecoder(fd)
+	dec := json.NewDecoder(toml.New(fd))
 	if err := dec.Decode(&Config); err != nil {
 		return err
 	}
@@ -126,51 +120,6 @@ func LoadConfiguration(configPath string) error {
 	loadKeys(Config.Main.SecretKey)
 
 	return nil
-}
-
-// WriteConfig writes configuration to a file.
-func WriteConfig(filename string) error {
-	fd, err := os.OpenFile(filename, os.O_RDWR|os.O_TRUNC, 0600)
-	if err != nil {
-		return err
-	}
-
-	enc := toml.NewEncoder(fd).
-		ArraysWithOneElementPerLine(true).
-		Indentation("  ").
-		Order(toml.OrderPreserve)
-
-	if err = enc.Encode(Config); err != nil {
-		defer fd.Close()
-		return err
-	}
-
-	return fd.Close()
-}
-
-// GenerateKey returns a random key
-func GenerateKey(minLen, maxLen int) string {
-	if minLen >= maxLen {
-		panic("maxLen must be greater then minLen")
-	}
-	rand.Seed(time.Now().UnixNano())
-
-	runes := []rune{}
-	for _, table := range keyChars {
-		for i := table[0]; i <= table[1]; i++ {
-			if i == 34 || i == 92 { // exclude " and \
-				continue
-			}
-			runes = append(runes, i)
-		}
-	}
-
-	l := rand.Intn(maxLen-minLen) + minLen
-	b := make([]rune, l)
-	for i := range b {
-		b[i] = runes[rand.Intn(len(runes))]
-	}
-	return string(b)
 }
 
 // loadKeys prepares all the keys derivated from the configuration's

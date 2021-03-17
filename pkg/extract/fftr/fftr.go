@@ -9,7 +9,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/pelletier/go-toml"
+	"github.com/komkom/toml"
 	"golang.org/x/net/idna"
 )
 
@@ -63,7 +63,7 @@ func NewConfig(r io.Reader, format string) (*Config, error) {
 	cf.AutoDetectOnFailure = true
 	switch format {
 	case "toml":
-		dec := toml.NewDecoder(r)
+		dec := json.NewDecoder(toml.New(r))
 		if err := dec.Decode(cf); err != nil {
 			return nil, err
 		}

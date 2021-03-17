@@ -40,9 +40,9 @@ func init() {
 func appPersistentPreRun(c *cobra.Command, args []string) error {
 	if configPath == "" {
 		configPath = "config.toml"
-		if err := createConfigFile(configPath); err != nil {
-			return err
-		}
+	}
+	if err := createConfigFile(configPath); err != nil {
+		return err
 	}
 
 	if err := configs.LoadConfiguration(configPath); err != nil {
@@ -152,14 +152,12 @@ func createConfigFile(filename string) error {
 }
 
 func updateConfig() bool {
-	updated := false
-
 	if configs.Config.Main.SecretKey == "" {
 		configs.Config.Main.SecretKey = configs.GenerateKey(48, 64)
-		updated = true
+		return true
 	}
 
-	return updated
+	return false
 }
 
 func createFolder(name string) error {

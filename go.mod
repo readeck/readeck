@@ -12,7 +12,7 @@ require (
 	github.com/araddon/dateparse v0.0.0-20210207001429-0eec95c9db7e
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
 	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
-	github.com/cristalhq/jwt/v3 v3.0.12 // indirect
+	github.com/cristalhq/jwt/v3 v3.0.12
 	github.com/doug-martin/goqu/v9 v9.11.0
 	github.com/fatih/color v1.10.0
 	github.com/gammazero/deque v0.0.0-20201010052221-3932da5530cc // indirect
@@ -29,13 +29,13 @@ require (
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/jarcoal/httpmock v1.0.8
 	github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e // indirect
+	github.com/komkom/toml v0.0.0-20210317065440-24f427ca88cc
 	github.com/leebenson/conform v1.2.2
 	github.com/lithammer/shortuuid v3.0.0+incompatible
 	github.com/lithammer/shortuuid/v3 v3.0.6
 	github.com/mattn/go-colorable v0.1.8
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/mitchellh/copystructure v1.1.1 // indirect
-	github.com/pelletier/go-toml v1.8.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.1.3
 	github.com/stretchr/testify v1.7.0
