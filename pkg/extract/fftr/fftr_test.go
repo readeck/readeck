@@ -139,7 +139,7 @@ func TestFftr(t *testing.T) {
 		cf, err := NewConfigForURL(src, folders)
 		assert.Nil(t, cf)
 		if assert.Error(t, err) {
-			assert.Contains(t, err.Error(), "convert")
+			assert.Contains(t, err.Error(), "cannot unmarshal")
 		}
 	})
 }
