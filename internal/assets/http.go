@@ -64,6 +64,9 @@ func (f *directFileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if st.IsDir() {
 		http.Error(w, http.StatusText(http.StatusForbidden), http.StatusForbidden)
 		return
+	} else if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
 	}
 
 	// Go 1.16 did not implement any form of caching control for embed.FS.

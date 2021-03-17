@@ -39,6 +39,7 @@ func randomSvg(s *server.Server) http.Handler {
 		c3 := (c2 + 25) % 360
 		w.Header().Set("Content-Type", "image/svg+xml")
 		s.SetLastModified(w, configs.BuildTime())
+		w.Header().Set("Cache-Control", `public, max-age=31536000`)
 		fmt.Fprintf(w, svgGradient, c1, c2, c3)
 	})
 	return r
