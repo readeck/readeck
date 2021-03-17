@@ -53,8 +53,8 @@ func TestFftr(t *testing.T) {
 		}
 
 		assert.Equal(t, []string{
-			"standard/w3.org.toml",
-			"standard/global.toml",
+			"standard/w3.org.json",
+			"standard/global.json",
 		}, cf.Files)
 	})
 
@@ -67,8 +67,8 @@ func TestFftr(t *testing.T) {
 
 		assert.Equal(t, []string{
 			"custom/longform.org.toml",
-			"standard/longform.org.toml",
-			"standard/global.toml",
+			"standard/longform.org.json",
+			"standard/global.json",
 		}, cf.Files)
 	})
 
@@ -80,9 +80,9 @@ func TestFftr(t *testing.T) {
 		}
 
 		assert.Equal(t, []string{
-			"standard/blogs.reuters.com.toml",
-			"standard/.reuters.com.toml",
-			"standard/global.toml",
+			"standard/blogs.reuters.com.json",
+			"standard/.reuters.com.json",
+			"standard/global.json",
 		}, cf.Files)
 	})
 
@@ -94,8 +94,8 @@ func TestFftr(t *testing.T) {
 		}
 
 		assert.Equal(t, []string{
-			"standard/.reuters.com.toml",
-			"standard/global.toml",
+			"standard/.reuters.com.json",
+			"standard/global.json",
 		}, cf.Files)
 	})
 
@@ -117,8 +117,8 @@ func TestFftr(t *testing.T) {
 		}
 
 		assert.Equal(t, []string{
-			"standard/xn--protin-bva.com.toml",
-			"standard/global.toml",
+			"standard/xn--protin-bva.com.json",
+			"standard/global.json",
 		}, cf.Files)
 	})
 

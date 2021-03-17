@@ -140,14 +140,15 @@ func (api *cookbookAPI) loadURLs() {
 
 		// Parse config files
 		for _, x := range files {
-			if x.IsDir() || path.Ext(x.Name()) != ".toml" {
+			if x.IsDir() || (path.Ext(x.Name()) != ".toml" && path.Ext(x.Name()) != ".json") {
 				continue
 			}
+
 			f, err := configFS.Open(x.Name())
 			if err != nil {
 				panic(err)
 			}
-			cfg, err := fftr.NewConfig(f)
+			cfg, err := fftr.NewConfig(f, path.Ext(x.Name())[1:])
 			if err != nil {
 				log.WithField(
 					"cf", fmt.Sprintf("%s/%s", configFS.Name, x.Name()),

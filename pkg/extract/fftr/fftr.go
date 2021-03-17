@@ -1,6 +1,7 @@
 package fftr
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/fs"
@@ -30,39 +31,47 @@ var DefaultConfigurationFolders ConfigFolderList = ConfigFolderList{
 
 // Config holds the fivefilters configuration.
 type Config struct {
-	Files []string `toml:"-"`
+	Files []string `json:"-"`
 
-	TitleSelectors          []string          `toml:"title_selectors"`
-	BodySelectors           []string          `toml:"body_selectors"`
-	DateSelectors           []string          `toml:"date_selectors"`
-	AuthorSelectors         []string          `toml:"author_selectors"`
-	StripSelectors          []string          `toml:"strip_selectors"`
-	StripIDOrClass          []string          `toml:"strip_id_or_class"`
-	StripImageSrc           []string          `toml:"strip_image_src"`
-	NativeAdSelectors       []string          `toml:"native_ad_selectors"`
-	Tidy                    bool              `toml:"tidy"`
-	Prune                   bool              `toml:"prune"`
-	AutoDetectOnFailure     bool              `toml:"autodetect_on_failure"`
-	SinglePageLinkSelectors []string          `toml:"single_page_link_selectors"`
-	NextPageLinkSelectors   []string          `toml:"next_page_link_selectors"`
-	ReplaceStrings          [][2]string       `toml:"replace_strings"`
-	HTTPHeaders             map[string]string `toml:"http_headers"`
-	Tests                   []FilterTest      `toml:"tests"`
+	TitleSelectors          []string          `json:"title_selectors"`
+	BodySelectors           []string          `json:"body_selectors"`
+	DateSelectors           []string          `json:"date_selectors"`
+	AuthorSelectors         []string          `json:"author_selectors"`
+	StripSelectors          []string          `json:"strip_selectors"`
+	StripIDOrClass          []string          `json:"strip_id_or_class"`
+	StripImageSrc           []string          `json:"strip_image_src"`
+	NativeAdSelectors       []string          `json:"native_ad_selectors"`
+	Tidy                    bool              `json:"tidy"`
+	Prune                   bool              `json:"prune"`
+	AutoDetectOnFailure     bool              `json:"autodetect_on_failure"`
+	SinglePageLinkSelectors []string          `json:"single_page_link_selectors"`
+	NextPageLinkSelectors   []string          `json:"next_page_link_selectors"`
+	ReplaceStrings          [][2]string       `json:"replace_strings"`
+	HTTPHeaders             map[string]string `json:"http_headers"`
+	Tests                   []FilterTest      `json:"tests"`
 }
 
 // FilterTest holds the values for a filter's test.
 type FilterTest struct {
-	URL      string
-	Contains []string
+	URL      string   `json:"url"`
+	Contains []string `json:"contains"`
 }
 
 // NewConfig loads a configuration file from an io.Reader.
-func NewConfig(r io.Reader) (*Config, error) {
+func NewConfig(r io.Reader, format string) (*Config, error) {
 	cf := &Config{}
 	cf.AutoDetectOnFailure = true
-	dec := toml.NewDecoder(r)
-	if err := dec.Decode(cf); err != nil {
-		return nil, err
+	switch format {
+	case "toml":
+		dec := toml.NewDecoder(r)
+		if err := dec.Decode(cf); err != nil {
+			return nil, err
+		}
+	case "json":
+		dec := json.NewDecoder(r)
+		if err := dec.Decode(cf); err != nil {
+			return nil, err
+		}
 	}
 
 	return cf, nil
@@ -89,7 +98,7 @@ func NewConfigForURL(src *url.URL, folders ConfigFolderList) (*Config, error) {
 		fp, _ := x.cf.Open(x.name)
 		defer fp.Close()
 
-		cf, err := NewConfig(fp)
+		cf, err := NewConfig(fp, x.format)
 		if err != nil {
 			return nil, err
 		}
@@ -135,18 +144,30 @@ func (cf *ConfigFolder) fileExists(name string) bool {
 	return !s.IsDir()
 }
 
+func (cf *ConfigFolder) fileLookup(name string) (string, string, bool) {
+	extensions := []string{"json", "toml"}
+	for _, ext := range extensions {
+		fname := fmt.Sprintf("%s.%s", name, ext)
+		if cf.fileExists(fname) {
+			return fname, ext, true
+		}
+	}
+
+	return "", "", false
+}
+
 type lookupResult struct {
-	name string
-	cf   *ConfigFolder
+	name   string
+	format string
+	cf     *ConfigFolder
 }
 
 func (cf ConfigFolderList) findHostFile(name string) []lookupResult {
 	res := []lookupResult{}
 
 	for _, folder := range cf {
-		fname := fmt.Sprintf("%s.toml", name)
-		if folder.fileExists(fname) {
-			res = append(res, lookupResult{fname, folder})
+		if fname, ext, ok := folder.fileLookup(name); ok {
+			res = append(res, lookupResult{fname, ext, folder})
 		}
 	}
 
@@ -158,9 +179,9 @@ func (cf ConfigFolderList) findHostWildcard(name string) []lookupResult {
 	parts := strings.Split(name, ".")
 	for _, folder := range cf {
 		for i := range parts {
-			fname := fmt.Sprintf(".%s.toml", strings.Join(parts[i:], "."))
-			if folder.fileExists(fname) {
-				res = append(res, lookupResult{fname, folder})
+			n := fmt.Sprintf(".%s", strings.Join(parts[i:], "."))
+			if fname, ext, ok := folder.fileLookup(n); ok {
+				res = append(res, lookupResult{fname, ext, folder})
 				break
 			}
 		}

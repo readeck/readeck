@@ -39,43 +39,43 @@ func init() {
 // Because we don't need viper's mess for just storing configuration from
 // a source.
 type config struct {
-	Main      configMain      `toml:"main"`
-	Server    configServer    `toml:"server"`
-	Database  configDB        `toml:"database"`
-	Extractor configExtractor `toml:"extractor"`
+	Main      configMain      `json:"main"`
+	Server    configServer    `json:"server"`
+	Database  configDB        `json:"database"`
+	Extractor configExtractor `json:"extractor"`
 }
 
 type configMain struct {
-	LogLevel      string `toml:"log_level"`
-	DevMode       bool   `toml:"dev_mode"`
-	SecretKey     string `toml:"secret_key"`
-	DataDirectory string `toml:"data_directory"`
+	LogLevel      string `json:"log_level"`
+	DevMode       bool   `json:"dev_mode"`
+	SecretKey     string `json:"secret_key"`
+	DataDirectory string `json:"data_directory"`
 }
 
 type configServer struct {
 	Host    string
 	Port    int
-	Session configSession `toml:"session"`
+	Session configSession `json:"session"`
 }
 
 type configDB struct {
-	Driver string `toml:"driver"`
-	Source string `toml:"source"`
+	Driver string `json:"driver"`
+	Source string `json:"source"`
 }
 
 type configSession struct {
-	CookieName string `toml:"cookie_name"`
-	MaxAge     int    `toml:"max_age"` // in minutes
+	CookieName string `json:"cookie_name"`
+	MaxAge     int    `json:"max_age"` // in minutes
 }
 
 type configExtractor struct {
-	NumWorkers int                `toml:"workers"`
-	SiteConfig []configSiteConfig `toml:"site_config"`
+	NumWorkers int                `json:"workers"`
+	SiteConfig []configSiteConfig `json:"site_config"`
 }
 
 type configSiteConfig struct {
-	Name string `toml:"name"`
-	Src  string `toml:"src"`
+	Name string `json:"name"`
+	Src  string `json:"src"`
 }
 
 // Config holds the configuration data from configuration files

@@ -5,6 +5,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -15,8 +16,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-
-	"github.com/pelletier/go-toml"
 
 	"github.com/readeck/readeck/pkg/extract/fftr"
 )
@@ -87,17 +86,15 @@ func converTextConfig(filename string, dest string) {
 
 	// log.Printf("%v", cfg)
 	buf := bytes.NewBuffer([]byte{})
-	encoder := toml.NewEncoder(buf).
-		ArraysWithOneElementPerLine(true).
-		Indentation("  ").
-		Order(toml.OrderPreserve)
+	encoder := json.NewEncoder(buf)
+	encoder.SetIndent("", "  ")
 
 	if err := encoder.Encode(cfg); err != nil {
 		log.Fatal(err)
 	}
 
 	destFile := path.Join(dest, path.Base(filename))
-	destFile = destFile[0:len(destFile)-len(path.Ext(destFile))] + ".toml"
+	destFile = destFile[0:len(destFile)-len(path.Ext(destFile))] + ".json"
 	fd, err := os.Create(destFile)
 	if err != nil {
 		log.Fatal(err)
@@ -108,7 +105,6 @@ func converTextConfig(filename string, dest string) {
 }
 
 func newConfig(file io.Reader) (*fftr.Config, error) {
-	// res := fftr.DefaultConfig()
 	res := &fftr.Config{
 		AutoDetectOnFailure: true,
 	}
