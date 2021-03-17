@@ -52,19 +52,18 @@
             {{ template "csrfField" . }}
             <input type="hidden" name="_to" value="{{ $.currentPath }}" />
             <button type="submit" style="display: none"></button>
-            {{- if .item.Tags }}
-            <ul class="badges">{{ range .item.Tags }}
+            <ul class="badges editable">{{ range .item.Tags }}
               <li class="badge">{{ . }}
               <button class="button-clear button-delete" type="submit"
                 name="remove_tags" value="{{ . }}"></button>
               </li>
-            {{ end }}</ul>
-            {{ end -}}
-            <div class="compound">
+            {{ end }}
+              <li class="control">
                 <input type="text" name="add_tags"
-                  placeholder="Add a new tag" />
-                <button type="submit">Add tag</button>
-            </div>
+                  placeholder="Add a new label" />
+                <button type="submit">Add label</button>
+              </li>
+            </ul>
           </form>
         </div>
 
