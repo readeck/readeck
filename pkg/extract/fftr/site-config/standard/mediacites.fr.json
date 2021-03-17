@@ -1,0 +1,38 @@
+{
+  "title_selectors": [
+    "//meta[@name='og:title']/@content"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' td-post-header ')]//*[contains(concat(' ',normalize-space(@class),' '),' td-post-sub-title ')] | //div[contains(concat(' ',normalize-space(@class),' '),' td-post-content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//meta[@name='author']/@content"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "send-gift-article-email",
+    "point-final",
+    "at-above-post",
+    "at-below-post"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.mediacites.fr/actu/2017/12/05/lhistoire-de-mediacites-a-laube-de-son-1er-anniversaire/",
+      "contains": []
+    },
+    {
+      "url": "https://www.mediacites.fr/toulouse/enquete-toulouse/2018/07/17/les-eaux-troubles-du-canal-du-midi/",
+      "contains": []
+    }
+  ]
+}

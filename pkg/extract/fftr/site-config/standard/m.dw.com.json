@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='article__intro'] | //div[@itemprop='articleBody']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//meta[@name='author']/@content"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://m.dw.com/de/wie-sieht-die-zukunft-von-fridays-for-future-aus/a-50436506",
+      "contains": [
+        "Sie protestieren nun schon seit Monaten für den weltweiten"
+      ]
+    }
+  ]
+}

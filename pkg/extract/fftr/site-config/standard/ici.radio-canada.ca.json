@@ -1,0 +1,46 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article",
+    "//p[@class='TexteChronique']",
+    "//div[@class='src-content']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//header",
+    "//figure",
+    "//div[@class='framed']",
+    "//form",
+    "//div[contains(@class, 'newsstory-share-social-layout-wrapper')]",
+    "//article[contains(@class, 'card-style')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://ici.radio-canada.ca/nouvelle/1003322/lexique-mots-neige-hiver-guy-bertrand",
+      "contains": []
+    },
+    {
+      "url": "http://ici.radio-canada.ca/tele/deuxieme-chance/inscription/",
+      "contains": []
+    },
+    {
+      "url": "http://ici.radio-canada.ca/emissions/aujourd_hui_l_histoire/2016-2017/chronique.asp?idChronique=423294",
+      "contains": []
+    },
+    {
+      "url": "https://ici.radio-canada.ca/rss/4159",
+      "contains": []
+    }
+  ]
+}

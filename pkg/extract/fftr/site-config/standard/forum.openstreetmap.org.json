@@ -1,0 +1,39 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//section[contains(concat(' ',normalize-space(@class),' '),' content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' postright ')]/h3"
+  ],
+  "strip_id_or_class": [
+    "brdwelcome",
+    "usercontacts",
+    "usertitle",
+    "postfootleft",
+    "postfootright",
+    "postsignature",
+    "crumbsplus"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//link[@rel='next']/@href"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://forum.openstreetmap.org/viewtopic.php?id=69069",
+      "contains": [
+        "I also experience heavy lags in refreshing standard layer"
+      ]
+    }
+  ]
+}

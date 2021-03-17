@@ -1,0 +1,37 @@
+{
+  "title_selectors": [
+    "//span[starts-with(@id, 'title-')]"
+  ],
+  "body_selectors": [
+    "//div[starts-with(@id, 'fhbody-')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "user-agent": "PHP/5.3"
+  },
+  "tests": [
+    {
+      "url": "http://apple.slashdot.org/story/13/03/21/1736239/new-os-x-trojan-adware-injects-ads-into-chrome-firefox-safari",
+      "contains": []
+    },
+    {
+      "url": "http://developers.slashdot.org/story/13/03/23/1426215/will-donglegate-affect-your-decision-to-attend-pycon",
+      "contains": []
+    },
+    {
+      "url": "http://rss.slashdot.org/Slashdot/slashdot",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='post_content']"
+  ],
+  "date_selectors": [
+    "//span[@class='date']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.shabayek.com/blog/2016/12/04/%D8%AF%D8%B1%D9%88%D8%B3-%D8%A7%D9%84%D8%AA%D8%B3%D9%88%D9%8A%D9%82-%D9%85%D9%86-%D9%85%D8%B7%D8%B9%D9%85-%D9%81%D8%A7%D9%8A%D9%81-%D8%AC%D8%A7%D9%8A%D8%B2-%D9%84%D9%84%D8%A8%D8%B1%D8%AC%D8%B1-%D9%88/",
+      "contains": []
+    }
+  ]
+}

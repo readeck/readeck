@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@id='pn-maincontent']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "z-menu",
+    "news_category",
+    "news_title",
+    "news_modify",
+    "news_morearticlesincat",
+    "ezc_comments"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.northumberlandview.ca/index.php?module=news\u0026type=user\u0026func=display\u0026sid=31127",
+      "contains": []
+    }
+  ]
+}

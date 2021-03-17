@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='post_inner_wrapper']"
+  ],
+  "date_selectors": [
+    "//div[@class='sub_page_caption']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' post_img ')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://blog.eleven-labs.com/en/cqrs-pattern-2/",
+      "contains": []
+    }
+  ]
+}

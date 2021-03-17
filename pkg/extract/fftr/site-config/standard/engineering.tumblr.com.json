@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//h2"
+  ],
+  "body_selectors": [
+    "//div[@class=\"post_content\"]"
+  ],
+  "date_selectors": [
+    "//p[@class=\"date\"]"
+  ],
+  "author_selectors": [
+    "//p[@class=\"author\"]/a"
+  ],
+  "strip_selectors": [
+    "//h2",
+    "//header"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://engineering.tumblr.com/post/21276808338/tumblr-firehose",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title_selectors": [
+    "//div[@id='ovArtikel']/h1"
+  ],
+  "body_selectors": [
+    "//div[@id='ovArtikel']"
+  ],
+  "date_selectors": [
+    "//div[@class='publicdate']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@id='ovArtikel']/h1",
+    "//*/div[@class='bu']",
+    "//*/div[@class='credit']",
+    "//*/div[@class='ad-head']",
+    "//*/div[@class='linksebay']",
+    "//*/div[@class='ovVideo']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.kicker.de/news/fussball/frauen/wmfr/frauen-weltmeisterschaft/2011/3/1123662/spielbericht_frankreich-frauen_deutschland-frauen.html",
+      "contains": []
+    }
+  ]
+}

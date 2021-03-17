@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' c-page-title ')]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' c-entry-content ')]"
+  ],
+  "date_selectors": [
+    "//time[contains(concat(' ',normalize-space(@class),' '),' c-byline__item ')]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//h3"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.vox.com/policy-and-politics/2016/11/28/13728086/trump-literally-and-seriously",
+      "contains": []
+    }
+  ]
+}

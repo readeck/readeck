@@ -1,0 +1,40 @@
+{
+  "title_selectors": [
+    "//h1[@itemprop=\"headline\"]"
+  ],
+  "body_selectors": [
+    "//figure[contains(@class, 'article__top-image')] | //div[@itemprop=\"articleBody\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(@class, 'media-container') and contains(@class, 'pull-right')]"
+  ],
+  "strip_id_or_class": [
+    "ad-space"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "Cookie": "pwv=2; pws=functional|analytics|content_recommendation|targeted_advertising|social_media",
+    "User-Agent": "PHP/7.4"
+  },
+  "tests": [
+    {
+      "url": "http://www.volkskrant.nl/sport/dossier-wereldvoetbalbond-fifa-wankelt~a4042695/",
+      "contains": [
+        "Het ging om de omstreden"
+      ]
+    },
+    {
+      "url": "http://www.volkskrant.nl/nieuws/rss.xml",
+      "contains": []
+    }
+  ]
+}

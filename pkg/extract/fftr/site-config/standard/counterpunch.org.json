@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//div[@class='main']//h1[contains(@class, 'article-title')]"
+  ],
+  "body_selectors": [
+    "//div[@itemprop=\"articleBody\"]"
+  ],
+  "date_selectors": [
+    "//meta[@itemprop=\"datePublished\"]/@content"
+  ],
+  "author_selectors": [
+    "//div[@class='mainauthorstyle']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.counterpunch.org/2011/09/28/the-dangerous-cult-of-the-guardian/",
+      "contains": []
+    }
+  ]
+}

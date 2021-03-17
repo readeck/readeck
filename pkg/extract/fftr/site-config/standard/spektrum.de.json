@@ -1,0 +1,39 @@
+{
+  "title_selectors": [
+    "//h2[contains(@class, 'content__title')]"
+  ],
+  "body_selectors": [
+    "//article[contains(@class, 'content')]"
+  ],
+  "date_selectors": [
+    "//li[contains(@class, 'content__meta__date')]"
+  ],
+  "author_selectors": [
+    "//div[contains(@class, 'content__author__info__name')]//strong"
+  ],
+  "strip_selectors": [
+    "//div[contains(@class, 'content__kicker')]",
+    "//figure[contains(@class, 'image__article__top')]",
+    "//div/div/ul[contains(@class, 'breadcrumbs')]",
+    "//aside/ul[contains(@class, 'content__meta')]",
+    "//aside[contains(@class, 'hide-for-print')]",
+    "//div[contains(@class, 'hide-for-print')]",
+    "//div[contains(@class, 'content__author')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.spektrum.de/news/europas-vernichtende-jahrtausendduerre/1584414",
+      "contains": []
+    }
+  ]
+}

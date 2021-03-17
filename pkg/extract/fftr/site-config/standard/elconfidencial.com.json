@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//div[@class='news-header-tit-box']//h1"
+  ],
+  "body_selectors": [
+    "//div[@id='news-body-center']"
+  ],
+  "date_selectors": [
+    "//time"
+  ],
+  "author_selectors": [
+    "//a[@class='news-def-author']"
+  ],
+  "strip_selectors": [
+    "//div[@id='news-body-center']//article",
+    "//section[contains(@class, 'inTextNews')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.elconfidencial.com/tecnologia/2017-02-06/microsoft-windows-google-chrome_1327589/",
+      "contains": []
+    }
+  ]
+}

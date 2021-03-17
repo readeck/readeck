@@ -1,0 +1,36 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": null,
+  "date_selectors": [
+    "//h4/a[2]"
+  ],
+  "author_selectors": [
+    "substring-after(//h3, 'By ')"
+  ],
+  "strip_selectors": [
+    "//h4",
+    "//a[@id=\"print_button\"]",
+    "//p[@class=\"excerpt\"]",
+    "//h3",
+    "//div[@class=\"caption\"]",
+    "//center/a/img"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://theamericanscholar.org/too-big-to-fail-and-too-risky-to-exist/",
+      "contains": []
+    }
+  ]
+}

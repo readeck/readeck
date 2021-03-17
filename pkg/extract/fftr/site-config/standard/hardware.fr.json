@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='content_dossier']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//a[@class='a_aut']"
+  ],
+  "strip_selectors": [
+    "//div[@id='pagination']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//div[@class='sommaire_colonne']//span[@class='page_actuelle']/following::span[@class='autres_page']//a/@href"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.hardware.fr/articles/850-1/pci-express-3-0-impact-performances.html",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' recipeDetail-content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "strip_id_or_class: recipeDetail-productsHeader",
+    "recipeExportOptions-exportOptions",
+    "recipeDetail-products",
+    "recipeDetail-disclaimer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.woolworths.com.au/shop/recipedetail/5426/jamie-s-merguez-spiced-lamb-with-root-veg-mash",
+      "contains": []
+    }
+  ]
+}

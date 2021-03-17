@@ -1,0 +1,22 @@
+{
+  "title_selectors": [
+    "//div[@class=\"title\"]/h3"
+  ],
+  "body_selectors": null,
+  "date_selectors": [
+    "substring-after(//div[@class=\"meta\"], \": \")"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": null
+}

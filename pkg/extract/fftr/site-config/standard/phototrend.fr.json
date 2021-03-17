@@ -1,0 +1,25 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[contains(@class, \"vcard\")]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://phototrend.fr/2019/04/mise-a-jour-luminar-3-1-0-accent-ai-2-0/",
+      "contains": []
+    }
+  ]
+}

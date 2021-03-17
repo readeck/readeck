@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//h1[@id='page-title']"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' fulltext-view ')]"
+  ],
+  "date_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' highwire-citation-jnl-eneuro-styles-article-title-complete-plus ')]//div[contains(concat(' ',normalize-space(@class),' '),' highwire-cite-metadata ')]//span[contains(concat(' ',normalize-space(@class),' '),' highwire-cite-metadata-date ') and (contains(concat(' ',normalize-space(@class),' '),' highwire-cite-metadata '))]"
+  ],
+  "author_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' highwire-citation-jnl-eneuro-styles-article-title-complete-plus ')]//div[contains(concat(' ',normalize-space(@class),' '),' highwire-cite-authors ')]"
+  ],
+  "strip_selectors": [
+    "//header[@id='section-header']",
+    "//footer[@id='section-footer']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": true,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.jneurosci.org/content/22/13/5344.full",
+      "contains": []
+    }
+  ]
+}

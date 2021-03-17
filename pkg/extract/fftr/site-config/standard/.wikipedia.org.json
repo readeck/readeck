@@ -1,0 +1,51 @@
+{
+  "title_selectors": [
+    "//h1[@id='firstHeading']"
+  ],
+  "body_selectors": [
+    "//div[@id = 'bodyContent']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//*[@id='toc']",
+    "//div[@id='catlinks']",
+    "//div[@id='jump-to-nav']",
+    "//div[@class='thumbcaption']//div[@class='magnify']",
+    "//table[@class='navbox']",
+    "//div[@class='dablink']",
+    "//div[@id='contentSub']",
+    "//table[contains(@class, 'metadata')]",
+    "//*[contains(@class, 'noprint')]",
+    "//span[@class='noexcerpt']"
+  ],
+  "strip_id_or_class": [
+    "editsection",
+    "vertical-navbox"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "user-agent": "Mozilla/5.2"
+  },
+  "tests": [
+    {
+      "url": "http://en.wikipedia.org/wiki/Christopher_Lloyd",
+      "contains": []
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Ronnie_James_Dio",
+      "contains": []
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Metallica",
+      "contains": []
+    }
+  ]
+}

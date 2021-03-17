@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h1[@class=\"post-title\"]"
+  ],
+  "body_selectors": [
+    "//div[@class='post-body']"
+  ],
+  "date_selectors": [
+    "substring-before(//div[@class='post-byline'], ', by')"
+  ],
+  "author_selectors": [
+    "//div[@class=\"post-byline\"]/a"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "post-kicker"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://sf.eater.com/archives/2012/05/22/nate_pollack_talks_about_the_american_grilled_cheese_kitchen_moving_into_the_mission.php",
+      "contains": []
+    }
+  ]
+}

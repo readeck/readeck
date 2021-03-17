@@ -1,0 +1,45 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='ep_intro'] | //div[@class='ep_wisy']",
+    "//iframe | //div[@id='info_article']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@class='ep_auteur_box']//a",
+    "//div[@class='AuteurDateVideo']//a"
+  ],
+  "strip_selectors": [
+    "//script"
+  ],
+  "strip_id_or_class": [
+    "rcp_paid_only",
+    "BouttonPartageEpisode",
+    "party_payant",
+    "pop-register"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "lang=\"en\"",
+      "lang=\"fr\""
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.revue-farouest.fr/appelez-moi-ernest/",
+      "contains": []
+    },
+    {
+      "url": "https://www.revue-farouest.fr/videos/manon-bril-youtube-antique/",
+      "contains": []
+    }
+  ]
+}

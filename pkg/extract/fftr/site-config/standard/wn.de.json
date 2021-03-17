@@ -1,0 +1,45 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='main']//div[@class='col right']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@id='main']//div[@class='col right']//div[contains(@class, 'attribute-author')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "boxes",
+    "lazy",
+    "comment_box",
+    "fb_comments"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cnoscript\u003e",
+      "\u003cdiv\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c/div\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.wn.de/Muenster/Kultur/1742956-Wilm-Weppelmann-verlaesst-die-Einsiedelei-Und-dann-ab-unter-die-Dusche",
+      "contains": []
+    },
+    {
+      "url": "http://www.wn.de/rss/feed/wn_muenster",
+      "contains": []
+    }
+  ]
+}

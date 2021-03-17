@@ -1,0 +1,39 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'body-preamble')]"
+  ],
+  "date_selectors": [
+    "//meta[@name='dcterms.date']/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name='dcterms.creator']/@content"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "top-link"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://stockholm.etc.se/debatt/jobbgaraget-gav-hopp-ungdomar-i-tensta",
+      "contains": [
+        "Jobbgaraget startades av Angeles"
+      ]
+    },
+    {
+      "url": "http://goteborg.etc.se/inrikes/snart-oppnar-stans-forsta-ekogalleria",
+      "contains": [
+        "Krasnapolsky och just nu"
+      ]
+    }
+  ]
+}

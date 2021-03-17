@@ -1,0 +1,27 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//table[@class='ap-smallphoto-table'] | //div[@class='body']//*[@class='entry-content']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": [
+    "analytics.apnewsregistry"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://hosted.ap.org/dynamic/stories/L/LT_MEXICO_MIGRANT_CARAVAN?SITE=PALEH\u0026SECTION=HOME\u0026TEMPLATE=DEFAULT\u0026CTIME=2018-04-29-14-34-45",
+      "contains": []
+    }
+  ]
+}

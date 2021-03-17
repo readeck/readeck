@@ -1,0 +1,42 @@
+{
+  "title_selectors": [
+    "//div[@class=\"box-content\"]//h1[1]"
+  ],
+  "body_selectors": [
+    "//div[@id=\"intTranscript\"]",
+    "//div[@class=\"box-content\"]"
+  ],
+  "date_selectors": [
+    "substring-before(substring-after(//p[@class=\"info\"], \"on\"), \"Length\")"
+  ],
+  "author_selectors": [
+    "//p[@class=\"info\"]/strong"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"box-content\"]//h1[1]",
+    "//div[@class=\"box-content\"]//p[@class=\"info\"]",
+    "//div[@class=\"addthis_toolbox addthis_default_style\"]"
+  ],
+  "strip_id_or_class": [
+    "vendor-content-box",
+    "tags2",
+    "instructions",
+    "comments",
+    "forum-list-tree"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.infoq.com/interviews/oleg-zhurakousky-javaone2011-interview",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title_selectors": [
+    "//h1[@class='em-project-header__title']"
+  ],
+  "body_selectors": [
+    "//div[@class='em-project-body']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(@class, 'modal')]",
+    "//a[contains(@class, 'js--em-project__follow-btn-user')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.electromaker.io/project/view/rgb-hexmatrix-iot-clock",
+      "contains": []
+    }
+  ]
+}

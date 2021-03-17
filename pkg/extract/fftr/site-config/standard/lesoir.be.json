@@ -1,0 +1,40 @@
+{
+  "title_selectors": [
+    "//h1//text()"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' gr-article-teaser ')] | //div[contains(concat(' ',normalize-space(@class),' '),' gr-main-media ')] | //div[contains(concat(' ',normalize-space(@class),' '),' gr-article-content ')]"
+  ],
+  "date_selectors": [
+    "//time[contains(concat(' ',normalize-space(@class),' '),' pubdate ')]"
+  ],
+  "author_selectors": [
+    "//p[contains(concat(' ',normalize-space(@class),' '),' gr-meta-author ')]"
+  ],
+  "strip_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' gr-ads-inread ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' gr-newsletter-inread ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' gr-linked-stories ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' gr-free-tags ')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.lesoir.be/art/1137303/article/debats/cartes-blanches/2016-03-01/neoliberalisme-est-un-fascisme",
+      "contains": []
+    },
+    {
+      "url": "https://www.lesoir.be/330356/article/2020-10-08/wibra-belgique-declare-faillite",
+      "contains": []
+    }
+  ]
+}

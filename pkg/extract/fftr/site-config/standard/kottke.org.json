@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h2"
+  ],
+  "body_selectors": [
+    "//div[@id='main']"
+  ],
+  "date_selectors": [
+    "substring-before(substring-after(//div[@class='meta'],'\u0026bull;'),'\u0026bull;')"
+  ],
+  "author_selectors": [
+    "//*[@id='main']/div/a[1]"
+  ],
+  "strip_selectors": [
+    "//div[@class='meta']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://kottke.org/08/02/king-of-kong-a-fistful-of-quarters",
+      "contains": []
+    }
+  ]
+}

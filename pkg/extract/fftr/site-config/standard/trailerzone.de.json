@@ -1,0 +1,33 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='video' or @id='main']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "socialshareprivacy2",
+    "wp_rp_first"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "Genre\u003c/strong\u003e",
+      "\u003c/strong\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eGenre\u003c/strong\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.trailerzone.de/g-i-joe-2-die-abrechnung/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='itemIntroText' or @class='itemImageBlock' or @class='itemFullText']"
+  ],
+  "date_selectors": [
+    "//meta[@name='og:article:published_time']/@value"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "itemImageGallery"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cdiv style=\"margin:5px 0 10px;\"\u003e",
+      "\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e\u003c!--"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.gossip-tv.gr/story/158902/aggelike-daliane-semera-duskoleuontai-oloi-sta-epaggelmatika-tous",
+      "contains": []
+    },
+    {
+      "url": "http://www.gossip-tv.gr/lifestyle/Taste/story/230266/lahtaristo-kai-ygieino-tost-sokolatas",
+      "contains": []
+    }
+  ]
+}

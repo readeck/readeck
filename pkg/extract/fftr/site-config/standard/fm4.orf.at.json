@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//h1[@class='detail']"
+  ],
+  "body_selectors": [
+    "//div[@id='story']"
+  ],
+  "date_selectors": [
+    "translate(translate(substring-before(substring-after(//p[@class='date'],'Erstellt am:'), ' Uhr'), '. ', '.'), '-', ' ')"
+  ],
+  "author_selectors": [
+    "//div[@class='authorDescription']/h2"
+  ],
+  "strip_selectors": [
+    "//p[@class='date']",
+    "//p[@class='credit']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://fm4.orf.at/stories/1689156/",
+      "contains": []
+    }
+  ]
+}

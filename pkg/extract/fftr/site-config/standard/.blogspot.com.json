@@ -1,0 +1,43 @@
+{
+  "title_selectors": [
+    "//*[contains(@class,'post-title')]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class,'post-body')]",
+    "//div[contains(@class,'entry-content')]"
+  ],
+  "date_selectors": [
+    "//*[contains(@class, 'date-header')]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cnoscript\u003e",
+      "\u003cdiv\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c/div\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://themerryone.blogspot.com/2010/08/new-move-new-blog.html",
+      "contains": []
+    },
+    {
+      "url": "http://strobist.blogspot.com/2012/01/qa-down-phase-one-rabbit-hole.html",
+      "contains": []
+    }
+  ]
+}

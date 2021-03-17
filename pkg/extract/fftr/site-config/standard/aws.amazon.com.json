@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": [
+    "substring-before(substring-after(//footer[@class=\"blog-post-meta\"], \"by \"), ' |')"
+  ],
+  "strip_selectors": [
+    "//footer"
+  ],
+  "strip_id_or_class": [
+    "aws-comment-wrapper"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://aws.amazon.com/fr/blogs/database/building-a-cross-account-continuous-delivery-pipeline-for-database-migrations/",
+      "contains": []
+    }
+  ]
+}

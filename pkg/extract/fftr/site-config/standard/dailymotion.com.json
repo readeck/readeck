@@ -1,0 +1,38 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": [
+    "//iframe"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//link[@type='application/xml+oembed']"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003c![CDATA[",
+      "_"
+    ],
+    [
+      "]]\u003e",
+      "_"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.dailymotion.com/video/x1vk5oh_before-they-were-on-game-of-thrones_people",
+      "contains": []
+    }
+  ]
+}

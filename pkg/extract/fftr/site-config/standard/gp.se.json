@@ -1,0 +1,38 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='articleContainer']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@id='articleContent']//div[contains(@class, 'byline')]//span[contains(@class, 'name fn')]"
+  ],
+  "strip_selectors": [
+    "//div[contains(@class, 'byline')]//img"
+  ],
+  "strip_id_or_class": [
+    "toolbar",
+    "ADad",
+    "articleSerieWrapper",
+    "articleFloatContainer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.gp.se/nyheter/bohuslan/1.2045564-styckade-mannen-hade-mordat-hustrun",
+      "contains": []
+    },
+    {
+      "url": "http://www.gp.se/1.16560",
+      "contains": []
+    }
+  ]
+}

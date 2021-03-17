@@ -1,0 +1,40 @@
+{
+  "title_selectors": [
+    "//h3"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'mcnt ztag')]"
+  ],
+  "date_selectors": [
+    "//span[contains(@class, 'blogsep')]"
+  ],
+  "author_selectors": [
+    "//span[contains(@class, 'ztag pre')]"
+  ],
+  "strip_selectors": [
+    "//*[contains(@class, 'mcnt ztag')]//span[@style = 'display:none;']",
+    "//*[contains(@id, 'divTopLink')]",
+    "//*[contains(@class, 'phide')]",
+    "//*[contains(@class, 'thide')]",
+    "//*[contains(@id, 'topbar')]",
+    "//*[contains(@class, 'tbar')]",
+    "//*[contains(@class, 'snl')]",
+    "//*[contains(@id, 'banner')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://elainejeff.blog.163.com/blog/static/167190291201381121654580/",
+      "contains": []
+    }
+  ]
+}

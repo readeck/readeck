@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//h1[@class='interior-page-title']"
+  ],
+  "body_selectors": [
+    "//div[@class='rich-text-body']"
+  ],
+  "date_selectors": [
+    "//div[@class='byline']/time"
+  ],
+  "author_selectors": [
+    "//span[@class='author']/a"
+  ],
+  "strip_selectors": [
+    "//div[@class='byline']",
+    "//div[@class='offscreen-menu']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://thenextgeneration.org/blog/post/rebrand-announce/",
+      "contains": []
+    }
+  ]
+}

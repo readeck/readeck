@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h2[@class=\"pageTitle\"]"
+  ],
+  "body_selectors": [
+    "//div[@class=\"post\"]"
+  ],
+  "date_selectors": [
+    "substring-before(substring-after(//div[@class=\"postfoot\"], 'Published'), 'by')"
+  ],
+  "author_selectors": [
+    "substring-before(substring-after(//div[@class=\"postfoot\"], 'by'), 'Filed')"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"postfoot\"]",
+    "//h2[@class=\"pageTitle\"]",
+    "//h3[@class=\"pageTitle\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://weblogs.asp.net/scottgu/archive/2011/08/31/html-editor-smart-tasks-and-event-handler-generation-asp-net-vnext-series.aspx",
+      "contains": []
+    }
+  ]
+}

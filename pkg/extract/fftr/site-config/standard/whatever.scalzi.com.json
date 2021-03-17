@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class=\"navigation\"]",
+    "//div[@id=\"sidebar\"]",
+    "//div[@id=\"post-extra-content\"]",
+    "//div[@id=\"footer\"]",
+    "//div[contains(@class, \"sharing\")]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://whatever.scalzi.com/2011/01/09/quick-giffords-follow-up/",
+      "contains": []
+    }
+  ]
+}

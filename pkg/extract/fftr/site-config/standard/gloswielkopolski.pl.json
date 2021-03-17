@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//article[@id='material']/header/h1"
+  ],
+  "body_selectors": [
+    "//section[@id='tresc']"
+  ],
+  "date_selectors": [
+    "//article[@id='material']/header/p/time[1]"
+  ],
+  "author_selectors": [
+    "//article[@id='material']/header/div[2]/p"
+  ],
+  "strip_selectors": [
+    "//div[@class='podobneSonda']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    ".//section[@id='tresc']/div[@class='stronicowanie']/a[@rel='next']"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.gloswielkopolski.pl/artykul/803547,abc-telemarketingu-praca-ktora-zwalnia-z-myslenia,id,t.html",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//div[@id='article']//h1"
+  ],
+  "body_selectors": [
+    "//div[@id='article' or @id='current_illustration']"
+  ],
+  "date_selectors": [
+    "//div[@id='article']//div[@class='date']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.straightdope.com/columns/read/947/whatever-happened-to-adoption-of-the-metric-system-in-the-u-s",
+      "contains": []
+    }
+  ]
+}

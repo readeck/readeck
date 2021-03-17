@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@id='printBody']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@id='byline']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "concat('http://www.esquire.com/print-this/', substring-after(//link[@rel='canonical']/@href, 'esquire.com/'))"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.esquire.com/features/impossible/price-is-right-perfect-bid-0810",
+      "contains": []
+    },
+    {
+      "url": "http://www.esquire.com/blogs/politics/police-getting-leftover-armoured-iraq-trucks-112513",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h1[@class='mainContentTitle']"
+  ],
+  "body_selectors": [
+    "//div[@class='articleText']"
+  ],
+  "date_selectors": [
+    "//span[@class='publication']/time/@datetime"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "rekommenderade",
+    "disqus",
+    "annonser"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.lalibre.be/actu/international/emmanuelle-mignon-l-ex-directrice-de-cabinet-de-sarkozy-mise-en-examen-56b10c9d3570b1fc10e24f20",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//div[@class='title_text']"
+  ],
+  "body_selectors": [
+    "//div[@class='story_text']/.."
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@class='author_text']"
+  ],
+  "strip_selectors": [
+    "//b"
+  ],
+  "strip_id_or_class": [
+    "back_to_top",
+    "author_text",
+    "title_text"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.eastoftheweb.com/short-stories/UBooks/Horl.shtml",
+      "contains": []
+    }
+  ]
+}

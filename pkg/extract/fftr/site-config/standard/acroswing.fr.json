@@ -1,0 +1,25 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//time[@class='updated']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.acroswing.fr/actualites/competition_rock/selectif_bellegarde_sur_valserine__2012-02-26.php",
+      "contains": []
+    }
+  ]
+}

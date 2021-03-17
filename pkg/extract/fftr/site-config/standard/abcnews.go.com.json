@@ -1,0 +1,54 @@
+{
+  "title_selectors": [
+    "//h1[@class='headline']"
+  ],
+  "body_selectors": [
+    "//div[@id='storyText']",
+    "//img[@id='ff-img'] | //div[@id='meta']//div[contains(@class, 'overview')]"
+  ],
+  "date_selectors": [
+    "//div[@class='date']"
+  ],
+  "author_selectors": [
+    "//div[@class='byline']"
+  ],
+  "strip_selectors": [
+    "//*[@id='date_partner']",
+    "//div[@class='breadcrumb']",
+    "//div[contains(@class,'show_tools')]",
+    "//div[@id='sponsoredByAd']",
+    "//div[contains(@class,'rel_container')]",
+    "//p[a[starts-with(@href, 'http://www.twitter.com')]]",
+    "//p[a[starts-with(@href, 'http://www.facebook.com')]]",
+    "//p[contains(., 'Click here to return to')]"
+  ],
+  "strip_id_or_class": [
+    "mediaplayer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "concat(//li[@class='pager']//a/@href, '\u0026singlePage=true')"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003clink rel=\"image_src\" href=\"http",
+      "\u003cimg id=\"ff-img\" src=\"http"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://abcnews.go.com/Politics/newt-gingrich-rocky-rollout-presidential-campaign-recover/story?id=13632744",
+      "contains": []
+    },
+    {
+      "url": "http://abcnews.go.com/Blotter/family-freed-american-hostage-somalia-seals-obama/story?id=15439544",
+      "contains": []
+    }
+  ]
+}

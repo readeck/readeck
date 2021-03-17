@@ -1,0 +1,31 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'yr-entry-text')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' entry__body ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "tag-cloud",
+    "below-entry"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "Cookie": "A3=d=AQABBHKoQl4CEIemT4yNVwXsjj9-v6PMOlMFEgABAQH4Q14LX_W6b2UB_iMAAAcIa6hCXgxb2nQ\u0026S=AQAAAmgPcrcQNEeDSeHZkaQboZc"
+  },
+  "tests": [
+    {
+      "url": "http://www.huffingtonpost.co.uk/entry/edward-snowdens-david-cameron-tweet-tells-public-to-rise-up-if-they-want-him-to-resign_uk_57074b52e4b00c769e2d91a9?s481714i",
+      "contains": []
+    }
+  ]
+}

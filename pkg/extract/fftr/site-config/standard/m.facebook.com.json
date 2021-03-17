@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//div[@id='m_story_permalink_view' or contains(@data-sigil, 'm-story-view')]//h3"
+  ],
+  "body_selectors": [
+    "//div[@id='m_story_permalink_view' or contains(@data-sigil, 'm-story-view')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//*[contains(@data-sigil, 'm-mentions-expand') or contains(@data-sigil, 'story-popup-context') or contains(@data-sigil, 'share') or contains(@data-sigil, 'translate')]"
+  ],
+  "strip_id_or_class": [
+    "commentable"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://m.facebook.com/permalink.php?story_fbid=10154584776550183\u0026id=294468630182",
+      "contains": [
+        "holding an extraordinary session in Brussels this month"
+      ]
+    }
+  ]
+}

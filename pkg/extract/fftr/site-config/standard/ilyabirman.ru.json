@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//div[@class='published visible e2-smart-title']//span"
+  ],
+  "body_selectors": [
+    "//div[@class='text published visible']"
+  ],
+  "date_selectors": [
+    "//p[@class='super-h']"
+  ],
+  "author_selectors": [
+    "//span[@id='e2-blog-title']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://ilyabirman.ru/meanwhile/2011/11/15/2/",
+      "contains": []
+    }
+  ]
+}

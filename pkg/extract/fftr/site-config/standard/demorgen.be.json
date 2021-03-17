@@ -1,0 +1,37 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article[@class='artstyle fu--type-default artstyle--type-default']"
+  ],
+  "date_selectors": [
+    "//time[@class='artstyle__byline__datetime']"
+  ],
+  "author_selectors": [
+    "//a[@class='artstyle__byline__author']"
+  ],
+  "strip_selectors": [
+    "//h4[@class='artstyle__labels']",
+    "//section[@data-element-id='article-element-authors']",
+    "//aside[@class='artstyle__editorial-tips']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "cookie": "pws=functional|analytics|content_recommendation|targeted_advertising|social_media; pwv=1"
+  },
+  "tests": [
+    {
+      "url": "https://www.demorgen.be/nieuws/helft-belgische-moslims-is-fundamentalist~b2344ae6/",
+      "contains": [
+        "Helft Belgische moslims is fundamentalist"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='maincontent']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' fm-author ')]/a"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "fm-sec",
+    "pmc-page-banner"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4157320/",
+      "contains": [
+        "Infectious diseases continue to pose a tremendous burden of disease worldwide"
+      ]
+    }
+  ]
+}

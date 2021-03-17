@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//h1[@class=\"entry-title\"]"
+  ],
+  "body_selectors": null,
+  "date_selectors": [
+    "//header[contains(@class, \"entry-header\")]//time[contains(@class, \"published\")]/@datetime"
+  ],
+  "author_selectors": [
+    "//meta[@itemprop=\"author\"]/@content"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.champeau.info/blog/2018/10/12/gmail-et-lassistant-google-ce-futur-asile-de-fous/",
+      "contains": []
+    }
+  ]
+}

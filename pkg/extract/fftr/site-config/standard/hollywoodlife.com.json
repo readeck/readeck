@@ -1,0 +1,51 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article[contains(@class, 'entry-content')]"
+  ],
+  "date_selectors": [
+    "//meta[@name='sailthru.date']/@content"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='data']",
+    "//iframe[contains(@name, 'wpcom')]"
+  ],
+  "strip_id_or_class": [
+    "wpcom-iframe-form",
+    "gallery-thumbs",
+    "twitter",
+    "fb-link",
+    "pinterest"
+  ],
+  "strip_image_src": [
+    "subscribe.png"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003ca href=\"http://www.youtube.com/subscription_center?add_user_id=2rJLq19N0dGrxfib80M",
+      "\u003c/p\u003e\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e\u003c!--"
+    ],
+    [
+      "\u003ch3\u003eMore",
+      "\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e\u003c!--"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://hollywoodlife.com/2013/10/04/miriam-carey-dead-capitol-hill-car-chase-shooting-postpartum-depression/",
+      "contains": []
+    },
+    {
+      "url": "http://hollywoodlife.com/feed/",
+      "contains": []
+    }
+  ]
+}

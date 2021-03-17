@@ -1,0 +1,35 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'post-bodycopy')]"
+  ],
+  "date_selectors": [
+    "substring-after(//div[@class='post-byline'], ', on')"
+  ],
+  "author_selectors": [
+    "substring-before(substring-after(//div[@class='post-byline'], 'By '), ', on')"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "reply",
+    "left",
+    "post-headline",
+    "post-byline",
+    "footer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.uni-watch.com/2011/10/18/the-curious-case-of-steve-debergs-microphone-and-speaker/",
+      "contains": []
+    }
+  ]
+}

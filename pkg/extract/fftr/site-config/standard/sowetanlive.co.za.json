@@ -1,0 +1,36 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-widgets ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "related_articles"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "=s180\"",
+      "=s750\""
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.sowetanlive.co.za/rss/?publication=sowetan-live",
+      "contains": []
+    },
+    {
+      "url": "https://www.sowetanlive.co.za/sundayworld/news/2017-11-08-manana-should-pay-medical-bills-for-assault-victims-court-told/",
+      "contains": []
+    }
+  ]
+}

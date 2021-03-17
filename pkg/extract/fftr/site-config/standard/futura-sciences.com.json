@@ -1,0 +1,43 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//section[contains(concat(' ',normalize-space(@class),' '),' article-text ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "ficheprevnext",
+    "bar",
+    "border-full",
+    "httplogbar-wrapper",
+    "diaporamafullscreenariane",
+    "ariane",
+    "diaporamafullscreen",
+    "module-propal-nl",
+    "readmore-wrapper",
+    "bg-light-green",
+    "breadcrumb",
+    "short-article-description",
+    "paragraph"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.futura-sciences.com/magazines/espace/infos/actu/d/astronomie-surprenants-panaches-ceres-62066/",
+      "contains": []
+    },
+    {
+      "url": "http://www.futura-sciences.com/magazines/high-tech/infos/actu/d/technologie-bientot-plus-besoin-machine-laver-62157/#xtor=RSS-8",
+      "contains": []
+    }
+  ]
+}

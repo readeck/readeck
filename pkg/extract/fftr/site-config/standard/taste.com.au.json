@@ -1,0 +1,31 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' ingredients-and-method-block ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' author-credits-publication-box ')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "select-all-description"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "Cookie": "cbd=00100"
+  },
+  "tests": [
+    {
+      "url": "https://www.taste.com.au/recipes/potato-gnocchi-sage-burnt-butter-sauce/bjbfxz2n",
+      "contains": []
+    }
+  ]
+}

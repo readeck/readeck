@@ -1,0 +1,38 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article[contains(concat(' ',normalize-space(@class),' '),' Post ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//*[@class='Post-header']//a[@rel='author']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "Post-header",
+    "Post-share",
+    "Post-private",
+    "Post-actions",
+    "Bloc-auteur",
+    "Post-then"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.essonneinfo.fr/91-essonne-info/122987/download-festival-retour-evenement-explosif/",
+      "contains": []
+    },
+    {
+      "url": "https://www.essonneinfo.fr/91-essonne-info/123619/metro-18-a-loupe-environnementale/",
+      "contains": []
+    }
+  ]
+}

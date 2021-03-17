@@ -1,0 +1,37 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class,'mainContaner')]"
+  ],
+  "date_selectors": [
+    "//span[contains(@class,'date')]"
+  ],
+  "author_selectors": [
+    "//span[contains(@class,'reporter')]"
+  ],
+  "strip_selectors": [
+    "//div[contains(@class,'mainHeaer')]",
+    "//div[contains(@class,'keyW')]",
+    "//div[contains(@class,'wonderful')]",
+    "//div[contains(@class,'pages')]",
+    "//div[contains(@class,'Topics TopicsW3')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//li[@class='pageNext']/a[contains(.,'下一頁')]"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.cw.com.tw/article/article.action?id=5032848",
+      "contains": []
+    }
+  ]
+}

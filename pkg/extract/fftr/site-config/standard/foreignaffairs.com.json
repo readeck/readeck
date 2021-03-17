@@ -1,0 +1,39 @@
+{
+  "title_selectors": [
+    "//h1[@class=\"title\"]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class,\"content-resize\")]"
+  ],
+  "date_selectors": [
+    "//div[contains(@class,\"field-field-article-issue\")]/div/div/a/text() | //span[@class=\"date-display-single\"]"
+  ],
+  "author_selectors": [
+    "//div[contains(@class,\"field-field-article-display-authors\")]/div/div/a/text()"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"article-sidebar\"]",
+    "//div[@class=\"showlinks\"]",
+    "//div[contains(@class,\"premium-box\")]",
+    "//div[contains(@class,\"premium-box\")]",
+    "//table[contains(@border,\"2\")]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//div[@class='showlinks']/a"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.foreignaffairs.com/articles/138810/pierre-n-leval/the-long-arm-of-international-law",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//a[@class='post_title']"
+  ],
+  "body_selectors": [
+    "//div[@class='entrybox']"
+  ],
+  "date_selectors": [
+    "//div[@class='entrybox']/b[1]"
+  ],
+  "author_selectors": [
+    "string('Maciej Cegłowski')"
+  ],
+  "strip_selectors": [
+    "//div[@class='entrybox']/b[1]"
+  ],
+  "strip_id_or_class": [
+    "post_title"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://idlewords.com/2011/08/why_arabic_is_terrific.htm",
+      "contains": []
+    }
+  ]
+}

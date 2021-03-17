@@ -1,0 +1,30 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='ff-body']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003ch1 align=center\u003e",
+      "\u003cdiv id=\"ff-body\"\u003e\u003ch1 align=center\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.sqlite.org/fileformat2.html",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='indivbody']"
+  ],
+  "date_selectors": [
+    "//div[@class='indivbody']/h2[1]"
+  ],
+  "author_selectors": [
+    "//p[@class='mastname']"
+  ],
+  "strip_selectors": [
+    "//div[@class='indivbody']/h1[1]",
+    "//div[@class='indivbody']/p[1]",
+    "//div[@class='indivbody']/p[2]",
+    "//div[@class='indivbody']/h3[1]",
+    "//div[@class='indivbody']/h2[1]",
+    "//p[@class='posted']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.schneier.com/blog/archives/2010/12/security_in_202.html",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'printRecipe')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='recipeHeader']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//ul[@class='printOptions']//a[contains(@href, 'detail.aspx?p=1\u0026showphoto=true')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.verybestbaking.com/recipes/143190/Penne-Pasta-with-Sun-dried-Tomato-Cream-Sauce/detail.aspx",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//article/header/h2"
+  ],
+  "body_selectors": [
+    "//article"
+  ],
+  "date_selectors": [
+    "//article//time[@pubdate]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//header"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.marco.org/2012/09/08/businessweek-gruber",
+      "contains": []
+    },
+    {
+      "url": "http://www.marco.org/2012/04/24/might-upgrade-someday",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//div[@class='weblogPost']/h3[1]"
+  ],
+  "body_selectors": [
+    "//div[@class='weblogPostBody']"
+  ],
+  "date_selectors": [
+    "//span[@class=\"weblogPostDisplayDate\"]"
+  ],
+  "author_selectors": [
+    "(\"Brent Simmons\")"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://inessential.com/2011/10/25/why_just_store_the_app_data_on_dropbo",
+      "contains": []
+    }
+  ]
+}

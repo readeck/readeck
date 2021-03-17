@@ -1,0 +1,38 @@
+{
+  "title_selectors": [
+    "//div[@class=\"title\"]/h2/a",
+    "substring-after(//title, '- ')"
+  ],
+  "body_selectors": [
+    "//div[@class=\"body\"]"
+  ],
+  "date_selectors": [
+    "//li[@class=\"iconDate\"]",
+    "substring-after(//div[@class=\"meta\"]/p, '/ ')"
+  ],
+  "author_selectors": [
+    "//li[@class=\"iconEmail\"]/a",
+    "//div[@class=\"meta\"]/p/a"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://penny-arcade.com/2012/01/13/i-put-some-news-in-your-news",
+      "contains": []
+    },
+    {
+      "url": "http://penny-arcade.com/report/editorial-article/the-dystopian-future-of-casual-games-personalized-targeted-pricing-and-mech",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'article-body-wrap')]"
+  ],
+  "date_selectors": [
+    "//article//time[@itemprop=\"datePublished\"]/@content"
+  ],
+  "author_selectors": [
+    "//article//a[@itemprop=\"author\"]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://newrepublic.com/article/120178/problem-international-development-and-plan-fix-it",
+      "contains": [
+        "It seemed like such a good idea at the time"
+      ]
+    },
+    {
+      "url": "http://www.newrepublic.com/article/112731/moocs-will-online-education-ruin-university-experience",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "title_selectors": [
+    "//h1",
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@id='ContentLeft']/div[contains(@class, 'full-article_print')]",
+    "//div[@id='ContentLeft']/div[contains(@class, 'full-news')]"
+  ],
+  "date_selectors": [
+    "//div[contains(@class, 'view-publish_date')]"
+  ],
+  "author_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' author ')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "attribute-relatedcontent",
+    "heftreferenz",
+    "disqus_thread",
+    "pagenavigator",
+    "adlib_wrapper",
+    "addthis_toolbox",
+    "tags",
+    "attribute-relatedcontent",
+    "disqus_thread"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//div[@class=\"pagenavigator\"][1]/p/span[@class=\"next\"]/a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.admin-magazin.de/Das-Heft/2014/02/Workshop-OpenLDAP-Server",
+      "contains": [
+        "OpenLDAP hat in der Version 2.4"
+      ]
+    },
+    {
+      "url": "http://www.admin-magazin.de/Das-Heft/2017/07/Sophos-Mobile-7",
+      "contains": []
+    },
+    {
+      "url": "http://www.admin-magazin.de/Das-Heft/2013/11/Hochverfuegbarkeit-mit-SQL-Server-2012-und-2014",
+      "contains": [
+        "Lokale Hochverfügbarkeit kommt in diesem Fall durch redundante Server-Instanzen zustande"
+      ]
+    },
+    {
+      "url": "http://www.admin-magazin.de/Online-Artikel/Postfix-einrichten-und-absichern",
+      "contains": [
+        "Die eben beschriebenen Maßnahmen reduzieren zwar den Ansturm von unerwünschter Mail"
+      ]
+    },
+    {
+      "url": "http://www.admin-magazin.de/News/Programm-fuer-LinuxCon-Europe-steht/(tagID)/13",
+      "contains": [
+        "Die Linux Foundation hat"
+      ]
+    },
+    {
+      "url": "http://www.admin-magazin.de/News/Release-Kandidat-von-HAProxy-1.8-unterstuetzt-HTTP-2",
+      "contains": [
+        "Mit Version 1.8 unterstützt HAProxy netzwerkseitig"
+      ]
+    },
+    {
+      "url": "http://www.admin-magazin.de/Online-Artikel/Docker-Workshop-2-Volumes",
+      "contains": [
+        "Wenn ein Verzeichnis, das Sie auf dem Host als Docker-Volume nutzen wollen"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title_selectors": [
+    "//article[@role='main']//h1"
+  ],
+  "body_selectors": [
+    "//article[@role='main']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//aside"
+  ],
+  "strip_id_or_class": [
+    "svtHide-No-Js",
+    "aside",
+    "Aside",
+    "hidden",
+    "Share"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cnoscript\u003e",
+      "\u003cdiv\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c/div\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.svt.se/nyheter/het-debatt-mellan-borg-och-andersson",
+      "contains": [
+        "Anders Borg (M) började med"
+      ]
+    }
+  ]
+}

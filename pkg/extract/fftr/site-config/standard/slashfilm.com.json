@@ -1,0 +1,41 @@
+{
+  "title_selectors": [
+    "substring-before(//title,'| /Film')"
+  ],
+  "body_selectors": null,
+  "date_selectors": [
+    "substring-before(substring-after(//p[@class='post-info'],'Posted on '),'by')"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='pm-left']",
+    "//div[@class='pm-right']",
+    "//h2/span",
+    "//h2/strong/a",
+    "//p[contains(text(),'we have to split this post over')]",
+    "//p[@class='post-info']",
+    "//h1/a",
+    "//img[contains(@src,'siteimages/authors')]",
+    "//div[@id='header']",
+    "//div[@class='topad-right']",
+    "//strong[contains(text(),'Cool Posts From Around the Web:')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//h2/strong/a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.slashfilm.com/superhero-bits-206/",
+      "contains": []
+    }
+  ]
+}

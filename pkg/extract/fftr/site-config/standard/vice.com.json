@@ -1,0 +1,33 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article__body-components ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' adph ')]",
+    "//div[@data-component=\"RelatedArticleBlock\"]"
+  ],
+  "strip_id_or_class": [
+    "topic-callout",
+    "abc__quote--pullquote"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.vice.com/en/article/4ad8qd/why-bidens-ice-is-still-deporting-people",
+      "contains": [
+        "The order is temporary"
+      ]
+    }
+  ]
+}

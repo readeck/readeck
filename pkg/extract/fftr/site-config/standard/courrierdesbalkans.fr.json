@@ -1,0 +1,31 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='content']//div[contains(concat(' ',normalize-space(@class),' '),' main ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@id='content']//span[@itemprop='author']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "barre-outils",
+    "barre-sociale",
+    "reserveabonnes"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.courrierdesbalkans.fr/Confrontes-a-une-crise-de-main-d-oeuvre-les-employeurs-du-Banat-recrutent-en",
+      "contains": []
+    }
+  ]
+}

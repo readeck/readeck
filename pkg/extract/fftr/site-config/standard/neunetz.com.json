@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'entry-content')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "sharedaddy"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://neunetz.com/2019/09/13/apple-tv-quasi-geschenkt/",
+      "contains": [
+        "Apple muss hier noch aufholen"
+      ]
+    }
+  ]
+}

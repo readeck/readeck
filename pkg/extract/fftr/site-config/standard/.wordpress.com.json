@@ -1,0 +1,47 @@
+{
+  "title_selectors": [
+    "//meta[@property='og:title']/@content"
+  ],
+  "body_selectors": [
+    "//div[@id=\"content\"]//div[contains(@class, 'entry-content') or contains(@class, 'entrytext') or @class='main' or @class='entry']",
+    "//div[@id='content']"
+  ],
+  "date_selectors": [
+    "//div[@id='content']//span[contains(@class, 'entry-date')]",
+    "//div[contains(@class, 'entry-meta')]//time[@pubdate or @pubDate]"
+  ],
+  "author_selectors": [
+    "//div[contains(@class, 'entry-meta')]//a[@rel='author']"
+  ],
+  "strip_selectors": [
+    "//nav",
+    "//header",
+    "//*[@id='comments' or @id='respond']",
+    "//div[contains(@class, 'comments')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' navigation ')]"
+  ],
+  "strip_id_or_class": [
+    "sharedaddy",
+    "wpadvert",
+    "commentlist",
+    "sociable",
+    "related_post",
+    "wp-socializer",
+    "addtoany"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://elisehahn.wordpress.com/2013/09/22/looking-back-to-move-forward-navigating-race-and-racism-in-neoliberal-terrain/",
+      "contains": []
+    }
+  ]
+}

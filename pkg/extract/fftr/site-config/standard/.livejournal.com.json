@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": [
+    "l-stat.livejournal.com",
+    "www.livejournal.com",
+    "l-userpic.livejournal.com"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://news.livejournal.com/136664.html",
+      "contains": []
+    },
+    {
+      "url": "http://stelazin.livejournal.com/91363.html",
+      "contains": []
+    }
+  ]
+}

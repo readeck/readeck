@@ -1,0 +1,31 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='pageContent description']"
+  ],
+  "date_selectors": [
+    "//div[@class='authorsAndDateTime']/span[@title]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "video full"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//div[@class='pages']/a[last()-1]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.gamer.no/artikler/142455/slik-blei-ambisiose-dragons-dogma-skapt/",
+      "contains": []
+    }
+  ]
+}

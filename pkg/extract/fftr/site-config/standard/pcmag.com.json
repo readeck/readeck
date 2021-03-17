@@ -1,0 +1,31 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@id,'content')]"
+  ],
+  "date_selectors": [
+    "//*[contains(@class,'date')]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "sponsors"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": true,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//a[contains(.,'Next \u003e')]"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.pcmag.com/article2/0,2817,2401676,00.asp",
+      "contains": []
+    }
+  ]
+}

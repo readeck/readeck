@@ -1,0 +1,33 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article//div[contains(concat(' ',normalize-space(@class),' '),' bodytext ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' contentauthor ')]//a[@rel='author']"
+  ],
+  "strip_selectors": [
+    "//p[@class='floatr ruledtop']/strong/parent::p"
+  ],
+  "strip_id_or_class": [
+    "ctafeedback",
+    "toolssocial",
+    "articlepartner"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://voxeurop.eu/en/2018/migrant-crisis-5122095",
+      "contains": []
+    }
+  ]
+}

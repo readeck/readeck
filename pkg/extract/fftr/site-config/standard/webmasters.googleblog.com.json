@@ -1,0 +1,38 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='main']"
+  ],
+  "date_selectors": [
+    "//div[@class='publishdate']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='share']",
+    "//div[@class='post-footer']",
+    "//div[@class='cmt_iframe_holder']",
+    "//div[@class='blog-pager']",
+    "//div[@class='clear']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "noscript\u003e",
+      "div\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://webmasters.googleblog.com/2016/08/helping-users-easily-access-content-on.html",
+      "contains": []
+    }
+  ]
+}

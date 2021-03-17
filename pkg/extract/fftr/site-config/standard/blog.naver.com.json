@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//span[@class='pcol1 itemSubjectBoldfont']"
+  ],
+  "body_selectors": [
+    "//div[@id='postListBody']"
+  ],
+  "date_selectors": [
+    "//p[@class='date fil5 pcol2']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='post-btn']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "/html/frameset/frame[1]/attribute::src"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://blog.naver.com/how2invest/110135068757",
+      "contains": []
+    }
+  ]
+}

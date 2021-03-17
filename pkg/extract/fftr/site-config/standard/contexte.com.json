@@ -1,0 +1,38 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' article-header-title ')]"
+  ],
+  "body_selectors": [
+    "//p[contains(concat(' ',normalize-space(@class),' '),' article-header-lead ')] | //div[contains(concat(' ',normalize-space(@class),' '),' article-text ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-container ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//p[contains(concat(' ',normalize-space(@class),' '),' article-header-meta ')]//a[1]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "ad-container",
+    "article-header-title",
+    "article-action-label",
+    "article-action-labels",
+    "article-action-tooltip"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "user-agent": "Mozilla/5.0 (X11; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0"
+  },
+  "tests": [
+    {
+      "url": "https://www.contexte.com/article/pouvoirs/le-groupe-lrm-encaisse-les-coups-de-lopposition-dans-affaire-benalla_89898.html",
+      "contains": []
+    }
+  ]
+}

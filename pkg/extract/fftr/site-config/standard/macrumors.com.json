@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//h3"
+  ],
+  "body_selectors": [
+    "//div[@class='content']"
+  ],
+  "date_selectors": [
+    "substring-before(//div[@class='byline'], \" by \")"
+  ],
+  "author_selectors": [
+    "substring-after(//div[@class='byline'], \" by \")"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "commentsContainer",
+    "linkback"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.macrumors.com/2010/11/10/apple-debuts-new-apple-tv-and-itunes-movie-content-in-japan/",
+      "contains": []
+    }
+  ]
+}

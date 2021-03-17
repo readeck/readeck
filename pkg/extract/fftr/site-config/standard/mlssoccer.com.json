@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//*[@class=\"header_title\"]/h1"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'content')]"
+  ],
+  "date_selectors": [
+    "//*[@class=\"field-date\"]"
+  ],
+  "author_selectors": [
+    "//*[@class=\"field-author\"]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.mlssoccer.com/news/article/2012/06/19/lack-depth-front-forces-arena-alter-las-formation",
+      "contains": []
+    }
+  ]
+}

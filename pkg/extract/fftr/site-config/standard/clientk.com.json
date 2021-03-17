@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//div[@class=\"entrytitle\"]/a"
+  ],
+  "body_selectors": [
+    "//div[@class=\"entrybody\"]"
+  ],
+  "date_selectors": [
+    "substring-before(substring-after(//div[@class=\"entrytime\"], \"|\"), \"- Posted\")"
+  ],
+  "author_selectors": [
+    "substring-after(substring-before(//div[@class=\"entrytime\"], \"|\"), \"By \")"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"entrybody\"]//p[@class=\"singleinfo\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://clientk.com/2011/12/19/the-impact-of-more/",
+      "contains": []
+    }
+  ]
+}

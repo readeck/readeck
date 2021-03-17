@@ -1,0 +1,30 @@
+{
+  "title_selectors": [
+    "//h1[@id='titre']"
+  ],
+  "body_selectors": [
+    "//h2[@id=\"surtitre\"]|//div[@id=\"ctn_introarticle\"]|//div[@class=\"ctn_globalcontent\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "qc-container-main",
+    "article_footer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.quechoisir.org/alimentation/securite-hygiene/actualite-acrylamide-un-contaminant-trop-present-dans-nos-assiettes",
+      "contains": []
+    }
+  ]
+}

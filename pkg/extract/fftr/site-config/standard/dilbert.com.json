@@ -1,0 +1,40 @@
+{
+  "title_selectors": [
+    "//a[@class=\"post-title\"]/text()",
+    "//meta[@name=\"twitter:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//img[@class=\"img-responsive img-comic\"]"
+  ],
+  "date_selectors": [
+    "//meta[@property=\"article:publish_date\"]/@content"
+  ],
+  "author_selectors": [
+    "string('Scott Adams')"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://dilbert.com/blog/entry/death_by_hypnosis_or_not/",
+      "contains": []
+    },
+    {
+      "url": "http://dilbert.com/strips/comic/2013-10-22",
+      "contains": []
+    },
+    {
+      "url": "http://feed.dilbert.com/dilbert/daily_strip",
+      "contains": []
+    }
+  ]
+}

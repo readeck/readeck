@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//span[@class='titel']"
+  ],
+  "body_selectors": null,
+  "date_selectors": [
+    "substring-after(//span[@class='metadaten_C'],'astronews.com')"
+  ],
+  "author_selectors": [
+    "//span[@class='metadaten_C']/a//span[@class='metadaten_C']"
+  ],
+  "strip_selectors": [
+    "//span[@class='bu']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": [
+    "/_images/"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.astronews.com/news/artikel/2011/10/1110-021.shtml",
+      "contains": []
+    }
+  ]
+}

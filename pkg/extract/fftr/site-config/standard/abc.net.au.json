@@ -1,0 +1,45 @@
+{
+  "title_selectors": [
+    "//div[@class='article section']//h1"
+  ],
+  "body_selectors": [
+    "//div[@class=\"page section\"]"
+  ],
+  "date_selectors": [
+    "//span[@class=\"timestamp\"]"
+  ],
+  "author_selectors": [
+    "//div[@class=\"byline\"]/a"
+  ],
+  "strip_selectors": [
+    "//a[@class=\"inline-caption\"]",
+    "//p[@class=\"ticker section noprint\"]",
+    "//p[@class=\"topics\"]",
+    "//h1",
+    "//div[@class=\"byline\"]",
+    "//p[@class=\"published\"]",
+    "//div[contains(@class,\"featured-scroller\")]"
+  ],
+  "strip_id_or_class": [
+    "footer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.abc.net.au/news/2013-03-27/open-speed-highways-change-clp-giles/4597892",
+      "contains": []
+    },
+    {
+      "url": "http://www.abc.net.au/news/2013-04-30/credit-growth-remains-subdued/4660054?section=business",
+      "contains": []
+    }
+  ]
+}

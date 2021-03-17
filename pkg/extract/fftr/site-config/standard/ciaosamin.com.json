@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//h3[contains(@class, 'post-title')]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'entry-content')]"
+  ],
+  "date_selectors": [
+    "//h2[contains(@class, 'date-header')]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://ciaosamin.com/ciao/2015/12/28/recipe-million-dollar-caramels",
+      "contains": []
+    }
+  ]
+}

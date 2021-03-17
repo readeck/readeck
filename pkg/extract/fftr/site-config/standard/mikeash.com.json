@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//div[@class=\"blogtitle\"]"
+  ],
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": [
+    "substring-after(//span[@class=\"blogheader\"], 'Author: ')"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"blogtitle\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.mikeash.com/pyblog/friday-qa-2012-01-13-the-mac-toolbox.html",
+      "contains": []
+    }
+  ]
+}

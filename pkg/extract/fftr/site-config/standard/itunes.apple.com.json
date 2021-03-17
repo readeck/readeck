@@ -1,0 +1,41 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='left-stack' or contains(@class, 'center-stack')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "rating",
+    "listeners-also-bought"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "class=\"artwork\" src=\"",
+      "class=\"artwork\" src-disabled=\""
+    ],
+    [
+      "src-swap-high-dpi=\"",
+      "src=\""
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://itunes.apple.com/us/rss/topaudiobooks/limit=10/xml",
+      "contains": []
+    },
+    {
+      "url": "https://itunes.apple.com/us/audiobook/the-giver-unabridged/id356345850",
+      "contains": []
+    }
+  ]
+}

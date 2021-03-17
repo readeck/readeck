@@ -1,0 +1,49 @@
+{
+  "title_selectors": [
+    "//h1[@id=\"headline\"]"
+  ],
+  "body_selectors": [
+    "//div[@id=\"template\"]"
+  ],
+  "date_selectors": [
+    "substring-after(//div[contains(@class, \"editorial-byline-meta\")], \" | \")"
+  ],
+  "author_selectors": [
+    "//div[contains(@class, \"editorial-byline-author\")]/a"
+  ],
+  "strip_selectors": [
+    "/html/body/span[contains(@style, \"display: none\")]",
+    "//div[contains(@class, \"searchInstruction\")]",
+    "//div[contains(@class, \"searchResults\")]/h4"
+  ],
+  "strip_id_or_class": [
+    "editorial-byline-pic",
+    "editorial-byline",
+    "headline",
+    "pullquote",
+    "image-caption-content",
+    "header",
+    "footer",
+    "searchContainer",
+    "letter-text",
+    "letter-from",
+    "letter-date",
+    "social-tab",
+    "divider"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.theglobalmail.org/feature/tiramisu-time-in-pyongyang/88/",
+      "contains": []
+    }
+  ]
+}

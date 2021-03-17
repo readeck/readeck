@@ -1,0 +1,31 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'article-content')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.sydsvenskan.se/2017-02-09/svensk-gripen-misstankt-for-kokainsmugglingen-i-landskrona",
+      "contains": [
+        "De fann 18 kilo kokain, värt 55 miljoner kronor"
+      ]
+    },
+    {
+      "url": "http://www.sydsvenskan.se/rss.xml",
+      "contains": []
+    }
+  ]
+}

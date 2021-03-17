@@ -1,0 +1,45 @@
+{
+  "title_selectors": [
+    "//meta[@name=\"title\"]/@content"
+  ],
+  "body_selectors": [
+    "//article"
+  ],
+  "date_selectors": [
+    "//meta[@itemProp=\"datePublished\"]/@content"
+  ],
+  "author_selectors": [
+    "//meta[@itemProp=\"author\"]/@content"
+  ],
+  "strip_selectors": [
+    "//header",
+    "//aside",
+    "//article/div[contains(., 'For our free coronavirus pandemic coverage')]",
+    "//*[starts-with(@id, 'adspot-')]"
+  ],
+  "strip_id_or_class": [
+    "adWrapper",
+    "noPrint"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.theage.com.au/victoria/top-cops-warns-outlaw-bikies-we-have-a-gang-too-20130331-2h1l8.html",
+      "contains": []
+    },
+    {
+      "url": "https://www.theage.com.au/national/the-twin-baggage-of-pride-and-ideology-impeding-the-pandemic-strategy-20200716-p55cq1.html",
+      "contains": [
+        "Health campaigns have to be delivered"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article[contains(@class, 'entry--item')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//img[@data-src]",
+    "//footer",
+    "//aside"
+  ],
+  "strip_id_or_class": [
+    "comments"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cnoscript\u003e",
+      "\u003c!-- noscript --\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c!-- /noscript --\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://fularsizentellik.com/journal/2019/07/16/evrimsel-psikoloji-redpill",
+      "contains": []
+    }
+  ]
+}

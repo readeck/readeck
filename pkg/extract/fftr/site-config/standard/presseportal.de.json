@@ -1,0 +1,37 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' story-text ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "news-bodycopy"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.presseportal.de/pm/103258/2930232/felix-neureuther-vor-der-ski-wm-ich-denke-von-rennen-zu-rennen",
+      "contains": []
+    },
+    {
+      "url": "http://www.presseportal.de/pm/66749/2933779/koelner-stadt-anzeiger-bahnmitarbeiter-werden-in-nrw-immer-haeufiger-angegriffen-zahl-der/rss",
+      "contains": [
+        "kleineren Bahnhöfen installieren und erhofft"
+      ]
+    },
+    {
+      "url": "http://www.presseportal.de/rss/presseportal.rss2",
+      "contains": []
+    }
+  ]
+}

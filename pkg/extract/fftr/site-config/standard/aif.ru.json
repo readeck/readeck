@@ -1,0 +1,87 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//meta[@name=\"article:published_time\"]/@content"
+  ],
+  "author_selectors": [
+    "//div[contains(@class, 'autor')]/a[@itemprop=\"name\"]"
+  ],
+  "strip_selectors": [
+    "//time[@itemprop=\"datePublished\"]",
+    "//div[@class=\"viewed\"]",
+    "//strong[contains(@class, 'first_float')]",
+    "//a[@class=\"origins\"]",
+    "//div[@class=\"autors_box\"]",
+    "//div[contains(@class, 'img_inject')]",
+    "//figure[not(@id) and div[img[@class='sharable_picture']]]",
+    "//div[contains(@class, 'gallery_box')]/div[contains(@class, 'gallery_main')]",
+    "//div[@class=\"tags\"]",
+    "//a[contains(@class, 'more_btn')]",
+    "//div[contains(@class, 'adv_content')]",
+    "//a[contains(@class, 'show_comments_widget_js')]",
+    "//h2[contains(@class, 'pptr17antx_1af_block_h2')]",
+    "//p[contains(@class, 'pptr17antx_1af_link_p')]",
+    "//section[contains(@class, 'interesting')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://aif.ru/society/law/chto_za_zakonoproekt_o_lishenii_svobody_za_klevetu_v_seti",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/society/ptransport/smert_nad_bruklinom_kak_mirovaya_aviaciya_poluchila_krovavyy_urok",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/society/science/budet_nam_nauka_prezident_ran_o_nasushchnyh_problemah_i_nadezhdah_uchyonyh",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/moscow/mer_moskvy_vystupil_s_ezhegodnym_otchetom_pered_deputatami_mgd",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/culture/v_sovremennike_otvetili_na_slova_sadalskogo_o_pohoronah_gafta",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/society/gallery/izverzhenie_vulkana_etna_v_italii",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/society/media/obektivnaya_ocenka_minstroy_i_fond_zhkh_nagradili_luchshih_zhurnalistov",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/health/secrets/gimnastika_s_hitrinkoy_kak_povysit_effektivnost_privychnyh_uprazhneniy",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/food/products/kakao_dlya_mozga_neostyvshiy_napitok_deystvuet_kak_luchshiy_doping",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/politics/russia/v_rf_vvedut_zapret_na_anonimnoe_popolnenie_elektronnyh_koshelkov_-_rbk",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/food/products/kakie_produkty_pomogut_rabote_mozga",
+      "contains": []
+    },
+    {
+      "url": "https://aif.ru/society/rossiyane_smogut_sovershat_avtoplatezhi_po_nomeru_telefona_v_sisteme_sbp",
+      "contains": []
+    }
+  ]
+}

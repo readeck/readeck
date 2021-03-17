@@ -1,0 +1,45 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ', normalize-space(@itemprop), ' '), ' headline ')]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ', normalize-space(@id), ' '), ' lead_graphic ')] | //div[contains(concat(' ', normalize-space(@itemprop), ' '), ' articleBody ')]"
+  ],
+  "date_selectors": [
+    "//time[contains(concat(' ', normalize-space(@itemprop), ' '), ' datePublished ')]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "photo_credit",
+    "photo_caption",
+    "inline_gallery",
+    "pq",
+    "credit",
+    "figcaption",
+    "related_item"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.businessweek.com/magazine/buyback-insurance-a-good-deal-for-retailers-07282011.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.businessweek.com/articles/2012-06-06/american-pain-the-largest-u-dot-s-dot-pill-mills-rise-and-fall",
+      "contains": []
+    },
+    {
+      "url": "http://www.businessweek.com/articles/2014-07-09/american-apparel-dov-charneys-sleazy-struggle-for-control",
+      "contains": []
+    }
+  ]
+}

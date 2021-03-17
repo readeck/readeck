@@ -1,0 +1,32 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, \"w-post-content\")]"
+  ],
+  "date_selectors": [
+    "//header//time"
+  ],
+  "author_selectors": [
+    "//a[@class=\"w-author__name-link\"]"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"w-post-breadcrumbs\"]",
+    "//div[@class=\"w-chips\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://web.dev/content-visibility/",
+      "contains": []
+    }
+  ]
+}

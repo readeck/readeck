@@ -1,0 +1,63 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@itemprop=\"articleBody\"]",
+    "//div[@itemprop=\"reviewBody\"]",
+    "//figcaption|//div[@class=\"img-wrapper\"]/noscript/img"
+  ],
+  "date_selectors": [
+    "//meta[@name=\"DC.date.issued\"]/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"author\"]/@content"
+  ],
+  "strip_selectors": [
+    "//aside",
+    "//h3[contains(., \"See also:\")]",
+    "//div[@id=\"article-top-page-number\"]",
+    "//p[starts-with(normalize-space(.), '[')]",
+    "//p[starts-with(normalize-space(.), '+')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//a[@rel=\"next\"]"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.networkworld.com/index.rss",
+      "contains": []
+    },
+    {
+      "url": "http://www.networkworld.com/article/2952852/email-services/4-great-gmail-tips-you-might-not-know-about.html#tk.rss_all",
+      "contains": []
+    },
+    {
+      "url": "http://www.networkworld.com/article/2951819/infrastructure-management/cios-say-applecare-for-enterprise-is-lacking.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.networkworld.com/article/2951823/cisco-subnet/early-access-qa-new-cisco-ceo-chuck-robbins-heads-into-hyper-connected-mode.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.networkworld.com/article/2947478/mobile/what-if-the-apple-watch-really-is-a-flop.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.networkworld.com/article/2953522/cloud-computing/nfv-a-hit-for-opendaylight.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.networkworld.com/article/2960522/wi-fi/best-wi-fi-stumblers-for-the-mac.html",
+      "contains": []
+    }
+  ]
+}

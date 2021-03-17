@@ -1,0 +1,42 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' o-page ')]"
+  ],
+  "date_selectors": [
+    "//header[contains(concat(' ',normalize-space(@class),' '),' o-page__content__head ')]//div[contains(concat(' ',normalize-space(@class),' '),' o-infos ')]//time[contains(concat(' ',normalize-space(@class),' '),' o-infos__date ')]"
+  ],
+  "author_selectors": [
+    "//header//a[contains(@href, '/users/')]"
+  ],
+  "strip_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' o-page__footer ')]"
+  ],
+  "strip_id_or_class": [
+    "c-same-subject",
+    "c-kiosk--single",
+    "o-page__footer",
+    "o-page__figure__trigger",
+    "c-comments",
+    "c-epigraph"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.alternatives-economiques.fr/etats-unis-overdoses-tuent-plus-armes-a-feu/00085167",
+      "contains": []
+    },
+    {
+      "url": "https://www.alternatives-economiques.fr/nucleaire-france-a-lheure-choix/00087747",
+      "contains": []
+    }
+  ]
+}

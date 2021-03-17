@@ -1,0 +1,44 @@
+{
+  "title_selectors": [
+    "//div[@class='newsdetbd']"
+  ],
+  "body_selectors": [
+    "//div[@id='innerleft']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='mrrt']",
+    "//div[@id='selNotes']"
+  ],
+  "strip_id_or_class": [
+    "fdpd",
+    "epapt",
+    "newsrtwd",
+    "padtp",
+    "newdt",
+    "newdlt",
+    "clsNotes",
+    "clear",
+    "cmtwrap",
+    "sess",
+    "parents"
+  ],
+  "strip_image_src": [
+    "/albums/"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": true,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.dinamalar.com/News_Detail.asp?Id=295725",
+      "contains": []
+    }
+  ]
+}

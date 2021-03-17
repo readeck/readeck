@@ -1,0 +1,34 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='main']"
+  ],
+  "date_selectors": [
+    "substring-before(substring-after(//div[@class='meta-single'], ' am '), ' | ')"
+  ],
+  "author_selectors": [
+    "substring-before(substring-after(//div[@class='meta-single'], 'erstellt von '), ' am')"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "pagelink",
+    "wp-polls"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//div[@class='post-page-next']/a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.designtagebuch.de/die-gefuehlte-lesbarkeit/",
+      "contains": []
+    }
+  ]
+}

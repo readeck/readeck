@@ -1,0 +1,36 @@
+{
+  "title_selectors": [
+    "/html/head/title"
+  ],
+  "body_selectors": [
+    "//div[@id = 'articlecontent']/div[contains(@class, 'bodytext')]",
+    "//div[@class = 'blogitem']"
+  ],
+  "date_selectors": [
+    "//div[@class = 'articleheadings']/span[@class = 'updated']",
+    "//span[@class = 'pubdate']"
+  ],
+  "author_selectors": [
+    "//div[@class = 'articleheadings']/p[contains(@class,'author')]/span[@class = 'fn']",
+    "//p[@class=\"credit\"]/span[@class=\"author\"]/a[position() = 1]"
+  ],
+  "strip_selectors": [
+    "//div[div[contains(@class, 'imgbox')]]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.sfgate.com/columnists/garchik/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h2"
+  ],
+  "body_selectors": [
+    "//div[@id='leftdetail']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//a[contains(., 'Full Version')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[contains(@href, 'printable=1')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.hemmings.com/classifieds/dealer/ferrari/330gtc/1601235.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.hemmings.com/rss/keyword.xml?adtype=carsforsale\u0026make=ferrari",
+      "contains": []
+    }
+  ]
+}

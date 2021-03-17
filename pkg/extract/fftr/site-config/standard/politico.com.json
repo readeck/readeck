@@ -1,0 +1,37 @@
+{
+  "title_selectors": [
+    "//div[contains(@class, \"article\")]/h1"
+  ],
+  "body_selectors": [
+    "//div[contains(@class,\"story-text\")]"
+  ],
+  "date_selectors": [
+    "//div[contains(@class,\"story-text\")]//time[@itemprop=\"datePublished\"]/@datetime"
+  ],
+  "author_selectors": [
+    "//div[contains(@class,\"story-text\")]//p[contains(@class, 'story-meta__authors')]",
+    "//div[contains(@class,\"story-text\")]//p[contains(@class, 'byline')]"
+  ],
+  "strip_selectors": [
+    "//div[contains(@class, \"breadcrumbs\")]",
+    "//a[contains(@class, \"hidden\")]",
+    "//div[contains(@class, \"story-embed\")]",
+    "//div[contains(@class, \"story-text\")]//p/a[contains(text(), \"Also on POLITICO:\")]/.."
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.politico.com/news/stories/0712/78105.html",
+      "contains": []
+    }
+  ]
+}

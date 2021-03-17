@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h2[@class='publication-title']"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' content-area ')]"
+  ],
+  "date_selectors": [
+    "//p[@class='publish-date']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "breadcrumb",
+    "pagination",
+    "top"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' pagination ')]/ul/li/a[contains(., 'next page')]"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.health.gov.au/internet/publications/publishing.nsf/Content/ohp-enhealth-raintank-cnt-l",
+      "contains": []
+    }
+  ]
+}

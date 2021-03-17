@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h1[@class=\"headline\"]"
+  ],
+  "body_selectors": [
+    "//div[@id=\"main-article-content\"]"
+  ],
+  "date_selectors": [
+    "//h2[@class=\"publish-date\"]/span"
+  ],
+  "author_selectors": [
+    "//div[@class=\"hdr-sub byline\"]/a"
+  ],
+  "strip_selectors": [
+    "//ul[@class=\"lnks-readmore\"]",
+    "//div[@class=\"inlineImageCaption\"]",
+    "//div[@style=\"width:468px\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://uk.xbox360.ign.com/articles/121/1210717p1.html",
+      "contains": []
+    }
+  ]
+}

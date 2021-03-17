@@ -1,0 +1,25 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//meta[@name=\"date\"]/@content"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://gauchiste.fr/post/2019/11/08/Un-catadioptre-vous-sauvera-(peut-%C3%AAtre)-la-vie",
+      "contains": []
+    }
+  ]
+}

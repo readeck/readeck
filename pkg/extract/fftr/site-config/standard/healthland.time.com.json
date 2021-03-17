@@ -1,0 +1,33 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class = 'entry-content']"
+  ],
+  "date_selectors": [
+    "//span[@class = 'date']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='more-ways']",
+    "//div[@id = 'stayConnected']",
+    "//p[child::a[@rel = 'bookmark']]",
+    "//p[starts-with(string(.),'(MORE:')]",
+    "//p[starts-with(string(.),'(PHOTOS:')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://healthland.time.com/2011/07/24/amy-winehouse-and-the-pain-of-addiction/?preview=true\u0026preview_id=39210\u0026preview_nonce=0777d4e408",
+      "contains": []
+    }
+  ]
+}

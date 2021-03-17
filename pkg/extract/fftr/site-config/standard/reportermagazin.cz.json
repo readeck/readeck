@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' article-detail__title ')]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-detail__contentArticle ')]"
+  ],
+  "date_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-header-big__authorDate ')]"
+  ],
+  "author_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-detail__contentArticle ')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://reportermagazin.cz/a/iJ3Hz/prosime-boha-aby-meli-cesti-lekari-dobry-zivot",
+      "contains": []
+    }
+  ]
+}

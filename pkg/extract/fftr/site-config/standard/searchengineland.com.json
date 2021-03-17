@@ -1,0 +1,44 @@
+{
+  "title_selectors": [
+    "//div[@class=\"storyBox\"]/h1"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article ') and (contains(concat(' ',normalize-space(@class),' '),' clear '))]"
+  ],
+  "date_selectors": [
+    "substring-before(//span[@class=\"dateline\"], 'by')"
+  ],
+  "author_selectors": [
+    "//a[@rel=\"author\"]"
+  ],
+  "strip_selectors": [
+    "//h1",
+    "//p[@class=\"homeStory tdmSideInfo\"]",
+    "//div[@id=\"bylineShare\"]",
+    "//script",
+    "//hr"
+  ],
+  "strip_id_or_class": [
+    "homeStory",
+    "authorpic",
+    "insideComments",
+    "authorbio",
+    "gpt-ad-sel-cube",
+    "smxTextAd"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://searchengineland.com/googles-jaw-dropping-sponsored-post-campaign-for-chrome-106348",
+      "contains": []
+    }
+  ]
+}

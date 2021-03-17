@@ -1,0 +1,46 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='published clearfix'] | //div[@class='story_titles']/h3 | //div[@class='story_text']"
+  ],
+  "date_selectors": [
+    "/html/body/div[3]/div[1]/div[6]/div/div[1]/div[2]/div[1]/div/p"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "info_panel",
+    "info_poll",
+    "teaser",
+    "panelbox",
+    "polls",
+    "warning",
+    "vplaceholder"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "Print\u003c/a\u003e",
+      "\u003c/a\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.20min.ch/wissen/news/story/31588952",
+      "contains": []
+    },
+    {
+      "url": "http://www.20min.ch/digital/dossier/apple/story/So-einfach-laesst-sich-das-iPhone-6-Plus-verbiegen-24651169",
+      "contains": []
+    }
+  ]
+}

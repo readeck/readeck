@@ -1,0 +1,45 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//main/article//div[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]"
+  ],
+  "date_selectors": [
+    "//meta[@property=\"article:published_time\"]/@content"
+  ],
+  "author_selectors": [
+    "//main/article/header//span[@itemprop=\"author\"]"
+  ],
+  "strip_selectors": [
+    "//aside",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' ala-single-sidebar-wrapper ')]",
+    "//a[contains(@class, 'subhead-anchor')]",
+    "//footer",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' utility-side-bar ')]"
+  ],
+  "strip_id_or_class": [
+    "aside-breaker"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.alistapart.com/articles/organizing-mobile/",
+      "contains": []
+    },
+    {
+      "url": "https://alistapart.com/article/responsible-javascript-part-1",
+      "contains": [
+        "Modern layout engines like Flexbox and Grid"
+      ]
+    }
+  ]
+}

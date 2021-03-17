@@ -1,0 +1,39 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='content']/div[contains(@class, 'text')]"
+  ],
+  "date_selectors": [
+    "//p[contains(@class, 'time')]"
+  ],
+  "author_selectors": [
+    "//p[contains(@class, 'author')]/a"
+  ],
+  "strip_selectors": [
+    "//h1"
+  ],
+  "strip_id_or_class": [
+    "meta",
+    "author",
+    "paging"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//div[contains(@class, 'text')]/div/div[contains(@class, 'paging')]/a[@class='more ']"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://jetzt.sueddeutsche.de/texte/anzeigen/544308/Alles-flicken",
+      "contains": []
+    }
+  ]
+}

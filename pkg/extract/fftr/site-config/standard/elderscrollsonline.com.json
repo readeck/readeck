@@ -1,0 +1,82 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class, \"alpha\")]"
+  ],
+  "body_selectors": [
+    "//article[contains(@class, \"news-post\")]"
+  ],
+  "date_selectors": [
+    "//time"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003ctime class=\"gamma\"\u003e01.",
+      "\u003ctime class=\"gamma\"\u003eJanuary."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e02.",
+      "\u003ctime class=\"gamma\"\u003eFebruary."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e03.",
+      "\u003ctime class=\"gamma\"\u003eMarch."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e04.",
+      "\u003ctime class=\"gamma\"\u003eApril."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e05.",
+      "\u003ctime class=\"gamma\"\u003eMay."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e06.",
+      "\u003ctime class=\"gamma\"\u003eJune."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e07.",
+      "\u003ctime class=\"gamma\"\u003eJuly."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e08.",
+      "\u003ctime class=\"gamma\"\u003eAugust."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e09.",
+      "\u003ctime class=\"gamma\"\u003eSeptember."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e10.",
+      "\u003ctime class=\"gamma\"\u003eOctober."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e11.",
+      "\u003ctime class=\"gamma\"\u003eNovember."
+    ],
+    [
+      "\u003ctime class=\"gamma\"\u003e12.",
+      "\u003ctime class=\"gamma\"\u003eDecember."
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://elderscrollsonline.com/en/rss",
+      "contains": []
+    },
+    {
+      "url": "http://elderscrollsonline.com/en/news/post/2013/03/27/developer-question-of-the-week-17",
+      "contains": []
+    }
+  ]
+}

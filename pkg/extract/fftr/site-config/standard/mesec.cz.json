@@ -1,0 +1,27 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='urs'] | //div[@itemprop='articleBody']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "promo-in-article"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.mesec.cz/aktuality/ceske-drahy-pridaji-zamestnancum-jejich-mzdy-vzrostou-o-1-7/",
+      "contains": []
+    }
+  ]
+}

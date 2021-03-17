@@ -1,0 +1,36 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id = 'content']"
+  ],
+  "date_selectors": [
+    "substring-before(//meta[@name = 'dc.date']/@content,'T')"
+  ],
+  "author_selectors": [
+    "//span[@class = 'authors']",
+    "//span[@class = 'ht-vtag'][1]"
+  ],
+  "strip_selectors": [
+    "//div[contains(@class, 'region-ubercontent')]",
+    "//h1",
+    "//div[@id = 'ht-author']",
+    "//ul[@class = 'links inline']",
+    "//div[@id = 'ht-tools']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.historytoday.com/carol-dyhouse/skin-deep-fall-fur",
+      "contains": []
+    }
+  ]
+}

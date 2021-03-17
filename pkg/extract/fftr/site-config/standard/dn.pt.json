@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@class=\"Author\"]"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"Patrocinio\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "concat('http://www.dn.pt/Common/print.aspx?content_id=', //input[@type='hidden' and @name='link-comments']/@value)"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.dn.pt/inicio/opiniao/interior.aspx?content_id=3972244\u0026seccao=Alberto%20Gon%E7alves\u0026tag=Opini%E3o%20-%20Em%20Foco\u0026page=1",
+      "contains": []
+    }
+  ]
+}

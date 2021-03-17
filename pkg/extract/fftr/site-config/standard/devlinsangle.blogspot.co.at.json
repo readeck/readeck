@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h3"
+  ],
+  "body_selectors": [
+    "//div[@class='post hentry']"
+  ],
+  "date_selectors": [
+    "//h2[@class='date-header']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='post-footer']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://devlinsangle.blogspot.co.at/2012/03/difference-between-teaching-and_01.html",
+      "contains": []
+    }
+  ]
+}

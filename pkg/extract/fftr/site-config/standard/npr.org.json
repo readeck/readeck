@@ -1,0 +1,77 @@
+{
+  "title_selectors": [
+    "//div[contains(@class, 'storytitle')]//h1"
+  ],
+  "body_selectors": [
+    "//div[@id='primaryaudio']//*[@class='duration' or @class='download' or contains(@class, 'photo')] | //div[@id='storytext' or @id='supplementarycontent' or contains(@class, 'transcript')]"
+  ],
+  "date_selectors": [
+    "//meta[@name=\"date\"]/@content"
+  ],
+  "author_selectors": [
+    "//div[@aria-label=\"Byline\"]"
+  ],
+  "strip_selectors": [
+    "//a[contains(@class, 'enlargeicon')]",
+    "//div[contains(@class, 'bookedition')]",
+    "//div[@class='textsize']",
+    "//ul[@class='genres']",
+    "//span[@class='bull']",
+    "//h3[@class='conheader']",
+    "//button",
+    "//div[@class=\"ecommercepop\"]",
+    "//span[@class=\"bull\"]",
+    "//span[@class=\"purchaseLink\"]",
+    "//div[@class=\"enlarge_html\"]",
+    "//div[@class=\"enlarge_measure\"]",
+    "//div[@class=\"container con1col small\"]",
+    "//a[contains(@class, \"enlargebtn\")]",
+    "//div[contains(@class, \"bucketwrap internallink\")]"
+  ],
+  "strip_id_or_class": [
+    "enlarge_measure",
+    "enlarge_html",
+    "secondary",
+    "con1col",
+    "hide-caption",
+    "toggle-caption"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003ca name=\"more\"\u003e\u0026nbsp;\u003c/a\u003e",
+      "\u003c!-- no more --\u003e"
+    ],
+    [
+      "\u003cdiv class=\"transcript\"\u003e",
+      "\u003cdiv class=\"transcript\"\u003e\u003ch2\u003eTranscript\u003c/h2\u003e"
+    ],
+    [
+      "\u003cdiv class=\"transcript storytext\"\u003e",
+      "\u003cdiv class=\"transcript storytext\"\u003e\u003ch2\u003eTranscript\u003c/h2\u003e"
+    ]
+  ],
+  "http_headers": {
+    "Cookie": "trackingChoice=true; choiceVersion=1"
+  },
+  "tests": [
+    {
+      "url": "http://www.npr.org/blogs/thetwo-way/2011/07/12/137799301/sports-loses-its-escapist-gleam-in-a-summer-of-court-dates",
+      "contains": []
+    },
+    {
+      "url": "http://www.npr.org/2012/07/04/156190948/feeling-under-siege-catholic-leadership-shifts-right",
+      "contains": []
+    },
+    {
+      "url": "http://www.npr.org/2012/12/13/166480907/the-years-best-sci-fi-crosses-galaxies-and-genres",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h2[@class=\"lyt-hdg-02-04\"]"
+  ],
+  "body_selectors": [
+    "//div[@class=\"articleContent\"]"
+  ],
+  "date_selectors": [
+    "//div[@class=\"lyt-namearea\"]/text()"
+  ],
+  "author_selectors": [
+    "//div[@class=\"lyt-namearea\"]/a"
+  ],
+  "strip_selectors": [
+    "//div[@id=\"tab-aside\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://news.mynavi.jp/articles/2011/12/07/nico/index.html",
+      "contains": []
+    }
+  ]
+}

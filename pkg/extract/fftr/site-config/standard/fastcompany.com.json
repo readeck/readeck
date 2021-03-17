@@ -1,0 +1,55 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//figure[@class='jumbotron'] | //div[@itemprop='body']",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' post__main ')]"
+  ],
+  "date_selectors": [
+    "//meta[@property='article:published_time']/@content"
+  ],
+  "author_selectors": [
+    "//div[@class='byline']//a"
+  ],
+  "strip_selectors": [
+    "//h1[@class='post__title']"
+  ],
+  "strip_id_or_class": [
+    "eyebrow",
+    "post__footer",
+    "social__list"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003ch2 class=\"post__deck\"\u003e",
+      "\u003cp\u003e"
+    ],
+    [
+      "\u003c/h2\u003e",
+      "\u003c/p\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.fastcompany.com/3000226/link-between-quietness-and-productivity",
+      "contains": [
+        "Some of you may have tried to reach me this morning"
+      ]
+    },
+    {
+      "url": "http://www.fastcompany.com/3003586/6-simple-rituals-reach-your-potential-every-day",
+      "contains": []
+    },
+    {
+      "url": "https://www.fastcompany.com/90342223/the-newest-hot-coworking-space-costs-just-2-25-an-hour-because-it-is-a-parking-spot",
+      "contains": []
+    }
+  ]
+}

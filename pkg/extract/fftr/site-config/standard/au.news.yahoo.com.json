@@ -1,0 +1,28 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@class=\"info\"]//span[@class=\"association printer-source\"]",
+    "//div[@class=\"info\"]//span[@class=\"stamp printer-date\"]"
+  ],
+  "strip_selectors": [
+    "//a[contains(text(), \"RELATED:\")]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://au.news.yahoo.com/a/31334394/brave-subway-employee-fights-off-masked-robber-using-her-bare-hands/",
+      "contains": []
+    }
+  ]
+}

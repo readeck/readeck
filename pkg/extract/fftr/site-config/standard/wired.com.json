@@ -1,0 +1,87 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'article__chunks') or contains(@class, 'content-header__dek')]",
+    "(//article[contains(@class, 'body-copy')])[1]",
+    "(//article[contains(@class, 'article-body-component')])[1]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' entry ')]"
+  ],
+  "date_selectors": [
+    "//meta[@name='DisplayDate']/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name='Author']/@content"
+  ],
+  "strip_selectors": [
+    "//p[contains(., 'Pages:') and contains(., 'View All')]",
+    "//p[@class='caption']",
+    "//div[@class='desc' or @class='slide' or @id='slide-info']",
+    "//*[contains(concat(' ',normalize-space(@class),' '),' callout ')]",
+    "//div[@id=\"social\"]",
+    "//img[contains(@alt, 'capital letter')]"
+  ],
+  "strip_id_or_class": [
+    "full-bleed-ad",
+    "layout__aside",
+    "pullquote",
+    "left_rail",
+    "related-container",
+    "radvert-caption-wrap",
+    "related",
+    "article-tags",
+    "visually-hidden",
+    "inset-left-component",
+    "recirc-most-popular",
+    "wpgallery"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cnoscript\u003e",
+      "\u003c!-- noscript --\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c!-- /noscript --\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.wired.com/story/telltale-heart-fitbit-murder/",
+      "contains": [
+        "twiddling his thumbs in her direction"
+      ]
+    },
+    {
+      "url": "https://www.wired.com/2017/07/inside-cubas-diy-internet-revolution/",
+      "contains": [
+        "I should call the hostess once I know"
+      ]
+    },
+    {
+      "url": "http://www.wired.com/cloudline/2011/10/meet-arms-cortex-a15-the-future-of-the-ipad-and-possibly-the-macbook-air/",
+      "contains": []
+    },
+    {
+      "url": "http://www.wired.com/wiredenterprise/2013/09/docker/",
+      "contains": []
+    },
+    {
+      "url": "http://www.wired.com/threatlevel/2012/05/ff_counterfeiter/all/",
+      "contains": []
+    },
+    {
+      "url": "http://www.wired.com/2015/11/i-turned-off-javascript-for-a-whole-week-and-it-was-glorious/",
+      "contains": []
+    }
+  ]
+}

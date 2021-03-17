@@ -1,0 +1,32 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[@id=\"js-Content\"]"
+  ],
+  "date_selectors": [
+    "(//time[contains(@class, \"c-sHeader__date-published\")])[1]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "u-skip",
+    "c-relatedPostList"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.villagevoice.com/2020/09/29/robert-mitchum-a-seasoned-champion/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "user-agent": "PHP/7.4"
+  },
+  "tests": [
+    {
+      "url": "https://getpocket.com/redirect?\u0026url=https%3A%2F%2Fwww.washingtonpost.com%2Fpolitics%2Fdonald-trumps-demand-for-a-border-wall-shut-down-the-government-at-the-same-time-his-company-was-firing-undocumented-workers%2F2019%2F01%2F26%2F8cf75d66-20c5-11e9-8e21-59a09ff1e2a1_story.html",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//h2 | //div[@id='artikelteaser'] | //div[@id='artikeltext']"
+  ],
+  "date_selectors": [
+    "//li[@class='artikeldatum']"
+  ],
+  "author_selectors": [
+    "substring(//li[@class='artikelautor'], 5)"
+  ],
+  "strip_selectors": [
+    "//div[@class='zusatzinfo']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": [
+    "artikel_a_merken.gif"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.echo-online.de/lokales/darmstadt/index.rss",
+      "contains": []
+    }
+  ]
+}

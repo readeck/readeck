@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h1[@class=\"post-title\"]"
+  ],
+  "body_selectors": [
+    "//section[@class=\"article-content\"]"
+  ],
+  "date_selectors": [
+    "//div[@class=\"post-date\"]/time/@datetime"
+  ],
+  "author_selectors": [
+    "//div[@class=\"post-bottom-meta\"]/span[@class=\"post-author\"]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://entwickler.de/online/mobile-welt-offline-welt-was-der-offline-first-ansatz-fuer-app-entwickler-heisst-140602.html",
+      "contains": []
+    },
+    {
+      "url": "https://entwickler.de/online/development/plex-docker-joomla-165345.html",
+      "contains": []
+    }
+  ]
+}

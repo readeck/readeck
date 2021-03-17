@@ -1,0 +1,73 @@
+{
+  "title_selectors": [
+    "//meta[@property='og:title']/@content"
+  ],
+  "body_selectors": [
+    "//article[@id='main-article']",
+    "//div[@id='main-article']",
+    "//article[contains(@class, 'ArticleLayout_article')]",
+    "//div[@itemprop='articleBody']",
+    "//div[@class='articleText']",
+    "//div[@class='articleContent']",
+    "//div[@id='article']"
+  ],
+  "date_selectors": [
+    "//*[contains(@class, 'date')]"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"author\"]/@content",
+    "//div[@id='profile']//*[@class='authors']//a[1]",
+    "//*[@class='author']/span"
+  ],
+  "strip_selectors": [
+    "//header",
+    "//gpt-ad",
+    "//div[contains(@class, 'ArticleBio_social')]",
+    "//*[contains(@class, 'ArticleRecirc')]",
+    "//div[@class='moreOnBoxWithImages']",
+    "//p[contains(., 'This article available online at:')]",
+    "//p[contains(., 'This article available online at:')]/following::*",
+    "//div[@class='earthbox']",
+    "//aside[@role=\"complementary\"]",
+    "//p[contains(@id, 'injected-recirculation-link')]"
+  ],
+  "strip_id_or_class": [
+    "share-social",
+    "c-article-writer__social",
+    "c-nudge__container",
+    "ad-boxinjector-m-wrapper"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": [
+    "//meta[@property=\"og:url\" and contains(@content, '/sponsored/')]"
+  ],
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.theatlantic.com/technology/archive/2011/04/want-to-see-how-crazy-a-bot-run-market-can-be/237773/",
+      "contains": []
+    },
+    {
+      "url": "https://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/6342/",
+      "contains": []
+    },
+    {
+      "url": "https://www.theatlantic.com/entertainment/archive/2012/04/30-rock-live-a-funny-reminder-of-why-sitcoms-arent-shot-live-anymore/256447/",
+      "contains": []
+    },
+    {
+      "url": "https://www.theatlantic.com/technology/archive/2013/06/fix-things-never-force-it-lessons-from-grandpa/276873/",
+      "contains": []
+    },
+    {
+      "url": "https://www.theatlantic.com/family/archive/2020/11/dear-therapist-i-discovered-my-husbands-sexts/617092/",
+      "contains": []
+    }
+  ]
+}

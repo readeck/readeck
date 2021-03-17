@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//h1[@class='entry-title']"
+  ],
+  "body_selectors": [
+    "//div[@id='mvp-content-main']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='recomienda-wrap']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.muycomputerpro.com/2017/09/20/fundacion-universidad-empresa-hyperloop-one",
+      "contains": []
+    }
+  ]
+}

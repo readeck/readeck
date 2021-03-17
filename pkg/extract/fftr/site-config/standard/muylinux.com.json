@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h1[@class='entry-title']"
+  ],
+  "body_selectors": [
+    "//div[@class='text']"
+  ],
+  "date_selectors": [
+    "//li[@class='entry-date']"
+  ],
+  "author_selectors": [
+    "//li[@class='entry-author']//a"
+  ],
+  "strip_selectors": [
+    "//div[@class='text']//img[1]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.muylinux.com/2016/03/22/kde-plasma-5-6",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class, 'section-title')]"
+  ],
+  "body_selectors": [
+    "//div[@id='print-area']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "timer",
+    "photo-sm",
+    "page-header"
+  ],
+  "strip_image_src": [
+    "food-logo-small"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[@id='prntrec']"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.food.com/recipe/couldnt-be-easier-bbq-pork-tenderloin-crock-pot-317152",
+      "contains": []
+    }
+  ]
+}

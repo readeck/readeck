@@ -1,0 +1,35 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='article']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='head']"
+  ],
+  "strip_id_or_class": [
+    "txt_upl"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//div[@id='gazeta_article_tools']//a[contains(@class, 'print')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://wyborcza.pl/1,123455,11536088,Gdy_peknie_fejs__obryzga_wszystko.html?as=1\u0026startsz=x",
+      "contains": []
+    },
+    {
+      "url": "http://wyborcza.pl/1,75478,14880255,Biskup_Dydycz_o_pedofilii_i_tajemnicy_spowiedzi__Zamiast.html",
+      "contains": []
+    }
+  ]
+}

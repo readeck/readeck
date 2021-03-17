@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//div[@id='content']/div/h1"
+  ],
+  "body_selectors": [
+    "//div[@id='breadtext']"
+  ],
+  "date_selectors": [
+    "//time[@itemprop='dtreviewed']/@datetime"
+  ],
+  "author_selectors": [
+    "//a[@itemprop='reviewer']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.gamereactor.no/previews/177481/The+Evil+Within/?sid=38b5bd30f56f1b7214de4ff5bed4b76f",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' entry-title ')]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//span[@class='auteurcat']"
+  ],
+  "strip_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' ms-auth-header ')]/ancestor::fieldset"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cstrong\u003eFOCUS \u0026#8211;",
+      "\u003cstrong\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.placegrenet.fr/2018/07/27/condition-animale-pressee-par-des-associations-la-ville-de-grenoble-vote-un-voeu-pour-interpeller-letat/201804",
+      "contains": []
+    }
+  ]
+}

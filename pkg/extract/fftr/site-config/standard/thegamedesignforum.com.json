@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//h1[@class='featuretitle']"
+  ],
+  "body_selectors": [
+    "//div[@id='nobordercontentarea']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//img[@alt='Follow tgdfweb on Twitter']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": true,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://thegamedesignforum.com/features/acceleration_flow_1.html",
+      "contains": []
+    }
+  ]
+}

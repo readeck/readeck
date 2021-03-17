@@ -1,0 +1,26 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "adsbygoogle",
+    "yarpp-related"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://bobbyromeo.com/technology/xiaomi-smart-1080p-wifi-ip-camera-rtsp-streaming-hack/",
+      "contains": []
+    }
+  ]
+}

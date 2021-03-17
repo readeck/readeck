@@ -1,0 +1,35 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "substring-before(//div[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]//strong[text()='Auteur :']/following-sibling::em, ',')"
+  ],
+  "strip_selectors": [
+    "//strong[text()='Lire aussi']/following-sibling::a[contains(@href, '//www.natura-sciences.com/')]/parent::p"
+  ],
+  "strip_id_or_class": [
+    "sharify-container"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.natura-sciences.com/agriculture/miscanthus-huile-de-ricin-biosource.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.natura-sciences.com/environnement/montagne-dor-guyane-projet-minier.html",
+      "contains": []
+    }
+  ]
+}

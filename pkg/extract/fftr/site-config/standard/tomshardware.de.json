@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h1[@id=\"header-news-title\" and @class=\"hardwareTitle\"][1]"
+  ],
+  "body_selectors": [
+    "//div[@id=\"news-content\"]/div[@id=\"intelliTXT\"][1]"
+  ],
+  "date_selectors": [
+    "//div[@id=\"header-news-infos\"]/span[1]"
+  ],
+  "author_selectors": [
+    "//div[@id=\"header-news-infos\"]/a[1]"
+  ],
+  "strip_selectors": [
+    "//div[@id=\"news-content\"]/div[@id=\"intelliTXT\"]/table"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.tomshardware.de/DDR4-DDR3-ISSCC-Samsung-Hynix,news-247133.html",
+      "contains": []
+    }
+  ]
+}

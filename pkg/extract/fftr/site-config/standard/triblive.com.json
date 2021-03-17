@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": null,
+  "date_selectors": [
+    "substring-after(//small,'Published:')"
+  ],
+  "author_selectors": [
+    "//span/a"
+  ],
+  "strip_selectors": [
+    "//h1[@class='vert_class']",
+    "//h1[@class='headline']",
+    "//img[contains(@src,'logo_triblive.gif')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[@class='stprint']"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://triblive.com/sports/2819913-85/lemieux-deal-penguins-burkle-nhl-owners-team-mario-bettman-case",
+      "contains": []
+    }
+  ]
+}

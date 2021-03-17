@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "substring-before(//title, '-')"
+  ],
+  "body_selectors": [
+    "//div[@id=\"bodytext\"]"
+  ],
+  "date_selectors": [
+    "//a[@class='storytime']"
+  ],
+  "author_selectors": [
+    "//div[@class='byline']/a"
+  ],
+  "strip_selectors": [
+    "//div[@class='pagination']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//div[@class='pagination-inner']/a[.='全文']"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.ftchinese.com/story/001049088",
+      "contains": []
+    }
+  ]
+}

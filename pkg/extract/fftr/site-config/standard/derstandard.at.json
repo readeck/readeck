@@ -1,0 +1,64 @@
+{
+  "title_selectors": [
+    "//div[@id='content-header']/h1"
+  ],
+  "body_selectors": [
+    "//div[@id='objectContent']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//span[@class='author']"
+  ],
+  "strip_selectors": [
+    "//ul[@class='lookupLinksArtikel']",
+    "//meta",
+    "//div[@itemprop='publisher']",
+    "//div[@id='content-header']",
+    "//div[@id='pageTop']",
+    "//div[@id='toolbar']",
+    "//div[@id='articleTools']",
+    "//div[@id='weiterLesen']",
+    "//div[@id='communityCanvas']",
+    "//div[@class='credits']",
+    "//div[@id='feature-cover']",
+    "//div[@id='feature-meta']",
+    "//li[@class='empty']",
+    "//ul[@class='lookup-links']",
+    "//p[@class='article-pubdate']",
+    "//aside[@data-type='supplemental']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "Cookie": "DSGVO_ZUSAGE_V1=true"
+  },
+  "tests": [
+    {
+      "url": "http://derstandard.at/1318726018343/Breitband-LTE-Was-bringt-die-neue-Mobilfunk-Generation",
+      "contains": []
+    },
+    {
+      "url": "http://derstandard.at/2000033602592/40-Jahre-fuer-einen-der-nicht-gemeinsam-leben-wollte",
+      "contains": []
+    },
+    {
+      "url": "http://derstandard.at/2000017141382/Feature-Format",
+      "contains": []
+    },
+    {
+      "url": "http://derstandard.at/2000031826169/Die-Mittagspause-ist-den-meisten-heilig",
+      "contains": []
+    },
+    {
+      "url": "http://derstandard.at/2000032076109/Fordern-wir-die-totale-Ueberwachung",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//article[@itemprop=\"articleBody\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//button"
+  ],
+  "strip_id_or_class": [
+    "img-mask",
+    "StretchedBox"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "itemprop=\"url\" style=\"background-image:url(",
+      "itemprop=\"url\" src=\""
+    ],
+    [
+      ");\" src=\"https://s.yimg.com/g/images/spaceball.gif\"",
+      "\""
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.yahoo.com/news/amazon-just-accidentally-leaked-details-145441439.html",
+      "contains": [
+        "stereo functionality could allow"
+      ]
+    }
+  ]
+}

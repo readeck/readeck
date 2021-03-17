@@ -1,0 +1,49 @@
+{
+  "title_selectors": [
+    "//h1[@id='stream_title']"
+  ],
+  "body_selectors": [
+    "//div[@class='node-article']"
+  ],
+  "date_selectors": [
+    "//div[@class='date-stamp']"
+  ],
+  "author_selectors": [
+    "//div[@class='byline']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "fb-like-box",
+    "stream-fb-like",
+    "social-meta",
+    "social-spoken",
+    "twitter-share-button",
+    "twitter-follow-button",
+    "spinner_node_list",
+    "node-sort-link",
+    "stream_title",
+    "stream_summary",
+    "update-count-container",
+    "major-updates",
+    "newsletter-slide",
+    "author-mini-profile",
+    "byline",
+    "header",
+    "footer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.sbnation.com/nba/2012/3/13/2867226/dwight-howard-trade-rumors-2012-faq-orlando-magic",
+      "contains": []
+    }
+  ]
+}

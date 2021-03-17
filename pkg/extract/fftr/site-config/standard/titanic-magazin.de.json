@@ -1,0 +1,34 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'tt_news-bodytext')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003c!--TYPO3SEARCH_end--\u003e",
+      "\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.titanic-magazin.de/ich.war.bei.der.waffen.rss",
+      "contains": []
+    },
+    {
+      "url": "http://www.titanic-magazin.de/news/wenig-bekannte-fakten-ueber-2014-6986/",
+      "contains": []
+    }
+  ]
+}

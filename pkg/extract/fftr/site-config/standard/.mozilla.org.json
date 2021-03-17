@@ -1,0 +1,27 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//p[@class=\"entry-posted\"]//abbr[@class=\"published\"]/@title"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "comments"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://hacks.mozilla.org/2013/05/how-to-spread-the-word-about-your-code/",
+      "contains": []
+    }
+  ]
+}

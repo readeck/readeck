@@ -1,0 +1,32 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//main/div/article"
+  ],
+  "date_selectors": [
+    "//time/@datetime"
+  ],
+  "author_selectors": [
+    "//p[@data-scp=\"author_name\"]"
+  ],
+  "strip_selectors": [
+    "//header",
+    "//aside"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://thewirecutter.com/money/credit-cards/",
+      "contains": []
+    }
+  ]
+}

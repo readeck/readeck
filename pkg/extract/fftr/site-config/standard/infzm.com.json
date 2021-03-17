@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class ,'articleHeadline clearfix')]"
+  ],
+  "body_selectors": [
+    "//section[contains(@id, 'articleContent')]"
+  ],
+  "date_selectors": [
+    "substring(//em[contains(@class, 'pubTime')],1)"
+  ],
+  "author_selectors": [
+    "//em[contains(@class, 'toAuthor')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.infzm.com/content/41577",
+      "contains": []
+    }
+  ]
+}

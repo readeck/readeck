@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='article-view__content']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//span[@class=\"article-authornames\"]/a"
+  ],
+  "strip_selectors": [
+    "//div[@class='adbox-wrapper__label']",
+    "//div[@class='adbox-rectangle']",
+    "//div[@class='adbox-rectangle']",
+    "//div[contains(@class,'article-view__share-links-top')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.computerbase.de/news/2012-06/verbraucherzentrale-mahnt-blizzard-fuer-diablo-3-ab/",
+      "contains": []
+    }
+  ]
+}

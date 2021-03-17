@@ -1,0 +1,28 @@
+{
+  "title_selectors": [
+    "//*[contains(@class,'post-title')]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class,'post-body')]",
+    "//div[contains(@class,'entry-content')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": true,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.pathawks.com/2011/06/crazyawesomecoloradotrip.html",
+      "contains": []
+    }
+  ]
+}

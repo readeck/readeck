@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": [
+    "//div[@id = 'intelliTXT']"
+  ],
+  "date_selectors": [
+    "//time[@itemprop = 'datePublished']"
+  ],
+  "author_selectors": [
+    "//a[@itemprop = 'author']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//link[@rel='next']/@href"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.tomshardware.com/reviews/gaming-graphics-card-review,3107.html",
+      "contains": []
+    }
+  ]
+}

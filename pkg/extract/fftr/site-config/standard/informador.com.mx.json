@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//div[@class='tituloInt']"
+  ],
+  "body_selectors": [
+    "//div[@class='notaPortada']"
+  ],
+  "date_selectors": [
+    "//span[@class='publi']"
+  ],
+  "author_selectors": [
+    "//span[@class='autor']"
+  ],
+  "strip_selectors": [
+    "//img[@id='imgHorizontalInt imgDetalleImg imagenNota']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.informador.com.mx/tecnologia/2011/337606/6/iran-desarrolla-antivirus-tras-afectaciones-por-duqu.htm",
+      "contains": []
+    }
+  ]
+}

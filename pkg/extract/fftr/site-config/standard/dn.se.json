@@ -1,0 +1,59 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class, 'article__headline')]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'article__body-content') or contains(@class, 'article__lead') or contains(@class, 'image-box__container')]",
+    "//div[@id=\"article-content\"]"
+  ],
+  "date_selectors": [
+    "substring(substring-after(//p[@class=\"published\"], 'Publicerad '), 0, 11)"
+  ],
+  "author_selectors": [
+    "//div[@id=\"byline\"]/div/p/strong"
+  ],
+  "strip_selectors": [
+    "//div[@id=\"mirrors\"]"
+  ],
+  "strip_id_or_class": [
+    "advert-space",
+    "fbc-recommend",
+    "recommend",
+    "article-readers",
+    "article-addons",
+    "hook",
+    "footer",
+    "ad-head",
+    "atc-share-title"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cnoscript\u003e",
+      "\u003c!-- removed --\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c!-- removed --\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.dn.se/nyheter/varlden/landade-flygplan-mitt-i-villaomrade",
+      "contains": [
+        "Ett tekniskt haveri tvingade"
+      ]
+    },
+    {
+      "url": "http://www.dn.se/rss/senaste-nytt",
+      "contains": []
+    }
+  ]
+}

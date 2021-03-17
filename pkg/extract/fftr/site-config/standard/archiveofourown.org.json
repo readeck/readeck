@@ -1,0 +1,45 @@
+{
+  "title_selectors": [
+    "//h2[@class='title']"
+  ],
+  "body_selectors": [
+    "//div[@id=\"workskin\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//h3[@class='byline']",
+    "//a[@class='login author']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "header",
+    "navigation",
+    "feedback",
+    "kudos",
+    "add_comment_placeholder",
+    "add_comment",
+    "globalize",
+    "footer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//div[@id='main']//a[contains(@href, 'view_adult=true')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://archiveofourown.org/works/229402?view_full_work=true",
+      "contains": []
+    },
+    {
+      "url": "https://archiveofourown.org/works/750111/chapters/1399929",
+      "contains": []
+    }
+  ]
+}

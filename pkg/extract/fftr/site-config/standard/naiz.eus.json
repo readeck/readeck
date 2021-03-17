@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class,'widget full_article')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.naiz.eus/eu/actualidad/noticia/20151002/adegi-afirma-que-los-jovenes-viven-una-vida-muy-comoda-y-no-tienen-hambre-para-emprender#",
+      "contains": []
+    },
+    {
+      "url": "http://www.naiz.eus/eu/actualidad/noticia/20151012/podemos-euskadi-critica-que-otegi-y-sus-companeros-quieran-pasar-por-grandes-pacifistas",
+      "contains": []
+    }
+  ]
+}

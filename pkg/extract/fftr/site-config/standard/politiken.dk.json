@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class, 'stor-type')]"
+  ],
+  "body_selectors": [
+    "//div[@id='art-body']"
+  ],
+  "date_selectors": [
+    "substring-after(//div[@class='art-created'], ' ')"
+  ],
+  "author_selectors": [
+    "//span[@class='autor-name']"
+  ],
+  "strip_selectors": [
+    "//div[@class='art-fakta article-box']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://politiken.dk/kultur/boger/skonlitteratur_boger/ECE1426386/makabre-tegneserie-zombier-aeder-alt-levende/",
+      "contains": []
+    }
+  ]
+}

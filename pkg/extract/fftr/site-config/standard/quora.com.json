@@ -1,0 +1,49 @@
+{
+  "title_selectors": [
+    "(//div[contains(@class, 'puppeteer_test_question_title')])[1]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' spacing_log_answer_header ')] | //div[contains(concat(' ',normalize-space(@class),' '),' qu-userSelect--text ')][.//a] | //div[contains(concat(' ',normalize-space(@class),' '),' spacing_log_answer_content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "AnswerFooter",
+    "ActionBar",
+    "hidden",
+    "item_action_bar",
+    "answer_voters",
+    "question_topics",
+    "answer_header_text",
+    "editor_link",
+    "view_tag",
+    "include_details",
+    "sig_edit",
+    "profile_photo_img",
+    "question_text_icons"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.quora.com/What-everyday-habit-do-you-wish-you-had-developed-earlier-in-life",
+      "contains": [
+        "overcome emotional eating"
+      ]
+    },
+    {
+      "url": "http://www.quora.com/What-is-the-greatest-illusion-in-life",
+      "contains": [
+        "What is the greatest illusion in life?"
+      ]
+    }
+  ]
+}

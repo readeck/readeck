@@ -1,0 +1,32 @@
+{
+  "title_selectors": [
+    "//div[@class='page-content']//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='page-content']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "editorial-bar-top",
+    "social-bottom",
+    "comment-form",
+    "pc-why"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.cable.co.uk/news/bt-vision-unveils-interactive-guide-application-800734218/",
+      "contains": []
+    }
+  ]
+}

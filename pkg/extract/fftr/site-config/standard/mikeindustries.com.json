@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//div[@class='post_content']/h2"
+  ],
+  "body_selectors": [
+    "//div[@class='entry']"
+  ],
+  "date_selectors": [
+    "//div[@class='dateline']"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='closer']",
+    "//div[@class='navigation']",
+    "//div[@class='aux_pane']",
+    "//div[@class='aux_aux_pane']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.mikeindustries.com/blog/archive/2011/10/never-be-another",
+      "contains": []
+    }
+  ]
+}

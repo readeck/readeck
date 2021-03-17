@@ -1,0 +1,63 @@
+{
+  "title_selectors": [
+    "//meta[@name=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[@class=\"sz-article__top-asset\"] | //div[contains(concat(' ', normalize-space(@class), ' '), ' sz-article__body ')]"
+  ],
+  "date_selectors": [
+    "//time"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"author\"]/@content"
+  ],
+  "strip_selectors": [
+    "//figcaption",
+    "//noscript"
+  ],
+  "strip_id_or_class": [
+    "teaserable-layout",
+    "css-oo0q1r",
+    "sz-image-asset__zoom-icon"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[@data-track='{\"itemType\":\"article-pagination\",\"itemSubtype\":\"display-on-one-page\"}']"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003ch2\u003e",
+      "\u003ch3\u003e"
+    ],
+    [
+      "\u003c/h2\u003e",
+      "\u003c/h3\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.sueddeutsche.de/reise/bergwinter-saisonstart-in-den-skigebieten-geht-schon-1.3251799",
+      "contains": [
+        "Ranalt. Der steile Anstieg kurz nach dem Tunnel."
+      ]
+    },
+    {
+      "url": "http://www.sueddeutsche.de/kultur/politik-und-philosophie-warum-trump-jedes-mittel-recht-ist-1.3256078",
+      "contains": [
+        "Sucht man die Spuren des Pragmatismus"
+      ]
+    },
+    {
+      "url": "http://www.sueddeutsche.de/muenchen/mietshaus-am-gaertnerplatz-alles-muss-raus-1.1556693",
+      "contains": [
+        "Kammer zugemauert gewesen und das"
+      ]
+    }
+  ]
+}

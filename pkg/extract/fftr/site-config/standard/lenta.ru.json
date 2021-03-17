@@ -1,0 +1,42 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@itemprop='articleBody'] | //img[@itemprop='image']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//iframe[@name='banner']"
+  ],
+  "strip_id_or_class": [
+    "b-inline-topics-box",
+    "b-box"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://lenta.ru/news/2020/04/09/cosmology/",
+      "contains": []
+    },
+    {
+      "url": "https://lenta.ru/news/2016/07/08/weakpound/",
+      "contains": []
+    },
+    {
+      "url": "https://lenta.ru/news/2017/11/01/bigdata/",
+      "contains": []
+    },
+    {
+      "url": "https://lenta.ru/news/2018/10/23/b6112/",
+      "contains": []
+    }
+  ]
+}

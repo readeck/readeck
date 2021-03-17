@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//h1[@class='postTitle']"
+  ],
+  "body_selectors": [
+    "//div[@class='postContent']"
+  ],
+  "date_selectors": [
+    "substring-before(//h4[@class='postAuthor'], '|')"
+  ],
+  "author_selectors": [
+    "//a[@rel='author']"
+  ],
+  "strip_selectors": [
+    "//div[@class='simplePullQuote']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.unwinnable.com/2013/04/23/gratifying-play/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[contains(.,'Print view')]"
+  ],
+  "next_page_link_selectors": [
+    "//img[@alt = 'Next page']/../@href",
+    "//*[@class = 'pages']/*/td[@class = 'next enabled']/a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.dpreview.com/articles/6126592906/first-impressions-using-the-fujifilm-x-pro1",
+      "contains": []
+    }
+  ]
+}

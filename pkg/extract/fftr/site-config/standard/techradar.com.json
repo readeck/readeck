@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//div[@id='subColumn1Pad']/div[1][@class='article']/div[1][@class='articleHead']/h1"
+  ],
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@id='page_logo']/a",
+    "//*[(@id = \"utilities\")]",
+    "//div[@id='subColumn1Pad']/div[1][@class='article']/div[1][@class='articleHead']/p[@class='tiny']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.techradar.com/news/television/sky-to-rebrand-living-as-sky-living-903105",
+      "contains": []
+    }
+  ]
+}

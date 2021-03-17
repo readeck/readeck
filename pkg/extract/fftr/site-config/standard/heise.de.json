@@ -1,0 +1,142 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article[contains(@class, 'printversion')]",
+    "//article[@id=\"meldung\"] | //div[@class='meldung_wrapper'] | //section[@id='artikel_text']"
+  ],
+  "date_selectors": [
+    "//article//time[@itemprop=\"datePublished\"]/@datetime",
+    "//p[@class='news_datum']"
+  ],
+  "author_selectors": [
+    "//article//span[@itemprop=\"author\"]",
+    "//span[@class='author']",
+    "//div[@class=\"article__author\"]"
+  ],
+  "strip_selectors": [
+    "//nav",
+    "//time",
+    "//h4[@class='author']",
+    "//div[@class='gallery compact']/h3",
+    "//div[@class='gallery compact']/figcaption",
+    "//p[@class='news_datum']",
+    "//p[@class='artikel_datum']",
+    "//p[@class='news_navi']",
+    "//p[@class='printversion']",
+    "//a[contains(@href, 'mailto')]",
+    "//div[@class='gallery compact']/h2",
+    "//p[@class='themen_foren']",
+    "//style",
+    "//span[@class='source']",
+    "//figure[@class='printversion__logo']",
+    "//a-ad",
+    "//footer",
+    "//a-collapse"
+  ],
+  "strip_id_or_class": [
+    "comments",
+    "ISI_IGNORE",
+    "printversion--hide",
+    "linkurl_grossbild",
+    "image-num",
+    "heisebox_right",
+    "dossier",
+    "latest_posting_snippet",
+    "a-pvgs",
+    "a-pvg__body",
+    "teaser_adliste",
+    "a-article-header__service",
+    "legacy-img",
+    "opinary-widget-embed",
+    "article-sidebar",
+    "ad_"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[contains(@href, '?view=print')]",
+    "//a[contains(@title, 'Druck')]",
+    "//a[contains(@href, '?seite=all')]/@href"
+  ],
+  "next_page_link_selectors": [
+    "//a[@class='next' and not(contains(text(), 'Artikel'))]",
+    "//a[@title='vor']",
+    "//a[@rel='next']"
+  ],
+  "replace_strings": [
+    [
+      "\u003ch5\u003e",
+      "\u003ch2\u003e"
+    ],
+    [
+      "\u003c/h5\u003e",
+      "\u003c/h2\u003e"
+    ],
+    [
+      "\u003ctitle\u003eDruckversion - ",
+      "\u003ctitle\u003e"
+    ],
+    [
+      " | heise online\u003c/title\u003e",
+      "\u003c/title\u003e"
+    ],
+    [
+      " | c't Magazin\u003c/title\u003e",
+      "\u003c/title\u003e"
+    ],
+    [
+      " | Telepolis\u003c/title\u003e",
+      "\u003c/title\u003e"
+    ],
+    [
+      " | heise Security\u003c/title\u003e",
+      "\u003c/title\u003e"
+    ],
+    [
+      " | heise Autos\u003c/title\u003e",
+      "\u003c/title\u003e"
+    ],
+    [
+      "\u003cdiv class=\"heisebox\"\u003e",
+      "\u003cblockquote\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.heise.de/select/ct/2020/3/1580493780857147",
+      "contains": []
+    },
+    {
+      "url": "http://www.heise.de/open/artikel/Die-Neuerungen-von-Linux-3-15-2196231.html",
+      "contains": []
+    },
+    {
+      "url": "http://m.heise.de/open/artikel/Die-Neuerungen-von-Linux-3-15-2196231.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.heise.de/newsticker/meldung/Ueberwachungstechnik-Die-globale-Handy-Standortueberwachung-2301494.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.heise.de/newsticker/meldung/Bodenradar-fuer-selbstfahrende-Autos-horcht-unter-die-Strasse-3273941.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.heise.de/tp/artikel/49/49473/1.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.heise.de/ct/artikel/Die-Neuerungen-von-Linux-3-15-2196231.html",
+      "contains": []
+    },
+    {
+      "url": "http://heise.de/-3527918",
+      "contains": []
+    }
+  ]
+}

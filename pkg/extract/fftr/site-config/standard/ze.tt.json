@@ -1,0 +1,42 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class, 'ph-article-title')]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'ph-article-text-lead')] | //div[contains(@class, 'ph-article-text-body')] | //div[contains(@class, 'ph-article-image-wrapper')]"
+  ],
+  "date_selectors": [
+    "//time[contains(@class, 'ph-article-date')]"
+  ],
+  "author_selectors": [
+    "//div[contains(@class, 'ph-article-authors-wrapper')]"
+  ],
+  "strip_selectors": [
+    "//div[contains(@class, 'ph-ad')]",
+    "//p//a[@target='_blank']//em"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": true,
+  "prune": true,
+  "autodetect_on_failure": false,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://ze.tt/fotograf-portraetiert-menschen-nach-12-und-3-glaesern-wein/",
+      "contains": []
+    },
+    {
+      "url": "http://ze.tt/fotoprojekt-menschen-in-mosambik-zeigen-selbst-wie-sie-der-duerre-trotzen/",
+      "contains": []
+    },
+    {
+      "url": "http://ze.tt/was-deine-tattoos-ueber-dich-aussagen/",
+      "contains": []
+    }
+  ]
+}

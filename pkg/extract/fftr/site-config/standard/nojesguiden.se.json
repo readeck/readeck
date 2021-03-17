@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='article-content']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//span[@class='meta']/span[@class='username']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "article-actions"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://nojesguiden.se/blogg/maja-bredberg/maja-laser-tidningen-en-helt-vanlig-lordag-i",
+      "contains": []
+    }
+  ]
+}

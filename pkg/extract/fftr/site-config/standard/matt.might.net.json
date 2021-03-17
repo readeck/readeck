@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": [
+    "string(\"Matt Might\")"
+  ],
+  "strip_selectors": [
+    "//h1/following-sibling::div"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://matt.might.net/articles/oo-cesk/",
+      "contains": []
+    }
+  ]
+}

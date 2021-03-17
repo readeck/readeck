@@ -1,0 +1,43 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": [
+    "//div[@id='intellitTXT']"
+  ],
+  "date_selectors": [
+    "//div[contains(@class,'timestamp')]/abbr/text()"
+  ],
+  "author_selectors": [
+    "//div[@id='byline']"
+  ],
+  "strip_selectors": [
+    "//div[@id='byline']",
+    "//div[contains(@class,'timestamp')]",
+    "//div[contains(@class, 'ad-label')]",
+    "//div[contains(@class, 'ad-break')]",
+    "//span[contains(@class, 'x-video')]",
+    "//span[contains(@class, 'inline')]",
+    "//div[contains(@class, 'video')]",
+    "//div[contains(@class, 'discuss')]",
+    "//div[@id='most-popular']",
+    "//div[contains(@class,'drawer')]",
+    "//*[contains(@class, 'hide')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.msnbc.msn.com/id/44748412/ns/business-world_business/#.TolUv-vfDbE",
+      "contains": []
+    }
+  ]
+}

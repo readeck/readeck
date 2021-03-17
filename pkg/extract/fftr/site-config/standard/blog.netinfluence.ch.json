@@ -1,0 +1,32 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article[contains(concat(' ',normalize-space(@class),' '),' post ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//a[contains(concat(' ',normalize-space(@class),' '),' author-url ')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "ad-content",
+    "post-author",
+    "post-pagination",
+    "post-related"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://blog.netinfluence.ch/2019/05/17/faire-une-application-temps-reel-a-la-decouverte-de-mercure/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "user-agent": "PHP/7.2"
+  },
+  "tests": [
+    {
+      "url": "https://blogs.gnome.org/aday/2017/08/08/the-gnome-way/",
+      "contains": []
+    }
+  ]
+}

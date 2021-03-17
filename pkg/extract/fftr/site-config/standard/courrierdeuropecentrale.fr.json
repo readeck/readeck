@@ -1,0 +1,36 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//header[contains(concat(' ',normalize-space(@class),' '),' entry-header ')]//a[@rel='author']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "abonnement",
+    "authorpage",
+    "article-tags",
+    "entry-footer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://courrierdeuropecentrale.fr/prague-budapest-differences/",
+      "contains": []
+    },
+    {
+      "url": "https://courrierdeuropecentrale.fr/la-slovaquie-attire-de-plus-en-plus-de-touristes/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": [
+    "//div[@id='main']"
+  ],
+  "date_selectors": [
+    "substring-after(//p[@class='time'],'Posted')"
+  ],
+  "author_selectors": [
+    "//p[@id='author-name-role']/a"
+  ],
+  "strip_selectors": [
+    "//div[@id='author-info']",
+    "//div[@id='author-links']",
+    "//h1"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.scotusblog.com/2012/04/shaken-baby-case-an-update/",
+      "contains": []
+    }
+  ]
+}

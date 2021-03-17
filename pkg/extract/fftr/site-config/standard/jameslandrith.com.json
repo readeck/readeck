@@ -1,0 +1,37 @@
+{
+  "title_selectors": [
+    "//div[@class='blog']/ul[@class='single']/li//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='blog']/ul[@class='single']/li"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//h1",
+    "//*[@class='post-meta']",
+    "//div[@class='apss-social-share']",
+    "//div[@class='tags']",
+    "//*[@class='nav-single']",
+    "//nav"
+  ],
+  "strip_id_or_class": [
+    "post_meta",
+    "social-share"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": true,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://jameslandrith.com/2016/03/20/so-turnabout-is-not-actual-advocacy-or-how-to-be-a-shitty-person-101/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@class=\"postBody txtWrap\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//img[@class=\"mugshot\"]/@alt"
+  ],
+  "strip_selectors": [
+    "//h1",
+    "//p[@id=\"introP\"]",
+    "//div[@class=\"postByline\"]",
+    "//div[@class=\"editorBio\"]",
+    "//div[@class=\"inline-slideshow\"]",
+    "//div[@class=\"related\"]"
+  ],
+  "strip_id_or_class": [
+    "breadcrumb"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://news.cnet.com/8301-27076_3-57405303-248/apple-ipad-charging-fine-keep-it-plugged-in/?tag=mncol;posts",
+      "contains": []
+    }
+  ]
+}

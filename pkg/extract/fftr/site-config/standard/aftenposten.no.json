@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[@class='articleTitle ']"
+  ],
+  "body_selectors": [
+    "//div[@class='bodyText widget storyContent']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//p/span[@class='quote']/.."
+  ],
+  "strip_id_or_class": [
+    "pull1"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.aftenposten.no/meninger/spaltister/Portrett-av-scenekunstneren-som-ung-mann-7167959.html",
+      "contains": []
+    }
+  ]
+}

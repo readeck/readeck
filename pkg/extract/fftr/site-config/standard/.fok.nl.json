@@ -1,0 +1,36 @@
+{
+  "title_selectors": [
+    "//h1[@class='title']"
+  ],
+  "body_selectors": [
+    "//div[@id='itemBody']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "itemFooter"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "90%;\"\u003eLees ook",
+      "0%;\"\u003e\u003c/h3\u003e\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e"
+    ]
+  ],
+  "http_headers": {
+    "user-agent": "Googlebot/2.1"
+  },
+  "tests": [
+    {
+      "url": "http://sport.fok.nl/nieuws/548725/1/1/50/rosicky-traint-weer-mee-bij-tsjechie.html",
+      "contains": []
+    }
+  ]
+}

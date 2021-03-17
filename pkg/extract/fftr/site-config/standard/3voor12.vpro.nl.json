@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//div[@class='intro']/h1"
+  ],
+  "body_selectors": [
+    "//div[@id='main']"
+  ],
+  "date_selectors": [
+    "//ul[@class='text-data']/li[@class='date']"
+  ],
+  "author_selectors": [
+    "//ul[@class='text-data']/li[@class='author']"
+  ],
+  "strip_selectors": [
+    "//div[@class='share']",
+    "//*[@class='zoom']",
+    "//div[@id='disqus_thread']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://3voor12.vpro.nl/nieuws/2012/januari/Ook-website-GroenLinks-woensdag-op-zwart-i-v-m--SOPA.html",
+      "contains": []
+    }
+  ]
+}

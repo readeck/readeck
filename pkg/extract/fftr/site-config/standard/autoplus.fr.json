@@ -1,0 +1,44 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' left ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//link"
+  ],
+  "strip_id_or_class": [
+    "native-ad",
+    "newsletter_youngtimer",
+    "block-auteur",
+    "title-block",
+    "teaser-x-items",
+    "newsletter-atp",
+    "occasion"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003ch2",
+      "\u003cp"
+    ],
+    [
+      "\u003c/h2\u003e",
+      "\u003c/p\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.autoplus.fr/peugeot/3008/actualite/Peugeot-3008-SUV-Scoop-Equipements-1549589.html",
+      "contains": []
+    }
+  ]
+}

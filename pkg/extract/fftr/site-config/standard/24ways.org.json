@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//div[@class='meta']/h2/a"
+  ],
+  "body_selectors": [
+    "//div[@id='article']"
+  ],
+  "date_selectors": [
+    "//time//@datetime"
+  ],
+  "author_selectors": [
+    "//header[@class=\"c-article__header\"]//p[contains(concat(' ',normalize-space(@class),' '),' p-author ')]"
+  ],
+  "strip_selectors": [
+    "//div[@class='domore']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://24ways.org/2011/composing-the-new-canon",
+      "contains": []
+    }
+  ]
+}

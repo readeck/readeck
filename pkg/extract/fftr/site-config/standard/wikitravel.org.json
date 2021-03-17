@@ -1,0 +1,36 @@
+{
+  "title_selectors": [
+    "//h1[@id='firstHeading' or @class='firstHeading']"
+  ],
+  "body_selectors": [
+    "//div[@id = 'bodyContent']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//table[@id='toc'] | //div[@id='p-toc']",
+    "//div[@id='catlinks' or @id='contentSub']",
+    "//div[@id='jump-to-nav']",
+    "//div[@class='thumbcaption']//div[@class='magnify']",
+    "//table[@class='navbox']"
+  ],
+  "strip_id_or_class": [
+    "editsection",
+    "vertical-navbox"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://wikitravel.org/wiki/en/index.php?title=Bangkok\u0026printable=yes",
+      "contains": []
+    }
+  ]
+}

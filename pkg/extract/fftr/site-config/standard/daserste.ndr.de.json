@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' headline ')]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' modCon ')]//div[contains(concat(' ',normalize-space(@class),' '),' mod ') and (contains(concat(' ',normalize-space(@class),' '),' modA ')) and (contains(concat(' ',normalize-space(@class),' '),' modParagraph '))]//div[contains(concat(' ',normalize-space(@class),' '),' boxCon ')]//div[contains(concat(' ',normalize-space(@class),' '),' box ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//li[@class='next']/a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://daserste.ndr.de/panorama/aktuell/Chronik-Rechtsextreme-Vorfaelle-in-der-AfD-2016,afd892.html",
+      "contains": []
+    }
+  ]
+}

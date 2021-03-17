@@ -1,0 +1,33 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class=\"article-body underline\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "appendedAds",
+    "right-ad-container",
+    "ad_wrap"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://theweek.com/article/index/215763/insider-trading-on-capitol-hill",
+      "contains": []
+    },
+    {
+      "url": "https://theweek.com/articles/642979/why-poor-whites-flock-donald-trump",
+      "contains": []
+    }
+  ]
+}

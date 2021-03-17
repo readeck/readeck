@@ -1,0 +1,49 @@
+{
+  "title_selectors": [
+    "//div[@class=\"post-title\"]//h1"
+  ],
+  "body_selectors": [
+    "//article[@class='post-content']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//span[@class='summary-entry']",
+    "//footer",
+    "//noscript",
+    "//div[@class=\"embedded-tag-container\"]",
+    "//p[contains(@class, 'humanoid-videos--title')]",
+    "//a[contains(@class, 'humanoid-videos__video-title')]"
+  ],
+  "strip_id_or_class": [
+    "js-cookies-bar"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\"\u003c/div\u003e\"",
+      "\"\u0026lt;/div\u0026gt;\""
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.numerama.com/sciences/243352-hubble-detecte-un-trou-noir-supermassif-propulse-hors-de-sa-galaxie.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.numerama.com/tech/242703-free-mobile-et-la-4g-en-illimite-ce-quil-faut-savoir.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.numerama.com/business/243686-comme-convenu-quand-lenfer-dune-startup-se-transforme-en-succes-dauto-edition.html",
+      "contains": []
+    }
+  ]
+}

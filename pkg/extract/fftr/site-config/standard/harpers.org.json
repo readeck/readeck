@@ -1,0 +1,37 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-content ')]"
+  ],
+  "date_selectors": [
+    "//meta[@property=\"article:published_time\"]/@content"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//aside"
+  ],
+  "strip_id_or_class": [
+    "related-issue-tout",
+    "aria-font-adjusts",
+    "component-share-buttons"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://harpers.org/archive/2020/11/making-meaning-garth-greenwell/",
+      "contains": [
+        "I was recently surprised to discover"
+      ]
+    }
+  ]
+}

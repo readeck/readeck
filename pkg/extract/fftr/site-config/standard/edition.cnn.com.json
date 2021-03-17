@@ -1,0 +1,54 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//section[@id=\"body-text\"]",
+    "//section[contains(@class, 'body-text')]"
+  ],
+  "date_selectors": [
+    "//meta[@name=\"pubdate\"]/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"author\"]/@content"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "highlights",
+    "ai2html",
+    "ad--epic",
+    "zn-body__read-more",
+    "el__embedded--standard",
+    "cn-zoneAdContainer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cmeta http-equiv=\"refresh\"",
+      "\u003cmeta norefresh"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://edition.cnn.com/2012/05/13/us/new-york-police-policy/index.html",
+      "contains": [
+        "this discriminatory and ineffective practice"
+      ]
+    },
+    {
+      "url": "http://rss.cnn.com/rss/edition.rss",
+      "contains": []
+    },
+    {
+      "url": "http://rss.cnn.com/rss/edition_technology.rss",
+      "contains": []
+    }
+  ]
+}

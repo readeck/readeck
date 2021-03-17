@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "concat(//div[@class='month'],' ',//div[@class='day'])"
+  ],
+  "author_selectors": [
+    "substring-after( //div[@class='posttitle']/h2[@class='author'],'by ')"
+  ],
+  "strip_selectors": [
+    "//*[(@id = \"featured\")]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.macstories.net/news/instapaper-4-0-available-completely-redesigned-ipad-ui-new-features-search-subscription/",
+      "contains": []
+    }
+  ]
+}

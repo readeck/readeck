@@ -1,0 +1,46 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'thecontent')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "relatedside"
+  ],
+  "strip_image_src": [
+    "loading.gif"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "src=\"http://cdn.howtogeek.com/public/images/blank.gif\"",
+      "-"
+    ],
+    [
+      "data-href=",
+      "src="
+    ],
+    [
+      "src=\"/pagespeed_static/1.JiBnMqyl6S.gif\"",
+      "-"
+    ],
+    [
+      "data-pagespeed-lazy-src=",
+      "src="
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.howtogeek.com/school/microsoft-excel-formulas-and-functions/lesson1/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title_selectors": [
+    "//section[@id='pagearticle']/h1[1]"
+  ],
+  "body_selectors": [
+    "//section[@id='pagearticle']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//a[@rel='author']"
+  ],
+  "strip_selectors": [
+    "//*[@id='comments']/following-sibling::*",
+    "//*[@id='comments']/following-sibling::text()",
+    "//*[@id='respond']/following-sibling::*",
+    "//*[@id='respond']/following-sibling::text()",
+    "//*[@id='comments']",
+    "//*[@id='respond']"
+  ],
+  "strip_id_or_class": [
+    "toptitlepages",
+    "rcp_paid_only",
+    "rcp_restricted",
+    "relpost-thumb-wrapper",
+    "really_simple_share",
+    "copyright",
+    "reply",
+    "cancel-comment-reply",
+    "commentform"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://dailynord.fr/2018/07/lextraordinaire-oeuvre-de-sergex-ne-a-mericourt/",
+      "contains": []
+    }
+  ]
+}

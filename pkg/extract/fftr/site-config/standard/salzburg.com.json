@@ -1,0 +1,28 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//p[@class='teaser1 darkgrey myriad']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='hidden']",
+    "//div[@id='article_related_source']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.salzburg.com/nachrichten/oesterreich/politik/sn/artikel/deutliche-nachbesserungen-bei-lehrerdienstrecht-19469/",
+      "contains": []
+    }
+  ]
+}

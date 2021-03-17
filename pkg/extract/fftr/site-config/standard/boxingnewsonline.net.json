@@ -1,0 +1,34 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' col-mod-main ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//a[contains(concat(' ',normalize-space(@class),' '),' herald-author-name ')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "entry-meta-wrapper-sticky",
+    "herald-related-wrapper",
+    "div-gpt-ad-MPU_InlineArticleAD1",
+    "meta-tags",
+    "hidden-lg",
+    "hidden-md"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.boxingnewsonline.net/long-read-roberto-duran-and-esteban-de-jesus-the-last-goodbye/",
+      "contains": []
+    }
+  ]
+}

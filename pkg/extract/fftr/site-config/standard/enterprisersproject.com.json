@@ -1,0 +1,38 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' radix-layouts-contentheader ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//section[contains(concat(' ',normalize-space(@class),' '),' pane-node-author ')]//a[contains(concat(' ',normalize-space(@class),' '),' username ')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "pane-node-author",
+    "pane-node-created",
+    "element-invisible",
+    "item-list-pager",
+    "pane-cta",
+    "pane-related-articles-panel-pane-1",
+    "pane-node-field-article-tags",
+    "embedded-callout-text"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//*[contains(concat(' ',normalize-space(@class),' '),' pager-next ')]/a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://enterprisersproject.com/article/2018/10/7-ways-conquer-networking-challenges-when-you-work-remote",
+      "contains": []
+    }
+  ]
+}

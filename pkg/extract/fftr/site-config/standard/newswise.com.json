@@ -1,0 +1,39 @@
+{
+  "title_selectors": [
+    "//h1/a[2]"
+  ],
+  "body_selectors": [
+    "//div[@id=\"main\"]"
+  ],
+  "date_selectors": [
+    "//span[contains(@class, 'releasedate')]"
+  ],
+  "author_selectors": [
+    "//span[@id=\"articlesource\"]"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"inst-logo\"]",
+    "//h1[1]"
+  ],
+  "strip_id_or_class": [
+    "addthis",
+    "released",
+    "skiptranslate",
+    "flash"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.newswise.com/articles/first-heat-wave-of-season-puts-elderly-at-risk",
+      "contains": []
+    }
+  ]
+}

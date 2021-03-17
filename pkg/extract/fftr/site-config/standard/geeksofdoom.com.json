@@ -1,0 +1,27 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//span[@class='storydate']"
+  ],
+  "author_selectors": [
+    "substring-after(//span[@class='storyauthor'],'Posted by')"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.geeksofdoom.com/2012/03/14/robert-rodriguez-says-machete-kills-and-sin-city-2-will-film-this-year/",
+      "contains": []
+    }
+  ]
+}

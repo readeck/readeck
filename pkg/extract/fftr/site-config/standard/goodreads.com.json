@@ -1,0 +1,58 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'mainContentFloat')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//td[@width=\"130px\"]",
+    "//div[./a[contains(@onclick, \"swapContent\")]]/span[contains(@id, 'freeTextContainer')]",
+    "//div/a[contains(@onclick, \"swapContent\")]",
+    "//table[contains(@class, 'bookDiscussions')]",
+    "//div[@id=\"friendReviews\"]"
+  ],
+  "strip_id_or_class": [
+    "wtrButtonContainer",
+    "pagination",
+    "rightContainer",
+    "flagList11",
+    "bookCoverActions",
+    "asyncPreviewButtonContainer",
+    "reviewControls",
+    "ctaBannerShown",
+    "otherEditions",
+    "add_mention_box",
+    "chooseExplanation",
+    "moreLinks",
+    "initiallyHidden"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "style=\"display:none\"\u003e",
+      "\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.goodreads.com/list/show/19.Best_for_Book_Clubs",
+      "contains": []
+    },
+    {
+      "url": "https://www.goodreads.com/review/show/66574515?book_show_action=true\u0026from_review_page=1",
+      "contains": []
+    },
+    {
+      "url": "https://www.goodreads.com/book/show/42506310-leaving-the-witness",
+      "contains": []
+    }
+  ]
+}

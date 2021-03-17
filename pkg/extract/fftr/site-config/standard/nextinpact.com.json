@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@itemprop=\"articleBody\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "container_form_alert",
+    "spinner-container wide",
+    "child-briefs-container"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": true,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.nextinpact.com/news/102862-free-problemes-dns-a-repetition-rendent-difficile-navigation-web.htm",
+      "contains": []
+    }
+  ]
+}

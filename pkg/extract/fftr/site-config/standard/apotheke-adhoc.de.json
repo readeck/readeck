@@ -1,0 +1,62 @@
+{
+  "title_selectors": [
+    "substring-before(//div[@id='content']/h1, ',')"
+  ],
+  "body_selectors": [
+    "//div[@id='detail-body']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[@title='Seite drucken']"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cspan class=\"description\"\u003e",
+      "\u003cem\u003e"
+    ],
+    [
+      "\u003cp class=\"leadtext\"\u003e\u003csmall\u003e",
+      "\u003cp class=\"leadtext\"\u003e"
+    ],
+    [
+      "Patrick Hollstein",
+      "\u0026nbsp;"
+    ],
+    [
+      "APOTHEKE ADHOC",
+      "\u0026nbsp;"
+    ],
+    [
+      "dpa",
+      "\u0026nbsp;"
+    ],
+    [
+      "Katharina Lübke",
+      "\u0026nbsp;"
+    ],
+    [
+      "Julia Pradel",
+      "\u0026nbsp;"
+    ],
+    [
+      "Franziska Gerhardt",
+      "\u0026nbsp;"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.apotheke-adhoc.de/nachrichten/detail/panorama/avie-fuer-den-nachfolger/",
+      "contains": []
+    }
+  ]
+}

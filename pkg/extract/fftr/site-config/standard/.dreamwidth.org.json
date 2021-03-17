@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//div[contains(@id, 'entrysubj')]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'usercontent')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "currents"
+  ],
+  "strip_image_src": [
+    "dreamwidth.org"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://dw-news.dreamwidth.org/28922.html",
+      "contains": []
+    }
+  ]
+}

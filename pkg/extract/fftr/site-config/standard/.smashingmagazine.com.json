@@ -1,0 +1,40 @@
+{
+  "title_selectors": [
+    "//article[contains(@id, \"post-\")]/h2"
+  ],
+  "body_selectors": [
+    "//article[contains(@id, \"post-\")]",
+    "//article[contains(@class, \"post-\")]"
+  ],
+  "date_selectors": [
+    "//ul[@class=\"postmetadata clearfix\"]/li[@class=\"date\"]"
+  ],
+  "author_selectors": [
+    "//ul[@class=\"postmetadata clearfix\"]/li[@class=\"author\"]"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"ad ed\"]"
+  ],
+  "strip_id_or_class": [
+    "sot"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": true,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://wp.smashingmagazine.com/2012/11/08/complete-guide-custom-post-types/",
+      "contains": []
+    },
+    {
+      "url": "https://www.smashingmagazine.com/2017/04/browser-extension-edge-chrome-firefox-opera-brave-vivaldi/",
+      "contains": []
+    }
+  ]
+}

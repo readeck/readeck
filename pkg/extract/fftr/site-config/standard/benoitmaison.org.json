@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "h1[@class=\"entry-title\"]"
+  ],
+  "body_selectors": [
+    "//div[@class=\"entry-content\"]"
+  ],
+  "date_selectors": [
+    "//time[@class=\"entry-date\"]",
+    "//div[@class=\"entry-meta\"]/a[@rel=\"bookmark\"]"
+  ],
+  "author_selectors": [
+    "(\"Benoit Maison\")"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"entry-content\"]/div[last()]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.benoitmaison.org/2011/12/06/why-siri-had-to-start-in-beta/",
+      "contains": []
+    }
+  ]
+}

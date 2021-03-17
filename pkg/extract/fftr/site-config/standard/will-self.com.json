@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//*[@class=\"entry-title\"]"
+  ],
+  "body_selectors": null,
+  "date_selectors": [
+    "//time[@class=\"entry-date\"]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class=\"widget-area\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://will-self.com/2012/02/01/real-meals-dominos-pizza/",
+      "contains": []
+    }
+  ]
+}

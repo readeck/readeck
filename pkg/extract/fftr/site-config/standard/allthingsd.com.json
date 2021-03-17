@@ -1,0 +1,37 @@
+{
+  "title_selectors": [
+    "//div[@class=\"article-title\"]/h1[@class=\"title\"]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, \"article-body\")]"
+  ],
+  "date_selectors": [
+    "//p[@class=\"article-date\"]"
+  ],
+  "author_selectors": [
+    "//div[@class=\"page-header article-header clearfix\"]/p[@class=\"title\"]"
+  ],
+  "strip_selectors": [
+    "//blockquote[@class=\"memo\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://allthingsd.com/20120513/exclusive-yahoos-thompson-out-levinsohn-in-board-settlement-with-loeb-nears-completion/",
+      "contains": []
+    },
+    {
+      "url": "http://allthingsd.com/20131010/google-cio-ben-fried-on-how-google-works/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'body-copy')]"
+  ],
+  "date_selectors": [
+    "//meta[@name=\"iso-8601-publish-date\"]/@content",
+    "//meta[@name=\"parsely-pub-date\"]/@content",
+    "//*[@itemprop='datePublished']/@datetime"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"sailthru.author\"]/@content",
+    "//meta[@name=\"parsely-author\"]/@content"
+  ],
+  "strip_selectors": [
+    "//aside"
+  ],
+  "strip_id_or_class": [
+    "inline-newsletter",
+    "terminal-tout-container",
+    "lede",
+    "postr-recirc",
+    "left-column",
+    "touts-v2",
+    "first-paragraph-image__credit"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.bloomberg.com/news/articles/2015-12-30/will-your-job-disappear-by-2024-",
+      "contains": [
+        "Every week, hosts Tori Stilwell"
+      ]
+    },
+    {
+      "url": "https://www.bloomberg.com/news/articles/2016-12-06/apple-to-start-publishing-ai-research-to-hasten-deep-learning",
+      "contains": []
+    }
+  ]
+}

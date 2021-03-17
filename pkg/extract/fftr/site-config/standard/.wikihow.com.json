@@ -1,0 +1,36 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='bodycontents']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "gatEditSection",
+    "relatedwikihows",
+    "sp_method_toc"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[@id='gatPrintView']",
+    "concat(//link[@rel='canonical']/@href, '?printable=yes')"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://pt.wikihow.com/Criar-um-Script-de-Login-Seguro-em-PHP-e-MySQL",
+      "contains": []
+    },
+    {
+      "url": "https://de.wikihow.com/index.php?title=Handschrift-verbessern",
+      "contains": []
+    }
+  ]
+}

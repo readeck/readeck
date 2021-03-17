@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' articleTitre ')]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' articleBrut ')]"
+  ],
+  "date_selectors": [
+    "//span[contains(concat(' ',normalize-space(@class),' '),' articleAuteurDate')]//time"
+  ],
+  "author_selectors": [
+    "//span[contains(concat(' ',normalize-space(@class),' '),' articleAuteurDate')]//span/a"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.usinenouvelle.com/article/froid-devant.N321392",
+      "contains": []
+    }
+  ]
+}

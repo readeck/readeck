@@ -1,0 +1,65 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//section[contains(concat(' ',normalize-space(@class),' '),' content ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@itemprop='author']//p[@itemprop='name']"
+  ],
+  "strip_selectors": [
+    "//h2[text()='Pour aller plus loin']/following-sibling::div[contains(concat(' ',normalize-space(@class),' '),' panel ')]",
+    "//h2[text()='Pour aller plus loin']",
+    "//h2[@id=\"cbdReview\"]",
+    "//nav"
+  ],
+  "strip_id_or_class": [
+    "social",
+    "follow",
+    "page-up",
+    "see-more",
+    "author-box",
+    "mobileHide",
+    "h-alb-titre",
+    "listComments",
+    "share-buttons",
+    "comment-form-bottom",
+    "biblio-action-buttons"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://culturebd.com/serie-17441-dept.-h",
+      "contains": []
+    },
+    {
+      "url": "https://culturebd.com/album-bd/les-enquetes-du-commissaire-raffini/230936-12-rue-des-souvenirs",
+      "contains": []
+    },
+    {
+      "url": "https://culturebd.com/actualites/interviews/2018/07/331-wesh-caribou-l-art-du-rire-par-grand-froid",
+      "contains": []
+    },
+    {
+      "url": "https://culturebd.com/anecdotes/the-end-l-apocalypse-selon-les-doors-255",
+      "contains": []
+    },
+    {
+      "url": "https://culturebd.com/auteurs/110-rodolphe",
+      "contains": []
+    },
+    {
+      "url": "https://culturebd.com/agenda/exposition-chapeau-bas-spirou-676",
+      "contains": []
+    }
+  ]
+}

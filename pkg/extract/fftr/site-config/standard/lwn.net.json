@@ -1,0 +1,86 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='ArticleText']"
+  ],
+  "date_selectors": [
+    "//div[@class='FeatureByline']/text()[preceding-sibling::br]",
+    "//div[@class='GAByline']/p[1]"
+  ],
+  "author_selectors": [
+    "//div[@class='FeatureByline']/strong",
+    "substring-after(//div[@class='GAByline']/p[2], 'by ')"
+  ],
+  "strip_selectors": [
+    "//div[@class='FeatureByline']",
+    "//div[@class='GAByline']",
+    "//div[@class='ftrss-strip']",
+    "//table[@class='Form']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": true,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//div[@class='ArticleText']//a[contains(text(), 'Full Story')]/@href",
+    "concat(//div[@class='ArticleText']//a[contains(text(), 'Read more')]/@href, 'bigpage')"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cp class=\"Cat1HL\"\u003e",
+      "\u003ch1\u003e"
+    ],
+    [
+      "\u003ch2 class=\"SummaryHL\"\u003e",
+      "\u003ch3\u003e"
+    ],
+    [
+      "\u003cp class=\"Cat2HL\"\u003e",
+      "\u003ch2\u003e"
+    ],
+    [
+      "\u003chr width=\"60%\" align=\"left\"\u003e",
+      "\u003cdiv class=\"ftrss-strip\"\u003e"
+    ],
+    [
+      "to post comments)",
+      "\u003c/div\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://lwn.net/Articles/668318/",
+      "contains": []
+    },
+    {
+      "url": "http://lwn.net/Articles/668695/",
+      "contains": []
+    },
+    {
+      "url": "http://lwn.net/Articles/669114/",
+      "contains": []
+    },
+    {
+      "url": "http://lwn.net/Articles/670209/",
+      "contains": []
+    },
+    {
+      "url": "http://lwn.net/Articles/670209/rss",
+      "contains": []
+    },
+    {
+      "url": "http://lwn.net/Articles/668318/rss",
+      "contains": []
+    },
+    {
+      "url": "http://lwn.net/Articles/670062/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class, 'head')]"
+  ],
+  "body_selectors": [
+    "//div[@id='mainColumn']//div[contains(@class, 'list-article-full')]",
+    "//div[@id='mainColumn']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//a[contains(@class, 'ui-author')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "storyToolbar",
+    "promotion-tag"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//div[@class='storyToolbar']//a[contains(@href, '/print/')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.csmonitor.com/World/Middle-East/2011/1108/Imminent-Iran-nuclear-threat-A-timeline-of-warnings-since-1979/Earliest-warnings-1979-84",
+      "contains": []
+    }
+  ]
+}

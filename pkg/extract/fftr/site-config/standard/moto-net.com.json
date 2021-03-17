@@ -1,0 +1,27 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' accroche ')] | //div[contains(concat(' ',normalize-space(@class),' '),' presentation-class-wrapper ')]/h2 | //div[contains(concat(' ',normalize-space(@class),' '),' field-name-body ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//li[contains(concat(' ',normalize-space(@class),' '),' book_navigation_item ') and contains(concat(' ',normalize-space(@class),' '),' current ')]/following-sibling::li[1]/a/@href"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.moto-net.com/article/comparatif-superbike-2018-aprilia-rsv4-rf-vs-bmw-s1000rr-vs-ducati-panigale-v4-s-1-comparo-sbk-2018-page-1-les-nouvelles-du-vieux-continent.html",
+      "contains": []
+    }
+  ]
+}

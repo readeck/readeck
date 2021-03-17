@@ -1,0 +1,47 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'postBody')]"
+  ],
+  "date_selectors": [
+    "//div[@id='nameAndTime']/time"
+  ],
+  "author_selectors": [
+    "//div[@id='nameAndTime']/span[@class='author']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "image-credit",
+    "noAutolink",
+    "related",
+    "sponsor",
+    "sharebarWrapper",
+    "collections-topics-and-tags"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "Download today's podcast\u003c/a\u003e",
+      "Download today's podcast\u003c/a\u003e\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.cnet.com/8301-13952_1-57367607-81/the-404-981-where-the-world-is-a-vampire-podcast/",
+      "contains": []
+    },
+    {
+      "url": "http://www.cnet.com/news/firefox-maker-mozilla-we-dont-need-googles-money-anymore/",
+      "contains": []
+    }
+  ]
+}

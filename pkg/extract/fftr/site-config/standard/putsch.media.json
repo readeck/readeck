@@ -1,0 +1,35 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' full-width-media\" ')]"
+  ],
+  "date_selectors": [
+    "//time/@datetime"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//time",
+    "//script"
+  ],
+  "strip_id_or_class": [
+    "author",
+    "private",
+    "entry-title",
+    "social-fixed"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://putsch.media/20180628/culture/art-et-expos/la-nuit-des-eglises-a-la-decouverte-dun-patrimoine-francais/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[@class=\"main-title\"]"
+  ],
+  "body_selectors": [
+    "//div[@id=\"sticky-desktop-only\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//span[@class=\"recipe-author__name\"]"
+  ],
+  "strip_selectors": [
+    "//div[@id=\"bloc-video\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.marmiton.org/recettes/recette_gateau-au-chocolat-fondant-rapide_166352.aspx",
+      "contains": []
+    }
+  ]
+}

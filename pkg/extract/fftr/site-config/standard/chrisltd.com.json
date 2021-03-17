@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//header/h1/b[contains(@class, 'title')]"
+  ],
+  "body_selectors": [
+    "//div[@id='main]/article"
+  ],
+  "date_selectors": [
+    "//header/h1/span[contains(@class, 'date')]"
+  ],
+  "author_selectors": [
+    "substring-after(//article/header/div, 'By ')"
+  ],
+  "strip_selectors": [
+    "//header"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://chrisltd.com/blog/2012/03/fix-widows-indesign/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content",
+    "//h1[@class=\"story-header\"]"
+  ],
+  "body_selectors": [
+    "//article[contains(@class, \"-ArticleWrapper\")]",
+    "(//div[contains(@class, 'article__body-content')])[1]",
+    "(//div[@id=\"story-body\"])[1]",
+    "//div[contains(@class, \"videoInStory\") or @id=\"meta-information\"]",
+    "//div[contains(@class, 'hrecipe')]//div[@id='subcolumn-1']"
+  ],
+  "date_selectors": [
+    "//article//div[contains(@class, 'author-unit__container')]//span",
+    "//span[@class=\"story-date\"]/span[@class='date']",
+    "//meta[@name='DCTERMS.created']/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"author\"]/@content",
+    "//div[@id='headline']//span[@class='byline-name']"
+  ],
+  "strip_selectors": [
+    "//article//header",
+    "//div[contains(@class, \"CommentsWrapper\")]",
+    "//*[contains(@class, 'VisuallyHidden')]",
+    "//div[contains(@class, \"story-feature\") and not(contains(@class, 'full-width'))]",
+    "//span[@class=\"story-date\"]",
+    "//div[@class=\"warning\"]//p",
+    "//div[@id='page-bookmark-links-head']",
+    "//object",
+    "//div[contains(@class, \"bbccom_advert_placeholder\")]",
+    "//div[contains(@class, \"embedded-hyper\")]",
+    "//div[contains(@class, 'market-data')]",
+    "//a[contains(@class, 'hidden')]",
+    "//div[contains(@class, 'hypertabs')]",
+    "//div[contains(@class, 'related')]",
+    "//form[@id='comment-form']",
+    "//div[contains(@class, 'comment-introduction')]",
+    "//div[contains(@class, 'share-tools')]",
+    "//div[@id='also-related-links']",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' drop-capped ')]",
+    "//section[@data-component=\"tag-list\"]",
+    "//section[@data-component=\"see-alsos\"]",
+    "//figcaption",
+    "//aside[contains(@class, 'sp-pullout')]"
+  ],
+  "strip_id_or_class": [
+    "image-and-copyright-container",
+    "article-body__pull-quote",
+    "share-help",
+    "comments_module"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": [
+    "//meta[@property=\"og:url\" and contains(@content, '/sponsored/')]"
+  ],
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "http://ichef.bbci.co.uk/news/200/",
+      "http://ichef.bbci.co.uk/news/624/"
+    ],
+    [
+      "http://ichef.bbci.co.uk/news/304/",
+      "http://ichef.bbci.co.uk/news/624/"
+    ],
+    [
+      "http://ichef.bbci.co.uk/news/320/",
+      "http://ichef.bbci.co.uk/news/660/"
+    ],
+    [
+      "{width}{hidpi}",
+      "624"
+    ],
+    [
+      "\u003cnoscript\u003e",
+      "\u003cdiv\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c/div\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.bbc.co.uk/sport/0/football/23224017",
+      "contains": [
+        "Swansea City have completed the club-record signing"
+      ]
+    },
+    {
+      "url": "http://www.bbc.co.uk/news/business-15060862",
+      "contains": [
+        "Europe's leaders are meeting again to try to solve"
+      ]
+    },
+    {
+      "url": "http://feeds.bbci.co.uk/news/rss.xml",
+      "contains": []
+    },
+    {
+      "url": "http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=int",
+      "contains": []
+    },
+    {
+      "url": "http://www.bbc.co.uk/news/world-asia-22056933",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//div[@class='content']/h3"
+  ],
+  "body_selectors": [
+    "//div[@class='content']"
+  ],
+  "date_selectors": [
+    "//div[@class='content']/h2"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@class='content']/h2",
+    "//div[@id='postmenu']",
+    "//div[@class='trackback']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.3quarksdaily.com/3quarksdaily/2012/01/martin-luther-king-i-have-a-dream.html",
+      "contains": []
+    }
+  ]
+}

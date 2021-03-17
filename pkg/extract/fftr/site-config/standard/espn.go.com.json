@@ -1,0 +1,37 @@
+{
+  "title_selectors": [
+    "//div[@class='headline'] | //div[@class='mod-header']/h3"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'article')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(@class, 'mod-inline')]",
+    "//*/span[@class='page-actions']",
+    "//div[@class='page-actions']/*",
+    "//div[@class='headline'] | //div[@class='mod-header']/h3",
+    "//div[@class='mod-blog-navigation']",
+    "//div[@class='monthday']",
+    "//div[@class='time']",
+    "//div[@class='timeofday']",
+    "//div[contains(@class, 'mod-conversations')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://espn.go.com/boston/mlb/story/_/id/7092528/terry-francona-victim-latest-red-sox-smear-campaign",
+      "contains": []
+    }
+  ]
+}

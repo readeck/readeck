@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='artText']"
+  ],
+  "date_selectors": [
+    "//ul[@class='date-doi']/li[@id='artPubDate']"
+  ],
+  "author_selectors": [
+    "//ul[@id='author-list']/li/a[@class='author-name']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0175799",
+      "contains": []
+    }
+  ]
+}

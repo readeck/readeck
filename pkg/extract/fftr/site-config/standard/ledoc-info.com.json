@@ -1,0 +1,36 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' entry-title ')]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' single-thumb ')] | //div[contains(concat(' ',normalize-space(@class),' '),' entry-content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "message_pms",
+    "td_login_message",
+    "td_pay_message",
+    "dkpdf-button-container"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://ledoc-info.com/2018/07/01/photodoc-lallee-tourisme-passage-plus-glauque-de-montpellier/",
+      "contains": []
+    },
+    {
+      "url": "https://ledoc-info.com/2018/02/08/grande-motte-projets-divisent/",
+      "contains": []
+    }
+  ]
+}

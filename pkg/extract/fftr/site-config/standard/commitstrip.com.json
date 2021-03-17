@@ -1,0 +1,33 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//img[starts-with(@class, 'aligncenter size-full wp-image-')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.commitstrip.com/en/2015/11/10/coder-epitaphs/",
+      "contains": []
+    },
+    {
+      "url": "http://www.commitstrip.com/en/2015/11/12/pay-to-pitch-to-randoms-the-next-big-idea/",
+      "contains": []
+    },
+    {
+      "url": "http://www.commitstrip.com/en/2015/11/13/the-last-ever-line-of-code/",
+      "contains": []
+    }
+  ]
+}

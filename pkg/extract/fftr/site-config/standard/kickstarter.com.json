@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[@id='name']"
+  ],
+  "body_selectors": [
+    "//*[@id='leftcol']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "share-box",
+    "project-faqs",
+    "report-issue-wrap"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.kickstarter.com/projects/hop/elevation-dock-the-best-dock-for-iphone",
+      "contains": []
+    }
+  ]
+}

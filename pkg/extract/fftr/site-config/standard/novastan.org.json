@@ -1,0 +1,35 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' mkd-post-text ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//h6[contains(concat(' ',normalize-space(@class),' '),' author ')]/a",
+    "//article[contains(concat(' ',normalize-space(@class),' '),' post ')]//a[@itemprop='author']"
+  ],
+  "strip_selectors": [
+    "//p//a[@href='https://www.facebook.com/Novastan.org/']/ancestor::p[1]"
+  ],
+  "strip_id_or_class": [
+    "entry-title",
+    "simplefavorite-button",
+    "mkd-blog-single-share",
+    "mkd-single-tags-holder"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.novastan.org/fr/kirghizstan/les-secrets-de-fabrication-du-feutre-kirghiz/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//section[contains(@class, 'body-text')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "highlights"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cmeta http-equiv=\"refresh\"",
+      "\u003cmeta norefresh"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.cnn.com/2012/05/13/us/new-york-police-policy/index.html",
+      "contains": [
+        "this discriminatory and ineffective practice"
+      ]
+    },
+    {
+      "url": "http://rss.cnn.com/rss/edition.rss",
+      "contains": []
+    },
+    {
+      "url": "http://rss.cnn.com/rss/edition_technology.rss",
+      "contains": []
+    }
+  ]
+}

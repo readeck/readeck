@@ -1,0 +1,41 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class,'article_head')]//h2 | //div[@id='body']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@class='byline']/a[0]"
+  ],
+  "strip_selectors": [
+    "//div[@class='wptl btm']"
+  ],
+  "strip_id_or_class": [
+    "promo_article"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//link[contains(@href, 'm.theregister')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.theregister.co.uk/2015/07/06/geeks_guide_spaceguard_center/",
+      "contains": []
+    },
+    {
+      "url": "http://www.theregister.co.uk/2015/07/06/us_japan_massive_robots_in_the_ring/",
+      "contains": []
+    },
+    {
+      "url": "https://www.theregister.co.uk/2019/02/11/620_million_hacked_accounts_dark_web/",
+      "contains": []
+    }
+  ]
+}

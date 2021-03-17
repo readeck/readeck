@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div//ul",
+    "//aside"
+  ],
+  "strip_id_or_class": [
+    "adWrapper",
+    "noPrint"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.watoday.com.au/business/the-economy/no-one-died-behind-the-typo-on-the-new-50-note-20190618-p51yqg.html",
+      "contains": []
+    }
+  ]
+}

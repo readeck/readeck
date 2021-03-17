@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//div[@id='page_header']/h1"
+  ],
+  "body_selectors": [
+    "//div[@id='content']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@id='recipe_tools']",
+    "//div[@id='addcomment']"
+  ],
+  "strip_id_or_class": [
+    "lineno",
+    "block-toolbar-button",
+    "recipe_score"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://code.activestate.com/recipes/500261-named-tuples/",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//article[contains(@class, 'post-content')]"
+  ],
+  "date_selectors": [
+    "//div[@id=\"content\"]//p[contains(@class, 'post-date')]"
+  ],
+  "author_selectors": [
+    "//div[@id=\"content\"]//p[contains(@class, 'byline')/a[starts-with(@href, '/contributor')]"
+  ],
+  "strip_selectors": [
+    "//div[contains(@id, 'div-gpt-ad)]"
+  ],
+  "strip_id_or_class": [
+    "ssk-group"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://lareviewofbooks.org/review/american-politics-redeembale-robert-gates-hillary-clinton-two-memoirs-washington-dc",
+      "contains": []
+    },
+    {
+      "url": "http://lareviewofbooks.org/interview/souvenirs-future",
+      "contains": []
+    }
+  ]
+}

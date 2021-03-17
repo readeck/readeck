@@ -1,0 +1,41 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='post-text' or @class='user-action-time' or @class='user-details' or @class='vote'] | //div[@id='answers-header']//h2"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "vote-up",
+    "vote-down",
+    "star-off",
+    "favoritecount",
+    "-share",
+    "badgecount"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cdiv class=\"user-details\"\u003e\u003cbr\u003e\u003c/div\u003e",
+      "\u003c!-- nothing --\u003e"
+    ],
+    [
+      "\u003cdiv class=\"vote\"\u003e",
+      "\u003cdiv class=\"vote\"\u003e\u003ch3\u003eVote count:"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://stackoverflow.com/questions/4484289/id-like-to-understand-the-jquery-plugin-syntax",
+      "contains": []
+    }
+  ]
+}

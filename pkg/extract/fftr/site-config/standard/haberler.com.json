@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//div[@id=\"habermetni\"]/h1[@id=\"haber_baslik\"]"
+  ],
+  "body_selectors": [
+    "//div[@id=\"habermetni\"]/p"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//img[@class='newsDetailLeft']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": [
+    "/haber-resimleri/"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.haberler.com/emniyete-atacakti-elinde-patladi-3198733-haberi/",
+      "contains": []
+    }
+  ]
+}

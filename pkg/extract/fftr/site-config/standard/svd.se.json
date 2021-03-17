@@ -1,0 +1,37 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'ArticleLayout-featureImage')] | //div[contains(concat(' ',normalize-space(@class),' '),' Body ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//meta[@name=\"author\"]/@content"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "share"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.svd.se/nyheter/inrikes/oppositionen-stoppar-skattesankning_8531228.svd",
+      "contains": []
+    },
+    {
+      "url": "http://www.svd.se/nyheter/inrikes/manga-huggormsbitna-golfare_5004031.svd",
+      "contains": []
+    },
+    {
+      "url": "http://www.svd.se/?service=rss\u0026type=senastenytt",
+      "contains": []
+    }
+  ]
+}

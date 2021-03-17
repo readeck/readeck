@@ -1,0 +1,34 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class=\"node\"]"
+  ],
+  "date_selectors": [
+    "//div[@class=\"comment-auth\"]/div | //div[@class=\"comment-auth\"]/span[2]"
+  ],
+  "author_selectors": [
+    "//div[@id=\"above-content\"]//img/@alt | //div[@class=\"comment-auth\"]/span[1]/a/text()"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "vertical-social-bar",
+    "blogs_paginator",
+    "horizontal-social-links",
+    "servicelinksdiv"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.mnn.com/green-tech/research-innovations/blogs/5-breakthroughs-that-will-make-solar-power-cheaper-than-coal",
+      "contains": []
+    }
+  ]
+}

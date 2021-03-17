@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//*[@id='posts']/div[1]/h2"
+  ],
+  "body_selectors": [
+    "//div[@class='body-lead']"
+  ],
+  "date_selectors": [
+    "//*[@class='date']"
+  ],
+  "author_selectors": [
+    "//*[@id='posts']/div[1]/div[2]/span[2]/a"
+  ],
+  "strip_selectors": [
+    "//div[@class='body-lead']/div[@class='info-label']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.subtraction.com/2011/02/01/unnecessary-explanations",
+      "contains": []
+    }
+  ]
+}

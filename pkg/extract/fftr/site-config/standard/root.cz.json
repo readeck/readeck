@@ -1,0 +1,32 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='urs'] | //div[@itemprop='articleBody']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "perex__impressum",
+    "element-print-hidden"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.root.cz/zpravicky/google-testuje-moznost-vyzkouset-mobilni-aplikace-pred-instalaci/",
+      "contains": []
+    },
+    {
+      "url": "http://www.root.cz/clanky/let-s-encrypt-otevrel-branu-ve-verejne-bete-muze-mit-certifikat-kazdy/",
+      "contains": []
+    }
+  ]
+}

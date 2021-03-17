@@ -1,0 +1,38 @@
+{
+  "title_selectors": [
+    "//div[@class='story']/h1"
+  ],
+  "body_selectors": [
+    "//div[@class='story']"
+  ],
+  "date_selectors": [
+    "//p[@class='storydate']"
+  ],
+  "author_selectors": [
+    "//div[@class='details']/p[contains(., 'by ')]/a"
+  ],
+  "strip_selectors": [
+    "//div[@class='story']/h1",
+    "//p[a[contains(., 'Leave a Comment')]]"
+  ],
+  "strip_id_or_class": [
+    "share",
+    "maincolumn_head",
+    "maincolmod"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.techdirt.com/articles/20120112/17455117394/sega-gets-it-right-about-sopa-its-time-hard-reset-copyright-law-congress.shtml",
+      "contains": []
+    }
+  ]
+}

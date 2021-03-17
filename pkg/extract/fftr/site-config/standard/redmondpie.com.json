@@ -1,0 +1,42 @@
+{
+  "title_selectors": [
+    "//div[@class='posthead']//h2"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'postcontent') or @class='posthead']"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//div[@class='posthead']//a[@rel='author']"
+  ],
+  "strip_selectors": [
+    "//div[@class='posthead']//h2"
+  ],
+  "strip_id_or_class": [
+    "likeThisPost"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003eAdvertisements\u003c/div\u003e",
+      "\u003e\u003c/div\u003e"
+    ],
+    [
+      "\u003cp\u003eYou can follow us on",
+      "\u003cp style=\"display:none;\"\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.redmondpie.com/how-to-play-music-directly-from-home-screen-folders-on-iphone/",
+      "contains": []
+    }
+  ]
+}

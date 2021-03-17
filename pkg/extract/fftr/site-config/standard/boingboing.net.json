@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h2[@class=\"headline\"]"
+  ],
+  "body_selectors": [
+    "//div[@id=\"story\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "shareMe",
+    "authorbox",
+    "byline",
+    "share",
+    "separator"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//h2[@class=\"headline\"]/a"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://boingboing.net/2011/10/23/understanding-the-hyperrich-through-the-lens-of-tomorrows-history.html",
+      "contains": []
+    }
+  ]
+}

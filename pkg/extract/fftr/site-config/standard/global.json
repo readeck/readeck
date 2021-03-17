@@ -1,0 +1,38 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": null,
+  "date_selectors": [
+    "//meta[@property=\"article:published_time\"]/@content"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//*[contains(@class, 'google-dfp-ad-wrapper')]"
+  ],
+  "strip_id_or_class": [
+    "sharedaddy",
+    "i-amphtml-replaced-content"
+  ],
+  "strip_image_src": [
+    "doubleclick.net"
+  ],
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003camp-img",
+      "\u003cimg"
+    ],
+    [
+      "\u003c/amp-img\u003e",
+      "\u003c!-- nothing --\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": null
+}

@@ -1,0 +1,37 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@id=\"main-content\"]"
+  ],
+  "date_selectors": [
+    "//div[@class=\"submitted\"]/time"
+  ],
+  "author_selectors": [
+    "//div[@class=\"submitted\"]/span"
+  ],
+  "strip_selectors": [
+    "//h1",
+    "//div[@class=\"submitted\"]",
+    "//dd[@class=\"profile-avatar\"]",
+    "//div[@class=\"author-profile\"]/dl/dt[1]",
+    "//div[@id=\"right-col\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.netmagazine.com/opinions/nielsen-wrong-mobile",
+      "contains": []
+    }
+  ]
+}

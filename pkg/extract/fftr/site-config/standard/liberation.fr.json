@@ -1,0 +1,33 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' width-padded-left ')]"
+  ],
+  "date_selectors": [
+    "//span[@class='date']/time"
+  ],
+  "author_selectors": [
+    "//div[@class='article-head-metas']/a"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "article-rel-item"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.liberation.fr/elections-presidentielle-legislatives-2017/2017/04/14/pas-assez-enthousiastes-ils-se-font-virer-d-un-meeting-de-fillon_1562897",
+      "contains": [
+        "Alors comment expliquer"
+      ]
+    }
+  ]
+}

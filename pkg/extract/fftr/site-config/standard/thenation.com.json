@@ -1,0 +1,43 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'article-body-inner')]"
+  ],
+  "date_selectors": [
+    "//meta[@property=\"article:published_time\"]/@content",
+    "//meta[@name=\"sailthru.date\"]/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"sailthru.author\"]/@content",
+    "//a[contains(@href, '/authors')]"
+  ],
+  "strip_selectors": [
+    "//aside[contains(@class, 'current-issue')]"
+  ],
+  "strip_id_or_class": [
+    "email-signup-module",
+    "most-popular-plus-ad",
+    "related-oneup"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.thenation.com/article/162331/hard-against-time-roy-fisher",
+      "contains": []
+    },
+    {
+      "url": "https://www.thenation.com/article/world/opcw-leaks-syria/",
+      "contains": []
+    }
+  ]
+}

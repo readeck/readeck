@@ -1,0 +1,39 @@
+{
+  "title_selectors": [
+    "//div[@class=\"blogpost\"]/h2"
+  ],
+  "body_selectors": [
+    "//div[@class=\"blogpost\"]"
+  ],
+  "date_selectors": [
+    "//div[@class=\"blogpost\"]/p[@class=\"byline\"]/span[@class=\"time_posted\"]"
+  ],
+  "author_selectors": [
+    "//div[@class=\"blogpost\"]/p[@class=\"byline\"]/a"
+  ],
+  "strip_selectors": [
+    "//h2"
+  ],
+  "strip_id_or_class": [
+    "flag",
+    "byline",
+    "post_footer",
+    "related_posts",
+    "post_author_bios"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://greatergreaterwashington.org/post/12457/ask-ggw-what-will-happen-to-the-1000-series-railcars/",
+      "contains": []
+    }
+  ]
+}

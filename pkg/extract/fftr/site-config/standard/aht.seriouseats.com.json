@@ -1,0 +1,33 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='content']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//h2[@class='fn'] | //h2[@class='double-lined'] | //h3 | //div[@id='threeColumn2'] | //div[@id='threeColumn3']"
+  ],
+  "strip_id_or_class": [
+    "\"recipe-feedback\"",
+    "\"comments\"",
+    "\"procedure-number\"",
+    "\"more-with-author\"",
+    "\"inner\""
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://aht.seriouseats.com/archives/2009/12/the-burger-lab-salting-ground-beef.html",
+      "contains": []
+    }
+  ]
+}

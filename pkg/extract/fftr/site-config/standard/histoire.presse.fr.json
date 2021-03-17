@@ -1,0 +1,25 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' nd-no-sidebars ')]//div[contains(concat(' ',normalize-space(@class),' '),' nd-region-middle ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.histoire.presse.fr/actualite/infos/georges-clemenceau-chambre-30-juillet-1885-22-11-2010-15540",
+      "contains": []
+    }
+  ]
+}

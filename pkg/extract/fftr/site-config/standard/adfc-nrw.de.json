@@ -1,0 +1,25 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' news-single-item ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.adfc-nrw.de/kreisverbaende/kv-muenster/willkommen-beim-adfcnbspim-muensterland/aktuelles-aus-muenstermuensterland/article/der-busbahnhof-am-hbf-muss-aufgewertet-werden.html",
+      "contains": []
+    }
+  ]
+}

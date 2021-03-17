@@ -1,0 +1,111 @@
+{
+  "title_selectors": [
+    "//meta[@property='og:title']/@content"
+  ],
+  "body_selectors": [
+    "//main/article/div[@itemprop='articleBody']",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-page ')]",
+    "//main/article/div[@class='article__wrap']"
+  ],
+  "date_selectors": [
+    "//meta[@name='date']/@content"
+  ],
+  "author_selectors": [
+    "//a[@class='byline__author']/span",
+    "substring-after(//span[@class='metadata__source'], 'Quelle: ')",
+    "//a[@class='article__head__meta__author']/span"
+  ],
+  "strip_selectors": [
+    "//span[@class='figure__copyright']",
+    "//aside",
+    "//figure[@class='figure-stamp']",
+    "//a[contains(@title, 'Dieser Text ')]",
+    "//a[contains(@title, 'Dieser Artikel ')]",
+    "//span[@class='figure__text']/text()[contains(., 'Dieser Text ')]",
+    "//span[@class='figure__text']/text()[contains(., 'Dieser Artikel ')]",
+    "//a[@href='#']",
+    "//form[@id='newsletter-teaser-form']",
+    "//figure[@data-video-provider=\"brightcove\"]",
+    "//a[contains(concat(' ',normalize-space(@class),' '),' faq-link ')]",
+    "//div[@class='article__head-wrap']//h1"
+  ],
+  "strip_id_or_class": [
+    "ad-container",
+    "article-pagination article__item",
+    "js-videoplayer",
+    "article__socialbox",
+    "article__nextread nextread-base is-centered",
+    "js-comments",
+    "article__pagination is-constrained is-centered",
+    "article__head__meta"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//li[@class='article-pager__all']//a[@data-ct-label='all']",
+    "//li[@class='article-pager__all']/a"
+  ],
+  "next_page_link_selectors": [
+    "//meta[@rel='next']/@href"
+  ],
+  "replace_strings": [
+    [
+      "\u003cnoscript",
+      "\u003cfoo"
+    ]
+  ],
+  "http_headers": {
+    "Cookie": "zonconsent=2022-09-03T19:45:59.150Z"
+  },
+  "tests": [
+    {
+      "url": "http://www.zeit.de/kultur/film/2012-12/Kurzfilmtag",
+      "contains": [
+        "In drei Minuten die Welt erobern"
+      ]
+    },
+    {
+      "url": "http://www.zeit.de/sport/2016-01/darts-wm-finale-anderson-lewis/komplettansicht",
+      "contains": []
+    },
+    {
+      "url": "http://www.zeit.de/kultur/2015-12/selbstverwirklichung-optimierung-essay",
+      "contains": []
+    },
+    {
+      "url": "http://www.zeit.de/2015/51/selbstdiagnose-gesundheit-zuhause-blut-urin-selbsttest",
+      "contains": []
+    },
+    {
+      "url": "http://www.zeit.de/campus/2015/s2/nebenjob-master-studium-finanzierung",
+      "contains": []
+    },
+    {
+      "url": "https://www.zeit.de/gesellschaft/2019-12/uiguren-china-verfolgung-exil-muenchen",
+      "contains": []
+    },
+    {
+      "url": "http://www.zeit.de/zeit-magazin/2015/51/daisy-ridley-traum",
+      "contains": [
+        "Mein ganzes Leben lang habe"
+      ]
+    },
+    {
+      "url": "http://www.zeit.de/zeit-magazin/2015/52/cyberstalking-internet-stalker-familie-mierau",
+      "contains": []
+    },
+    {
+      "url": "http://www.zeit.de/zeit-magazin/2017/46/harald-martenstein-ddr-toastbrot",
+      "contains": []
+    },
+    {
+      "url": "https://www.zeit.de/wissen/gesundheit/2020-10/corona-mundschutz-alltag-maske-infektionsschutz-hygiene-ratgeber-faq",
+      "contains": [
+        "Die bisherigen Hygieneregeln in Restaurants"
+      ]
+    }
+  ]
+}

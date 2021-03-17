@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class, 'entry-title')]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class, 'mainContent')]"
+  ],
+  "date_selectors": [
+    "//meta[@name='weibo: article:create_at']/@content"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "related_topics"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.36kr.com/p/207879.html",
+      "contains": []
+    }
+  ]
+}

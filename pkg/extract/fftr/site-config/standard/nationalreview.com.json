@@ -1,0 +1,39 @@
+{
+  "title_selectors": [
+    "//meta[@name=\"sailthru.title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-content ')]"
+  ],
+  "date_selectors": [
+    "//meta[@property=\"article:published_time\"]/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"sailthru.author\"]/@content"
+  ],
+  "strip_selectors": [
+    "//aside",
+    "//footer"
+  ],
+  "strip_id_or_class": [
+    "ad-unit",
+    "article-header__remixd-player",
+    "author-module-ad-container",
+    "article-social-comment"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.nationalreview.com/2020/09/reminiscences-of-a-middle-class-radical/",
+      "contains": []
+    }
+  ]
+}

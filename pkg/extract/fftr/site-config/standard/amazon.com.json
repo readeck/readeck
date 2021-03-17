@@ -1,0 +1,43 @@
+{
+  "title_selectors": [
+    "//span[@id = 'btAsinTitle']"
+  ],
+  "body_selectors": [
+    "(//*[@id='prodImageCell']//a)[1] | //div[@id = 'ps-content'] | //span[@id='actualPriceValue'] | //h2[.='Product Details']/following-sibling::div | //div[@class='h2' and .='Product Description']/following-sibling::div"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//li[contains(., 'update product info') or contains(., 'give feedback on images')]"
+  ],
+  "strip_id_or_class": [
+    "nocontent",
+    "masDynamicConten",
+    "dynamic-content",
+    "collapsePS",
+    "expandPS",
+    "psPlaceHolde"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cspan id=\"actualPriceValue\"\u003e",
+      "\u003cspan id=\"actualPriceValue\"\u003e\u003cbr /\u003ePrice:"
+    ]
+  ],
+  "http_headers": {
+    "user-agent": "PHP/5.3"
+  },
+  "tests": [
+    {
+      "url": "http://www.amazon.com/Common-Sense-Forestry-Living-Mother/dp/1931498210/",
+      "contains": []
+    }
+  ]
+}

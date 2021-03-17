@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//*[@class='storyPageText']/.."
+  ],
+  "date_selectors": [
+    "substring-before(substring-after(//*[@class='storyByline'], 'on'), 'at')"
+  ],
+  "author_selectors": [
+    "string('Dave Winer')"
+  ],
+  "strip_selectors": [
+    "//a[starts-with(@href, '#')]",
+    "//*[@class='storyByline']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://scripting.com/stories/2011/07/08/yeahImStillYawning.html",
+      "contains": []
+    }
+  ]
+}

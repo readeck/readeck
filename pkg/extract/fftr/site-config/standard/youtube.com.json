@@ -1,0 +1,40 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": [
+    "//iframe"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//link[@type='text/xml+oembed']"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003chtml\u003e\u0026lt;iframe",
+      "\u003ciframe id=\"video\""
+    ],
+    [
+      "\u0026gt;\u0026lt;/iframe\u0026gt;\u003c/html\u003e",
+      "\u003e\u003c/iframe\u003e"
+    ]
+  ],
+  "http_headers": {
+    "user-agent": "PHP/7.2"
+  },
+  "tests": [
+    {
+      "url": "https://www.youtube.com/watch?v=GjENnyQupow",
+      "contains": []
+    }
+  ]
+}

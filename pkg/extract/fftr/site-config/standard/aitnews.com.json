@@ -1,0 +1,25 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'single-post-thumbnail')] | //*[@itemprop=\"articleBody\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://aitnews.com/2016/04/23/%D8%A7%D9%84%D9%80-fbi-%D9%8A%D8%AE%D8%AA%D8%B1%D9%82-%D9%87%D8%A7%D8%AA%D9%81-%D8%A2%D9%8A%D9%81%D9%88%D9%86-%D8%A2%D8%AE%D8%B1-%D8%AF%D9%88%D9%86-%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9-%D8%A2%D8%A8/",
+      "contains": []
+    }
+  ]
+}

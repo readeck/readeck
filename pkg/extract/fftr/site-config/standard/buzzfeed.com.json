@@ -1,0 +1,54 @@
+{
+  "title_selectors": [
+    "//h1[@data-print='title']"
+  ],
+  "body_selectors": [
+    "//div[@data-print='body']",
+    "//section[@data-print='body']",
+    "//article[contains(concat(' ',normalize-space(@class),' '),' buzz ')]"
+  ],
+  "date_selectors": [
+    "//time[@data-print='date']"
+  ],
+  "author_selectors": [
+    "//a[@data-print='author']"
+  ],
+  "strip_selectors": [
+    "*[@data-print=\"ignore\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": [
+    "//meta[@property=\"article:section\" and @content=\"Advertiser\"]"
+  ],
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "rel:bf_image_src=",
+      "src="
+    ],
+    [
+      "src=\"data:",
+      "disabled_src=\"data:"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.buzzfeed.com/hgrant/35-reasons-why-dogs-hate-the-holidays",
+      "contains": []
+    },
+    {
+      "url": "http://www.buzzfeed.com/bravo/ways-to-up-your-online-dating-game",
+      "contains": []
+    },
+    {
+      "url": "https://www.buzzfeed.com/charliewarzel/the-terrifying-future-of-fake-news",
+      "contains": []
+    }
+  ]
+}

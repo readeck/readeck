@@ -1,0 +1,45 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='text']",
+    "//div[@id= 'articlecontent']"
+  ],
+  "date_selectors": [
+    "//span[@class='pubdate']"
+  ],
+  "author_selectors": [
+    "substring-after(substring-before(//div[@id='byline'],'|'),'By')",
+    "//div[@class='byline']/a"
+  ],
+  "strip_selectors": [
+    "//div[@id= 'articlecontent']/h1",
+    "//div[@id='articlecontent']/p[@class='deck']",
+    "//div[@id='articlecontent']/div[@class='byline']",
+    "//div[@id='articlespacer']",
+    "//div[@id='incsharebox']",
+    "//div[@id='articlesidebar']",
+    "//a[contains(., 'Dig Deeper')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[contains(@href, 'Printer_Friendly.html')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.inc.com/guides/2010/11/seven-tips-for-lobbying-politicians.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.inc.com/eric-schurenberg/startups-are-we-geting-irrationally-exuberant.html",
+      "contains": []
+    }
+  ]
+}

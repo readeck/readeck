@@ -1,0 +1,27 @@
+{
+  "title_selectors": [
+    "//h2"
+  ],
+  "body_selectors": [
+    "div[@id='illustration'] | //p"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://mobile.lemondeinformatique.fr/actualites/lire-les-datacenters-d-apple-google-et-facebook-eco-responsables-selon-greenpeace-le-monde-informatique-57122.html",
+      "contains": []
+    }
+  ]
+}

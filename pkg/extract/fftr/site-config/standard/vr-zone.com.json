@@ -1,0 +1,34 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": [
+    "//div[@class='post-content entry-content']"
+  ],
+  "date_selectors": [
+    "//time"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//a[@id='dd_start']",
+    "//iframe",
+    "//div[@class='dd_outer']",
+    "//comments"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://vr-zone.com/articles/amd-take-intel-8-core-fm3-socket-zen-desktop-cpus-next-year/91057.html",
+      "contains": []
+    }
+  ]
+}

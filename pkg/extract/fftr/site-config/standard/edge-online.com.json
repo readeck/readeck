@@ -1,0 +1,40 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//h2[@class='strapline'] | //article[contains(@class, 'node-article')]"
+  ],
+  "date_selectors": [
+    "//time[@pubdate]/@datetime"
+  ],
+  "author_selectors": [
+    "//span[@class='author-name']"
+  ],
+  "strip_selectors": [
+    "//footer"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[contains(@href, '?page=show')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cp\u003e[ pagebreak ]\u003c/p\u003e",
+      "\u003c!-- pagebreak --\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.edge-online.com/features/telling-modern-warfares-story",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article-content ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' slideshow-ad-video ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' video-ad ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' meta ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' tags ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' twitter-follow ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' button-center-wrapper ')]",
+    "//img[contains(concat(' ',normalize-space(@class),' '),' avatar ')]",
+    "//h3[contains(concat(' ',normalize-space(@class),' '),' vcard ')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": null
+}

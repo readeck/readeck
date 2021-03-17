@@ -1,0 +1,47 @@
+{
+  "title_selectors": [
+    "//h1[@class='headline']"
+  ],
+  "body_selectors": [
+    "//div[@class='span2.article']"
+  ],
+  "date_selectors": [
+    "substring-before(//span[@class='info-text'], ', \u003cbr\u003e')"
+  ],
+  "author_selectors": [
+    "//span[@itemprop='author']"
+  ],
+  "strip_selectors": [
+    "//img[@class='slide__image'][1]",
+    "//img[@class='slide__image'][2]",
+    "//div[@class='inline-image__img']//img[1]",
+    "//img[contains(concat(' ',normalize-space(@class),' '),' teaser-plus ')]",
+    "//div[@amp-access='data.reduced']"
+  ],
+  "strip_id_or_class": [
+    "flying-carpet-wrapper",
+    "blurred",
+    "ampstart-card"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//link[@rel='amphtml']"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.shz.de/deutschland-welt/politik/Therapien-gegen-Homo-und-Transsexualitaet-sollen-verboten-werden-id26742562.html",
+      "contains": []
+    },
+    {
+      "url": "https://www.shz.de/lokales/schleibote/australische-pinguine-tragen-jetzt-pullis-aus-kappeln-id26733692.html",
+      "contains": []
+    }
+  ]
+}

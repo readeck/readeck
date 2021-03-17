@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//div[@class=\"content_detail\"]/h1"
+  ],
+  "body_selectors": [
+    "//div[@class=\"text_detail\"]"
+  ],
+  "date_selectors": [
+    "substring-before(substring-after(//div[@class=\"content_detail\"]/span[@class=\"date\"], ','), ' WIB')"
+  ],
+  "author_selectors": [
+    "//div[@class=\"author\"]/strong"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://news.detik.com/read/2012/05/22/225531/1922307/10/menkeu-cek-soal-lolosnya-315-kg-sabu-dari-bea-cukai",
+      "contains": []
+    }
+  ]
+}

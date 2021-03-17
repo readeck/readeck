@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h1"
+  ],
+  "body_selectors": [
+    "//div[@class='entry']"
+  ],
+  "date_selectors": [
+    "substring-after(//h2, '|')"
+  ],
+  "author_selectors": [
+    "//h2/a"
+  ],
+  "strip_selectors": [
+    "//h3"
+  ],
+  "strip_id_or_class": [
+    "attachment"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://buquad.com/2012/04/09/paul-ryan/",
+      "contains": []
+    }
+  ]
+}

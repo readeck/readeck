@@ -1,0 +1,38 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(@class, 'articleContentWrapper')]"
+  ],
+  "date_selectors": [
+    "//meta[@name='publish-date']/@content"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(@class, 'staff_info')]//dd[contains(., 'Twitter')]"
+  ],
+  "strip_id_or_class": [
+    "related_content",
+    "enlarge",
+    "photoBy",
+    "older"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.bizjournals.com/cincinnati/news/2013/10/03/harris-teeter-shareholders-vote-on.html",
+      "contains": []
+    },
+    {
+      "url": "http://feeds.bizjournals.com/industry_20?format=xml",
+      "contains": []
+    }
+  ]
+}

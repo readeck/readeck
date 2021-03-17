@@ -1,0 +1,42 @@
+{
+  "title_selectors": [
+    "//h1[contains(@class, 'interview-title']",
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//article[contains(@class, 'complete-interview')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//ul[contains(@class, 'book-covers')][.//div[contains(@class, 'picture')]]"
+  ],
+  "strip_id_or_class": [
+    "hideNoLink",
+    "dynamic-bookshelf",
+    "hide-for-small",
+    "buy-button",
+    "listen-button",
+    "social-buttons",
+    "show-for-small-only",
+    "-donate",
+    "interview-tags",
+    "interview-social",
+    "interview-related"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://fivebooks.com/best-books/nietzsche-brian-leiter/",
+      "contains": []
+    }
+  ]
+}

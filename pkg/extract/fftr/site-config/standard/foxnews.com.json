@@ -1,0 +1,35 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//meta[@name=\"dc.date\"]/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"dc.publisher\"]/@content"
+  ],
+  "strip_selectors": [
+    "//p[contains(@class, 'contributor vcard')]",
+    "//p[a[contains(., 'Click here to read more on this story ')]]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cul\u003e\u003cli\u003e\u003cdiv class=\"photo\"\u003e",
+      "\u003cdiv class=\"photo\"\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.foxnews.com/entertainment/2011/05/04/dwayne-johnson-guys-grow-pair-driving-hybrid/",
+      "contains": []
+    }
+  ]
+}

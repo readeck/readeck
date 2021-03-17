@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//div[@id='center-col']/h4"
+  ],
+  "body_selectors": [
+    "//div[@id='center-col']"
+  ],
+  "date_selectors": [
+    "substring-after(//div[@class='commenttext']/span,'#')"
+  ],
+  "author_selectors": [
+    "substring-before(//title,'In')"
+  ],
+  "strip_selectors": [
+    "//div[@id='center-col']/h4",
+    "//div[@class='graytext']",
+    "//img[@src='http://www.randsinrepose.com/spreader.gif']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.randsinrepose.com/archives/2012/03/13/hacking_is_important.html",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//article/header/h2"
+  ],
+  "body_selectors": [
+    "//article"
+  ],
+  "date_selectors": [
+    "//article//time[@pubdate]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.christies.com/LotFinder/custom/lot_details_MultiLanguage.aspx?from=salesummary\u0026intObjectID=5556662\u0026sid=e536ed1a-b763-41c4-afcf-c94815ec6eee\u0026LID=3",
+      "contains": []
+    }
+  ]
+}

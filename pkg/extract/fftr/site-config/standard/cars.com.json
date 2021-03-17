@@ -1,0 +1,27 @@
+{
+  "title_selectors": [
+    "//div[contains(@class, 'basicInfo')]//h1"
+  ],
+  "body_selectors": [
+    "//img[@id='chosenPhotoIMG'] | //div[@id='aboutThisVehicleBox']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.cars.com/go/search/detail.jsp?listingId=115364779",
+      "contains": []
+    }
+  ]
+}

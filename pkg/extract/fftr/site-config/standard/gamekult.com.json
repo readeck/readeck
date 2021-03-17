@@ -1,0 +1,51 @@
+{
+  "title_selectors": [
+    "//h1[@class=\"ed__news__title\"] | //h4[@class='gk__helpers__fat-title-m--complementary ed__show-h__mdb__title']"
+  ],
+  "body_selectors": [
+    "//div[@class=\"gk__content__container\"] | //div[@class=\"js-pm-refreshed-content\"] | //article[contains(@class, \"ed__review__article\")]"
+  ],
+  "date_selectors": [
+    "//p[@class=\"byline\"]/time/@datetime"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//aside[@id=\"beginning\"]",
+    "//select[@id=\"news_changing_node\"]",
+    "//section[@class=\"gk__pt js-pt-container has--tbs is--md gk__hide\"]",
+    "//aside[@class=\"ed__show__aside\"]",
+    "//div[@class=\"gk__breadcrumb\"]",
+    "//p[@class=\"ed__header__info--top\"]",
+    "//div[contains(@class, \"ed__review__article__header__price\")]",
+    "//ul[contains(@class, 'js-preview-list')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cfooter\u003e",
+      "\u003cdiv\u003e"
+    ],
+    [
+      "\u003c/footer\u003e",
+      "\u003c/div\u003e"
+    ],
+    [
+      "data-lazy",
+      "src"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.gamekult.com/actualite/quand-les-jeux-se-racontent-en-champ-contrechamp-3050810023.html",
+      "contains": []
+    }
+  ]
+}

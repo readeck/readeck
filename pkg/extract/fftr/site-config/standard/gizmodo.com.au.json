@@ -1,0 +1,37 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@id='content_post' or @class=\"post-body\" or contains(@class, 'illustration top')]"
+  ],
+  "date_selectors": [
+    "//span[@class=\"date\"]",
+    "//time"
+  ],
+  "author_selectors": [
+    "(//cite//span[@class=\"plus-icon\"])[1]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cmeta http-equiv=\"refresh\"",
+      "\u003cmeta http-equiv=\"disabled-refresh\""
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.gizmodo.com.au/2016/01/these-hateful-eightfigures-are-delightfully-retro/",
+      "contains": [
+        "NECA have fully unveiled"
+      ]
+    }
+  ]
+}

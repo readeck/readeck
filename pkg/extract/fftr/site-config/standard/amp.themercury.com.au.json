@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' tg-tlc-storyheader_titlewrapper_h1 ')]"
+  ],
+  "body_selectors": [
+    "//section[contains(concat(' ',normalize-space(@class),' '),' story ')]"
+  ],
+  "date_selectors": [
+    "//time[contains(concat(' ',normalize-space(@class),' '),' abovestory_timestamp ')]"
+  ],
+  "author_selectors": [
+    "//span[contains(concat(' ',normalize-space(@class),' '),' abovestory_byline ')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://amp.themercury.com.au/news/tasmania/investors-flock-south-at-news-of-skyrocketing-rents-in-hobart/news-story/58125594f8e54b65df6d8eed4e00878ad",
+      "contains": []
+    }
+  ]
+}

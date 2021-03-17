@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//*[contains(@class,'titName SG_txta')]"
+  ],
+  "body_selectors": [
+    "//div[contains(@class,'articalContent')]"
+  ],
+  "date_selectors": [
+    "//*[contains(@class,'time SG_txtc')]"
+  ],
+  "author_selectors": [
+    "//*[contains(@id,'ownernick')]"
+  ],
+  "strip_selectors": [
+    "//span[contains(@class,'MASS')]",
+    "//div[contains(@class,'allComm')]",
+    "//ins"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://blog.sina.com.cn/s/blog_5054769e0102dtja.html",
+      "contains": []
+    }
+  ]
+}

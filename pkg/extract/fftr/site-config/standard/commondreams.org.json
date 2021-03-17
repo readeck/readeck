@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//span[@itemprop='mainEntityOfPage']"
+  ],
+  "body_selectors": [
+    "//div[@itemprop='articleBody']"
+  ],
+  "date_selectors": [
+    "//span[@class='date-display-single']"
+  ],
+  "author_selectors": [
+    "//div[@id='field-wrapper-authors']"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.commondreams.org/news/2019/08/19/17-million-turn-out-hong-kong-demonstration-vow-keep-fighting-protests-enter-11th",
+      "contains": []
+    }
+  ]
+}

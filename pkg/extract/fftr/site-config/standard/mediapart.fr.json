@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//h1[@class=\"title\"]"
+  ],
+  "body_selectors": [
+    "//main[@class=\"global-wrapper\"]"
+  ],
+  "date_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' author ')]//time/@datetime"
+  ],
+  "author_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' author ')]//a[@class='journalist']"
+  ],
+  "strip_selectors": [
+    "//aside"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//link[@rel=\"canonical\"]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.mediapart.fr/journal/france/170116/le-site-slatefr-est-passe-entre-les-mains-du-cac-40",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article[@class='article fjs-article']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//ul[@class='article__metadata']",
+    "//div[@class='article__tag-list']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "cookie": "pws=functional|analytics|content_recommendation|targeted_advertising|social_media; pwv=2"
+  },
+  "tests": [
+    {
+      "url": "https://www.hln.be/in-de-buurt/leuven/minister-geens-bezoekt-pop-up-naaiatelier-en-krijgt-modieus-mondmasker-aangemeten~a88e678d/",
+      "contains": [
+        "Minister Geens bezoekt pop-up naaiatelier en krijgt modieus mondmasker aangemeten"
+      ]
+    }
+  ]
+}

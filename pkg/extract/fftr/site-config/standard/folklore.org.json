@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='main']"
+  ],
+  "date_selectors": [
+    "/html/body/table[3]/tbody/tr/td[1]/table[2]/tbody/tr[2]/td[2]"
+  ],
+  "author_selectors": [
+    "/html/body/table[3]/tbody/tr/td[1]/table[2]/tbody/tr[1]/td[2]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.folklore.org/StoryView.py?story=Calculator_Construction_Set.txt",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//time"
+  ],
+  "author_selectors": null,
+  "strip_selectors": [
+    "//aside"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//li[@class='next']//a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.elektroniknet.de/elektronik-automotive/wirtschaft/aus-quattro-gmbh-wird-audi-sport-136464.html",
+      "contains": [
+        "etwa 1.200 Mitarbeiter an den Standorten Neckarsulm und Ingolstadt"
+      ]
+    },
+    {
+      "url": "http://www.elektroniknet.de/elektronik-automotive/sonstiges/machine-learning-wird-demnaechst-massiv-an-bedeutung-gewinnen-136362.html",
+      "contains": [
+        "Ende 2014 übernahm er seine heutige Position als CEO von MBRDNA"
+      ]
+    }
+  ]
+}

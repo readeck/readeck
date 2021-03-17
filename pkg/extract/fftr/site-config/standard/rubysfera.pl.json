@@ -1,0 +1,32 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//li[@class='date']"
+  ],
+  "author_selectors": [
+    "//div[contains(@class, 'author_text')]/h4/text()"
+  ],
+  "strip_selectors": [
+    "//div[contains(@class, 'entry_meta')]",
+    "//div[contains(@class, 'single_meta')]",
+    "//br[contains(@class, 'clear')]",
+    "//h3[contains(., 'Komentarz')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://rubysfera.pl/2011/09/10-porad-o-rvm/",
+      "contains": []
+    }
+  ]
+}

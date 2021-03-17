@@ -1,0 +1,38 @@
+{
+  "title_selectors": [
+    "//article//h1"
+  ],
+  "body_selectors": [
+    "//section[@class=\"page\"]"
+  ],
+  "date_selectors": [
+    "//meta[@name=\"date\"]/@content"
+  ],
+  "author_selectors": [
+    "//div[@class=\"author-name\" or @class=\"article-byline\"]/a[1]"
+  ],
+  "strip_selectors": [
+    "//div[@class='blogLabel']",
+    "//div[@class=\"article-meta\"]",
+    "//div[@class=\"author-info\"]",
+    "//div[@class=\"department\"]",
+    "//div[@class=\"cap-main\"]",
+    "//div[@id=\"compare-lede\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.macworld.com/article/163184/2011/10/the_ipod_as_an_iconic_cultural_force.html",
+      "contains": []
+    }
+  ]
+}

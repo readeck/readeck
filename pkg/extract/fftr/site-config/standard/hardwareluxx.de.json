@@ -1,0 +1,44 @@
+{
+  "title_selectors": [
+    "(//span[@itemprop='title'])[last()]"
+  ],
+  "body_selectors": [
+    "//article"
+  ],
+  "date_selectors": [
+    "//time"
+  ],
+  "author_selectors": [
+    "//span[@itemprop='author']//span[@itemprop='name']"
+  ],
+  "strip_selectors": [
+    "//header",
+    "//div[@id='bcr']",
+    "//footer",
+    "//section",
+    "//figure[@class='dynbench']",
+    "//div[@class='pagenavbar']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//span[@class='next']/a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.hardwareluxx.de/index.php/news/allgemein/netzpolitik/35169-creator-space-youtube-eroeffnet-neues-studio-in-berlin.html",
+      "contains": []
+    },
+    {
+      "url": "http://www.hardwareluxx.de/index.php/artikel/hardware/komplettsysteme/35020-caseking-king-mod-titan-oc-gaming-pc-im-test.html",
+      "contains": []
+    }
+  ]
+}

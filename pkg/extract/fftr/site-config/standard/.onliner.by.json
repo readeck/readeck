@@ -1,0 +1,33 @@
+{
+  "title_selectors": [
+    "//*[contains(@class, 'b-posts-1-item__title')]"
+  ],
+  "body_selectors": [
+    "//figure[contains(@class, 'b-posts-1-item__image')] | //div[contains(@class, 'b-posts-1-item__text')]"
+  ],
+  "date_selectors": [
+    "//article//time/@datetime"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://tech.onliner.by/feed",
+      "contains": []
+    },
+    {
+      "url": "http://tech.onliner.by/2014/04/24/the-amazing-spider-man-2",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title_selectors": [
+    "concat(\"Tweet from \", (//*[contains(@class, 'UserNames-displayName') or contains(@class, 'fullname')])[1])"
+  ],
+  "body_selectors": [
+    "(//div[contains(@class, 'TweetDetail-text') or contains(@class, 'tweet-text')])[1]"
+  ],
+  "date_selectors": [
+    "(//div[contains(@class, 'TweetDetail-timeAndGeo') or contains(@class, 'metadata')])[1]"
+  ],
+  "author_selectors": [
+    "(//*[contains(@class, 'UserNames-displayName') or contains(@class, 'fullname')])[1]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": true,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "Cookie": "personalization_id=1;",
+    "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+  },
+  "tests": [
+    {
+      "url": "https://mobile.twitter.com/medialens/status/216883678582804480",
+      "contains": [
+        "is all but alone in challenging the tsunami of UK"
+      ]
+    }
+  ]
+}

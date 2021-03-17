@@ -1,0 +1,86 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='GeneralMaterial-article']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": [
+    "Toolbar",
+    "RelatedBlock",
+    "AudioPanel-podcast",
+    "AudioPanel-buttonPlay",
+    "AudioPanel-title",
+    "AudioPanel-progressText",
+    "Progress-panel"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cnoscript\u003e",
+      "\u003cspan data-was=\"noscript\"\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c/span\u003e"
+    ],
+    [
+      "\u003cp class=\"SimpleBlock-context_p\"\u003e",
+      "\u003cp class=\"SimpleBlock-context_p\" style=\"display:list-item; margin-left:2em\"\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://meduza.io/news/2020/03/25/sud-v-nyu-yorke-zapretil-vypusk-kriptovalyuty-telegram",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/video/2019/12/11/dalnost-poleta-poka-ne-ta-o-kakoy-mozhno-mechtat-no-dlya-nachala-revolyutsii-etogo-dostatochno",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/episodes/2020/02/27/moya-tsel-svoboda-molodoy-uchenyy-astrofizik-investiruet-neskolko-let-i-uzhe-millioner-no-kak",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/episodes/2020/04/08/beloe-krasnoe-konyak-ne-odnovremenno-my-ochen-trevozhimsya-za-sebya-i-svoih-detey-kak-s-etim-spravitsya",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/news/2019/09/20/ya-na-svobode-pavel-ustinov-poblagodaril-vseh-za-podderzhku",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/feature/2019/09/24/v-iphone-11-pro-tselyh-tri-kamery-my-poprosili-fotografa-evgeniya-feldmana-ispytat-ih-vozmozhnosti",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/feature/2019/12/10/chto-takoe-luzhkovskaya-arhitektura-10-zdaniy-kotorye-izmenili-moskvu",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/news/2020/04/08/putin-ob-yavil-o-doplate-80-tysyach-rubley-vracham-rabotayuschim-s-patsientami-s-koronavirusom",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/feature/2019/09/18/meduza-opoznala-politseyskogo-slomavshego-nogu-dizayneru-konstantinu-konovalovu-vo-vremya-zaderzhaniya-v-tsentre-moskvy",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/news/2020/04/01/belorussiya-poprosila-u-rossii-pomoschi-v-borbe-s-koronavirusom",
+      "contains": []
+    },
+    {
+      "url": "https://meduza.io/shapito/2020/04/08/politsiya-luiziany-sluchayno-ob-yavila-sudnuyu-noch-da-da-toy-samoy-sirenoy-iz-odnoimennyh-filmov",
+      "contains": []
+    }
+  ]
+}

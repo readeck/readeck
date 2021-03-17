@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//title"
+  ],
+  "body_selectors": [
+    "//article"
+  ],
+  "date_selectors": null,
+  "author_selectors": [
+    "//span[@class='author vcard']/a"
+  ],
+  "strip_selectors": [
+    "//div[@id='pagination_top']",
+    "//header[@class='entry-header']",
+    "//span[@class='multipage-navlink nav-previous']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": [
+    "//span[@class='multipage-navlink nav-next']/a"
+  ],
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.planet3dnow.de/cms/14809-test-fractal-design-node-804/",
+      "contains": []
+    }
+  ]
+}

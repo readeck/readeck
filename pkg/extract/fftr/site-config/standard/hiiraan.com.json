@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' single ')]//div[contains(concat(' ',normalize-space(@class),' '),' description ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.hiiraan.com/news/2014/Dec/wararka_maanta20-89428.htm",
+      "contains": []
+    },
+    {
+      "url": "http://rss.hiiraan.com/wararka_maanta_rss.xml",
+      "contains": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title_selectors": [
+    "//div[@id='articleTitleWrapper' or @id='mainFeature']//h1"
+  ],
+  "body_selectors": [
+    "//div[@id='mainFeature']//img | //div[contains(@class, 'fullText')]"
+  ],
+  "date_selectors": [
+    "//div[@id='articleMeta']/p"
+  ],
+  "author_selectors": [
+    "//*[@id='authorNameJob']//a"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.spiked-online.com/newsite/article/standing_up_to_the_white-coated_gods_of_fortune/13785",
+      "contains": []
+    },
+    {
+      "url": "http://www.spiked-online.com/newsite/article/sex_box_and_the_crisis_of_intimacy/14168",
+      "contains": []
+    }
+  ]
+}

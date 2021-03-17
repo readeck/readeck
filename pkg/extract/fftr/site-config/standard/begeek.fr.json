@@ -1,0 +1,42 @@
+{
+  "title_selectors": [
+    "//div[@class='title']/h1"
+  ],
+  "body_selectors": [
+    "//section[@id=\"single\"]"
+  ],
+  "date_selectors": [
+    "//div[@id=\"publish_post\"]/time/@datetime"
+  ],
+  "author_selectors": [
+    "//div[@class=\"author_link\"]/span/a[@itemprop=\"author\"]"
+  ],
+  "strip_selectors": [
+    "//div[@class=\"title\"]",
+    "//div[@class=\"info_top\"]",
+    "//div[@class=\"follow-tools\"]",
+    "//div[@class=\"author\"]",
+    "//div[@id=\"share_post\"]",
+    "//div[@id=\"topic_ass\"]",
+    "//div[@id=\"taboola-below-article-thumbs-mix\"]",
+    "//section[@id=\"facebook-com\"]",
+    "//section[@id=\"related_post\"]",
+    "//div[@id=\"ligatus\"]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "http://www.begeek.fr/videos-amazon-va-defier-youtube-france-202647",
+      "contains": []
+    }
+  ]
+}

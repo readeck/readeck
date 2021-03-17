@@ -1,0 +1,39 @@
+{
+  "title_selectors": [
+    "//h1[contains(concat(' ',normalize-space(@class),' '),' entry-title ')]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' content ')]"
+  ],
+  "date_selectors": [
+    "//meta[@property=\"og:updated_time\"]/@content"
+  ],
+  "author_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' td-post-header ')]//small//div[contains(concat(' ',normalize-space(@class),' '),' bestof-meta-autor ')]"
+  ],
+  "strip_selectors": [
+    "//ul[@id='actions']"
+  ],
+  "strip_id_or_class": [
+    "wc-memberships-content-restricted-message",
+    "box_protegee_abonne",
+    "share-bottom",
+    "share-comment",
+    "wpb_wrapper"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://marsactu.fr/a-miramas-village-vitrine-en-carton-pate-et-vrai-centre-ville-en-coulisses/",
+      "contains": []
+    }
+  ]
+}

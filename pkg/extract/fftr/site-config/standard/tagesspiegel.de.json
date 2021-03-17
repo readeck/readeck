@@ -1,0 +1,75 @@
+{
+  "title_selectors": [
+    "//div[@class='ts-title']"
+  ],
+  "body_selectors": [
+    "//article[@class='ts-article']"
+  ],
+  "date_selectors": [
+    "//time[@class='ts-time']"
+  ],
+  "author_selectors": [
+    "//a[@rel='author']"
+  ],
+  "strip_selectors": [
+    "//iframe"
+  ],
+  "strip_id_or_class": [
+    "hcf-hidden",
+    "ts-user-quote",
+    "ts-abo-link",
+    "ts-homepage-link",
+    "ts-recommendation",
+    "newsletter"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": [
+    "//a[contains(@class, 'ts-one-page')]"
+  ],
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003ca class=\"ts-gallery",
+      "\u003cp class=\"ts-gallery"
+    ],
+    [
+      "\u003cfigcaption class=\"ts-caption\"\u003e",
+      "\u003cbr\u003e\u003csmall\u003e\u003cem\u003e"
+    ],
+    [
+      "\u003c/figcaption\u003e",
+      "\u003c/em\u003e\u003c/small\u003e"
+    ],
+    [
+      "\u003ca class=\" ajaxify",
+      "\u003cp class=\"ajaxify"
+    ],
+    [
+      "\u003cdiv class=\"ts-caption\"\u003e\u003cdiv\u003e\u003cp\u003e",
+      "\u003csmall\u003e\u003cem\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.tagesspiegel.de/berlin/das-leben-der-berliner-u-bahn-schnorrer-ich-hatte-mal-eine-firma-das-war-geil-/20489728.html",
+      "contains": []
+    },
+    {
+      "url": "https://www.tagesspiegel.de/berlin/bezirke/wedding/wedding-jetzt/auf-der-suche-nach-einem-stadtteil-wilder-weiter-wedding/8757156.html",
+      "contains": []
+    },
+    {
+      "url": "https://www.tagesspiegel.de/berlin/olympia-in-berlin-der-flughafen-tegel-soll-das-olympische-dorf-werden/10645036.html",
+      "contains": []
+    },
+    {
+      "url": "https://www.tagesspiegel.de/mediacenter/fotostrecken/berlin/bildergalerie-kreuzberger-der-woche/9305534.html",
+      "contains": []
+    }
+  ]
+}

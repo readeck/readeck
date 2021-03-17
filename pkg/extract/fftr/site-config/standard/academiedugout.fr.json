@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' recipe-ingredients ')] | //p[contains(concat(' ',normalize-space(@class),' '),' recipe-steps__title ')] | //div[contains(concat(' ',normalize-space(@class),' '),' recipe-steps ')]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' desk-seven-twelfths ')]",
+    "//div[contains(concat(' ',normalize-space(@class),' '),' mod-cta--juicy__recipe-step ')]//div[contains(concat(' ',normalize-space(@class),' '),' mod-cta__button ')]",
+    "//label[contains(concat(' ',normalize-space(@class),' '),' recipe-ingredients__label ')]"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.academiedugout.fr/recettes/pate-en-croute-cerise-pistache_11929_2",
+      "contains": []
+    }
+  ]
+}

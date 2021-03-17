@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": null,
+  "date_selectors": [
+    "//time[contains(@class, 'c-byline__time--article__hed')]"
+  ],
+  "author_selectors": [
+    "//ol[contains(@class, 'c-meta__byline--article__hed')]"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.citylab.com/design/2018/08/the-case-for-rooms/563216/",
+      "contains": [
+        "src=\"https://cdn.theatlantic.com/assets/media/img/posts/2018/08/AP_051007018677/01f7b92fc.jpg\""
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//section[contains(@class, 'main')]"
+  ],
+  "date_selectors": [
+    "//span[@class=\"date\"]"
+  ],
+  "author_selectors": [
+    "//span[contains(@class, 'display-name')]"
+  ],
+  "strip_selectors": [
+    "//aside",
+    "//svg",
+    "//*[local-name() = 'svg']",
+    "//div[contains(@class, 'storytype-label-wrapper')]",
+    "//figcaption[contains(@class, 'caption')]"
+  ],
+  "strip_id_or_class": [
+    "related"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": true,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://earther.com/ireland-is-officially-the-first-country-to-divest-from-1827552460",
+      "contains": []
+    }
+  ]
+}

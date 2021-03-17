@@ -1,0 +1,29 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class=\"post-body\"]"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//div[@id='agegate_IDHERE']"
+  ],
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": {
+    "user-agent": "PHP/5.3"
+  },
+  "tests": [
+    {
+      "url": "http://gawker.com/#!5782070/russian-bomb-squad-successfully-defuses-sex-toy",
+      "contains": []
+    }
+  ]
+}

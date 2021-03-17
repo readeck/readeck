@@ -1,0 +1,29 @@
+{
+  "title_selectors": [
+    "//div[contains(@class, 'title_area')]//strong[@class=\"title\"]"
+  ],
+  "body_selectors": [
+    "//div[contains(concat(' ',normalize-space(@class),' '),' contents_area ')]"
+  ],
+  "date_selectors": [
+    "//div[contains(@class, 'title_area')]//span[@class=\"date\"]"
+  ],
+  "author_selectors": null,
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.naeu.playblackdesert.com/en-US/News/Detail?groupContentNo=451\u0026countryType=en-US",
+      "contains": []
+    }
+  ]
+}

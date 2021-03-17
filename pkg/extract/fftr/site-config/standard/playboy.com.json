@@ -1,0 +1,34 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//article"
+  ],
+  "date_selectors": [
+    "//article//*[@class=\"publication-date\"]"
+  ],
+  "author_selectors": [
+    "//article//*[@class=\"author\"]"
+  ],
+  "strip_selectors": [
+    "//article/header",
+    "//article/section"
+  ],
+  "strip_id_or_class": [
+    "cta-image"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.playboy.com/read/forget-camming-adult-entertainment-is-taking-over-snapchat",
+      "contains": []
+    }
+  ]
+}

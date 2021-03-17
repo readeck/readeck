@@ -1,0 +1,31 @@
+{
+  "title_selectors": [
+    "//meta[@property=\"og:title\"]/@content"
+  ],
+  "body_selectors": [
+    "//div[@itemprop=\"articleBody\"]"
+  ],
+  "date_selectors": [
+    "//meta[@name=\"DCSext.articleFirstPublished\"]/@content"
+  ],
+  "author_selectors": [
+    "//meta[@name=\"DCSext.author\"]/@content"
+  ],
+  "strip_selectors": null,
+  "strip_id_or_class": null,
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": null,
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://www.telegraph.co.uk/news/2021/02/16/covidlockdown-continue-cases-drop-1000-day/",
+      "contains": []
+    }
+  ]
+}
