@@ -1,8 +1,10 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static values = {
-    embed: String,
+  static get values () {
+    return {
+      embed: String,
+    }
   }
 
   connect() {

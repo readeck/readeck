@@ -1,9 +1,13 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static values = {jwt: String}
+  static get values () {
+    return {
+      jwt: String,
+    }
+  }
 
   async copy() {
     await navigator.clipboard.writeText(this.jwtValue)
   }
-};
+}

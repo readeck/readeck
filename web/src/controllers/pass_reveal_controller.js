@@ -1,11 +1,16 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["field"]
-  static values = {
-    iconShow: String,
-    iconHide: String,
-    icon: String,
+  static get targets () {
+    return ["field"]
+  }
+
+  static get values () {
+    return {
+      iconShow: String,
+      iconHide: String,
+      icon: String,
+    }
   }
 
   connect() {

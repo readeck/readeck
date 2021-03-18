@@ -3,10 +3,12 @@ import api from "../lib/api"
 import icon from "../lib/icon"
 
 export default class extends Controller {
-  static values = {
-    id: String,
-    iconOn: String,
-    iconOff: String,
+  static get values() {
+    return {
+      id: String,
+      iconOn: String,
+      iconOff: String,
+    }
   }
 
   async toggle(evt) {
