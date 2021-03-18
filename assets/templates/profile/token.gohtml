@@ -40,19 +40,23 @@
 
 <h2 class="title">API authentication</h2>
 
-<div class="field max" data-controller="clipboard" data-clipboard-jwt-value="{{ .JWT }}">
-  <label>Your API token</label>
-  <textarea readonly="1" style="height:5em; max-width:40em">{{ .JWT }}</textarea>
-  <p><button class="small outlined" data-action="clipboard#copy">Copy Token</button></p>
+<div class="field max" data-controller="clipboard">
+  <div data-clipboard-target="label">
+    <strong>Your API token</strong>
+  </div>
+  <textarea readonly="1" style="height:5em; max-width:40em"
+   data-clipboard-target="content">{{ .JWT }}</textarea>
 </div>
 
-<div class="field max" data-controller="clipboard" data-clipboard-jwt-value="Authorization: Bearer {{ .JWT }}">
+<div class="field max" data-controller="clipboard">
   <p>You can use this token by passing as an <code>Authorization: Bearer</code>
   HTTP header.</p>
 
-  <label>HTTP Header</label>
-  <textarea readonly="1" style="height:5em; max-width:40em">Authorization: Bearer {{ .JWT }}</textarea>
-  <p><button class="small outlined" data-action="clipboard#copy">Copy Header</button></p>
+  <div data-clipboard-target="label">
+    <strong>HTTP Header</strong>
+  </div>
+  <textarea readonly="1" style="height:5em; max-width:40em"
+   data-clipboard-target="content">Authorization: Bearer {{ .JWT }}</textarea>
 </div>
 
 {{ end }}
