@@ -27,7 +27,7 @@ export default class extends Controller {
 
     this.playBtn = document.createElement("div")
     this.playBtn.classList.add("play-button")
-    this.playBtn.setAttribute("data-action", "click->video#play")
+    this.playBtn.setAttribute("data-action", `click->${this.identifier}#play`)
     this.element.appendChild(this.playBtn)
   }
 
