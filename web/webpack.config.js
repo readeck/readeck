@@ -1,6 +1,8 @@
 const path = require("path")
+const zlib = require("zlib")
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const CompressionPlugin = require("compression-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin")
@@ -114,6 +116,26 @@ module.exports = {
     }),
     new SpriteLoaderPlugin({
       plainSprite: true,
+    }),
+    new CompressionPlugin({
+      test: /\.(js|css|svg)?$/i,
+      filename: "[path][base].gz",
+      algorithm: "gzip",
+      compressionOptions: {
+        level: 9,
+      },
+      threshold: 4096,
+      minRatio: 0.8,
+    }),
+    new CompressionPlugin({
+      test: /\.(js|css|svg)?$/i,
+      filename: "[path][base].br",
+      algorithm: "brotliCompress",
+      compressionOptions: {
+        [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+      },
+      threshold: 4096,
+      minRatio: 0.8,
     }),
   ],
   optimization: {
