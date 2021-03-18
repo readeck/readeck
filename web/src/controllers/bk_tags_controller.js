@@ -1,5 +1,6 @@
 import { Controller } from "stimulus"
 import api from "../lib/api"
+import $ from "../lib/dq"
 
 export default class extends Controller {
   static get targets() {
@@ -18,10 +19,9 @@ export default class extends Controller {
 
     let rsp = await api.patchJSON(`bookmarks/${this.idValue}`, data)
 
-    this.tagTargets.forEach(el => {
-      let b = el.querySelector("button")
-      if (!rsp.tags.includes(b.value)) {
-        el.parentNode.removeChild(el)
+    this.tagTargets.forEach(e => {
+      if (!rsp.tags.includes($("button", e).getAttr("value"))) {
+        $(e).remove()
       }
     })
   }
@@ -52,17 +52,15 @@ export default class extends Controller {
   // the provided template.
   addTagElement(name) {
     let tpl = this.tmplTarget.content.cloneNode(true)
-    let li = tpl.querySelector("li")
-    li.insertBefore(document.createTextNode(name), li.firstChild)
-    tpl.querySelector("button").value = name
-
-    this.tagListTarget.insertBefore(tpl, this.tagListTarget.firstChild)
+    $("li", tpl).prepend($.T(name))
+    $("button", tpl).attr("value", name)
+    $(this.tagListTarget).prepend(tpl)
   }
 
   // clearTagList removes all the tag elements in the list.
   clearTagList() {
     this.tagTargets.forEach(e => {
-      e.parentNode.removeChild(e)
+      $(e).remove()
     })
   }
 };

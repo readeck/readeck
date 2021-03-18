@@ -1,4 +1,6 @@
 import { Controller } from "stimulus"
+import $ from "../lib/dq"
+import icon from "../lib/icon"
 
 export default class extends Controller {
   static get targets () {
@@ -14,32 +16,29 @@ export default class extends Controller {
   }
 
   connect() {
-    // Create the button element
-    let el = document.createElement("button")
-    el.setAttribute("type", "button")
-    el.setAttribute("data-action", `click->${this.identifier}#toggle`)
-    el.setAttribute("class", "button-clear")
+    // Create the button
+    this.icon = icon.getIcon()
 
-    // Add the icon and give it some space
-    el.innerHTML = this.icon()
-    el.style.padding = "0"
-    el.style.marginLeft = "-2.4rem"
-    el.style.marginTop = "0.9rem"
-    this.fieldTarget.parentNode.insertBefore(el, this.fieldTarget.nextSibling)
+    $(this.fieldTarget).after(
+      $.E("button")
+        .addClass("button-clear")
+        .attr("type", "button")
+        .attr("data-action", `click->${this.identifier}#toggle`)
+        .css("padding", "0")
+        .css("marginLeft", "-2.4rem")
+        .css("marginTop", "0.9rem")
+        .append(this.icon),
+    )
 
-    this.fieldTarget.style.paddingRight = "2.4rem"
-    this.fieldTarget.style.width = "calc(100% - 0.8rem)"
-
-    // Set the icon url
+    // Set the icon
     this.iconValue = this.iconShowValue
   }
 
   iconValueChanged() {
-    let e = this.element.querySelector(".svgicon>svg>use")
-    if (e === null || !this.iconValue) {
+    if (!this.iconValue) {
       return
     }
-    e.setAttribute("xlink:href", this.iconValue)
+    icon.swapIcon(this.icon.firstChild, this.iconValue)
   }
 
   toggle() {
@@ -51,9 +50,5 @@ export default class extends Controller {
       this.iconValue = this.iconShowValue
     }
     this.fieldTarget.focus()
-  }
-
-  icon() {
-    return '<span class="svgicon"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" width="16"><use xlink:href=""></use></svg></span>'
   }
 }

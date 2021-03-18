@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import $ from "../lib/dq"
 import icon from "../lib/icon"
 
 export default class extends Controller {
@@ -7,13 +8,12 @@ export default class extends Controller {
   }
 
   connect () {
-    let el = document.createElement("button")
-    el.setAttribute("type", "button")
-    el.setAttribute("class", "button-clear")
-    el.setAttribute("data-action", `${this.identifier}#copy`)
-    el.appendChild(icon.getIcon("bxs-copy"))
-
-    this.labelTarget.appendChild(el)
+    $.E("button")
+      .addClass("button-clear")
+      .attr("type", "button")
+      .attr("data-action", `${this.identifier}#copy`)
+      .append(icon.getIcon("bxs-copy"))
+      .appendTo(this.labelTarget)
   }
 
   async copy() {

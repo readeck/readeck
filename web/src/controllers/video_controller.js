@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import $ from "../lib/dq"
 
 export default class extends Controller {
   static get values () {
@@ -12,30 +13,25 @@ export default class extends Controller {
       return
     }
 
-    this.tpl = document.createElement("template")
-    let w, h = 0
-    this.tpl.innerHTML = this.embedValue.trim()
-    this.tpl.content.querySelectorAll("iframe").forEach(n => {
-      n.setAttribute("sandbox", "allow-scripts allow-same-origin")
-      w = parseInt(n.getAttribute("width")) || 0
-      h = parseInt(n.getAttribute("height")) || 0
-    })
+    this.tpl = $.E("template").html(this.embedValue.trim())
+    this.ifr = $("iframe", this.tpl.get().content)
+    this.ifr.attr("sandbox", "allow-scripts allow-same-origin")
 
+    let w = parseInt(this.ifr.getAttr("width")) || 0
+    let h = parseInt(this.ifr.getAttr("height")) || 0
     if (w > 0 && h > 0) {
       this.element.style.paddingTop = `${100 * h / w}%`
     }
 
-    this.playBtn = document.createElement("div")
-    this.playBtn.classList.add("play-button")
-    this.playBtn.setAttribute("data-action", `click->${this.identifier}#play`)
-    this.element.appendChild(this.playBtn)
+    this.playBtn = $.E("div")
+      .addClass("play-button")
+      .attr("data-action", `click->${this.identifier}#play`)
+      .appendTo(this.element)
   }
 
   play() {
-    this.playBtn.parentNode.removeChild(this.playBtn)
-    this.element.querySelectorAll("img").forEach(e => {
-      e.parentNode.removeChild(e)
-    })
-    this.element.appendChild(this.tpl.content)
+    this.playBtn.remove()
+    $("img", this.element).remove()
+    this.ifr.appendTo(this.element)
   }
 };

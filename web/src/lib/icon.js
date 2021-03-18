@@ -1,20 +1,21 @@
-const iconsURL = document.querySelector('html>head>meta[name="x-icons"]').content
+import $ from "./dq"
 
+const iconsURL = document.querySelector('html>head>meta[name="x-icons"]').content
+const svgNS = "http://www.w3.org/2000/svg"
 
 // getIcon returns an element with an svg icon for the given name.
 function getIcon(name) {
-  let e = document.createElement("span")
-  e.setAttribute("class", "svgicon")
-  let s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-  s.setAttributeNS("http://www.w3.org/2000/svg", "viewbox", "0 0 100 100")
-  s.setAttributeNS("http://www.w3.org/2000/svg", "width", "16")
-  let u = document.createElementNS("http://www.w3.org/2000/svg", "use")
-
-  e.appendChild(s)
-  s.appendChild(u)
-
-  u.setAttributeNS(null, "href", `${iconsURL}#${name}`)
-  return e
+  return $.E("span")
+    .addClass("svgicon")
+    .append(
+      $.E("svg", svgNS)
+        .attrNS(null, "viewbox", "0 0 100 100")
+        .attrNS(null, "width", "16")
+        .append($.E("use", svgNS)
+          .attrNS(null, "href", `${iconsURL}#${name || ""}`),
+        ),
+    )
+    .get()
 }
 
 // swapIcon changes the href of the first <use> tag in the
