@@ -48,22 +48,33 @@
             <li>{{ icon $ "bx-link" }} <a href="{{ .item.URL }}">{{ .item.URL }}</a></li>
           </ul>
 
-          <form action="" method="post">
+          <form action="" method="post" data-controller="bk-tags"
+           data-bk-tags-id-value="{{ .item.ID }}"
+           data-action="bk-tags#addTag">
             {{ template "csrfField" . }}
             <input type="hidden" name="_to" value="{{ $.currentPath }}" />
             <button type="submit" style="display: none"></button>
-            <ul class="badges editable">{{ range .item.Tags }}
-              <li class="badge">{{ . }}
+            <ul class="badges editable"
+             data-bk-tags-target="tagList">{{ range .item.Tags }}
+              <li class="badge" data-bk-tags-target="tag">{{ . }}
               <button class="button-clear button-delete" type="submit"
-                name="remove_tags" value="{{ . }}"></button>
+                name="remove_tags" value="{{ . }}"
+                data-action="bk-tags#removeTag"></button>
               </li>
             {{ end }}
               <li class="control">
-                <input type="text" name="add_tags"
-                  placeholder="Add a new label" />
+                <input type="text" name="add_tags" placeholder="Add a new label"
+                 data-bk-tags-target="newTag" />
                 <button type="submit">Add label</button>
               </li>
             </ul>
+            {{/* Tag item template used to add new one from the controller */}}
+            <template data-bk-tags-target="tmpl">
+              <li class="badge" data-bk-tags-target="tag"><button
+                class="button-clear button-delete" type="submit"
+                name="remove_tags"
+                data-action="bk-tags#removeTag"></button></li>
+            </template>
           </form>
         </div>
 
