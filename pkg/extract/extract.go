@@ -40,7 +40,7 @@ type (
 )
 
 const (
-	// StepStart happends before the connection is made.
+	// StepStart happens before the connection is made.
 	StepStart ProcessStep = iota + 1
 
 	// StepBody happens after receiving the resource body.

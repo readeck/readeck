@@ -42,7 +42,7 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 		// Always set state to loaded, even if there are errors
 		saved := false
 		defer func() {
-			// Recover from any error that could have arised
+			// Recover from any error that could have arose
 			if r := recover(); r != nil {
 				log.WithField("recover", r).Error("error during extraction")
 				b.State = StateError

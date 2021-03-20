@@ -245,7 +245,7 @@ func StripTags(m *extract.ProcessMessage, next extract.Processor) extract.Proces
 }
 
 // FindContentPage searches for SinglePageLinkSelectors in the page and,
-// if it finds one, it reset the process to its begining with the newly
+// if it finds one, it reset the process to its beginning with the newly
 // found URL.
 func FindContentPage(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
 	if m.Step() != extract.StepDom {

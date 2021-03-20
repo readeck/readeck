@@ -49,7 +49,7 @@ func Driver() Connector {
 }
 
 // Open opens a database connection and sets internal variables that can
-// be retrived using DB() (holding the sql.DB reference) and Q() (holding
+// be retrieved using DB() (holding the sql.DB reference) and Q() (holding
 // the goqu.Database reference).
 func Open(dsn string) error {
 	if driver != nil {
@@ -185,7 +185,7 @@ func getLastMigration() (m *migration, err error) {
 	m = &migration{ID: 0}
 
 	// Check if the migration table exists. If it doesn't
-	// it means we start from the begining.
+	// it means we start from the beginning.
 	if ok, err := driver.HasTable("migration"); err != nil {
 		return m, err
 	} else if !ok {
