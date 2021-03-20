@@ -27,7 +27,7 @@ require (
 	github.com/hlandau/passlib v1.0.10
 	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
-	github.com/jackc/pgx/v4 v4.10.1 // indirect
+	github.com/jackc/pgx/v4 v4.10.1
 	github.com/jarcoal/httpmock v1.0.8
 	github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e // indirect
 	github.com/komkom/toml v0.0.0-20210317065440-24f427ca88cc

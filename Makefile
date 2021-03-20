@@ -58,20 +58,15 @@ doc:
 	@echo "Visit http://localhost:6060/pkg/codeberg.org/readeck/readeck/?m=all"
 	godoc
 
-# Lint code
+# Linting
 .PHONY: lint
 lint:
-	golint ./...
-
-# Vet
-.PHONY: vet
-vet:
-	go vet -tags "$(TAGS)" -ldflags="-s -w" ./...
-
-# Check
-.PHONY: check
-check:
 	golangci-lint run
+
+# SLOC
+.PHONY: sloc
+sloc:
+	scc -i go,js,sass
 
 # Launch tests
 .PHONY: test
