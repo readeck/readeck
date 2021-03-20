@@ -49,6 +49,7 @@ type configMain struct {
 type configServer struct {
 	Host    string        `json:"host"`
 	Port    int           `json:"port"`
+	Prefix  string        `json:"prefix"`
 	Session configSession `json:"session"`
 }
 

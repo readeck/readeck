@@ -33,10 +33,7 @@ var serveCmd = &cobra.Command{
 }
 
 func runServe(c *cobra.Command, args []string) error {
-	s := server.New("/app/")
-
-	// Base routes (assets, auth, system info...)
-	// s.SetupRoutes()
+	s := server.New(configs.Config.Server.Prefix)
 
 	// Static asserts
 	assets.SetupRoutes(s)
@@ -61,8 +58,8 @@ func runServe(c *cobra.Command, args []string) error {
 		cookbook.SetupRoutes(s)
 	}
 
-	log.WithField("url", fmt.Sprintf("http://%s:%d/",
-		configs.Config.Server.Host, configs.Config.Server.Port),
+	log.WithField("url", fmt.Sprintf("http://%s:%d%s",
+		configs.Config.Server.Host, configs.Config.Server.Port, s.BasePath),
 	).Info("Starting server")
 	return s.ListenAndServe()
 }
