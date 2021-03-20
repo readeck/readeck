@@ -93,7 +93,10 @@ func (h *authHandler) renderLoginForm(w http.ResponseWriter, r *http.Request, st
 func (h *authHandler) logout(w http.ResponseWriter, r *http.Request) {
 	sess := h.srv.GetSession(r)
 	sess.Options.MaxAge = -1
-	sess.Save(r, w)
+	if err := sess.Save(r, w); err != nil {
+		h.srv.Error(w, r, err)
+		return
+	}
 
 	h.srv.Redirect(w, r, "/")
 }

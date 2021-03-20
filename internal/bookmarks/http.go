@@ -35,7 +35,7 @@ func SetupRoutes(s *server.Server) {
 
 // mediaRoutes serves files from a bookmark's saved archive. It reads
 // directly from the zip file and returns the requested file's content.
-func mediaRoutes(s *server.Server) http.Handler {
+func mediaRoutes(_ *server.Server) http.Handler {
 	r := chi.NewRouter()
 	r.Get("/{dom}/{d}/{uid}/{p:^(img|_resources)$}/{name}", func(w http.ResponseWriter, r *http.Request) {
 		p := path.Join(

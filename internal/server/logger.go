@@ -116,7 +116,7 @@ type structuredLoggerEntry struct {
 	e *log.Entry
 }
 
-func (l *structuredLoggerEntry) Write(status, bytes int, header http.Header, elapsed time.Duration, extra interface{}) {
+func (l *structuredLoggerEntry) Write(status, bytes int, _ http.Header, elapsed time.Duration, _ interface{}) {
 	l.e.WithFields(log.Fields{
 		"status":     status,
 		"length":     bytes,
@@ -124,5 +124,5 @@ func (l *structuredLoggerEntry) Write(status, bytes int, header http.Header, ela
 	}).Info("http")
 }
 
-func (l *structuredLoggerEntry) Panic(v interface{}, stack []byte) {
+func (l *structuredLoggerEntry) Panic(_ interface{}, _ []byte) {
 }

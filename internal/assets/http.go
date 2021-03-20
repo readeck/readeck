@@ -46,7 +46,7 @@ func serveAssets() http.HandlerFunc {
 	}
 }
 
-var canditateEncodings [][2]string = [][2]string{
+var canditateEncodings = [][2]string{
 	{"br", ".br"},
 	{"gzip", ".gz"},
 	{"", ""},

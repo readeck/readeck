@@ -53,7 +53,7 @@ func archiveProcessor(m *extract.ProcessMessage, next extract.Processor) extract
 	return next
 }
 
-func eventHandler(ctx context.Context, arc *archiver.Archiver, evt archiver.Event) {
+func eventHandler(ctx context.Context, _ *archiver.Archiver, evt archiver.Event) {
 	log := ctx.Value(ctxLogger).(*log.Entry)
 	switch evt.(type) {
 	case *archiver.EventError:

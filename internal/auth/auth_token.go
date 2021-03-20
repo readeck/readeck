@@ -56,7 +56,7 @@ func (p *TokenAuthProvider) Authenticate(w http.ResponseWriter, r *http.Request)
 }
 
 // CsrfExempt is always true for this provider.
-func (p *TokenAuthProvider) CsrfExempt(r *http.Request) bool {
+func (p *TokenAuthProvider) CsrfExempt(_ *http.Request) bool {
 	return true
 }
 

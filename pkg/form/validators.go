@@ -68,6 +68,7 @@ func IsValidEmail(f *Field) {
 	}
 }
 
+// IsValidURL checks is a url is a valid http or https url.
 func IsValidURL(f *Field, schemes map[string]bool) {
 	e := errors.New("Invalid URL")
 	u, err := url.Parse(f.Value().(string))

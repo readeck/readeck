@@ -151,18 +151,7 @@ func extMeta(k, v string, trim int) func(*html.Node) (string, string) {
 	}
 }
 
-func extMetaContent(k, v string, trim int) func(*html.Node) (string, string) {
-	return func(n *html.Node) (string, string) {
-		k := strings.TrimSpace(dom.GetAttribute(n, k)[trim:])
-		v := strings.TrimSpace(dom.GetAttribute(n, v))
-
-		// Sometimes,
-		a, _ := html.Parse(strings.NewReader(v))
-		return k, dom.TextContent(a)
-	}
-}
-
-var specList []rawSpec = []rawSpec{
+var specList = []rawSpec{
 	{"html", "//title", func(n *html.Node) (string, string) {
 		return "title", dom.TextContent(n)
 	}},

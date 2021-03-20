@@ -50,21 +50,20 @@ type FeatureCsrfProvider interface {
 type NullProvider struct{}
 
 // Info return information about the provider.
-func (p *NullProvider) Info(r *http.Request) *ProviderInfo {
+func (p *NullProvider) Info(_ *http.Request) *ProviderInfo {
 	return &ProviderInfo{
 		Name: "null",
 	}
 }
 
 // IsActive is always false
-func (p *NullProvider) IsActive(r *http.Request) bool {
+func (p *NullProvider) IsActive(_ *http.Request) bool {
 	return false
 }
 
-// Authenticate always return an error and no user.
-func (p *NullProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*http.Request, error) {
+// Authenticate doesn't do anything
+func (p *NullProvider) Authenticate(_ http.ResponseWriter, r *http.Request) (*http.Request, error) {
 	return r, nil
-	// return r, nil, errors.New("no authentication provider")
 }
 
 // Init returns an http.Handler that will try to find a suitable
@@ -79,7 +78,7 @@ func (p *NullProvider) Authenticate(w http.ResponseWriter, r *http.Request) (*ht
 func Init(providers ...Provider) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			var provider Provider = nil
+			var provider Provider
 			for _, p := range providers {
 				if p.IsActive(r) {
 					provider = p
@@ -103,7 +102,7 @@ func Init(providers ...Provider) func(next http.Handler) http.Handler {
 //
 // A provider performing a successful authentication must store
 // its authentication information using SetRequestAuthInfo.
-
+//
 // When the request has this attribute it will carry on.
 // Otherwise it stops the response with a 403 error.
 //
@@ -146,6 +145,8 @@ func SetRequestAuthInfo(r *http.Request, info *Info) *http.Request {
 	return r.WithContext(ctx)
 }
 
+// HasRequestAuthInfo returns true if the request context contains
+// an auth.Info instance.
 func HasRequestAuthInfo(r *http.Request) bool {
 	if _, ok := r.Context().Value(ctxAuthKey).(*Info); ok {
 		return true

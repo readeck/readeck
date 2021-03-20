@@ -38,7 +38,7 @@ func init() {
 	)
 }
 
-func appPersistentPreRun(c *cobra.Command, args []string) error {
+func appPersistentPreRun(_ *cobra.Command, _ []string) error {
 	if configPath == "" {
 		configPath = "config.toml"
 	}
@@ -131,7 +131,7 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 	return nil
 }
 
-func appPersistentPostRunE(cmd *cobra.Command, args []string) error {
+func appPersistentPostRunE(_ *cobra.Command, _ []string) error {
 	return cleanup()
 }
 

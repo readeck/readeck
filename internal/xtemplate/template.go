@@ -11,7 +11,6 @@ import (
 	"io"
 	"io/fs"
 	"io/ioutil"
-	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -146,8 +145,6 @@ func (x *Xtemplate) ParseFs(root fs.FS, extensions []string) error {
 	return nil
 }
 
-type walkFn func(path string, info os.FileInfo, err error) error
-
 func findTemplateFiles(root fs.FS, extensions []string) (map[string]*templatefile, error) {
 	var files = map[string]*templatefile{}
 	var exts = map[string]bool{}
@@ -179,6 +176,7 @@ func findTemplateFiles(root fs.FS, extensions []string) (map[string]*templatefil
 			return err
 		}
 		defer f.Close()
+
 		contents, err := ioutil.ReadAll(f)
 		if err != nil {
 			return err

@@ -23,7 +23,7 @@ type SessionAuthProvider struct {
 
 // IsActive always returns true. As it's the last provider, when authentication fail it
 // will with a redirect to the login page.
-func (p *SessionAuthProvider) IsActive(r *http.Request) bool {
+func (p *SessionAuthProvider) IsActive(_ *http.Request) bool {
 	return true
 }
 

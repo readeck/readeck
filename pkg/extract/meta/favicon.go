@@ -18,10 +18,10 @@ import (
 )
 
 var (
-	rxIconSize *regexp.Regexp = regexp.MustCompile("(\\d+)x\\d+")
+	rxIconSize = regexp.MustCompile("(\\d+)x\\d+")
 )
 
-var iconExt map[string]string = map[string]string{
+var iconExt = map[string]string{
 	".png":  "image/png",
 	".ico":  "image/ico",
 	".jpeg": "image/jpeg",

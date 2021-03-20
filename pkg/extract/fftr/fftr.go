@@ -24,7 +24,7 @@ type ConfigFolderList []*ConfigFolder
 
 // DefaultConfigurationFolders is a list of default locations with
 // configuration files.
-var DefaultConfigurationFolders ConfigFolderList = ConfigFolderList{
+var DefaultConfigurationFolders = ConfigFolderList{
 	{siteConfigFS("custom"), "custom"},
 	{siteConfigFS("standard"), "standard"},
 }

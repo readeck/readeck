@@ -61,7 +61,7 @@ func (s *Server) TextMessage(w http.ResponseWriter, r *http.Request, status int,
 }
 
 // Status sends a text plain response with the given status code.
-func (s *Server) Status(w http.ResponseWriter, r *http.Request, status int) {
+func (s *Server) Status(w http.ResponseWriter, _ *http.Request, status int) {
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.WriteHeader(status)

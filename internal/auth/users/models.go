@@ -13,7 +13,9 @@ import (
 )
 
 func init() {
-	passlib.UseDefaults(passlib.Defaults20180601)
+	if err := passlib.UseDefaults(passlib.Defaults20180601); err != nil {
+		panic(err)
+	}
 }
 
 const (
@@ -121,7 +123,7 @@ func (u *User) CheckPassword(password string) bool {
 
 	// Update the password when needed
 	if newhash != "" {
-		u.Update(goqu.Record{"password": newhash, "updated": time.Now()})
+		_ = u.Update(goqu.Record{"password": newhash, "updated": time.Now()})
 	}
 
 	return true

@@ -2,7 +2,6 @@ package tokens
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/cristalhq/jwt/v3"
 
@@ -18,7 +17,7 @@ func NewJwtToken(UID string) (*jwt.Token, error) {
 	}
 
 	claims := &jwt.RegisteredClaims{
-		ID: fmt.Sprintf("%s", UID),
+		ID: UID,
 	}
 
 	builder := jwt.NewBuilder(signer)

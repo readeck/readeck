@@ -32,7 +32,7 @@ var serveCmd = &cobra.Command{
 	RunE: runServe,
 }
 
-func runServe(c *cobra.Command, args []string) error {
+func runServe(_ *cobra.Command, _ []string) error {
 	s := server.New(configs.Config.Server.Prefix)
 
 	// Static asserts

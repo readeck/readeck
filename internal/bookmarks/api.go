@@ -345,7 +345,7 @@ func (api *bookmarkAPI) createBookmark(r *http.Request, u string, html []byte) (
 // loadCreateParamsHTML return the url and html passed in a multi-part form.
 // The content is then passed to the extractor which won't fetch the HTML from
 // the provided url.
-func (api *bookmarkAPI) loadCreateParamsHTML(w http.ResponseWriter, r *http.Request) (uri string, html []byte, err error) {
+func (api *bookmarkAPI) loadCreateParamsHTML(_ http.ResponseWriter, r *http.Request) (uri string, html []byte, err error) {
 	const maxMemory = 8 << 20
 	err = r.ParseMultipartForm(maxMemory)
 	if err != nil {

@@ -11,11 +11,13 @@ import (
 	"codeberg.org/readeck/readeck/pkg/form"
 )
 
+// PaginationForm is a default form for pagination
 type PaginationForm struct {
 	Limit  int `json:"limit"`
 	Offset int `json:"offset"`
 }
 
+// Validate validates the PaginationForm values
 func (pf *PaginationForm) Validate(f *form.Form) {
 	if pf.Offset < 0 {
 		f.Fields["offset"].Errors.Add(errors.New("Must be a positive number"))
@@ -42,6 +44,7 @@ func (s *Server) GetPageParams(r *http.Request) (*PaginationForm, *form.Form) {
 	return params, f
 }
 
+// Pagination holds all the information regarding pagination
 type Pagination struct {
 	URL          *url.URL
 	Limit        int
@@ -60,11 +63,13 @@ type Pagination struct {
 	PageLinks    []PageLink
 }
 
+// PageLink contains a link to a page in a Pagination instance
 type PageLink struct {
 	Index int
 	URL   string
 }
 
+// GetLink returns a new url string with limit and offset values
 func (p Pagination) GetLink(offset int) string {
 	var u url.URL
 	u = *p.URL
@@ -75,6 +80,7 @@ func (p Pagination) GetLink(offset int) string {
 	return u.String()
 }
 
+// GetPageLinks returns the links that can be used in a template.
 func (p Pagination) GetPageLinks() []PageLink {
 	res := []PageLink{
 		{1, p.GetLink(0)},
@@ -121,6 +127,7 @@ func (p Pagination) GetPageLinks() []PageLink {
 	return res
 }
 
+// NewPagination creates a new Pagination instance base on the current request.
 func (s *Server) NewPagination(r *http.Request, count, limit, offset int) Pagination {
 	p := Pagination{
 		URL:         s.AbsoluteURL(r),

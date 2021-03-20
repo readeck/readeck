@@ -310,7 +310,7 @@ func (s *Strings) Scan(value interface{}) error {
 		return nil
 	}
 
-	v, err := db.JsonBytes(value)
+	v, err := db.JSONBytes(value)
 	if err != nil {
 		return err
 	}
@@ -344,7 +344,7 @@ func (f *BookmarkFiles) Scan(value interface{}) error {
 		return nil
 	}
 
-	v, err := db.JsonBytes(value)
+	v, err := db.JSONBytes(value)
 	if err != nil {
 		return err
 	}

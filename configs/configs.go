@@ -14,10 +14,10 @@ import (
 )
 
 var (
-	version      string = "dev"
+	version      = "dev"
 	buildTimeStr string
 	buildTime    time.Time
-	startTime    time.Time = time.Now().UTC()
+	startTime    = time.Now().UTC()
 
 	cookieHk []byte
 	cookieBk []byte

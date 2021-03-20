@@ -17,15 +17,15 @@ type urlProcessor func(uri string, content []byte, contentType string) string
 
 // DefaultImageProcessor is the default image processor.
 // It simply reads and return the content.
-func DefaultImageProcessor(ctx context.Context, arc *Archiver,
-	input io.Reader, contentType string, uri *url.URL) ([]byte, string, error) {
+func DefaultImageProcessor(_ context.Context, _ *Archiver,
+	input io.Reader, contentType string, _ *url.URL) ([]byte, string, error) {
 	res, err := ioutil.ReadAll(input)
 	return res, contentType, err
 }
 
 // DefaultURLProcessor is the default URL processor.
 // It returns the base64 encoded URL.
-func DefaultURLProcessor(uri string, content []byte, contentType string) string {
+func DefaultURLProcessor(_ string, content []byte, contentType string) string {
 	return createDataURL(content, contentType)
 }
 
