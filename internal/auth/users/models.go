@@ -78,15 +78,16 @@ func (m *Manager) Create(user *User) error {
 	user.Created = time.Now()
 	user.Updated = user.Created
 
-	res, err := db.Q().Insert(TableName).
+	ds := db.Q().Insert(TableName).
 		Rows(user).
-		Prepared(true).Executor().Exec()
+		Prepared(true)
+
+	id, err := db.InsertWithID(ds, "id")
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	id, _ := res.LastInsertId()
-	user.ID = int(id)
+	user.ID = id
 	return nil
 }
 

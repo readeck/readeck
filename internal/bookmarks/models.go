@@ -5,7 +5,6 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"os"
 	"path"
@@ -110,15 +109,16 @@ func (m *BookmarkManager) Create(bookmark *Bookmark) error {
 	bookmark.Updated = bookmark.Created
 	bookmark.UID = shortuuid.New()
 
-	res, err := db.Q().Insert(TableName).
+	ds := db.Q().Insert(TableName).
 		Rows(bookmark).
-		Prepared(true).Executor().Exec()
+		Prepared(true)
+
+	id, err := db.InsertWithID(ds, "id")
 	if err != nil {
 		return err
 	}
 
-	id, _ := res.LastInsertId()
-	bookmark.ID = int(id)
+	bookmark.ID = id
 	return nil
 }
 
@@ -309,11 +309,12 @@ func (s *Strings) Scan(value interface{}) error {
 	if value == nil {
 		return nil
 	}
-	v, ok := value.(string)
-	if !ok {
-		return fmt.Errorf("Can't cast %+v", value)
+
+	v, err := db.JsonBytes(value)
+	if err != nil {
+		return err
 	}
-	json.Unmarshal([]byte(v), s)
+	json.Unmarshal(v, s)
 	return nil
 }
 
@@ -342,11 +343,12 @@ func (f *BookmarkFiles) Scan(value interface{}) error {
 	if value == nil {
 		return nil
 	}
-	v, ok := value.(string)
-	if !ok {
-		return fmt.Errorf("Can't cast %+v", value)
+
+	v, err := db.JsonBytes(value)
+	if err != nil {
+		return err
 	}
-	json.Unmarshal([]byte(v), f)
+	json.Unmarshal(v, f)
 	return nil
 }
 

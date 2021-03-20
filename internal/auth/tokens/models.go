@@ -95,22 +95,23 @@ func (m *Manager) Create(token *Token) error {
 	token.Created = time.Now()
 	token.UID = shortuuid.New()
 
-	res, err := db.Q().Insert(TableName).
+	ds := db.Q().Insert(TableName).
 		Rows(token).
-		Prepared(true).Executor().Exec()
+		Prepared(true)
+
+	id, err := db.InsertWithID(ds, "id")
 	if err != nil {
 		return err
 	}
 
-	id, _ := res.LastInsertId()
-	token.ID = int(id)
+	token.ID = id
 	return nil
 }
 
 // Update updates some bookmark values.
 func (t *Token) Update(v interface{}) error {
 	if t.ID == 0 {
-		return errors.New("No ID")
+		return errors.New("no ID")
 	}
 
 	_, err := db.Q().Update(TableName).Prepared(true).
