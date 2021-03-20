@@ -14,7 +14,7 @@ SITECONFIG_DEST=pkg/extract/fftr/site-config/standard
 
 # Build the app
 .PHONY: all
-all: web-build build
+all: web-build build build-pg
 
 # Build the server
 .PHONY: build
@@ -24,10 +24,19 @@ build:
 		-ldflags="$(VERSION_FLAGS) -s -w" \
 		-o dist/readeck
 
+# Build the server with only PG support (full static)
+.PHONY: build-pg
+build-pg:
+	go build \
+		-tags "$(BUILD_TAGS) without_sqlite" \
+		-ldflags="$(VERSION_FLAGS) -s -w" \
+		-o dist/readeck_pg
+
 # Build the server in dev mode, without compiling the assets
 .PHONY: build-dev
 build-dev:
 	go build -tags "$(TAGS)" -o dist/readeck
+
 
 # Clean the build
 .PHONY: clean
@@ -36,6 +45,12 @@ clean:
 	rm -rf assets/www/*
 	rm -f  assets/templates/base.gohtml
 	go clean
+
+list:
+	go list \
+		-tags "$(BUILD_TAGS)" \
+		-ldflags="$(VERSION_FLAGS) -s -w" \
+		-f "{{ .GoFiles }}"
 
 # Launch the documentation
 .PHONY: doc

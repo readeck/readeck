@@ -1,3 +1,5 @@
+// +build !without_sqlite
+
 package db
 
 import (
