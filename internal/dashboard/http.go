@@ -15,7 +15,10 @@ func routes(s *server.Server) http.Handler {
 	r := s.AuthenticatedRouter()
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		s.RenderTemplate(w, r, 200, "dashboard/index.gohtml", server.TC{})
+		s.Redirect(w, r, "/bookmarks")
+
+		// Once we have a real dashboard page, we can restore this
+		// s.RenderTemplate(w, r, 200, "dashboard/index.gohtml", server.TC{})
 	})
 
 	return r
