@@ -222,8 +222,7 @@ func scanForCharset(r io.Reader) string {
 			return ""
 		case html.StartTagToken, html.SelfClosingTagToken:
 			t := z.Token()
-			switch t.DataAtom.String() {
-			case "meta":
+			if t.DataAtom.String() == "meta" {
 				attrs := getAttrs(t)
 				if v, ok := attrs["charset"]; ok {
 					return fmt.Sprintf("text/html; charset=%s", v)
@@ -244,7 +243,8 @@ type DropMeta map[string][]string
 
 // Add adds a value to the raw metadata list.
 func (m DropMeta) Add(name, value string) {
-	if _, ok := m[name]; ok {
+	_, ok := m[name]
+	if ok {
 		m[name] = append(m[name], value)
 	} else {
 		m[name] = []string{value}

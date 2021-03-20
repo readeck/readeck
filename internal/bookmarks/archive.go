@@ -23,8 +23,6 @@ const (
 	resourceDirName = "_resources"
 )
 
-var ctxLogger = struct{}{}
-
 var (
 	// We can't process too many images at the same time if we don't want to overload
 	// the system and freeze everything just because the image processing has way
@@ -36,7 +34,6 @@ var (
 // newArchive runs the archiver and returns a BookmarkArchive instance.
 func newArchive(_ context.Context, ex *extract.Extractor) (*archiver.Archiver, error) {
 	req := &archiver.Request{
-		// Client: ex.Client(),
 		Input: bytes.NewReader(ex.HTML),
 		URL:   ex.Drop().URL,
 	}

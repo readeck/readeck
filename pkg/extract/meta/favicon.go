@@ -18,7 +18,7 @@ import (
 )
 
 var (
-	rxIconSize = regexp.MustCompile("(\\d+)x\\d+")
+	rxIconSize = regexp.MustCompile(`(\d+)x\d+`)
 )
 
 var iconExt = map[string]string{

@@ -288,28 +288,6 @@ func (api *bookmarkAPI) getBookmarks(r *http.Request, base string) (bookmarkList
 	return res, nil
 }
 
-// getBookmark returns a BookmarkItem instance.
-// The bookmark UID is taken from the path parameter "uid".
-// It filters by the current user.
-func (api *bookmarkAPI) getBookmark(r *http.Request) (bookmarkItem, error) {
-	res := bookmarkItem{}
-	uid := chi.URLParam(r, "uid")
-
-	b, err := Bookmarks.GetOne(
-		goqu.C("uid").Eq(uid),
-		goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
-	)
-	if err != nil {
-		return res, ErrNotFound
-	}
-
-	res = newBookmarkItem(api.srv, r, b, "")
-	res.Embed = b.Embed
-	res.Errors = b.Errors
-
-	return res, nil
-}
-
 // getBookmarkArticle returns a strings.Reader containing the
 // HTML content of a bookmark. Only the body is retrieved.
 func (api *bookmarkAPI) getBookmarkArticle(b *bookmarkItem) (*strings.Reader, error) {

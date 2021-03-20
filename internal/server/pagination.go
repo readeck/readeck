@@ -71,8 +71,7 @@ type PageLink struct {
 
 // GetLink returns a new url string with limit and offset values
 func (p Pagination) GetLink(offset int) string {
-	var u url.URL
-	u = *p.URL
+	u := *p.URL
 	q := u.Query()
 	q.Set("limit", strconv.Itoa(p.Limit))
 	q.Set("offset", strconv.Itoa(offset))

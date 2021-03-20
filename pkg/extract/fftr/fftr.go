@@ -84,10 +84,7 @@ func NewConfigForURL(src *url.URL, folders ConfigFolderList) (*Config, error) {
 	res.HTTPHeaders = map[string]string{}
 	res.AutoDetectOnFailure = true
 
-	hostname := src.Hostname()
-	if strings.HasPrefix(hostname, "www.") {
-		hostname = hostname[4:]
-	}
+	hostname := strings.TrimPrefix(src.Hostname(), "www.")
 	hostname, _ = idna.ToASCII(hostname)
 
 	fileList := folders.findHostFile(hostname)

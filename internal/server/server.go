@@ -153,7 +153,7 @@ func (s *Server) AbsoluteURL(r *http.Request, parts ...string) *url.URL {
 
 	// If the url is relative, we need a final slash on the original path
 	if strings.HasPrefix(pathName, "./") && !strings.HasSuffix(cur.Path, "/") {
-		cur.Path = cur.Path + "/"
+		cur.Path += "/"
 	}
 
 	// If the url is absolute, we must prepend the basePath

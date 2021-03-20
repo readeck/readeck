@@ -159,9 +159,11 @@ func (b *Bookmark) Update(v interface{}) error {
 		return errors.New("No ID")
 	}
 
-	switch v.(type) {
+	switch v := v.(type) {
 	case map[string]interface{}:
-		v.(map[string]interface{})["updated"] = time.Now()
+		v["updated"] = time.Now()
+	default:
+		//
 	}
 
 	_, err := db.Q().Update(TableName).Prepared(true).

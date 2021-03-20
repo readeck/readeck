@@ -130,7 +130,7 @@ func loadKeys(sk string) {
 	seed := append([]byte(sk), h[:]...)
 
 	hashMsg := func(k []byte, m string) []byte {
-		mac := hmac.New(sha256.New, k[:])
+		mac := hmac.New(sha256.New, k)
 		mac.Write([]byte(m))
 		return mac.Sum(nil)
 	}

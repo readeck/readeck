@@ -74,7 +74,7 @@ func (z *zipper) addCompressedFile(name string, data []byte) error {
 
 func (z *zipper) addDirectory(name string) error {
 	if !strings.HasSuffix(name, "/") {
-		name = name + "/"
+		name += "/"
 	}
 
 	_, err := z.zp.CreateHeader(&zip.FileHeader{

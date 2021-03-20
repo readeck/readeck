@@ -10,14 +10,14 @@ import (
 
 // NewJwtToken returns a new JWT token instance using
 // a given ID and signing with the configuration's JWT secret key.
-func NewJwtToken(UID string) (*jwt.Token, error) {
+func NewJwtToken(uid string) (*jwt.Token, error) {
 	signer, err := jwt.NewSignerEdDSA(configs.JwtSk())
 	if err != nil {
 		return nil, err
 	}
 
 	claims := &jwt.RegisteredClaims{
-		ID: UID,
+		ID: uid,
 	}
 
 	builder := jwt.NewBuilder(signer)
