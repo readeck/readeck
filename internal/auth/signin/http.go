@@ -7,9 +7,9 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi/v5"
 
-	"github.com/readeck/readeck/internal/auth/users"
-	"github.com/readeck/readeck/internal/server"
-	"github.com/readeck/readeck/pkg/form"
+	"codeberg.org/readeck/readeck/internal/auth/users"
+	"codeberg.org/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/pkg/form"
 )
 
 // SetupRoutes mounts the routes for the auth domain.

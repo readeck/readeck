@@ -20,8 +20,8 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/weppos/publicsuffix-go/publicsuffix"
 
-	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/db"
+	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/db"
 )
 
 // BookmarkState is the current bookmark state

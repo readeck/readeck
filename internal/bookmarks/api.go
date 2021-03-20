@@ -20,11 +20,11 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/thoas/go-funk"
 
-	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/auth"
-	"github.com/readeck/readeck/internal/server"
-	"github.com/readeck/readeck/pkg/form"
-	"github.com/readeck/readeck/pkg/zipfs"
+	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/auth"
+	"codeberg.org/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/pkg/form"
+	"codeberg.org/readeck/readeck/pkg/zipfs"
 )
 
 var validSchemes = map[string]bool{"http": true, "https": true}

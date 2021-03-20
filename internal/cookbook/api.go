@@ -11,11 +11,11 @@ import (
 	"github.com/go-chi/chi/v5"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/readeck/readeck/internal/server"
-	"github.com/readeck/readeck/pkg/extract"
-	"github.com/readeck/readeck/pkg/extract/contents"
-	"github.com/readeck/readeck/pkg/extract/fftr"
-	"github.com/readeck/readeck/pkg/extract/meta"
+	"codeberg.org/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/pkg/extract"
+	"codeberg.org/readeck/readeck/pkg/extract/contents"
+	"codeberg.org/readeck/readeck/pkg/extract/fftr"
+	"codeberg.org/readeck/readeck/pkg/extract/meta"
 )
 
 // cookbookAPI is the base cookbook api router.

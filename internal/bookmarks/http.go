@@ -7,8 +7,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/readeck/readeck/internal/server"
-	"github.com/readeck/readeck/pkg/zipfs"
+	"codeberg.org/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/pkg/zipfs"
 )
 
 type ctxKey struct{}

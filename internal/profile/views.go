@@ -7,10 +7,10 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi/v5"
 
-	"github.com/readeck/readeck/internal/auth"
-	"github.com/readeck/readeck/internal/auth/tokens"
-	"github.com/readeck/readeck/internal/server"
-	"github.com/readeck/readeck/pkg/form"
+	"codeberg.org/readeck/readeck/internal/auth"
+	"codeberg.org/readeck/readeck/internal/auth/tokens"
+	"codeberg.org/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/pkg/form"
 )
 
 // profileViews is an HTTP handler for the user profile web views

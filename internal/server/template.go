@@ -6,8 +6,8 @@ import (
 
 	"github.com/gorilla/csrf"
 
-	"github.com/readeck/readeck/assets"
-	"github.com/readeck/readeck/internal/xtemplate"
+	"codeberg.org/readeck/readeck/assets"
+	"codeberg.org/readeck/readeck/internal/xtemplate"
 )
 
 var xt *xtemplate.Xtemplate

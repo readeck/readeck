@@ -6,8 +6,8 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/gorilla/sessions"
 
-	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/auth/users"
+	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/auth/users"
 )
 
 // SessionAuthProvider is the last authentication provider.

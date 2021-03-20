@@ -6,8 +6,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/server"
 )
 
 const svgGradient = `<?xml version="1.0" encoding="UTF-8"?>` +

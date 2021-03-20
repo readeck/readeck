@@ -13,9 +13,9 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/readeck/readeck/assets"
-	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/assets"
+	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/server"
 )
 
 var (

@@ -11,7 +11,7 @@ import (
 	"github.com/antchfx/htmlquery"
 	"github.com/go-shiori/dom"
 
-	"github.com/readeck/readeck/pkg/extract"
+	"codeberg.org/readeck/readeck/pkg/extract"
 )
 
 // ExtractOembed is a processor that extracts the picture from the document

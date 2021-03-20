@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/sessions"
 
-	"github.com/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/configs"
 )
 
 type ctxKeySession struct{}

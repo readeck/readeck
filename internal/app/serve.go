@@ -6,14 +6,14 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/assets"
-	"github.com/readeck/readeck/internal/auth/signin"
-	"github.com/readeck/readeck/internal/bookmarks"
-	"github.com/readeck/readeck/internal/cookbook"
-	"github.com/readeck/readeck/internal/dashboard"
-	"github.com/readeck/readeck/internal/profile"
-	"github.com/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/assets"
+	"codeberg.org/readeck/readeck/internal/auth/signin"
+	"codeberg.org/readeck/readeck/internal/bookmarks"
+	"codeberg.org/readeck/readeck/internal/cookbook"
+	"codeberg.org/readeck/readeck/internal/dashboard"
+	"codeberg.org/readeck/readeck/internal/profile"
+	"codeberg.org/readeck/readeck/internal/server"
 )
 
 func init() {

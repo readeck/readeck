@@ -17,7 +17,7 @@ import (
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/readeck/readeck/pkg/extract"
+	"codeberg.org/readeck/readeck/pkg/extract"
 )
 
 func getFileContents(name string) []byte {

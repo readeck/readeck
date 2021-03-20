@@ -1,7 +1,7 @@
 package cookbook
 
 import (
-	"github.com/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/internal/server"
 )
 
 // SetupRoutes mounts the routes for the cookbook domain.

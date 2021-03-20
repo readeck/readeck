@@ -7,8 +7,8 @@ import (
 
 	"github.com/gorilla/csrf"
 
-	"github.com/readeck/readeck/configs"
-	"github.com/readeck/readeck/internal/auth"
+	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/auth"
 )
 
 const (

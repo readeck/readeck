@@ -13,7 +13,7 @@ import (
 	"github.com/go-shiori/dom"
 	"github.com/go-shiori/go-readability"
 
-	"github.com/readeck/readeck/pkg/extract"
+	"codeberg.org/readeck/readeck/pkg/extract"
 )
 
 var (

@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/readeck/readeck/pkg/form"
+	"codeberg.org/readeck/readeck/pkg/form"
 )
 
 type PaginationForm struct {

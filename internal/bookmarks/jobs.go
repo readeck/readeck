@@ -14,11 +14,11 @@ import (
 	"github.com/gammazero/workerpool"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/readeck/readeck/pkg/archiver"
-	"github.com/readeck/readeck/pkg/extract"
-	"github.com/readeck/readeck/pkg/extract/contents"
-	"github.com/readeck/readeck/pkg/extract/fftr"
-	"github.com/readeck/readeck/pkg/extract/meta"
+	"codeberg.org/readeck/readeck/pkg/archiver"
+	"codeberg.org/readeck/readeck/pkg/extract"
+	"codeberg.org/readeck/readeck/pkg/extract/contents"
+	"codeberg.org/readeck/readeck/pkg/extract/fftr"
+	"codeberg.org/readeck/readeck/pkg/extract/meta"
 )
 
 var workerPool *workerpool.WorkerPool

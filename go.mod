@@ -1,4 +1,4 @@
-module github.com/readeck/readeck
+module codeberg.org/readeck/readeck
 
 go 1.16
 

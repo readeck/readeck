@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/readeck/readeck/pkg/img"
+	"codeberg.org/readeck/readeck/pkg/img"
 )
 
 // NewRemoteImage loads an image and returns a new img.Image instance.

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/readeck/readeck/internal/auth/tokens"
+	"codeberg.org/readeck/readeck/internal/auth/tokens"
 )
 
 // TokenAuthProvider handles authentication using a bearer token

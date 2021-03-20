@@ -8,7 +8,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/configs"
 )
 
 // Message is used by the server's Message() method.
