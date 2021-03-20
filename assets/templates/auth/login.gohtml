@@ -4,12 +4,27 @@
 
 {{ define "body" }}
 <main class="login">
-  <form action="" method="POST">
+  <form action="" method="POST" data-controller="login-form" data-action="login-form#validate">
     {{ template "formErrors" .Form }}
     {{ template "csrfField" . }}
 
-    {{ template "textField" (dict "field" .Form.Fields.username "name" "username" "label" "Username" "class" "max") }}
-    {{ template "textField" (dict "field" .Form.Fields.password "name" "password" "label" "Password" "class" "max" "type" "password") }}
+    {{ template "textField" (dict "field" .Form.Fields.username
+                                  "name" "username"
+                                  "label" "Username"
+                                  "class" "max"
+                                  "inputAttrs" (dict "data-login-form-target" "username")
+                            ) }}
+    {{ template "textField" (dict "field" .Form.Fields.password
+                                  "name" "password"
+                                  "label" "Password"
+                                  "class" "max"
+                                  "type" "password"
+                                  "controlAttrs" (dict "data-controller" "pass-reveal"
+                                                       "data-pass-reveal-icon-show-value" "bxs-hide"
+                                                       "data-pass-reveal-icon-hide-value" "bxs-show")
+                                  "inputAttrs" (dict "data-pass-reveal-target" "field"
+                                                     "data-login-form-target" "password")
+                            ) }}
 
     <div><button type="submit" class="button is-link">Login</button></div>
   </form>
