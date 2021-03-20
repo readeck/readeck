@@ -53,7 +53,6 @@ type configServer struct {
 }
 
 type configDB struct {
-	Driver string `json:"driver"`
 	Source string `json:"source"`
 }
 
@@ -92,8 +91,7 @@ var Config = config{
 		},
 	},
 	Database: configDB{
-		Driver: "sqlite3",
-		Source: "data/db.sqlite3",
+		Source: "sqlite3:data/db.sqlite3",
 	},
 	Extractor: configExtractor{
 		NumWorkers: runtime.NumCPU(),

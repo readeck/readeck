@@ -3,6 +3,7 @@ package app
 import (
 	"errors"
 	"fmt"
+	"net/url"
 	"os"
 	"os/signal"
 	"path"
@@ -46,7 +47,7 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 	}
 
 	if err := configs.LoadConfiguration(configPath); err != nil {
-		return fmt.Errorf("Error loading configuration (%s)", err)
+		return fmt.Errorf("error loading configuration (%s)", err)
 	}
 
 	if updateConfig() {
@@ -80,6 +81,11 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 		addSiteConfig(x.Name, x.Src)
 	}
 
+	dsn, err := url.Parse(configs.Config.Database.Source)
+	if err != nil {
+		log.WithError(err).Fatal("Can't read database source value")
+	}
+
 	// Create required folders
 	if err := createFolder(configs.Config.Main.DataDirectory); err != nil {
 		log.WithError(err).Fatal("Can't create data directory")
@@ -89,17 +95,16 @@ func appPersistentPreRun(c *cobra.Command, args []string) error {
 	); err != nil {
 		log.WithError(err).Fatal("Can't create data directory")
 	}
-	if configs.Config.Database.Driver == "sqlite3" {
-		if err := createFolder(path.Dir(configs.Config.Database.Source)); err != nil {
+
+	// SQLite data path
+	if dsn.Scheme == "sqlite3" {
+		if err := createFolder(path.Dir(dsn.Opaque)); err != nil {
 			log.WithError(err).Fatal("Can't create database directory")
 		}
 	}
 
 	// Connect to database
-	if err := db.Open(
-		configs.Config.Database.Driver,
-		configs.Config.Database.Source,
-	); err != nil {
+	if err := db.Open(configs.Config.Database.Source); err != nil {
 		log.WithError(err).Fatal("Can't connect to database")
 	}
 
