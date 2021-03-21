@@ -1,7 +1,6 @@
 package bookmarks
 
 import (
-	"fmt"
 	"net"
 
 	"codeberg.org/readeck/readeck/configs"
@@ -13,7 +12,6 @@ import (
 func checkIP(ips []net.IP) (bool, string) {
 	for _, cidr := range configs.Config.Extractor.DeniedIPs {
 		for _, ip := range ips {
-			fmt.Printf("== %+v - %s - %+v\n", ip, cidr.String(), cidr.Contains(ip))
 			if cidr.Contains(ip) {
 				return false, cidr.String()
 			}
