@@ -3,6 +3,8 @@ package bookmarks
 import (
 	"net"
 
+	"golang.org/x/net/idna"
+
 	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/pkg/extract"
 )
@@ -28,7 +30,11 @@ func CheckIPProcessor(m *extract.ProcessMessage, next extract.Processor) extract
 		return next
 	}
 
-	host := m.Extractor.Drop().URL.Hostname()
+	hostname := m.Extractor.Drop().URL.Hostname()
+	host, err := idna.ToASCII(hostname)
+	if err != nil {
+		m.Cancel("invalid hostname %s", hostname)
+	}
 
 	ips, err := net.LookupIP(host)
 	if err != nil {

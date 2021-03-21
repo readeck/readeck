@@ -13,12 +13,9 @@ import (
 	"strings"
 	"time"
 
-	"golang.org/x/net/idna"
-
 	"github.com/doug-martin/goqu/v9"
 	"github.com/lithammer/shortuuid/v3"
 	log "github.com/sirupsen/logrus"
-	"github.com/weppos/publicsuffix-go/publicsuffix"
 
 	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/internal/db"
@@ -200,18 +197,7 @@ func (b *Bookmark) StateName() string {
 }
 
 func (b *Bookmark) getBaseFileURL() (string, error) {
-	var res string
-	var err error
-
-	if res, err = publicsuffix.Domain(b.Site); err != nil {
-		res = b.Site
-	}
-
-	if res, err = idna.ToASCII(res); err != nil {
-		return "", err
-	}
-
-	return path.Join(res, b.Created.Format("20060102"), b.UID), nil
+	return path.Join(b.UID[:2], b.UID), nil
 }
 
 func (b *Bookmark) removeFiles() {

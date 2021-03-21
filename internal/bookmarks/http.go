@@ -37,7 +37,7 @@ func SetupRoutes(s *server.Server) {
 // directly from the zip file and returns the requested file's content.
 func mediaRoutes(_ *server.Server) http.Handler {
 	r := chi.NewRouter()
-	r.Get("/{dom}/{d}/{uid}/{p:^(img|_resources)$}/{name}", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/{prefix:[a-zA-Z0-9]{2}}/{fname:[a-zA-Z0-9]+}/{p:^(img|_resources)$}/{name}", func(w http.ResponseWriter, r *http.Request) {
 		p := path.Join(
 			chi.URLParam(r, "p"),
 			chi.URLParam(r, "name"),
@@ -52,9 +52,8 @@ func mediaRoutes(_ *server.Server) http.Handler {
 
 		zipfile := path.Join(
 			StoragePath(),
-			chi.URLParam(r, "dom"),
-			chi.URLParam(r, "d"),
-			chi.URLParam(r, "uid")+".zip",
+			chi.URLParam(r, "prefix"),
+			chi.URLParam(r, "fname")+".zip",
 		)
 
 		fs := zipfs.HTTPZipFile(zipfile)
