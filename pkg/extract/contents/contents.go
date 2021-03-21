@@ -228,6 +228,12 @@ func fixImages(top *html.Node, m *extract.ProcessMessage) {
 			if err != nil {
 				continue
 			}
+
+			// This is insane, some sites serve images in the
+			// 12 or 20Mpx O_o
+			if z > 3072 {
+				continue
+			}
 			set = append(set, srcSetItem{src, z})
 		}
 		sort.SliceStable(set, func(i int, j int) bool {
