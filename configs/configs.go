@@ -11,6 +11,7 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/araddon/dateparse"
 	"github.com/komkom/toml"
 )
 
@@ -28,7 +29,7 @@ var (
 )
 
 func init() {
-	buildTime, _ = time.Parse("2006-01-02T15:04:05", buildTimeStr)
+	buildTime, _ = dateparse.ParseAny(buildTimeStr)
 }
 
 // Because we don't need viper's mess for just storing configuration from

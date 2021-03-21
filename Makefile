@@ -1,6 +1,6 @@
 #!/usr/bin/make
-VERSION := dev
-DATE := $(shell date -u +%Y-%m-%dT%H:%M:%S)
+VERSION := $(shell git describe --tags)
+DATE := $(shell git log -1 --format=%cI)
 
 TAGS := omit_load_extension foreign_keys json1 fts5 secure_delete
 BUILD_TAGS := $(TAGS)
