@@ -34,8 +34,9 @@ type (
 		Log       *log.Entry
 		Dom       *html.Node
 
-		step   ProcessStep
-		values map[string]interface{}
+		step     ProcessStep
+		canceled bool
+		values   map[string]interface{}
 	}
 )
 
@@ -75,6 +76,11 @@ func (m *ProcessMessage) SetValue(name string, value interface{}) {
 func (m *ProcessMessage) ResetContent() {
 	m.Dom = nil
 	m.Extractor.Drops()[m.Position].Body = []byte{}
+}
+
+func (m *ProcessMessage) Cancel(reason string, args ...interface{}) {
+	m.Log.WithError(fmt.Errorf(reason, args...)).Error("operation canceled")
+	m.canceled = true
 }
 
 // Error holds all the non-fatal errors that were
@@ -244,6 +250,10 @@ func (e *Extractor) Run() {
 		m.Log.WithField("idx", i).WithField("url", d.URL.String()).Info("start")
 		m.step = StepStart
 		e.runProcessors(m)
+		if m.canceled {
+			return
+		}
+
 		err := d.Load(e.client)
 		if err != nil {
 			m.Log.WithError(err).Error("cannot load resource")
@@ -254,6 +264,9 @@ func (e *Extractor) Run() {
 		m.Log.Debug("step body")
 		m.step = StepBody
 		e.runProcessors(m)
+		if m.canceled {
+			return
+		}
 
 		// Load the dom
 		if d.IsHTML() {
@@ -272,6 +285,9 @@ func (e *Extractor) Run() {
 				m.Dom = doc
 				m.step = StepDom
 				e.runProcessors(m)
+				if m.canceled {
+					return
+				}
 
 				// Render the final document body
 				if m.Dom != nil {
@@ -286,6 +302,9 @@ func (e *Extractor) Run() {
 		m.Log.Debug("step finish")
 		m.step = StepFinish
 		e.runProcessors(m)
+		if m.canceled {
+			return
+		}
 
 		// A processor can change the position in the loop
 		i = m.Position + 1
