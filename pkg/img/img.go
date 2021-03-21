@@ -1,7 +1,6 @@
 package img
 
 import (
-	"image"
 	"image/color"
 	"io"
 )
@@ -62,15 +61,5 @@ type ImageFilter func(Image) error
 // Since there's no other implementation at the moment,
 // let's keep it this way for now.
 func New(r io.Reader) (Image, error) {
-	m, format, err := image.Decode(r)
-	if err != nil {
-		return nil, err
-	}
-
-	return &NativeImage{
-		m:           m,
-		format:      format,
-		compression: CompressionFast,
-		quality:     80,
-	}, nil
+	return NewNativeImage(r)
 }

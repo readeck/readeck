@@ -1,6 +1,8 @@
 package img
 
 import (
+	"bytes"
+	"errors"
 	"image"
 	"image/draw"
 	"io"
@@ -26,6 +28,37 @@ type NativeImage struct {
 	encFormat   string
 	compression ImageCompression
 	quality     uint8
+}
+
+// NewNativeImage returns an Image instance using Go native image tools.
+func NewNativeImage(r io.Reader) (*NativeImage, error) {
+	var b bytes.Buffer
+	r1 := io.TeeReader(r, &b)
+	c, format, err := image.DecodeConfig(r1)
+	if err != nil {
+		return nil, err
+	}
+
+	// 6Mpx is already too much
+	if c.Width*c.Height > 6000000 {
+		return nil, errors.New("image is too big")
+	}
+
+	m, _, err := image.Decode(io.MultiReader(&b, r))
+	if err != nil {
+		return nil, err
+	}
+
+	return &NativeImage{
+		m:           m,
+		format:      format,
+		compression: CompressionFast,
+		quality:     80,
+	}, nil
+}
+
+func (im *NativeImage) Image() image.Image {
+	return im.m
 }
 
 // Close frees the resources used by the image and must be called
