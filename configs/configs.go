@@ -6,6 +6,7 @@ import (
 	"crypto/sha256"
 	"crypto/sha512"
 	"encoding/json"
+	"net"
 	"os"
 	"runtime"
 	"time"
@@ -65,11 +66,50 @@ type configSession struct {
 type configExtractor struct {
 	NumWorkers int                `json:"workers"`
 	SiteConfig []configSiteConfig `json:"site_config"`
+	DeniedIPs  []configIPNet      `json:"denied_ips"`
 }
 
 type configSiteConfig struct {
 	Name string `json:"name"`
 	Src  string `json:"src"`
+}
+
+type configIPNet struct {
+	*net.IPNet
+}
+
+func newConfigIPNet(v string) configIPNet {
+	_, r, _ := net.ParseCIDR(v)
+	return configIPNet{IPNet: r}
+}
+
+// UnmarshalJSON loads a given string containing an ip address or
+// a cidr. If it falls back to a single ip address, it gets a
+// /32 or /128 netmask.
+func (ci *configIPNet) UnmarshalJSON(d []byte) error {
+	var s string
+	err := json.Unmarshal(d, &s)
+	if err != nil {
+		return err
+	}
+
+	// Try first to parse a cidr value
+	_, r, err := net.ParseCIDR(s)
+	if err == nil {
+		ci.IPNet = r
+		return nil
+	}
+
+	// If not cidr notation, then that's an ip with /32 or /128
+	r = &net.IPNet{IP: net.ParseIP(s)}
+	if r.IP.To4() != nil {
+		r.Mask = net.CIDRMask(8*net.IPv4len, 8*net.IPv4len)
+	} else {
+		r.Mask = net.CIDRMask(8*net.IPv6len, 8*net.IPv6len)
+	}
+	ci.IPNet = r
+
+	return nil
 }
 
 // Config holds the configuration data from configuration files
@@ -96,6 +136,10 @@ var Config = config{
 	},
 	Extractor: configExtractor{
 		NumWorkers: runtime.NumCPU(),
+		DeniedIPs: []configIPNet{
+			newConfigIPNet("127.0.0.0/8"),
+			newConfigIPNet("::1/128"),
+		},
 	},
 }
 

@@ -72,6 +72,7 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 		ex.LogFields = &log.Fields{"@id": ctx.Value(ctxJobRequestID).(string)}
 
 		ex.AddProcessors(
+			CheckIPProcessor,
 			meta.ExtractMeta,
 			meta.ExtractOembed,
 			meta.SetDropProperties,

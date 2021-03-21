@@ -11,6 +11,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	log "github.com/sirupsen/logrus"
 
+	"codeberg.org/readeck/readeck/internal/bookmarks"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/extract"
 	"codeberg.org/readeck/readeck/pkg/extract/contents"
@@ -59,6 +60,7 @@ func (api *cookbookAPI) extract(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ex.AddProcessors(
+		bookmarks.CheckIPProcessor,
 		meta.ExtractMeta,
 		meta.ExtractOembed,
 		meta.SetDropProperties,
