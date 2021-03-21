@@ -49,6 +49,7 @@ func (s *Server) WithSession() func(next http.Handler) http.Handler {
 			// Store session
 			session, _ := store.Get(r, configs.Config.Server.Session.CookieName)
 			session.Options.HttpOnly = true
+			session.Options.Secure = r.URL.Scheme == "https"
 			session.Options.MaxAge = configs.Config.Server.Session.MaxAge
 			session.Options.SameSite = http.SameSiteStrictMode
 			session.Options.Path = path.Join(s.BasePath)
