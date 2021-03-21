@@ -18,7 +18,6 @@ host = "{{ .Server.Host }}"
 port = {{ .Server.Port }}
 
 [database]
-driver = "{{ .Database.Driver }}"
 source = "{{ .Database.Source }}"
 `
 
