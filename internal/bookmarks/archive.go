@@ -150,10 +150,10 @@ func imageProcessor(ctx context.Context, arc *archiver.Archiver, input io.Reader
 	}
 
 	im, err := img.New(input)
-	// If for any reason, we can't read the image, just return it
+	// If for any reason, we can't read the image, just return nothing
 	if err != nil {
 		arc.SendEvent(ctx, &archiver.EventError{Err: err, URI: uri.String()})
-		return nil, "", err
+		return []byte{}, "", nil
 	}
 	defer im.Close()
 
@@ -164,14 +164,14 @@ func imageProcessor(ctx context.Context, arc *archiver.Archiver, input io.Reader
 	)
 	if err != nil {
 		arc.SendEvent(ctx, &archiver.EventError{Err: err, URI: uri.String()})
-		return nil, "", err
+		return []byte{}, "", nil
 	}
 
 	var buf bytes.Buffer
 	err = im.Encode(&buf)
 	if err != nil {
 		arc.SendEvent(ctx, &archiver.EventError{Err: err, URI: uri.String()})
-		return nil, "", err
+		return []byte{}, "", nil
 	}
 
 	arc.SendEvent(ctx, archiver.EventInfo{"uri": uri.String(), "format": im.Format()})
