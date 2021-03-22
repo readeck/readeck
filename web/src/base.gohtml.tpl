@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<% for (var i in htmlWebpackPlugin.files.sprites) { %>
+<% for (var i in compilation.assets) { %><% if (/^img\/icons\..+\.svg/.test(i)) { %>
 {{- _registerAsset $ "icons" "/assets/<%= i %>" -}}
-<% } %>
+<% } %><% } %>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,9 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="x-csrf-token" content="{{ .csrfToken }}" />
   <meta name="x-api-url" content="{{ urlFor . "/api" }}" />
-  <% for (var i in htmlWebpackPlugin.files.sprites) { %>
+<% for (var i in compilation.assets) { %><% if (/^img\/icons\..+\.svg/.test(i)) { %>
   <meta name="x-icons" content="{{ .basePath }}assets/<%= i %>" />
-  <% } %>
+<% } %><% } %>
 <% for (var i in htmlWebpackPlugin.files.css) { %>
   <link href="{{ .basePath }}<%= htmlWebpackPlugin.files.css[i] %>" rel="stylesheet">
 <% } %>

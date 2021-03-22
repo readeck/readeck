@@ -25,7 +25,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "../assets/www"),
     publicPath: "assets",
-    filename: "[name].[hash:8].js",
+    filename: "[name].[fullhash:8].js",
   },
   module: {
     rules: [
@@ -47,10 +47,12 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              plugins: (loader) => [
-                require("postcss-preset-env")(),
-                require("cssnano")(),
-              ],
+              postcssOptions: {
+                plugins: () => [
+                  require("postcss-preset-env")(),
+                  require("cssnano")(),
+                ],
+              },
             },
           },
         ],
@@ -63,10 +65,12 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              plugins: (loader) => [
-                require("postcss-preset-env")(),
-                require("cssnano")(),
-              ],
+              postcssOptions: {
+                plugins: () => [
+                  require("postcss-preset-env")(),
+                  require("cssnano")(),
+                ],
+              },
             },
           },
           "sass-loader",
@@ -89,6 +93,10 @@ module.exports = {
         loader: "svg-sprite-loader",
         options: {
           extract: true,
+          symbolId: (filename, query) => {
+            // The symbolId can be the query part of the import
+            return query ? query.substring(1) : path.parse(filename).name
+          },
           spriteFilename: "icons.[hash:8].svg",
           outputPath: "img/",
         },
@@ -103,7 +111,7 @@ module.exports = {
       ],
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].[hash:8].css",
+      filename: "[name].[fullhash:8].css",
     }),
     new HtmlWebpackPlugin({
       template: "src/base.gohtml.tpl",
