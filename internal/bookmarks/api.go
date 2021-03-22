@@ -417,8 +417,7 @@ func (api *bookmarkAPI) deleteBookmark(b *Bookmark) error {
 
 	// Really remove later
 	uid := b.UID
-	workerPool.Submit(func() {
-		time.Sleep(time.Second * 30)
+	time.AfterFunc(30*time.Second, func() {
 		l := log.WithField("id", uid)
 		b, err := Bookmarks.GetOne(
 			goqu.C("is_deleted").Eq(true),
