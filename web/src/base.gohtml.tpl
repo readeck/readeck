@@ -15,14 +15,13 @@
 <% for (var i in htmlWebpackPlugin.files.css) { %>
   <link href="{{ .basePath }}<%= htmlWebpackPlugin.files.css[i] %>" rel="stylesheet">
 <% } %>
+<% for (var i in htmlWebpackPlugin.files.js) { %>
+  <script async src="{{ .basePath }}<%= htmlWebpackPlugin.files.js[i] %>"></script>
+<% } %>
   {{ block "head" . }}{{ end }}
 </head>
 
 <body>
 {{ block "body" . }}{{ end }}
-
-<% for (var i in htmlWebpackPlugin.files.js) { %>
-<script src="{{ .basePath }}<%= htmlWebpackPlugin.files.js[i] %>"></script>
-<% } %>
 </body>
 </html>

@@ -34,6 +34,6 @@
   "scripts": {
     "lint": "eslint *.js ./src",
     "build": "NODE_ENV=production webpack",
-    "watch": "NODE_ENV=production webpack --watch"
+    "watch": "NODE_ENV=production DEV=1 webpack --watch"
   }
 }

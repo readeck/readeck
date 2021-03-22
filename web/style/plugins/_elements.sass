@@ -87,6 +87,43 @@ svg
     width: 1em
     height: 1em
 
+  &.loader
+    svg
+      animation: 2s linear infinite spinner-rotate
+
+      circle
+        animation: 1.4s ease-in-out infinite both spinner-animation
+        fill: transparent
+        stroke: currentColor
+        stroke-width: 14
+        stroke-linecap: round
+        stroke-dasharray: 283
+        stroke-dashoffset: 280
+        transform-origin: 50% 50%
+
+@keyframes spinner-rotate
+  0%
+    transform: rotateZ(0deg)
+
+  100%
+    transform: rotateZ(360deg)
+
+@keyframes spinner-animation
+  0%,
+  25%
+    stroke-dashoffset: 280
+    transform: rotate(0)
+
+  50%,
+  75%
+    stroke-dashoffset: 75
+    transform: rotate(45deg)
+
+  100%
+    stroke-dashoffset: 280
+    transform: rotate(360deg)
+
+
 
 // Content block
 // ------------------------------------------------------------------

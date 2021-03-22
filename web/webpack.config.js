@@ -8,9 +8,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin")
 
 const mode = process.env.NODE_ENV || "development"
-const prod = mode === "production"
-
-const minify = mode === "production"
 
 module.exports = {
   mode,
@@ -139,7 +136,7 @@ module.exports = {
     }),
   ],
   optimization: {
-    minimize: minify,
+    minimize: true,
   },
-  devtool: prod ? false: "source-map",
+  devtool: process.env.DEV == "1" ? "source-map" : false,
 }

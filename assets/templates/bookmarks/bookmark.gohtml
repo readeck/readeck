@@ -14,7 +14,10 @@
 {{ define "content" }}
 {{ if not .item.Loaded }}
 <div class="page page-article">
-  <p><span class="loader"></span> Bookmark is loading...</p>
+  <div class="bookmark-loading">
+    {{ template "spinner" $ }}
+    Bookmark is loading...
+  </div>
 </div>
 {{ else }}
 <div class="page page-{{ .item.Type }}">
