@@ -8,22 +8,26 @@ import "../style/index.sass"
 // Icons
 // They are all combined into a big SVG file that's included
 // in the main template.
-import "@box/regular/bx-archive.svg"
-import "@box/solid/bxs-archive.svg"
-import "@box/solid/bxs-bookmarks.svg"
-import "@box/regular/bx-check-circle.svg"
-import "@box/solid/bxs-check-circle.svg"
-import "@box/solid/bxs-copy.svg"
-import "@box/regular/bx-pen.svg"
-import "@box/regular/bx-calendar.svg"
-import "@box/regular/bx-heart.svg"
-import "@box/solid/bxs-heart.svg"
-import "@box/regular/bx-link.svg"
-import "@box/regular/bx-log-out.svg"
-import "@box/regular/bx-trash.svg"
-import "@box/regular/bx-user-circle.svg"
-import "@box/solid/bxs-show.svg"
-import "@box/solid/bxs-hide.svg"
+//
+// Every icon is prefixed with o- (or xs- for solid icons)
+// to make them easier to find in the code, should you need to.
+
+import "@box/regular/bx-archive.svg?o-archive-off"
+import "@box/solid/bxs-archive.svg?o-archive-on"
+import "@box/solid/bxs-bookmarks.svg?o-bookmarks"
+import "@box/regular/bx-calendar.svg?o-calendar"
+import "@box/regular/bx-check-circle.svg?o-check-off"
+import "@box/solid/bxs-check-circle.svg?o-check-on"
+import "@box/solid/bxs-copy.svg?o-copy"
+import "@box/regular/bx-heart.svg?o-favorite-off"
+import "@box/solid/bxs-heart.svg?o-favorite-on"
+import "@box/solid/bxs-show.svg?o-hide"
+import "@box/regular/bx-link.svg?o-link"
+import "@box/regular/bx-log-out.svg?o-logout"
+import "@box/regular/bx-pen.svg?o-pen"
+import "@box/solid/bxs-hide.svg?o-show"
+import "@box/regular/bx-trash.svg?o-trash"
+import "@box/regular/bx-user-circle.svg?o-user"
 
 
 // Launch stimulus controllers

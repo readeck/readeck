@@ -42,13 +42,13 @@
               <strong>{{ default "no site name" .item.SiteName }}</strong>
             </li>
             {{ if .item.Published }}
-              <li>{{ icon $ "bx-calendar" }} Published on
+              <li>{{ icon $ "o-calendar" }} Published on
                 {{ .item.Published | date "02 January 2006" }}</li>
             {{ end }}
             {{ if .item.Authors }}
-              <li>{{ icon $ "bx-pen" }} By {{ .item.Authors | join ", " }}</li>
+              <li>{{ icon $ "o-pen" }} By {{ .item.Authors | join ", " }}</li>
             {{ end }}
-            <li>{{ icon $ "bx-link" }} <a href="{{ .item.URL }}">{{ .item.URL }}</a></li>
+            <li>{{ icon $ "o-link" }} <a href="{{ .item.URL }}">{{ .item.URL }}</a></li>
           </ul>
 
           <form action="" method="post" data-controller="bk-tags"
@@ -108,26 +108,26 @@
               <button class="outlined rounded icon" name="is_read" value="{{ .item.IsRead | ternary 0 1 }}"
                data-controller="bk-attr-update"
                data-bk-attr-update-id-value="{{ .item.ID }}"
-               data-bk-attr-update-icon-on-value="bxs-check-circle"
-               data-bk-attr-update-icon-off-value="bx-check-circle"
+               data-bk-attr-update-icon-on-value="o-check-on"
+               data-bk-attr-update-icon-off-value="o-check-off"
                data-action="click->bk-attr-update#toggle">
-              {{ icon $ (.item.IsRead | ternary "bxs-check-circle" "bx-check-circle") }}
+              {{ icon $ (.item.IsRead | ternary "o-check-on" "o-check-off") }}
               </button>
               <button class="outlined rounded icon" name="is_marked" value="{{ .item.IsMarked | ternary 0 1 }}"
                data-controller="bk-attr-update"
                data-bk-attr-update-id-value="{{ .item.ID }}"
-               data-bk-attr-update-icon-on-value="bxs-heart"
-               data-bk-attr-update-icon-off-value="bx-heart"
+               data-bk-attr-update-icon-on-value="o-favorite-on"
+               data-bk-attr-update-icon-off-value="o-favorite-off"
                data-action="click->bk-attr-update#toggle">
-              {{ icon $ (.item.IsMarked | ternary "bxs-heart" "bx-heart") }}
+              {{ icon $ (.item.IsMarked | ternary "o-favorite-on" "o-favorite-off") }}
               </button>
               <button class="outlined rounded icon" name="is_archived" value="{{ .item.IsArchived | ternary 0 1 }}"
                data-controller="bk-attr-update"
                data-bk-attr-update-id-value="{{ .item.ID }}"
-               data-bk-attr-update-icon-on-value="bxs-archive"
-               data-bk-attr-update-icon-off-value="bx-archive"
+               data-bk-attr-update-icon-on-value="o-archive-on"
+               data-bk-attr-update-icon-off-value="o-archive-off"
                data-action="click->bk-attr-update#toggle">
-              {{ icon $ (.item.IsArchived | ternary "bxs-archive" "bx-archive") }}
+              {{ icon $ (.item.IsArchived | ternary "o-archive-on" "o-archive-off") }}
               </button>
             </div>
           </form>
@@ -136,7 +136,7 @@
             {{ template "csrfField" $ }}
             <input type="hidden" name="_to" value="{{ $.currentPath }}" />
             <button class="outlined rounded icon delete">
-              {{ icon $ "bx-trash" }}
+              {{ icon $ "o-trash" }}
             </button>
           </form>
         {{ end -}}

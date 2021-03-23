@@ -12,7 +12,7 @@ export default class extends Controller {
       .addClass("button-clear")
       .attr("type", "button")
       .attr("data-action", `${this.identifier}#copy`)
-      .append(icon.getIcon("bxs-copy"))
+      .append(icon.getIcon("o-copy"))
       .appendTo(this.labelTarget)
   }
 
