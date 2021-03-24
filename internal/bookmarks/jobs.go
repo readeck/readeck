@@ -93,6 +93,7 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 			fftr.StripTags,
 			fftr.GoToNextPage,
 			contents.Readability,
+			CleanDomProcessor,
 			contents.Text,
 		)
 
