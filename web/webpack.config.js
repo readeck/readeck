@@ -1,11 +1,10 @@
 const path = require("path")
 const zlib = require("zlib")
 
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const CompressionPlugin = require("compression-webpack-plugin")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin")
+const AssetMap = require("./utils/asset-map")
 
 const mode = process.env.NODE_ENV || "development"
 
@@ -26,14 +25,12 @@ module.exports = {
     path: path.join(__dirname, "../assets/www"),
     publicPath: "assets",
     filename: "[name].[fullhash:8].js",
+    clean: {
+      keep: x => ["assets.json", ".keep"].includes(x),
+    },
   },
   module: {
     rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules)/,
-        use: ["babel-loader"],
-      },
       {
         test: /\.css$/,
         use: [
@@ -104,20 +101,8 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: [
-        "**\/*",
-        "!.keep",
-      ],
-    }),
     new MiniCssExtractPlugin({
       filename: "[name].[fullhash:8].css",
-    }),
-    new HtmlWebpackPlugin({
-      template: "src/base.gohtml.tpl",
-      filename: path.join(__dirname, "../assets/templates/base.gohtml"),
-      inject: false,
-      minify: false,
     }),
     new SpriteLoaderPlugin({
       plainSprite: true,
@@ -142,6 +127,7 @@ module.exports = {
       threshold: 4096,
       minRatio: 0.8,
     }),
+    new AssetMap(),
   ],
   optimization: {
     minimize: true,

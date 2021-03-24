@@ -1,0 +1,11 @@
+{{ template "bookmarks:card" dict "ctx" $
+                                  "item" .item
+                                  "baseURL" "/bookmarks" }}
+
+{{ template "bookmark:actions" dict "ctx" $
+                                    "item" .item
+                                    "baseURL" "/bookmarks" }}
+
+{{ template "bookmark:tags" dict "ctx" $
+                                 "item" .item
+                                 "baseURL" "/bookmarks" }}

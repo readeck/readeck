@@ -17,6 +17,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	log "github.com/sirupsen/logrus"
 
+	"codeberg.org/readeck/readeck/assets"
 	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/internal/auth"
 )
@@ -66,22 +67,19 @@ func New(basePath string) *Server {
 			_, err := io.Copy(out, in)
 			return "", err
 		},
-		"_registerAsset": func(ctx TC, name, filename string) string {
-			r := ctx["request"].(*http.Request)
-			ctx["assets"].(map[string]string)[name] = s.AbsoluteURL(r, filename).Path
-			return ""
-		},
 		"urlFor": func(ctx TC, name ...string) string {
 			r := ctx["request"].(*http.Request)
 			return s.AbsoluteURL(r, name...).String()
 		},
-		"iconURL": func(ctx TC, name string) string {
-			uri := ctx["assets"].(map[string]string)["icons"]
-			return fmt.Sprintf("%s#%s", uri, name)
+		"assetURL": func(ctx TC, name string) string {
+			r := ctx["request"].(*http.Request)
+			return s.AssetURL(r, name)
 		},
 		"icon": func(ctx TC, name string) template.HTML {
-			uri := ctx["assets"].(map[string]string)["icons"]
-			return template.HTML(fmt.Sprintf(svgTemplate, uri, name))
+			r := ctx["request"].(*http.Request)
+			return template.HTML(
+				fmt.Sprintf(svgTemplate, s.AssetURL(r, "img/icons.svg"), name),
+			)
 		},
 		"safeAttr": func(val string) template.HTMLAttr {
 			return template.HTMLAttr(val)
@@ -187,6 +185,14 @@ func (s *Server) CurrentPath(r *http.Request) string {
 	}
 
 	return p
+}
+
+func (s *Server) AssetURL(r *http.Request, name string) string {
+	return s.AbsoluteURL(r, "/assets", assets.AssetMap()[name]).String()
+}
+
+func (s *Server) IsTurboRequest(r *http.Request) bool {
+	return r.Header.Get("x-turbo") == "1"
 }
 
 // Redirect yields a 303 redirection with a location header.

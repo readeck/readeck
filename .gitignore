@@ -6,7 +6,7 @@
 
 /assets/www/*
 !/assets/www/.keep
-/assets/templates/base.gohtml
+!/assets/templates/base.gohtml
 
 /web/dist
 /web/node_modules

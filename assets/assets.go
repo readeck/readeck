@@ -2,6 +2,7 @@ package assets
 
 import (
 	"embed"
+	"encoding/json"
 	"io/fs"
 	"net/http"
 )
@@ -29,4 +30,22 @@ func TemplatesFS() fs.FS {
 		panic(err)
 	}
 	return sub
+}
+
+var assetMap map[string]string
+
+func init() {
+	f, err := Assets.Open("www/assets.json")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+	if err := json.NewDecoder(f).Decode(&assetMap); err != nil {
+		panic(err)
+	}
+}
+
+// AssetMap returns the loaded asset map.
+func AssetMap() map[string]string {
+	return assetMap
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ block "title" . }}{{ end }} - Readeck</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="x-csrf-token" content="{{ .csrfToken }}" />
+  <meta name="x-icons" content="{{ assetURL . "img/icons.svg" }}" />
+
+  <link href="{{ assetURL . "bundle.css" }}" rel="stylesheet">
+  <script async src="{{ assetURL . "bundle.js" }}"></script>
+
+  {{ block "head" . }}{{ end }}
+</head>
+
+<body data-turbo="false">
+{{ block "body" . }}{{ end }}
+</body>
+</html>

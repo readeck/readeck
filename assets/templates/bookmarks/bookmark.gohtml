@@ -51,34 +51,9 @@
             <li>{{ icon $ "o-link" }} <a href="{{ .item.URL }}">{{ .item.URL }}</a></li>
           </ul>
 
-          <form action="" method="post" data-controller="bk-tags"
-           data-bk-tags-id-value="{{ .item.ID }}"
-           data-action="bk-tags#addTag">
-            {{ template "csrfField" . }}
-            <input type="hidden" name="_to" value="{{ $.currentPath }}" />
-            <button type="submit" style="display: none"></button>
-            <ul class="badges editable"
-             data-bk-tags-target="tagList">{{ range .item.Tags }}
-              <li class="badge" data-bk-tags-target="tag">{{ . }}
-              <button class="button-clear button-delete" type="submit"
-                name="remove_tags" value="{{ . }}"
-                data-action="bk-tags#removeTag"></button>
-              </li>
-            {{ end }}
-              <li class="control">
-                <input type="text" name="add_tags" placeholder="Add a new label"
-                 data-bk-tags-target="newTag" />
-                <button type="submit">Add label</button>
-              </li>
-            </ul>
-            {{/* Tag item template used to add new one from the controller */}}
-            <template data-bk-tags-target="tmpl">
-              <li class="badge" data-bk-tags-target="tag"><button
-                class="button-clear button-delete" type="submit"
-                name="remove_tags"
-                data-action="bk-tags#removeTag"></button></li>
-            </template>
-          </form>
+          {{ template "bookmark:tags" dict "ctx" $
+                                           "item" .item
+                                           "baseURL" "./.." }}
         </div>
 
         {{- if .item.Resources.thumbnail }}
@@ -90,57 +65,9 @@
         {{- end }}
       </div>
 
-      <div class="item-actions">
-        {{- if .item.IsDeleted }}
-          <span class="text-danger">
-            This bookmark will be removed in a few seconds.
-          </span>
-          <form action="{{ urlFor $ "." "delete" }}" method="post">
-            {{ template "csrfField" $ }}
-            <input type="hidden" name="cancel" value="1" />
-            <input type="hidden" name="_to" value="{{ $.currentPath }}" />
-            <button type="submit">Cancel</button>
-          </form>
-        {{- else -}}
-          <form action="" method="post">
-            {{ template "csrfField" . }}
-            <div class="compound">
-              <button class="outlined rounded icon" name="is_read" value="{{ .item.IsRead | ternary 0 1 }}"
-               data-controller="bk-attr-update"
-               data-bk-attr-update-id-value="{{ .item.ID }}"
-               data-bk-attr-update-icon-on-value="o-check-on"
-               data-bk-attr-update-icon-off-value="o-check-off"
-               data-action="click->bk-attr-update#toggle">
-              {{ icon $ (.item.IsRead | ternary "o-check-on" "o-check-off") }}
-              </button>
-              <button class="outlined rounded icon" name="is_marked" value="{{ .item.IsMarked | ternary 0 1 }}"
-               data-controller="bk-attr-update"
-               data-bk-attr-update-id-value="{{ .item.ID }}"
-               data-bk-attr-update-icon-on-value="o-favorite-on"
-               data-bk-attr-update-icon-off-value="o-favorite-off"
-               data-action="click->bk-attr-update#toggle">
-              {{ icon $ (.item.IsMarked | ternary "o-favorite-on" "o-favorite-off") }}
-              </button>
-              <button class="outlined rounded icon" name="is_archived" value="{{ .item.IsArchived | ternary 0 1 }}"
-               data-controller="bk-attr-update"
-               data-bk-attr-update-id-value="{{ .item.ID }}"
-               data-bk-attr-update-icon-on-value="o-archive-on"
-               data-bk-attr-update-icon-off-value="o-archive-off"
-               data-action="click->bk-attr-update#toggle">
-              {{ icon $ (.item.IsArchived | ternary "o-archive-on" "o-archive-off") }}
-              </button>
-            </div>
-          </form>
-
-          <form action="{{ urlFor $ "." "delete" }}" method="post">
-            {{ template "csrfField" $ }}
-            <input type="hidden" name="_to" value="{{ $.currentPath }}" />
-            <button class="outlined rounded icon delete">
-              {{ icon $ "o-trash" }}
-            </button>
-          </form>
-        {{ end -}}
-      </div>
+      {{ template "bookmark:actions" dict "ctx" $
+                                          "item" .item
+                                          "baseURL" "./.." }}
     </div>
   </div>
 
@@ -154,11 +81,11 @@
   {{- end }}
 
   {{- if eq .item.Type "article" -}}
-    {{ template "_article" . }}
+    {{ template "bookmarks:article" . }}
   {{- else if eq .item.Type "photo" -}}
-    {{ template "_photo" .item }}
+    {{ template "bookmarks:photo" .item }}
   {{- else if eq .item.Type "video" -}}
-    {{ template "_video" .item }}
+    {{ template "bookmarks:video" .item }}
   {{- end -}}
 </div>
 {{ end }}

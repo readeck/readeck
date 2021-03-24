@@ -165,6 +165,13 @@ func (api *bookmarkAPI) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 
 	updated["href"] = api.srv.AbsoluteURL(r).String()
 
+	if api.srv.IsTurboRequest(r) {
+		api.srv.RenderTemplate(w, r, 200, "bookmarks/_turbo.gohtml", server.TC{
+			"item": newBookmarkItem(api.srv, r, b, "./.."),
+		})
+		return
+	}
+
 	w.Header().Add(
 		"Location",
 		updated["href"].(string),
@@ -369,6 +376,10 @@ func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm) (map[string]
 		b.IsArchived = *uf.IsArchived
 		updated["is_archived"] = b.IsArchived
 	}
+	if uf.IsDeleted != nil {
+		b.IsDeleted = *uf.IsDeleted
+		updated["is_deleted"] = b.IsDeleted
+	}
 
 	// Set tags
 	tagsChanged := false
@@ -399,6 +410,9 @@ func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm) (map[string]
 		if err := b.Update(updated); err != nil {
 			return updated, err
 		}
+		if updated["is_deleted"] == true {
+			api.launchDelete(b)
+		}
 	}
 
 	updated["id"] = b.UID
@@ -415,7 +429,11 @@ func (api *bookmarkAPI) deleteBookmark(b *Bookmark) error {
 		return err
 	}
 
-	// Really remove later
+	api.launchDelete(b)
+	return nil
+}
+
+func (api *bookmarkAPI) launchDelete(b *Bookmark) {
 	uid := b.UID
 	time.AfterFunc(30*time.Second, func() {
 		l := log.WithField("id", uid)
@@ -436,7 +454,6 @@ func (api *bookmarkAPI) deleteBookmark(b *Bookmark) error {
 		}
 		l.Info("Bookmark deleted")
 	})
-	return nil
 }
 
 func (api *bookmarkAPI) deleteBookmarkCancel(b *Bookmark) error {
@@ -577,6 +594,7 @@ type updateForm struct {
 	IsRead     *bool   `json:"is_read"`
 	IsMarked   *bool   `json:"is_marked"`
 	IsArchived *bool   `json:"is_archived"`
+	IsDeleted  *bool   `json:"is_deleted"`
 	Tags       Strings `json:"tags"`
 	AddTags    Strings `json:"add_tags"`
 	RemoveTags Strings `json:"remove_tags"`
