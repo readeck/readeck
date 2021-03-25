@@ -12,7 +12,7 @@ import (
 
 var xt *xtemplate.Xtemplate
 
-const svgTemplate = `<span class="svgicon"%s><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" width="16"><use href="%s#%s"></use></svg></span>`
+const svgTemplate = `<span%s><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" width="16"><use href="%s#%s"></use></svg></span>`
 
 // RenderTemplate yields an HTML response using the given template and context.
 func (s *Server) RenderTemplate(w http.ResponseWriter, r *http.Request,

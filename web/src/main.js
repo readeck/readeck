@@ -33,6 +33,8 @@ import "@box/regular/bx-trash.svg?o-trash"
 import "@box/regular/bx-undo.svg?o-undo"
 import "@box/regular/bx-user-circle.svg?o-user"
 
+import "./img/spinner.svg?o-spinner"
+
 
 // Launch stimulus controllers
 import "regenerator-runtime/runtime"

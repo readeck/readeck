@@ -79,8 +79,13 @@ func New(basePath string) *Server {
 			r := ctx["request"].(*http.Request)
 			attrs := ""
 			if len(args)%2 == 0 {
+				seenClass := false
 				for i := 0; i < len(args); i += 2 {
+					seenClass = seenClass || args[i] == "class"
 					attrs = fmt.Sprintf(`%s %s="%s"`, attrs, args[i], args[i+1])
+				}
+				if !seenClass {
+					attrs = fmt.Sprintf(`%s %s="%s"`, attrs, "class", "svgicon")
 				}
 			}
 
