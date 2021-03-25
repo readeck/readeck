@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -234,6 +235,27 @@ func (b *Bookmark) getFilePath() string {
 		return ""
 	}
 	return filepath.Join(StoragePath(), b.FilePath+".zip")
+}
+
+// getInnerFile returns the content of a file in the
+func (b *Bookmark) getInnerFile(name string) ([]byte, error) {
+	p := b.getFilePath()
+	if p == "" {
+		return nil, os.ErrNotExist
+	}
+
+	z, err := zip.OpenReader(p)
+	if err != nil {
+		return nil, err
+	}
+	defer z.Close()
+
+	fd, err := z.Open(name)
+	if err != nil {
+		return nil, err
+	}
+
+	return ioutil.ReadAll(fd)
 }
 
 // getArticle returns the article content

@@ -80,6 +80,34 @@
   </div>
   {{- end }}
 
+  {{ with ._log }}
+  <div class="panel" data-controller="reveal">
+    <div class="panel-heading" data-reveal-target="trigger">
+     {{ icon $ "o-plus" "data-reveal-target" "show" "style" "display: none" }}
+     {{ icon $ "o-minus" "data-reveal-target" "hide" "style" "display: none" }}
+     Extract Log
+    </div>
+    <div class="panel-content content-block"
+     data-reveal-target="hide">
+      <pre>{{ . }}</pre>
+    </div>
+  </div>
+  {{ end }}
+
+  {{ with ._props }}
+  <div class="panel" data-controller="reveal">
+    <div class="panel-heading" data-reveal-target="trigger">
+     {{ icon $ "o-plus" "data-reveal-target" "show" "style" "display: none" }}
+     {{ icon $ "o-minus" "data-reveal-target" "hide" "style" "display: none" }}
+     Properties
+    </div>
+    <div class="panel-content content-block"
+     data-reveal-target="hide">
+      <pre>{{ . }}</pre>
+    </div>
+  </div>
+  {{ end }}
+
   {{- if eq .item.Type "article" -}}
     {{ template "bookmarks:article" . }}
   {{- else if eq .item.Type "photo" -}}

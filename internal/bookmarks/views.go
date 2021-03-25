@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
+	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
 )
@@ -96,6 +97,19 @@ func (h *bookmarkViews) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx["out"] = w
+
+	if configs.Config.Main.DevMode {
+		for k, x := range map[string]string{
+			"_props": "props.json",
+			"_log":   "log",
+		} {
+			if r, err := b.getInnerFile(x); err != nil {
+				ctx[k] = err.Error()
+			} else {
+				ctx[k] = string(r)
+			}
+		}
+	}
 
 	h.srv.RenderTemplate(w, r, 200, "bookmarks/bookmark.gohtml", ctx)
 }

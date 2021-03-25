@@ -24,9 +24,12 @@ import "@box/solid/bxs-heart.svg?o-favorite-on"
 import "@box/solid/bxs-show.svg?o-hide"
 import "@box/regular/bx-link.svg?o-link"
 import "@box/regular/bx-log-out.svg?o-logout"
+import "@box/solid/bxs-minus-circle.svg?o-minus"
 import "@box/regular/bx-pen.svg?o-pen"
+import "@box/solid/bxs-plus-circle.svg?o-plus"
 import "@box/solid/bxs-hide.svg?o-show"
 import "@box/regular/bx-trash.svg?o-trash"
+import "@box/regular/bx-undo.svg?o-undo"
 import "@box/regular/bx-user-circle.svg?o-user"
 
 

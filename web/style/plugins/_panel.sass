@@ -1,0 +1,17 @@
+@use "config" as *
+
+.panel
+  border-radius: $radius
+  box-shadow: 2px 2px 8px rgba(0,0,0, .2)
+  margin: $block-spacing 0
+
+  .panel-heading
+    padding: $block-spacing/4 $block-spacing/2
+    border-radius: $radius $radius
+    background-color: $primary
+    color: $primary-invert
+    font-size: 1.2em
+    font-weight: bold
+
+  .panel-content
+    padding: $block-spacing/2
