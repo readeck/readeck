@@ -41,12 +41,12 @@ func ExtractPicture(m *extract.ProcessMessage, next extract.Processor) extract.P
 
 	picture, err := extract.NewPicture(href, d.URL)
 	if err != nil {
-		m.Log.WithError(err).Error()
+		m.Log.WithError(err).Warn()
 		return next
 	}
 
 	if err = picture.Load(m.Extractor.Client(), size, ""); err != nil {
-		m.Log.WithError(err).WithField("url", href).Error("cannot load picture")
+		m.Log.WithError(err).WithField("url", href).Warn("cannot load picture")
 		return next
 	}
 
@@ -55,7 +55,7 @@ func ExtractPicture(m *extract.ProcessMessage, next extract.Processor) extract.P
 
 	thumbnail, err := picture.Copy(380, "")
 	if err != nil {
-		m.Log.WithError(err).Error()
+		m.Log.WithError(err).Warn()
 		return next
 	}
 	d.Pictures["thumbnail"] = thumbnail

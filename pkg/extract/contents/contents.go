@@ -212,7 +212,7 @@ func fixImages(top *html.Node, m *extract.ProcessMessage) {
 	m.Log.Debug("fixing images")
 	nodes, err := htmlquery.QueryAll(top, "//*[@srcset]")
 	if err != nil {
-		m.Log.WithError(err).Error()
+		m.Log.WithError(err).Warn()
 	}
 
 	dom.ForEachNode(nodes, func(node *html.Node, _ int) {

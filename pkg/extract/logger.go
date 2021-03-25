@@ -56,7 +56,7 @@ func (h *messageLogHook) Fire(entry *log.Entry) error {
 
 	if entry.Level <= log.ErrorLevel {
 		b, _ = errorLogFormat.Format(entry)
-		h.e.errors = append(h.e.errors, errors.New(strings.TrimSpace(string(b))))
+		h.e.errors = append(h.e.errors, errors.New(entry.Message))
 	}
 
 	return nil

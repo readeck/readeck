@@ -37,7 +37,7 @@ func LoadConfiguration(m *extract.ProcessMessage, next extract.Processor) extrac
 	// Find fftr configuration for this site
 	cfg, err := NewConfigForURL(m.Extractor.Drop().URL, DefaultConfigurationFolders)
 	if err != nil {
-		m.Log.WithError(err).Error("load fftr")
+		m.Log.WithError(err).Warn("fftr configuration")
 		return next
 	}
 

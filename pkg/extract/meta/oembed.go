@@ -28,7 +28,7 @@ func ExtractOembed(m *extract.ProcessMessage, next extract.Processor) extract.Pr
 	m.Log.Debug("looking for oembed URL")
 	o, err := newOembed(m.Dom, d.URL, m.Extractor.Client())
 	if err != nil {
-		m.Log.WithError(err).Error("oembed error")
+		m.Log.WithError(err).Warn("oembed error")
 		return next
 	}
 
