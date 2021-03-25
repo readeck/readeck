@@ -178,6 +178,21 @@
                 max-height: 6em
                 border-radius: 0 $radius 0
 
+        .errors
+          color: $danger-accent
+          font-size: 80%
+          margin-top: $block-spacing/4
+
+          & > span
+            color: $danger-invert
+            background-color: $danger
+            padding: .2rem .5rem
+            border-radius: 4px
+
+          ul
+            padding-left: 1.2em
+            list-style: disc
+
         .item-actions
           display: flex
           align-items: center

@@ -24,8 +24,8 @@
   <div class="summary">
     <h1 class="title is-h2">{{ .item.Title }}</h1>
 
-    {{ if .item.Description -}}
-    <p class="subtitle">{{ .item.Description }}</p>
+    {{ with .item.Description -}}
+    <p class="subtitle">{{ . }}</p>
     {{- end }}
 
     <div class="box">
@@ -33,34 +33,39 @@
         <div class="box-content">
           <ul>
             <li>
-              {{- if .item.Resources.icon }}
-              <span><img class="site-icon" alt=""
-                src="{{ .item.Resources.icon.Src }}"
-                width="{{ .item.Resources.icon.Width }}"
-                height="{{ .item.Resources.icon.Height }}"></span>
+              {{- with .item.Resources.icon }}
+              <span><img class="site-icon" alt="" src="{{ .Src }}"
+                         width="{{ .Width }}" height="{{ .Height }}"></span>
               {{- end }}
               <strong>{{ default "no site name" .item.SiteName }}</strong>
             </li>
-            {{ if .item.Published }}
-              <li>{{ icon $ "o-calendar" }} Published on
-                {{ .item.Published | date "02 January 2006" }}</li>
-            {{ end }}
-            {{ if .item.Authors }}
-              <li>{{ icon $ "o-pen" }} By {{ .item.Authors | join ", " }}</li>
-            {{ end }}
+            {{ with .item.Published -}}
+              <li>{{ icon $ "o-calendar" }} Published on {{ . | date "02 January 2006" }}</li>
+            {{- end }}
+            {{ with .item.Authors -}}
+              <li>{{ icon $ "o-pen" }} By {{ . | join ", " }}</li>
+            {{- end }}
             <li>{{ icon $ "o-link" }} <a href="{{ .item.URL }}">{{ .item.URL }}</a></li>
           </ul>
 
           {{ template "bookmark:tags" dict "ctx" $
                                            "item" .item
                                            "baseURL" "./.." }}
+
+          {{ with .item.Errors }}
+          <div class="errors" data-controller="reveal">
+            <span data-reveal-target="trigger">{{ icon $ "o-error" }}
+            Errors occured during extraction:</span>
+            <ul data-reveal-target="hide">
+              {{ range . }}<li>{{ . }}</li>{{ end }}
+            </ul>
+          </div>
+          {{ end }}
         </div>
 
-        {{- if .item.Resources.thumbnail }}
+        {{- with .item.Resources.thumbnail }}
         <div class="box-image">
-          <img src="{{ .item.Resources.thumbnail.Src }}" alt=""
-            width="{{ .item.Resources.thumbnail.Width }}"
-            height="{{ .item.Resources.thumbnail.Height }}">
+          <img src="{{ .Src }}" alt="" width="{{ .Width }}" height="{{ .Height }}" />
         </div>
         {{- end }}
       </div>
@@ -69,44 +74,35 @@
                                           "item" .item
                                           "baseURL" "./.." }}
     </div>
-  </div>
 
-  {{ if and .item.Errors -}}
-  <div class="content notification is-warning is-light">
-    <p>Errors were encountered during extraction</p>
-    <ul>{{ range .item.Errors }}
-      <li>{{ . }}</li>
-    {{ end }}</ul>
-  </div>
-  {{- end }}
+    {{ with ._log }}
+    <div class="panel" data-controller="reveal">
+      <div class="panel-heading" data-reveal-target="trigger">
+      {{ icon $ "o-plus" "data-reveal-target" "show" "style" "display: none" }}
+      {{ icon $ "o-minus" "data-reveal-target" "hide" "style" "display: none" }}
+      Extract Log
+      </div>
+      <div class="panel-content content-block"
+      data-reveal-target="hide">
+        <pre>{{ . }}</pre>
+      </div>
+    </div>
+    {{ end }}
 
-  {{ with ._log }}
-  <div class="panel" data-controller="reveal">
-    <div class="panel-heading" data-reveal-target="trigger">
-     {{ icon $ "o-plus" "data-reveal-target" "show" "style" "display: none" }}
-     {{ icon $ "o-minus" "data-reveal-target" "hide" "style" "display: none" }}
-     Extract Log
+    {{ with ._props }}
+    <div class="panel" data-controller="reveal">
+      <div class="panel-heading" data-reveal-target="trigger">
+      {{ icon $ "o-plus" "data-reveal-target" "show" "style" "display: none" }}
+      {{ icon $ "o-minus" "data-reveal-target" "hide" "style" "display: none" }}
+      Properties
+      </div>
+      <div class="panel-content content-block"
+      data-reveal-target="hide">
+        <pre>{{ . }}</pre>
+      </div>
     </div>
-    <div class="panel-content content-block"
-     data-reveal-target="hide">
-      <pre>{{ . }}</pre>
-    </div>
+    {{ end }}
   </div>
-  {{ end }}
-
-  {{ with ._props }}
-  <div class="panel" data-controller="reveal">
-    <div class="panel-heading" data-reveal-target="trigger">
-     {{ icon $ "o-plus" "data-reveal-target" "show" "style" "display: none" }}
-     {{ icon $ "o-minus" "data-reveal-target" "hide" "style" "display: none" }}
-     Properties
-    </div>
-    <div class="panel-content content-block"
-     data-reveal-target="hide">
-      <pre>{{ . }}</pre>
-    </div>
-  </div>
-  {{ end }}
 
   {{- if eq .item.Type "article" -}}
     {{ template "bookmarks:article" . }}
