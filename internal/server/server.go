@@ -75,10 +75,19 @@ func New(basePath string) *Server {
 			r := ctx["request"].(*http.Request)
 			return s.AssetURL(r, name)
 		},
-		"icon": func(ctx TC, name string) template.HTML {
+		"icon": func(ctx TC, name string, args ...interface{}) template.HTML {
 			r := ctx["request"].(*http.Request)
+			attrs := ""
+			if len(args)%2 == 0 {
+				for i := 0; i < len(args); i += 2 {
+					attrs = fmt.Sprintf(`%s %s="%s"`, attrs, args[i], args[i+1])
+				}
+			}
+
 			return template.HTML(
-				fmt.Sprintf(svgTemplate, s.AssetURL(r, "img/icons.svg"), name),
+				fmt.Sprintf(
+					svgTemplate,
+					attrs, s.AssetURL(r, "img/icons.svg"), name),
 			)
 		},
 		"safeAttr": func(val string) template.HTMLAttr {
