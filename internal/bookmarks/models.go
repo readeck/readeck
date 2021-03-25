@@ -272,6 +272,7 @@ func (b *Bookmark) getArticle(baseURL string) (*strings.Reader, error) {
 			if err != nil {
 				return nil, err
 			}
+			defer fp.Close()
 			if _, err := io.Copy(buf, fp); err != nil {
 				return nil, err
 			}
