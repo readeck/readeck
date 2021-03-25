@@ -72,7 +72,7 @@ bookmarks:card renders a bookmark card
     </strong>
     <div class="item-actions">
       {{- if $x.IsDeleted }}
-        <span>
+        <span class="text-danger">
           This bookmark will be removed in a few seconds.
         </span>
         <form action="{{ $url }}/delete" method="post">
@@ -82,7 +82,7 @@ bookmarks:card renders a bookmark card
           <button type="submit" name="is_deleted" value="0"
            data-controller="turbo-form"
            data-turbo-form-action-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}"
-           data-turbo-form-method-value="patch">Cancel</button>
+           data-turbo-form-method-value="patch">{{ icon .ctx "o-undo" }}&nbsp;Undo</button>
         </form>
       {{- else -}}
       <form action="{{ $url }}" method="post"
@@ -140,7 +140,7 @@ bookmark:actions renders a bookmark action form
       <button type="submit" name="is_deleted" value="0"
        data-controller="turbo-form"
        data-turbo-form-action-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}"
-       data-turbo-form-method-value="patch">Cancel</button>
+       data-turbo-form-method-value="patch">{{ icon .ctx "o-undo" }}&nbsp;Undo</button>
     </form>
   {{- else -}}
     <form action="{{ $url }}" method="post"
