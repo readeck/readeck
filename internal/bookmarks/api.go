@@ -80,6 +80,14 @@ func (api *bookmarkAPI) bookmarkList(w http.ResponseWriter, r *http.Request) {
 func (api *bookmarkAPI) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
 	item := newBookmarkItem(api.srv, r, b, "./..")
+
+	if api.srv.IsTurboRequest(r) {
+		api.srv.RenderTemplate(w, r, 200, "bookmarks/_turbo.gohtml", server.TC{
+			"item": newBookmarkItem(api.srv, r, b, "./.."),
+		})
+		return
+	}
+
 	api.srv.Render(w, r, http.StatusOK, item)
 }
 

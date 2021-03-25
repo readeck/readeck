@@ -44,8 +44,26 @@ bookmarks:card renders a bookmark card
 {{- define "bookmarks:card" -}}
 {{- $x := .item -}}
 {{- $url := urlFor .ctx (or .baseURL ".") $x.ID -}}
+{{ if not $x.Loaded }}
+<turbo-frame id="bookmark-card-{{ .item.ID }}"
+ data-controller="turbo-refresh"
+ data-turbo-refresh-interval-value="2"
+ data-turbo-refresh-src-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}">
+<div class="card">
+  <div class="card-content">
+    <div class="bookmark-loading">
+      {{ template "spinner" .ctx }}
+    </div>
+  </div>
+  <div class="card-bottom">
+    <strong class="item-actions">Loading {{ $x.Site }}…</strong>
+  </div>
+</div>
+</turbo-frame>
+{{ else }}
 <turbo-frame id="bookmark-card-{{ .item.ID }}">
-<div class="card state-{{ $x.StateName }}{{ $x.IsDeleted | ternary " state-deleted" "" }}">
+<div class="card{{ $x.IsDeleted | ternary " state-deleted" "" }}"
+ data-turbo-refresh-target="loaded">
   <div class="card-image">
   {{- if $x.Resources.thumbnail }}
   <img loading="lazy" src="{{ $x.Resources.thumbnail.Src }}" alt=""
@@ -117,6 +135,7 @@ bookmarks:card renders a bookmark card
   </div>
 </div>
 </turbo-frame>
+{{ end }}
 {{ end }}
 
 

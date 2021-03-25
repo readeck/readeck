@@ -7,20 +7,22 @@
 
 {{- define "head" -}}
   {{- if not .item.Loaded -}}
-  <meta http-equiv="refresh" content="5">
+  <noscript><meta http-equiv="refresh" content="5"></noscript>
   {{- end -}}
 {{- end -}}
 
 {{ define "content" }}
+<turbo-frame id="bookmark-{{ .item.ID }}" data-controller="turbo-refresh"
+ data-turbo-refresh-interval-value="3">
 {{ if not .item.Loaded }}
 <div class="page page-article">
   <div class="bookmark-loading">
     {{ template "spinner" $ }}
-    Bookmark is loading...
+    Bookmark is loading…
   </div>
 </div>
 {{ else }}
-<div class="page page-{{ .item.Type }}">
+<div class="page page-{{ .item.Type }}" data-turbo-refresh-target="loaded">
   <div class="summary">
     <h1 class="title is-h2">{{ .item.Title }}</h1>
 
@@ -113,4 +115,5 @@
   {{- end -}}
 </div>
 {{ end }}
+<turbo-frame>
 {{ end }}
