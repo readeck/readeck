@@ -48,6 +48,7 @@ bookmarks:card renders a bookmark card
 <turbo-frame id="bookmark-card-{{ .item.ID }}"
  data-controller="turbo-refresh"
  data-turbo-refresh-interval-value="2"
+ data-turbo-refresh-on-value=".card .bookmark-loading"
  data-turbo-refresh-src-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}">
 <div class="card">
   <div class="card-content">
@@ -62,8 +63,7 @@ bookmarks:card renders a bookmark card
 </turbo-frame>
 {{ else }}
 <turbo-frame id="bookmark-card-{{ .item.ID }}">
-<div class="card{{ $x.IsDeleted | ternary " state-deleted" "" }}"
- data-turbo-refresh-target="loaded">
+<div class="card{{ $x.IsDeleted | ternary " state-deleted" "" }}">
   <div class="card-image">
   {{- if $x.Resources.thumbnail }}
   <img loading="lazy" src="{{ $x.Resources.thumbnail.Src }}" alt=""

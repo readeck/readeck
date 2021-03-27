@@ -13,6 +13,7 @@
 
 {{ define "content" }}
 <turbo-frame id="bookmark-{{ .item.ID }}" data-controller="turbo-refresh"
+ data-turbo-refresh-on-value=".page .bookmark-loading"
  data-turbo-refresh-interval-value="3">
 {{ if not .item.Loaded }}
 <div class="page page-article">
@@ -22,7 +23,7 @@
   </div>
 </div>
 {{ else }}
-<div class="page page-{{ .item.Type }}" data-turbo-refresh-target="loaded">
+<div class="page page-{{ .item.Type }}">
   <div class="summary">
     <h1 class="title is-h2">{{ .item.Title }}</h1>
 
