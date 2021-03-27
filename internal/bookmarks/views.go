@@ -61,7 +61,7 @@ func (h *bookmarkViews) bookmarkList(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Retrieve the bookmark list
-	bl := r.Context().Value(ctxBookmarkListKey).(bookmarkList)
+	bl := r.Context().Value(ctxBookmarkListKey{}).(bookmarkList)
 
 	bl.Items = make([]bookmarkItem, len(bl.items))
 	for i, item := range bl.items {
@@ -79,7 +79,7 @@ func (h *bookmarkViews) bookmarkList(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *bookmarkViews) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
-	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 	item := newBookmarkItem(h.srv, r, b, "")
 	item.Embed = b.Embed
 	item.Errors = b.Errors
@@ -127,7 +127,7 @@ func (h *bookmarkViews) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
 	if _, err := h.updateBookmark(b, uf); err != nil {
 		h.srv.Error(w, r, err)
@@ -146,7 +146,7 @@ func (h *bookmarkViews) bookmarkDelete(w http.ResponseWriter, r *http.Request) {
 	df := &deleteForm{}
 	f := form.NewForm(df)
 	form.Bind(f, r)
-	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
 	var err error
 	if df.Cancel {

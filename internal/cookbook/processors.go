@@ -11,6 +11,8 @@ import (
 	"codeberg.org/readeck/readeck/pkg/extract"
 )
 
+type ctxLogger struct{}
+
 func archiveProcessor(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
 	if m.Step() != extract.StepPostProcess {
 		return next
@@ -41,7 +43,7 @@ func archiveProcessor(m *extract.ProcessMessage, next extract.Processor) extract
 	arc.RequestTimeout = 45 * time.Second
 	arc.EventHandler = eventHandler
 
-	ctx := context.WithValue(context.Background(), ctxLogger, m.Log)
+	ctx := context.WithValue(context.Background(), ctxLogger{}, m.Log)
 
 	if err := arc.Archive(ctx); err != nil {
 		m.Log.WithError(err).Error("archive error")
@@ -54,7 +56,7 @@ func archiveProcessor(m *extract.ProcessMessage, next extract.Processor) extract
 }
 
 func eventHandler(ctx context.Context, _ *archiver.Archiver, evt archiver.Event) {
-	log := ctx.Value(ctxLogger).(*log.Entry)
+	log := ctx.Value(ctxLogger{}).(*log.Entry)
 	switch evt.(type) {
 	case *archiver.EventError:
 		log.WithFields(evt.Fields()).Warn("archive error")
@@ -66,5 +68,3 @@ func eventHandler(ctx context.Context, _ *archiver.Archiver, evt archiver.Event)
 		log.WithFields(evt.Fields()).Debug("archiver")
 	}
 }
-
-var ctxLogger = struct{}{}

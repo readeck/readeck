@@ -23,7 +23,7 @@ import (
 
 var workerPool *workerpool.WorkerPool
 
-var ctxJobRequestID = struct{}{}
+type ctxJobRequestID struct{}
 
 // StartWorkerPool start the worker pool that performs
 // page extraction.
@@ -69,7 +69,7 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 			return
 		}
 
-		ex.LogFields = &log.Fields{"@id": ctx.Value(ctxJobRequestID).(string)}
+		ex.LogFields = &log.Fields{"@id": ctx.Value(ctxJobRequestID{}).(string)}
 
 		ex.AddProcessors(
 			CheckIPProcessor,

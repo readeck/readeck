@@ -7,12 +7,9 @@ import (
 	"codeberg.org/readeck/readeck/internal/auth/users"
 )
 
-type ctxKeyProvider struct{}
-type ctxKeyAuth struct{}
-
-var (
-	ctxProviderKey = &ctxKeyProvider{}
-	ctxAuthKey     = &ctxKeyAuth{}
+type (
+	ctxProviderKey struct{}
+	ctxAuthKey     struct{}
 )
 
 // Info is the payload with the currently authenticated user
@@ -129,26 +126,26 @@ func Required(next http.Handler) http.Handler {
 
 // setRequestProvider stores the current provider for the request.
 func setRequestProvider(r *http.Request, provider Provider) *http.Request {
-	ctx := context.WithValue(r.Context(), ctxProviderKey, provider)
+	ctx := context.WithValue(r.Context(), ctxProviderKey{}, provider)
 	return r.WithContext(ctx)
 }
 
 // GetRequestProvider returns the current request's authentication
 // provider.
 func GetRequestProvider(r *http.Request) Provider {
-	return r.Context().Value(ctxProviderKey).(Provider)
+	return r.Context().Value(ctxProviderKey{}).(Provider)
 }
 
 // SetRequestAuthInfo stores the request's user.
 func SetRequestAuthInfo(r *http.Request, info *Info) *http.Request {
-	ctx := context.WithValue(r.Context(), ctxAuthKey, info)
+	ctx := context.WithValue(r.Context(), ctxAuthKey{}, info)
 	return r.WithContext(ctx)
 }
 
 // HasRequestAuthInfo returns true if the request context contains
 // an auth.Info instance.
 func HasRequestAuthInfo(r *http.Request) bool {
-	if _, ok := r.Context().Value(ctxAuthKey).(*Info); ok {
+	if _, ok := r.Context().Value(ctxAuthKey{}).(*Info); ok {
 		return true
 	}
 	return false
@@ -156,7 +153,7 @@ func HasRequestAuthInfo(r *http.Request) bool {
 
 // GetRequestAuthInfo returns the current request's auth info
 func GetRequestAuthInfo(r *http.Request) *Info {
-	return r.Context().Value(ctxAuthKey).(*Info)
+	return r.Context().Value(ctxAuthKey{}).(*Info)
 }
 
 // GetRequestUser returns the current request's user.

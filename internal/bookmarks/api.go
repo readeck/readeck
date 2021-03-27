@@ -29,6 +29,11 @@ import (
 
 var validSchemes = map[string]bool{"http": true, "https": true}
 
+type (
+	ctxBookmarkKey     struct{}
+	ctxBookmarkListKey struct{}
+)
+
 // bookmarkAPI is the base bookmark API router.
 type bookmarkAPI struct {
 	chi.Router
@@ -66,7 +71,7 @@ func newBookmarkAPI(s *server.Server) *bookmarkAPI {
 // bookmarkList renders a paginated list of the connected
 // user bookmarks in JSON.
 func (api *bookmarkAPI) bookmarkList(w http.ResponseWriter, r *http.Request) {
-	bl := r.Context().Value(ctxBookmarkListKey).(bookmarkList)
+	bl := r.Context().Value(ctxBookmarkListKey{}).(bookmarkList)
 
 	bl.Items = make([]bookmarkItem, len(bl.items))
 	for i, item := range bl.items {
@@ -79,7 +84,7 @@ func (api *bookmarkAPI) bookmarkList(w http.ResponseWriter, r *http.Request) {
 
 // bookmarkInfo renders a given bookmark items in JSON.
 func (api *bookmarkAPI) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
-	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 	item := newBookmarkItem(api.srv, r, b, "./..")
 
 	if api.srv.IsTurboRequest(r) {
@@ -95,7 +100,7 @@ func (api *bookmarkAPI) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 // bookmarkArticle renders the article HTML content of a bookmark.
 // Note that only the body's content is rendered.
 func (api *bookmarkAPI) bookmarkArticle(w http.ResponseWriter, r *http.Request) {
-	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
 	bi := newBookmarkItem(api.srv, r, b, "")
 	buf, err := api.getBookmarkArticle(&bi)
@@ -164,7 +169,7 @@ func (api *bookmarkAPI) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
 	updated, err := api.updateBookmark(b, uf)
 	if err != nil {
@@ -190,7 +195,7 @@ func (api *bookmarkAPI) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 
 // bookmarkDelete deletes a bookmark.
 func (api *bookmarkAPI) bookmarkDelete(w http.ResponseWriter, r *http.Request) {
-	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
 	if err := api.deleteBookmark(b); err != nil {
 		api.srv.Error(w, r, err)
@@ -205,7 +210,7 @@ func (api *bookmarkAPI) bookmarkDelete(w http.ResponseWriter, r *http.Request) {
 // Note that for images, we'll use another route that is not
 // authenticated and thus, much faster.
 func (api *bookmarkAPI) bookmarkResource(w http.ResponseWriter, r *http.Request) {
-	b := r.Context().Value(ctxBookmarkKey).(*Bookmark)
+	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 	p := path.Clean(chi.URLParam(r, "*"))
 
 	r2 := new(http.Request)
@@ -232,7 +237,7 @@ func (api *bookmarkAPI) withBookmark(next http.Handler) http.Handler {
 			api.srv.Status(w, r, http.StatusNotFound)
 			return
 		}
-		ctx := context.WithValue(r.Context(), ctxBookmarkKey, b)
+		ctx := context.WithValue(r.Context(), ctxBookmarkKey{}, b)
 
 		if b.State == StateLoaded {
 			api.srv.WriteLastModified(w, b)
@@ -300,7 +305,7 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 
 		res.Pagination = api.srv.NewPagination(r, int(count), pf.Limit, pf.Offset)
 
-		ctx := context.WithValue(r.Context(), ctxBookmarkListKey, res)
+		ctx := context.WithValue(r.Context(), ctxBookmarkListKey{}, res)
 
 		api.srv.WriteEtag(w, res)
 		api.srv.WithCaching(next).ServeHTTP(w, r.Clone(ctx))
@@ -332,7 +337,7 @@ func (api *bookmarkAPI) createBookmark(r *http.Request, u string, html []byte) (
 	// Start extraction job
 	ctx := context.WithValue(
 		context.Background(),
-		ctxJobRequestID,
+		ctxJobRequestID{},
 		api.srv.GetReqID(r),
 	)
 	enqueueExtractPage(ctx, b, html)

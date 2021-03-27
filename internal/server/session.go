@@ -11,13 +11,13 @@ import (
 	"codeberg.org/readeck/readeck/configs"
 )
 
-type ctxKeySession struct{}
-type ctxKeyFlash struct{}
+type (
+	ctxSessionKey struct{}
+	ctxFlashKey   struct{}
+)
 
 var (
-	store         sessions.Store
-	ctxSessionKey = &ctxKeySession{}
-	ctxFlashKey   = &ctxKeyFlash{}
+	store sessions.Store
 )
 
 // FlashMessage contains a message type and content.
@@ -55,12 +55,12 @@ func (s *Server) WithSession() func(next http.Handler) http.Handler {
 			session.Options.Path = path.Join(s.BasePath)
 
 			ctx := r.Context()
-			ctx = context.WithValue(ctx, ctxSessionKey, session)
+			ctx = context.WithValue(ctx, ctxSessionKey{}, session)
 
 			// Pop messages and store then. We must do it before
 			// anything is sent to the client.
 			flashes := session.Flashes()
-			ctx = context.WithValue(ctx, ctxFlashKey, flashes)
+			ctx = context.WithValue(ctx, ctxFlashKey{}, flashes)
 			if len(flashes) > 0 {
 				session.Save(r, w)
 			}
@@ -74,7 +74,7 @@ func (s *Server) WithSession() func(next http.Handler) http.Handler {
 // It will panic (on purpose) if the route is not using the
 // WithSession() middleware.
 func (s *Server) GetSession(r *http.Request) *sessions.Session {
-	return r.Context().Value(ctxSessionKey).(*sessions.Session)
+	return r.Context().Value(ctxSessionKey{}).(*sessions.Session)
 }
 
 // AddFlash saves a flash message in the session.
@@ -87,7 +87,7 @@ func (s *Server) AddFlash(w http.ResponseWriter, r *http.Request, typ, msg strin
 // Flashes returns the flash messages retrieved from the session
 // store in the session middleware.
 func (s *Server) Flashes(r *http.Request) []FlashMessage {
-	if msgs := r.Context().Value(ctxFlashKey); msgs != nil {
+	if msgs := r.Context().Value(ctxFlashKey{}); msgs != nil {
 		res := make([]FlashMessage, len(msgs.([]interface{})))
 		for i, item := range msgs.([]interface{}) {
 			res[i] = item.(FlashMessage)

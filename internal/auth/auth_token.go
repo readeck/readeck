@@ -45,7 +45,6 @@ func (p *TokenAuthProvider) Authenticate(w http.ResponseWriter, r *http.Request)
 		return r, nil
 	}
 
-	// ctx := context.WithValue(r.Context(), ctxAuthToken, res.Token)
 	return SetRequestAuthInfo(r, &Info{
 		Provider: &ProviderInfo{
 			Name:        "bearer token",

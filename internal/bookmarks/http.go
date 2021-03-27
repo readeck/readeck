@@ -11,16 +11,6 @@ import (
 	"codeberg.org/readeck/readeck/pkg/zipfs"
 )
 
-type (
-	ctxKeyBookmark     struct{}
-	ctxKeyBookmarkList struct{}
-)
-
-var (
-	ctxBookmarkKey     = &ctxKeyBookmark{}
-	ctxBookmarkListKey = &ctxKeyBookmarkList{}
-)
-
 // SetupRoutes mounts the routes for the bookmarks domain.
 // "/bm" is a public route outside the api scope in order to avoid
 // sending the session cookie.
