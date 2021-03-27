@@ -61,14 +61,14 @@ type directFileServer struct {
 func (f *directFileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	accepts := getAcceptEncodings(r)
 	name := filepath.Base(r.URL.Path)
-	mtime := configs.BuildTime()
+	mtime := configs.BuildTime().Truncate(time.Second)
 
 	// Super shortchut for If-Modified-Since
-	ius := r.Header.Get("If-Unmodified-Since")
-	t, err := http.ParseTime(ius)
+	ims := r.Header.Get("If-Modified-Since")
+	t, err := http.ParseTime(ims)
 	if err == nil {
-		m := mtime.Truncate(time.Second)
-		if m.Before(t) || m.Equal(t) {
+		t = t.Truncate(time.Second)
+		if mtime.Before(t) || mtime.Equal(t) {
 			w.WriteHeader(http.StatusNotModified)
 			return
 		}
