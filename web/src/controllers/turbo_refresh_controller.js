@@ -26,7 +26,6 @@ export default class extends Controller {
     }
 
     // We need this to check the selector on every mutation
-    // console.log("connect", new Date())
     this.timeout = null
 
     if (!this.isLoaded()) {
@@ -49,10 +48,8 @@ export default class extends Controller {
     if (this.timeout !== null) {
       return
     }
-    // console.log("must check", new Date())
 
     this.timeout = window.setTimeout(async () => {
-      // console.log("check", new Date(), this.srcValue)
       this.element.src = this.srcValue
       await this.element.loaded
 
