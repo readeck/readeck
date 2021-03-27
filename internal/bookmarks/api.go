@@ -46,15 +46,19 @@ func newBookmarkAPI(s *server.Server) *bookmarkAPI {
 	r := s.AuthenticatedRouter()
 
 	api := &bookmarkAPI{r, s}
-	r.Get("/", api.bookmarkList)
-	r.Post("/", api.bookmarkCreate)
+	r.Group(func(r chi.Router) {
+		r.With(api.withBookmarkList).Get("/", api.bookmarkList)
+		r.Post("/", api.bookmarkCreate)
+	})
 
-	br := r.With(api.withBookmark)
-	br.Get("/{uid}", api.bookmarkInfo)
-	br.Get("/{uid}/article", api.bookmarkArticle)
-	br.Get("/{uid}/x/*", api.bookmarkResource)
-	br.Patch("/{uid}", api.bookmarkUpdate)
-	br.Delete("/{uid}", api.bookmarkDelete)
+	r.Group(func(r chi.Router) {
+		r = r.With(api.withBookmark)
+		r.Get("/{uid}", api.bookmarkInfo)
+		r.Get("/{uid}/article", api.bookmarkArticle)
+		r.Get("/{uid}/x/*", api.bookmarkResource)
+		r.Patch("/{uid}", api.bookmarkUpdate)
+		r.Delete("/{uid}", api.bookmarkDelete)
+	})
 
 	return api
 }
@@ -62,14 +66,11 @@ func newBookmarkAPI(s *server.Server) *bookmarkAPI {
 // bookmarkList renders a paginated list of the connected
 // user bookmarks in JSON.
 func (api *bookmarkAPI) bookmarkList(w http.ResponseWriter, r *http.Request) {
-	bl, err := api.getBookmarks(r, ".")
-	if err != nil {
-		if errors.Is(err, ErrNotFound) {
-			api.srv.TextMessage(w, r, http.StatusNotFound, "not found")
-			return
-		}
-		api.srv.Error(w, r, err)
-		return
+	bl := r.Context().Value(ctxBookmarkListKey).(bookmarkList)
+
+	bl.Items = make([]bookmarkItem, len(bl.items))
+	for i, item := range bl.items {
+		bl.Items[i] = newBookmarkItem(api.srv, r, item, ".")
 	}
 
 	api.srv.SendPaginationHeaders(w, r, bl.Pagination.TotalCount, bl.Pagination.Limit, bl.Pagination.Offset)
@@ -231,76 +232,79 @@ func (api *bookmarkAPI) withBookmark(next http.Handler) http.Handler {
 			api.srv.Status(w, r, http.StatusNotFound)
 			return
 		}
-
-		dates := []time.Time{configs.BuildTime(), b.Updated}
-		if r.Method == "GET" && len(r.URL.Query()) == 0 && api.srv.CheckIfModifiedSince(
-			r, dates...,
-		) {
-			w.WriteHeader(http.StatusNotModified)
-			return
-		}
-
 		ctx := context.WithValue(r.Context(), ctxBookmarkKey, b)
 
 		if b.State == StateLoaded {
-			api.srv.SetLastModified(w, dates...)
+			api.srv.WriteLastModified(w, b)
+			api.srv.WriteEtag(w, b)
 		}
-		next.ServeHTTP(w, r.WithContext(ctx))
+
+		api.srv.WithCaching(next).ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 
-// getBookmarks returns a paginated list of BookmarkItem
-// (BookmarkList). It applies pagination and any filter
-// parameters that are present in the request.
-func (api *bookmarkAPI) getBookmarks(r *http.Request, base string) (bookmarkList, error) {
-	res := bookmarkList{}
+func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			next.ServeHTTP(w, r)
+			return
+		}
 
-	pf, _ := api.srv.GetPageParams(r)
-	if pf == nil {
-		return res, ErrNotFound
-	}
-	if pf.Limit == 0 {
-		pf.Limit = 30
-	}
+		res := bookmarkList{}
 
-	ds := Bookmarks.Query().
-		Select(
-			"b.id", "b.uid", "b.created", "b.updated", "b.state", "b.url", "b.title",
-			"b.site_name", "b.site", "b.authors", "b.lang", "b.type",
-			"b.is_deleted", "b.is_read", "b.is_marked", "b.is_archived",
-			"b.tags", "b.description", "b.file_path", "b.files").
-		Where(
-			goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
-		)
+		pf, _ := api.srv.GetPageParams(r)
+		if pf == nil {
+			api.srv.Status(w, r, http.StatusNotFound)
+			return
+		}
+		if pf.Limit == 0 {
+			pf.Limit = 30
+		}
 
-	ds = ds.Order(goqu.I("created").Desc())
+		ds := Bookmarks.Query().
+			Select(
+				"b.id", "b.uid", "b.created", "b.updated", "b.state", "b.url", "b.title",
+				"b.site_name", "b.site", "b.authors", "b.lang", "b.type",
+				"b.is_deleted", "b.is_read", "b.is_marked", "b.is_archived",
+				"b.tags", "b.description", "b.file_path", "b.files").
+			Where(
+				goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
+			)
 
-	// if strings.TrimSpace(search.Query) != "" {
-	// 	ds = Bookmarks.AddSearch(ds, search.Query)
-	// }
+		ds = ds.Order(goqu.I("created").Desc())
 
-	ds = ds.
-		Limit(uint(pf.Limit)).
-		Offset(uint(pf.Offset))
+		// if strings.TrimSpace(search.Query) != "" {
+		// 	ds = Bookmarks.AddSearch(ds, search.Query)
+		// }
 
-	count, err := ds.ClearOrder().ClearLimit().ClearOffset().Count()
-	if err != nil {
-		return res, err
-	}
+		ds = ds.
+			Limit(uint(pf.Limit)).
+			Offset(uint(pf.Offset))
 
-	items := []*Bookmark{}
-	if err := ds.ScanStructs(&items); err != nil {
-		return res, err
-	}
+		var count int64
+		var err error
+		if count, err = ds.ClearOrder().ClearLimit().ClearOffset().Count(); err != nil {
+			if errors.Is(err, ErrNotFound) {
+				api.srv.TextMessage(w, r, http.StatusNotFound, "not found")
+			} else {
+				api.srv.Error(w, r, err)
+			}
+			return
+		}
 
-	res.Pagination = api.srv.NewPagination(r, int(count), pf.Limit, pf.Offset)
+		res.items = []*Bookmark{}
+		if err := ds.ScanStructs(&res.items); err != nil {
+			api.srv.Error(w, r, err)
+			return
+		}
 
-	res.Items = make([]bookmarkItem, len(items))
-	for i, item := range items {
-		res.Items[i] = newBookmarkItem(api.srv, r, item, base)
-	}
+		res.Pagination = api.srv.NewPagination(r, int(count), pf.Limit, pf.Offset)
 
-	return res, nil
+		ctx := context.WithValue(r.Context(), ctxBookmarkListKey, res)
+
+		api.srv.WriteEtag(w, res)
+		api.srv.WithCaching(next).ServeHTTP(w, r.Clone(ctx))
+	})
 }
 
 // getBookmarkArticle returns a strings.Reader containing the
@@ -472,8 +476,18 @@ func (api *bookmarkAPI) deleteBookmarkCancel(b *Bookmark) error {
 
 // bookmarkList is a paginated list of BookmarkItem instances.
 type bookmarkList struct {
+	items      []*Bookmark
 	Pagination server.Pagination
 	Items      []bookmarkItem
+}
+
+func (bl bookmarkList) GetSumStrings() []string {
+	r := []string{}
+	for i := range bl.items {
+		r = append(r, bl.items[i].Updated.String(), bl.items[i].UID)
+	}
+
+	return r
 }
 
 // bookmarkItem is a serialized bookmark instance that can

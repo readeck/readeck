@@ -1,7 +1,6 @@
 package bookmarks
 
 import (
-	"errors"
 	"net/http"
 	"os"
 	"strings"
@@ -22,12 +21,15 @@ func newBookmarkViews(api *bookmarkAPI) *bookmarkViews {
 	r := api.srv.AuthenticatedRouter()
 
 	h := &bookmarkViews{r, api}
-	r.HandleFunc("/", h.bookmarkList)
+	r.With(api.withBookmarkList).
+		HandleFunc("/", h.bookmarkList)
 
-	br := r.With(api.withBookmark)
-	br.Get("/{uid}", h.bookmarkInfo)
-	br.Post("/{uid}", h.bookmarkUpdate)
-	br.Post("/{uid}/delete", h.bookmarkDelete)
+	r.Group(func(r chi.Router) {
+		r = r.With(api.withBookmark)
+		r.Get("/{uid}", h.bookmarkInfo)
+		r.Post("/{uid}", h.bookmarkUpdate)
+		r.Post("/{uid}/delete", h.bookmarkDelete)
+	})
 
 	return h
 }
@@ -59,14 +61,11 @@ func (h *bookmarkViews) bookmarkList(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Retrieve the bookmark list
-	bl, err := h.getBookmarks(r, ".")
-	if err != nil {
-		if errors.Is(err, ErrNotFound) {
-			w.WriteHeader(http.StatusNotFound)
-			return
-		}
-		h.srv.Error(w, r, err)
-		return
+	bl := r.Context().Value(ctxBookmarkListKey).(bookmarkList)
+
+	bl.Items = make([]bookmarkItem, len(bl.items))
+	for i, item := range bl.items {
+		bl.Items[i] = newBookmarkItem(h.srv, r, item, ".")
 	}
 
 	ctx := server.TC{

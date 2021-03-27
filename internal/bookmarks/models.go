@@ -312,6 +312,14 @@ func (b *Bookmark) getArticle(baseURL string) (*strings.Reader, error) {
 	return strings.NewReader(res), nil
 }
 
+func (b *Bookmark) GetSumStrings() []string {
+	return []string{b.UID, b.Updated.String()}
+}
+
+func (b *Bookmark) GetLastModified() []time.Time {
+	return []time.Time{b.Updated}
+}
+
 // Strings is a list of strings stored in a column.
 type Strings []string
 

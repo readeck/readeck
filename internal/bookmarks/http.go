@@ -11,10 +11,14 @@ import (
 	"codeberg.org/readeck/readeck/pkg/zipfs"
 )
 
-type ctxKey struct{}
+type (
+	ctxKeyBookmark     struct{}
+	ctxKeyBookmarkList struct{}
+)
 
 var (
-	ctxBookmarkKey = &ctxKey{}
+	ctxBookmarkKey     = &ctxKeyBookmark{}
+	ctxBookmarkListKey = &ctxKeyBookmarkList{}
 )
 
 // SetupRoutes mounts the routes for the bookmarks domain.
