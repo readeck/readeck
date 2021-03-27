@@ -2,6 +2,7 @@ const path = require("path")
 const zlib = require("zlib")
 
 const CompressionPlugin = require("compression-webpack-plugin")
+const CopyPlugin = require("copy-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin")
 const AssetMap = require("./utils/asset-map")
@@ -106,6 +107,11 @@ module.exports = {
     }),
     new SpriteLoaderPlugin({
       plainSprite: true,
+    }),
+    new CopyPlugin({
+      patterns: [{
+        from: "src/img/favicon.png", to: "img/[name].[hash:8][ext]",
+      }],
     }),
     new CompressionPlugin({
       test: /\.(js|css|svg)?$/i,
