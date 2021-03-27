@@ -11,7 +11,7 @@ const path = require("path")
 const rxFilename = new RegExp(/^(.+)(\.[a-z0-9]{8}\.)(.+)$/)
 
 // We don't need to map these extensions
-const excluded = [".map", ".gz", ".br", ".woff", ".woff2"]
+const excluded = [".map", ".gz", ".br", ".woff", ".woff2", ".txt"]
 
 class AssetMap {
   constructor(options) {

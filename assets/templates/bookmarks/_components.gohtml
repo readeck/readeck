@@ -51,6 +51,10 @@ bookmarks:card renders a bookmark card
  data-turbo-refresh-on-value=".card .bookmark-loading"
  data-turbo-refresh-src-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}">
 <div class="card">
+  <div class="card-image">
+    <img loading="lazy" src="{{ urlFor .ctx (print "/assets/rnd/" $x.ID ".svg") }}" alt=""
+     width="256" height="160">
+  </div>
   <div class="card-content">
     <div class="bookmark-loading">
       {{ template "spinner" .ctx }}
@@ -64,14 +68,15 @@ bookmarks:card renders a bookmark card
 {{ else }}
 <turbo-frame id="bookmark-card-{{ .item.ID }}">
 <div class="card{{ $x.IsDeleted | ternary " state-deleted" "" }}">
-  <div class="card-image">
-  {{- if $x.Resources.thumbnail }}
-  <img loading="lazy" src="{{ $x.Resources.thumbnail.Src }}" alt=""
-    width="{{ $x.Resources.thumbnail.Width }}" height="{{ .Resources.thumbnail.Height }}">
+  <div class="card-image"><a href="{{ $url }}">
+  {{- with $x.Resources.thumbnail }}
+  <img loading="lazy" src="{{ .Src }}" alt=""
+   width="{{ .Width }}" height="{{ .Height }}">
   {{ else }}
-  <img src="{{ urlFor .ctx (print "/assets/rnd/" $x.ID ".svg") }}" alt="">
+  <img loading="lazy" src="{{ urlFor .ctx (print "/assets/rnd/" $x.ID ".svg") }}" alt=""
+   width="256" height="160">
   {{ end -}}
-  </div>
+  </a></div>
   <div class="card-content">
     <h3 class="title"><a href="{{ $url }}" data-turbo-frame="_top">{{ default "untitled" $x.Title }}</a></h3>
     {{- if $x.Tags }}
