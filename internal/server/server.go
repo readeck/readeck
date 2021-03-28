@@ -47,7 +47,7 @@ func New(basePath string) *Server {
 		middleware.RealIP,
 		middleware.RequestID,
 		Logger(),
-		SetRequestInfo,
+		s.InitRequest,
 		auth.Init(
 			&auth.BasicAuthProvider{},
 			&auth.TokenAuthProvider{},
@@ -58,7 +58,7 @@ func New(basePath string) *Server {
 				},
 			},
 		),
-		s.SetSecurity(),
+		s.SetSecurityHeaders(),
 	)
 
 	// Init templates

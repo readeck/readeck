@@ -49,10 +49,13 @@ type configMain struct {
 }
 
 type configServer struct {
-	Host    string        `json:"host"`
-	Port    int           `json:"port"`
-	Prefix  string        `json:"prefix"`
-	Session configSession `json:"session"`
+	Host               string        `json:"host"`
+	Port               int           `json:"port"`
+	Prefix             string        `json:"prefix"`
+	AllowedHosts       []string      `json:"allowed_hosts"`
+	UseXForwardedHost  bool          `json:"use_x_forwarded_host"`
+	UseXForwardedProto bool          `json:"use_x_forwarded_proto"`
+	Session            configSession `json:"session"`
 }
 
 type configDB struct {
