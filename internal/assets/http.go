@@ -16,6 +16,7 @@ import (
 	"codeberg.org/readeck/readeck/assets"
 	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/internal/server"
+	"codeberg.org/readeck/readeck/pkg/accept"
 )
 
 var (
@@ -59,8 +60,6 @@ type directFileServer struct {
 }
 
 func (f *directFileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	accepts := getAcceptEncodings(r)
-	name := filepath.Base(r.URL.Path)
 	mtime := configs.BuildTime().Truncate(time.Second)
 
 	// Super shortchut for If-Modified-Since
@@ -72,6 +71,12 @@ func (f *directFileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusNotModified)
 			return
 		}
+	}
+
+	name := filepath.Base(r.URL.Path)
+	accepts := map[string]bool{}
+	for _, x := range accept.ParseAccept(r.Header, "Accept-Encoding") {
+		accepts[x.Value] = true
 	}
 
 	// Loop over all encoding candidates and return the first matching file
@@ -125,14 +130,4 @@ func (f *directFileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.ServeContent(w, r, name, mtime, fd)
 		return
 	}
-}
-
-func getAcceptEncodings(r *http.Request) map[string]bool {
-	res := map[string]bool{}
-	ae := r.Header.Get("Accept-Encoding")
-
-	for _, x := range strings.Split(ae, ",") {
-		res[strings.TrimSpace(strings.Split(x, ";")[0])] = true
-	}
-	return res
 }
