@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS user (
     updated  datetime NOT NULL,
     username text     UNIQUE NOT NULL,
     email    text     UNIQUE NOT NULL,
-    password text     NOT NULL
+    password text     NOT NULL,
+    `group`  text     NOT NULL DEFAULT "user"
 );
 
 CREATE TABLE IF NOT EXISTS token (
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS token (
     expires     datetime NULL,
     is_enabled  integer  NOT NULL DEFAULT 1,
     application text	 NOT NULL,
+    roles       json     NOT NULL DEFAULT "",
 
     CONSTRAINT fk_token_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );

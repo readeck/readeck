@@ -5,29 +5,31 @@ CREATE TABLE migration (
 );
 
 CREATE TABLE IF NOT EXISTS "user" (
-    id       SERIAL      PRIMARY KEY,
-    created  timestamptz NOT NULL,
-    updated  timestamptz NOT NULL,
-    username text        UNIQUE NOT NULL,
-    email    text        UNIQUE NOT NULL,
-    password text        NOT NULL
+    id       SERIAL       PRIMARY KEY,
+    created  timestamptz  NOT NULL,
+    updated  timestamptz  NOT NULL,
+    username varchar(128) UNIQUE NOT NULL,
+    email    varchar(128) UNIQUE NOT NULL,
+    password varchar(256) NOT NULL,
+    "group"  varchar(64)  NOT NULL DEFAULT 'user'
 );
 
 CREATE TABLE IF NOT EXISTS token (
-    id          SERIAL      PRIMARY KEY,
-    uid         text        UNIQUE NOT NULL,
-    user_id     integer     NOT NULL,
-    created     timestamptz NOT NULL,
-    expires     timestamptz NULL,
-    is_enabled  boolean     NOT NULL DEFAULT true,
-    application text	    NOT NULL,
+    id          SERIAL        PRIMARY KEY,
+    uid         varchar(32)   UNIQUE NOT NULL,
+    user_id     integer       NOT NULL,
+    created     timestamptz   NOT NULL,
+    expires     timestamptz   NULL,
+    is_enabled  boolean       NOT NULL DEFAULT true,
+    application varchar(128)  NOT NULL,
+    roles       json          NOT NULL DEFAULT '[]',
 
     CONSTRAINT fk_token_user FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS bookmark (
     id          SERIAL      PRIMARY KEY,
-    uid         text        UNIQUE NOT NULL,
+    uid         varchar(32) UNIQUE NOT NULL,
     user_id     integer     NOT NULL,
     created     timestamptz NOT NULL,
     updated     timestamptz NOT NULL,
@@ -42,8 +44,8 @@ CREATE TABLE IF NOT EXISTS bookmark (
     site_name   text        NOT NULL DEFAULT '',
     published   timestamptz,
     authors     json        NOT NULL DEFAULT '[]',
-    lang        text        NOT NULL DEFAULT '',
-    type        text        NOT NULL DEFAULT '',
+    lang        varchar(16) NOT NULL DEFAULT '',
+    type        varchar(64) NOT NULL DEFAULT '',
     description text        NOT NULL DEFAULT '',
     text        text        NOT NULL DEFAULT '',
     embed       text        NOT NULL DEFAULT '',
