@@ -51,18 +51,23 @@ func newBookmarkAPI(s *server.Server) *bookmarkAPI {
 	r := s.AuthenticatedRouter()
 
 	api := &bookmarkAPI{r, s}
-	r.Group(func(r chi.Router) {
+
+	r.With(api.srv.WithPermission("read")).Group(func(r chi.Router) {
 		r.With(api.withBookmarkList).Get("/", api.bookmarkList)
-		r.Post("/", api.bookmarkCreate)
+		r.With(api.withBookmark).Group(func(r chi.Router) {
+			r.Get("/{uid}", api.bookmarkInfo)
+			r.Get("/{uid}/article", api.bookmarkArticle)
+			r.Get("/{uid}/x/*", api.bookmarkResource)
+		})
+
 	})
 
-	r.Group(func(r chi.Router) {
-		r = r.With(api.withBookmark)
-		r.Get("/{uid}", api.bookmarkInfo)
-		r.Get("/{uid}/article", api.bookmarkArticle)
-		r.Get("/{uid}/x/*", api.bookmarkResource)
-		r.Patch("/{uid}", api.bookmarkUpdate)
-		r.Delete("/{uid}", api.bookmarkDelete)
+	r.With(api.srv.WithPermission("write")).Group(func(r chi.Router) {
+		r.Post("/", api.bookmarkCreate)
+		r.With(api.withBookmark).Group(func(r chi.Router) {
+			r.Patch("/{uid}", api.bookmarkUpdate)
+			r.Delete("/{uid}", api.bookmarkDelete)
+		})
 	})
 
 	return api
@@ -250,11 +255,6 @@ func (api *bookmarkAPI) withBookmark(next http.Handler) http.Handler {
 
 func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodGet {
-			next.ServeHTTP(w, r)
-			return
-		}
-
 		res := bookmarkList{}
 
 		pf, _ := api.srv.GetPageParams(r)
@@ -307,7 +307,9 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 
 		ctx := context.WithValue(r.Context(), ctxBookmarkListKey{}, res)
 
-		api.srv.WriteEtag(w, res)
+		if r.Method == http.MethodGet {
+			api.srv.WriteEtag(w, res)
+		}
 		api.srv.WithCaching(next).ServeHTTP(w, r.Clone(ctx))
 	})
 }

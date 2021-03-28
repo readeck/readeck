@@ -21,14 +21,18 @@ func newBookmarkViews(api *bookmarkAPI) *bookmarkViews {
 	r := api.srv.AuthenticatedRouter()
 
 	h := &bookmarkViews{r, api}
-	r.With(api.withBookmarkList).
-		HandleFunc("/", h.bookmarkList)
 
-	r.Group(func(r chi.Router) {
-		r = r.With(api.withBookmark)
-		r.Get("/{uid}", h.bookmarkInfo)
-		r.Post("/{uid}", h.bookmarkUpdate)
-		r.Post("/{uid}/delete", h.bookmarkDelete)
+	r.With(h.srv.WithPermission("read")).Group(func(r chi.Router) {
+		r.With(api.withBookmarkList).Get("/", h.bookmarkList)
+		r.With(api.withBookmark).Get("/{uid}", h.bookmarkInfo)
+	})
+
+	r.With(h.srv.WithPermission("write")).Group(func(r chi.Router) {
+		r.With(api.withBookmarkList).Post("/", h.bookmarkList)
+		r.With(api.withBookmark).Group(func(r chi.Router) {
+			r.Post("/{uid}", h.bookmarkUpdate)
+			r.Post("/{uid}/delete", h.bookmarkDelete)
+		})
 	})
 
 	return h
