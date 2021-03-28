@@ -3,14 +3,21 @@
 {{ define "body" }}
 <div class="app">
   <nav class="navbar">
+    <h1><a href="{{ urlFor $ "/" }}">Readeck</a></h1>
     <div class="main-nav">
-      <a class="active" href="{{ urlFor $ "/bookmarks" }}">
+      <a class="button active" href="{{ urlFor $ "/bookmarks" }}">
       {{ icon . "o-bookmarks" }} Bookmarks</a>
     </div>
 
     <div class="user-menu">
-      <a class="rounded icon" href="{{ urlFor $ "/profile" }}">{{ icon . "o-user" }}</a>
+      <a class="button rounded icon" href="{{ urlFor $ "/profile" }}">{{ icon . "o-user" }}</a>
     </div>
+
+    {{ if hasPermission $ "/admin" "read" -}}
+    <div>
+      <a class="button rounded icon" href="{{ urlFor $ "/admin" }}">{{ icon . "o-admin" }}</a>
+    </div>
+    {{- end }}
 
     <form action="{{ urlFor $ "/logout" }}" method="post">
       {{ template "csrfField" $ }}
