@@ -8,7 +8,9 @@
 <ul>
   <li><a href="{{ urlFor $ "/profile" }}">Profile</a></li>
   <li><a href="{{ urlFor $ "/profile/password" }}">Password</a></li>
+  {{ if hasPermission $ "/profile/tokens" "read" -}}
   <li><a href="{{ urlFor $ "/profile/tokens" }}">API Tokens</a></li>
+  {{- end }}
 </ul>
 </aside>
 {{ end }}
