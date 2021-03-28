@@ -5,11 +5,11 @@ linters:
   fast: true
   enable:
     - revive
+    - golint
     - govet
     - gosimple
     - deadcode
     - typecheck
-    - govet
     - unused
     - structcheck
     - varcheck
