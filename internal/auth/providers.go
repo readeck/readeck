@@ -83,11 +83,15 @@ func Init(providers ...Provider) func(next http.Handler) http.Handler {
 				}
 			}
 
+			// Set a default provider
 			if provider == nil {
 				provider = &NullProvider{}
 			}
-
 			r = setRequestProvider(r, provider)
+
+			// Always set a anonymous user
+			r = SetRequestAuthInfo(r, &Info{User: &users.User{}})
+
 			next.ServeHTTP(w, r)
 		})
 	}
@@ -113,7 +117,7 @@ func Required(next http.Handler) http.Handler {
 			return
 		}
 
-		if !HasRequestAuthInfo(r) {
+		if GetRequestUser(r).IsAnonymous() {
 			w.WriteHeader(http.StatusForbidden)
 			return
 		}
@@ -140,15 +144,6 @@ func GetRequestProvider(r *http.Request) Provider {
 func SetRequestAuthInfo(r *http.Request, info *Info) *http.Request {
 	ctx := context.WithValue(r.Context(), ctxAuthKey{}, info)
 	return r.WithContext(ctx)
-}
-
-// HasRequestAuthInfo returns true if the request context contains
-// an auth.Info instance.
-func HasRequestAuthInfo(r *http.Request) bool {
-	if _, ok := r.Context().Value(ctxAuthKey{}).(*Info); ok {
-		return true
-	}
-	return false
 }
 
 // GetRequestAuthInfo returns the current request's auth info

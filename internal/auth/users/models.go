@@ -152,6 +152,12 @@ func (u *User) CheckCode() uint32 {
 	), crc32.IEEETable)
 }
 
+// IsAnonymous returns true when the instance is not set to any existing user
+// (when ID is 0)
+func (u *User) IsAnonymous() bool {
+	return u.ID == 0
+}
+
 // Roles returns all the user's implicit roles.
 func (u *User) Roles() []string {
 	r, _ := acls.GetRoles(u.Group)
