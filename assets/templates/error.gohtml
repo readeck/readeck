@@ -1,0 +1,28 @@
+{{ extends "base.gohtml" }}
+
+{{ define "title" }}Error{{ end }}
+
+{{ define "body" }}
+<div class="app">
+  <nav class="navbar">
+    <div class="main-nav">
+      <h1><a href="{{ urlFor $ "/" }}">Readeck</a></h1>
+    </div>
+  </nav>
+
+  <div class="main">
+    <main>
+      <h1 class="title">Error</h1>
+
+      {{ if eq .status 403 }}
+      <p>Permission denied</p>
+      {{ else if eq .status 404 }}
+      <p>Page not found</p>
+      {{ else }}
+      <p>An error occured</p>
+      {{ end }}
+    </main>
+  </div>
+</div>
+
+{{ end }}
