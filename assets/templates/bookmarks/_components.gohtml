@@ -186,7 +186,7 @@ bookmark:actions renders a bookmark action form
     </form>
 
     <form action="{{ $url }}/delete" method="post">
-      {{ template "csrfField" $ }}
+      {{ template "csrfField" .ctx }}
       <input type="hidden" name="_to" value="{{ .ctx.currentPath }}" />
       <button class="outlined rounded icon delete" name="is_deleted" value="1"
        data-controller="turbo-form"

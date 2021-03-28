@@ -192,7 +192,7 @@ func (s *Server) AbsoluteURL(r *http.Request, parts ...string) *url.URL {
 // can later be used in the AbsoluteURL
 // or Redirect functions.
 func (s *Server) CurrentPath(r *http.Request) string {
-	p := strings.TrimLeft(r.URL.Path, s.BasePath)
+	p := strings.TrimPrefix(r.URL.Path, s.BasePath)
 	p = "/" + p
 	if r.URL.RawQuery != "" {
 		p += "?" + r.URL.RawQuery
