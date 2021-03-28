@@ -33,6 +33,10 @@ var serveCmd = &cobra.Command{
 }
 
 func runServe(_ *cobra.Command, _ []string) error {
+	if !configs.Config.Main.DevMode && len(configs.Config.Server.AllowedHosts) == 0 {
+		return fmt.Errorf("The server.allowed_hosts setting is not set")
+	}
+
 	s := server.New(configs.Config.Server.Prefix)
 
 	// Static asserts
