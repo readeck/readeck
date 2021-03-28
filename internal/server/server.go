@@ -130,10 +130,12 @@ func (s *Server) ListenAndServe() error {
 		MaxHeaderBytes: 1 << 20,
 	}
 
+	// System routes
+	s.AddRoute("/api/sys", s.sysRoutes())
+
 	// Add the profiler in dev mode
 	if configs.Config.Main.DevMode {
-		s.AddRoute("/debug", middleware.Profiler())
-		s.AddRoute("/api/sys", s.SysRoutes())
+		s.AddRoute("/debug", s.debugRoutes())
 	}
 
 	// Init templates
@@ -201,10 +203,13 @@ func (s *Server) CurrentPath(r *http.Request) string {
 	return p
 }
 
+// AssetURL returns the real URL for a given asset.
 func (s *Server) AssetURL(r *http.Request, name string) string {
 	return s.AbsoluteURL(r, "/assets", assets.AssetMap()[name]).String()
 }
 
+// IsTurboRequest returns true when the request was made with
+// an x-turbo header.
 func (s *Server) IsTurboRequest(r *http.Request) bool {
 	return r.Header.Get("x-turbo") == "1"
 }
@@ -222,14 +227,11 @@ func (s *Server) Log(r *http.Request) *log.Entry {
 	return log.WithField("@id", s.GetReqID(r))
 }
 
-// SysRoutes returns the route returning some system
+// sysRoutes returns the route returning some system
 // information.
-func (s *Server) SysRoutes() http.Handler {
-	r := chi.NewRouter()
-	// r.Use(s.WithSession(), s.WithAuth)
-	r.Use(
-		auth.Required,
-	)
+func (s *Server) sysRoutes() http.Handler {
+	r := s.AuthenticatedRouter()
+	r.Use(s.WithPermission("read"))
 
 	type memInfo struct {
 		Alloc      uint64 `json:"alloc"`
@@ -277,6 +279,13 @@ func (s *Server) SysRoutes() http.Handler {
 		s.Render(w, r, 200, res)
 	})
 
+	return r
+}
+
+func (s *Server) debugRoutes() http.Handler {
+	r := s.AuthenticatedRouter()
+	r.Use(s.WithPermission("read"))
+	r.Mount("/", middleware.Profiler())
 	return r
 }
 
