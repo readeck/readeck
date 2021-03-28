@@ -62,4 +62,5 @@ func (p *BasicAuthProvider) CsrfExempt(_ *http.Request) bool {
 func (p *BasicAuthProvider) denyAccess(w http.ResponseWriter) {
 	w.Header().Add("WWW-Authenticate", `Basic realm="Restricted"`)
 	w.WriteHeader(http.StatusUnauthorized)
+	w.Write([]byte(http.StatusText(http.StatusUnauthorized)))
 }

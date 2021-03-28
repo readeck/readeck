@@ -78,4 +78,5 @@ func (p *TokenAuthProvider) getToken(r *http.Request) (token string, ok bool) {
 func (p *TokenAuthProvider) denyAccess(w http.ResponseWriter) {
 	w.Header().Add("WWW-Authenticate", `Bearer realm="Bearer token"`)
 	w.WriteHeader(http.StatusUnauthorized)
+	w.Write([]byte(http.StatusText(http.StatusUnauthorized)))
 }

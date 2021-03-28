@@ -298,7 +298,7 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 		}
 
 		res.items = []*Bookmark{}
-		if err := ds.ScanStructs(&res.items); err != nil {
+		if err = ds.ScanStructs(&res.items); err != nil {
 			api.srv.Error(w, r, err)
 			return
 		}
