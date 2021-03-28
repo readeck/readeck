@@ -9,6 +9,7 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/hlandau/passlib"
 
+	"codeberg.org/readeck/readeck/internal/acls"
 	"codeberg.org/readeck/readeck/internal/db"
 )
 
@@ -39,6 +40,7 @@ type User struct {
 	Username string    `db:"username"`
 	Email    string    `db:"email"`
 	Password string    `db:"password"`
+	Group    string    `db:"group"`
 }
 
 // Manager is a query helper for user entries.
@@ -148,4 +150,23 @@ func (u *User) CheckCode() uint32 {
 	return crc32.Checksum([]byte(
 		u.Username+u.Email+u.Password,
 	), crc32.IEEETable)
+}
+
+// Roles returns all the user's implicit roles.
+func (u *User) Roles() []string {
+	r, _ := acls.GetRoles(u.Group)
+	return r
+}
+
+// HasPermission returns true if the user can perform "act" action
+// on "obj" object.
+func (u *User) HasPermission(obj, act string) bool {
+	if u.Group == "" {
+		return false
+	}
+	if r, err := acls.Check(u.Group, obj, act); err != nil {
+		return false
+	} else {
+		return r
+	}
 }

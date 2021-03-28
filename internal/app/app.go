@@ -123,6 +123,7 @@ func appPersistentPreRun(_ *cobra.Command, _ []string) error {
 			Username: "admin",
 			Email:    "admin@localhost",
 			Password: "admin",
+			Group:    "admin",
 		}); err != nil {
 			log.WithError(err).Fatal()
 		}
