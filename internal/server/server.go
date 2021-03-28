@@ -20,6 +20,7 @@ import (
 	"codeberg.org/readeck/readeck/assets"
 	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/internal/auth"
+	"codeberg.org/readeck/readeck/internal/auth/users"
 )
 
 // Server is a wrapper around chi router.
@@ -63,17 +64,20 @@ func New(basePath string) *Server {
 	// Init templates
 	s.TemplateFuncs(sprig.FuncMap())
 	s.TemplateFuncs(template.FuncMap{
+		"assetURL": func(ctx TC, name string) string {
+			r := ctx["request"].(*http.Request)
+			return s.AssetURL(r, name)
+		},
 		"cp": func(out io.Writer, in io.Reader) (string, error) {
 			_, err := io.Copy(out, in)
 			return "", err
 		},
-		"urlFor": func(ctx TC, name ...string) string {
-			r := ctx["request"].(*http.Request)
-			return s.AbsoluteURL(r, name...).String()
-		},
-		"assetURL": func(ctx TC, name string) string {
-			r := ctx["request"].(*http.Request)
-			return s.AssetURL(r, name)
+		"hasPermission": func(ctx TC, obj, act string) bool {
+			user, ok := ctx["user"].(*users.User)
+			if !ok || user == nil {
+				return false
+			}
+			return user.HasPermission(obj, act)
 		},
 		"icon": func(ctx TC, name string, args ...interface{}) template.HTML {
 			r := ctx["request"].(*http.Request)
@@ -97,6 +101,10 @@ func New(basePath string) *Server {
 		},
 		"safeAttr": func(val string) template.HTMLAttr {
 			return template.HTMLAttr(val)
+		},
+		"urlFor": func(ctx TC, name ...string) string {
+			r := ctx["request"].(*http.Request)
+			return s.AbsoluteURL(r, name...).String()
 		},
 	})
 

@@ -7,6 +7,8 @@ import (
 	"github.com/gorilla/csrf"
 
 	"codeberg.org/readeck/readeck/assets"
+	"codeberg.org/readeck/readeck/internal/auth"
+	"codeberg.org/readeck/readeck/internal/auth/users"
 	"codeberg.org/readeck/readeck/internal/xtemplate"
 )
 
@@ -53,12 +55,18 @@ func (s *Server) TemplateFuncs(funcMap template.FuncMap) {
 // templatePayload return a prefiled payload with some basic variables
 // and extends it with the given template context.
 func (s *Server) templatePayload(r *http.Request, context TC) TC {
+	var user *users.User
+	if auth.HasRequestAuthInfo(r) {
+		user = auth.GetRequestUser(r)
+	}
+
 	res := TC{
 		"basePath":    s.BasePath,
 		"csrfName":    csrfFieldName,
 		"csrfToken":   csrf.Token(r),
 		"currentPath": s.CurrentPath(r),
 		"request":     r,
+		"user":        user,
 		"assets":      map[string]string{},
 		"flashes":     s.Flashes(r),
 	}
