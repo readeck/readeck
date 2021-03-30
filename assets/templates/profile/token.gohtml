@@ -7,6 +7,19 @@
 
 <h1 class="title">API Token</h1>
 
+{{ if .Deleted -}}
+<form action="{{ $url }}/delete" method="POST">
+  {{ template "csrfField" . }}
+  <div class="message info">
+    <div class="field horizontal">
+      Token will be removed in a few second&nbsp;
+      <button name="cancel" value="1">Cancel</button>
+    </div>
+  </div>
+  </p>
+</form>
+{{- end }}
+
 <h2 class="title">Properties</h2>
 
 <form action="{{ $url }}" method="POST">
@@ -58,5 +71,14 @@
   <textarea readonly="1" style="height:5em; max-width:40em"
    data-clipboard-target="content">Authorization: Bearer {{ .JWT }}</textarea>
 </div>
+
+
+{{ if not .Deleted -}}
+<h2>Delete token</h2>
+<form action="{{ $url }}/delete" method="POST">
+  {{ template "csrfField" . }}
+  <p><button class="danger">Delete token</button></p>
+</form>
+{{- end }}
 
 {{ end }}

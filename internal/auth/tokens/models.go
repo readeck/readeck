@@ -128,6 +128,15 @@ func (t *Token) Save() error {
 	return t.Update(t)
 }
 
+// Delete removes a token from the database
+func (t *Token) Delete() error {
+	_, err := db.Q().Delete(TableName).Prepared(true).
+		Where(goqu.C("id").Eq(t.ID)).
+		Executor().Exec()
+
+	return err
+}
+
 // IsExpired returns true if the token has an expiration date and the
 // current time is after the expiration.
 func (t *Token) IsExpired() bool {

@@ -1,16 +1,16 @@
 package profile
 
 import (
-	"errors"
 	"net/http"
+	"time"
 
-	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi/v5"
 
 	"codeberg.org/readeck/readeck/internal/auth"
 	"codeberg.org/readeck/readeck/internal/auth/tokens"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
+	"codeberg.org/readeck/readeck/pkg/timers"
 )
 
 // profileViews is an HTTP handler for the user profile web views
@@ -18,6 +18,9 @@ type profileViews struct {
 	chi.Router
 	*profileAPI
 }
+
+// Token deletion timers
+var tokenTimers = timers.NewTimerStore("_tokenTimers")
 
 // newProfileViews returns an new instance of ProfileViews
 func newProfileViews(api *profileAPI) *profileViews {
@@ -27,15 +30,16 @@ func newProfileViews(api *profileAPI) *profileViews {
 	r.With(api.srv.WithPermission("read")).Group(func(r chi.Router) {
 		r.Get("/", v.userProfile)
 		r.Get("/password", v.userPassword)
-		r.Get("/tokens", v.tokenList)
-		r.Get("/tokens/{uid}", v.tokenInfo)
+		r.With(api.withTokenList).Get("/tokens", v.tokenList)
+		r.With(api.withToken).Get("/tokens/{uid}", v.tokenInfo)
 	})
 
 	r.With(api.srv.WithPermission("write")).Group(func(r chi.Router) {
 		r.Post("/", v.userProfile)
 		r.Post("/password", v.userPassword)
 		r.Post("/tokens", v.tokenCreate)
-		r.Post("/tokens/{uid}", v.tokenInfo)
+		r.With(api.withToken).Post("/tokens/{uid}", v.tokenInfo)
+		r.With(api.withToken).Post("/tokens/{uid}/delete", v.tokenDelete)
 	})
 
 	return v
@@ -108,15 +112,9 @@ func (v *profileViews) userPassword(w http.ResponseWriter, r *http.Request) {
 }
 
 func (v *profileViews) tokenList(w http.ResponseWriter, r *http.Request) {
-	tl, err := v.getTokens(r, ".")
-	if err != nil {
-		if errors.Is(err, tokens.ErrNotFound) {
-			v.srv.Status(w, r, http.StatusNotFound)
-			return
-		}
-		v.srv.Error(w, r, err)
-		return
-	}
+	tl := r.Context().Value(ctxTokenListKey{}).(tokenList)
+
+	tokenTimers.Clean(w, r, v.srv.GetSession(r))
 
 	ctx := server.TC{
 		"Pagination": tl.Pagination,
@@ -144,22 +142,14 @@ func (v *profileViews) tokenCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (v *profileViews) tokenInfo(w http.ResponseWriter, r *http.Request) {
-	uid := chi.URLParam(r, "uid")
-	t, err := tokens.Tokens.GetOne(
-		goqu.C("uid").Eq(uid),
-		goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
-	)
-	if err != nil {
-		v.srv.Status(w, r, http.StatusNotFound)
-		return
-	}
+	ti := r.Context().Value(ctxtTokenKey{}).(tokenItem)
 
 	tf := &tokenForm{}
 	f := form.NewForm(tf)
 
 	if r.Method == http.MethodGet {
-		tf.Expires = t.Expires
-		tf.IsEnabled = t.IsEnabled
+		tf.Expires = ti.Token.Expires
+		tf.IsEnabled = ti.Token.IsEnabled
 	}
 
 	if r.Method == http.MethodPost {
@@ -168,30 +158,71 @@ func (v *profileViews) tokenInfo(w http.ResponseWriter, r *http.Request) {
 			if tf.Expires != nil && tf.Expires.IsZero() {
 				tf.Expires = nil
 			}
-			t.IsEnabled = tf.IsEnabled
-			t.Expires = tf.Expires
-			if err := t.Save(); err != nil {
+			ti.Token.IsEnabled = tf.IsEnabled
+			ti.Token.Expires = tf.Expires
+			if err := ti.Token.Save(); err != nil {
 				v.srv.Log(r).WithError(err).Error("server error")
 				v.srv.AddFlash(w, r, "error", "Error while updating token")
 			} else {
 				v.srv.AddFlash(w, r, "info", "Token was updated.")
 			}
-			v.srv.Redirect(w, r, t.UID)
+			v.srv.Redirect(w, r, ti.UID)
 			return
-
 		}
 	}
 
-	jwt, err := tokens.NewJwtToken(t.UID)
+	jwt, err := tokens.NewJwtToken(ti.UID)
 	if err != nil {
 		v.srv.Status(w, r, http.StatusInternalServerError)
 		return
 	}
 
 	ctx := server.TC{
-		"Token": newTokenItem(v.srv, r, t, "."),
+		"Token": ti,
 		"JWT":   jwt,
 		"Form":  f,
 	}
+
+	sess := v.srv.GetSession(r)
+	timerID := tokenTimers.Get(sess, ti.UID)
+	if !tokenTimers.Exists(timerID) {
+		tokenTimers.Save(w, r, sess, ti.UID, timerID)
+	} else {
+		ctx["Deleted"] = true
+	}
+
 	v.srv.RenderTemplate(w, r, 200, "profile/token.gohtml", ctx)
+}
+
+func (v *profileViews) tokenDelete(w http.ResponseWriter, r *http.Request) {
+	df := &deleteForm{}
+	f := form.NewForm(df)
+	form.Bind(f, r)
+
+	ti := r.Context().Value(ctxtTokenKey{}).(tokenItem)
+	defer func() {
+		v.srv.Redirect(w, r, "..", ti.UID)
+	}()
+
+	sess := v.srv.GetSession(r)
+	if df.Cancel {
+		timerID := tokenTimers.Get(sess, ti.UID)
+		tokenTimers.Stop(timerID)
+		return
+	}
+
+	timerID := tokenTimers.Start(15*time.Second, func() {
+		log := v.srv.Log(r).WithField("token", ti.UID)
+		if err := ti.Delete(); err != nil {
+			log.WithError(err).Error("removing token")
+			return
+		}
+		log.Debug("token removed")
+	})
+
+	tokenTimers.Save(w, r, sess, ti.UID, timerID)
+}
+
+type deleteForm struct {
+	Cancel bool `json:"cancel"`
 }

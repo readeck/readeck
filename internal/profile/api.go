@@ -1,6 +1,7 @@
 package profile
 
 import (
+	"context"
 	"errors"
 	"net/http"
 	"time"
@@ -13,6 +14,11 @@ import (
 	"codeberg.org/readeck/readeck/internal/auth/users"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
+)
+
+type (
+	ctxTokenListKey struct{}
+	ctxtTokenKey    struct{}
 )
 
 // profileAPI is the base settings API router.
@@ -28,7 +34,7 @@ func newProfileAPI(s *server.Server) *profileAPI {
 
 	r.With(api.srv.WithPermission("read")).Group(func(r chi.Router) {
 		r.Get("/", api.profileInfo)
-		r.Get("/tokens", api.tokenList)
+		r.With(api.withTokenList).Get("/tokens", api.tokenList)
 	})
 
 	r.With(api.srv.WithPermission("write")).Group(func(r chi.Router) {
@@ -144,58 +150,78 @@ func (api *profileAPI) passwordUpdate(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func (api *profileAPI) tokenList(w http.ResponseWriter, r *http.Request) {
-	tl, err := api.getTokens(r, ".")
-	if err != nil {
-		if errors.Is(err, tokens.ErrNotFound) {
-			api.srv.TextMessage(w, r, http.StatusNotFound, "not found")
+func (api *profileAPI) withTokenList(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		res := tokenList{}
+
+		pf, _ := api.srv.GetPageParams(r)
+		if pf == nil {
+			api.srv.Status(w, r, http.StatusNotFound)
 			return
 		}
-		api.srv.Error(w, r, err)
-		return
-	}
+		if pf.Limit == 0 {
+			pf.Limit = 30
+		}
+
+		ds := tokens.Tokens.Query().
+			Where(
+				goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
+			).
+			Order(goqu.I("created").Desc()).
+			Limit(uint(pf.Limit)).
+			Offset(uint(pf.Offset))
+
+		count, err := ds.ClearOrder().ClearLimit().ClearOffset().Count()
+		if err != nil {
+			if errors.Is(err, tokens.ErrNotFound) {
+				api.srv.TextMessage(w, r, http.StatusNotFound, "not found")
+			} else {
+				api.srv.Error(w, r, err)
+			}
+			return
+		}
+
+		items := []*tokens.Token{}
+		if err := ds.ScanStructs(&items); err != nil {
+			api.srv.Error(w, r, err)
+			return
+		}
+
+		res.Pagination = api.srv.NewPagination(r, int(count), pf.Limit, pf.Offset)
+
+		res.Items = make([]tokenItem, len(items))
+		for i, item := range items {
+			res.Items[i] = newTokenItem(api.srv, r, item, ".")
+		}
+
+		ctx := context.WithValue(r.Context(), ctxTokenListKey{}, res)
+		next.ServeHTTP(w, r.Clone(ctx))
+	})
+}
+
+func (api *profileAPI) withToken(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		uid := chi.URLParam(r, "uid")
+		t, err := tokens.Tokens.GetOne(
+			goqu.C("uid").Eq(uid),
+			goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
+		)
+		if err != nil {
+			api.srv.Status(w, r, http.StatusNotFound)
+			return
+		}
+
+		item := newTokenItem(api.srv, r, t, ".")
+		ctx := context.WithValue(r.Context(), ctxtTokenKey{}, item)
+		next.ServeHTTP(w, r.Clone(ctx))
+	})
+}
+
+func (api *profileAPI) tokenList(w http.ResponseWriter, r *http.Request) {
+	tl := r.Context().Value(ctxTokenListKey{}).(tokenList)
 
 	api.srv.SendPaginationHeaders(w, r, tl.Pagination.TotalCount, tl.Pagination.Limit, tl.Pagination.Offset)
 	api.srv.Render(w, r, http.StatusOK, tl.Items)
-}
-
-func (api *profileAPI) getTokens(r *http.Request, base string) (tokenList, error) {
-	res := tokenList{}
-
-	pf, _ := api.srv.GetPageParams(r)
-	if pf == nil {
-		return res, tokens.ErrNotFound
-	}
-	if pf.Limit == 0 {
-		pf.Limit = 30
-	}
-
-	ds := tokens.Tokens.Query().
-		Where(
-			goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
-		).
-		Order(goqu.I("created").Desc()).
-		Limit(uint(pf.Limit)).
-		Offset(uint(pf.Offset))
-
-	count, err := ds.ClearOrder().ClearLimit().ClearOffset().Count()
-	if err != nil {
-		return res, err
-	}
-
-	items := []*tokens.Token{}
-	if err := ds.ScanStructs(&items); err != nil {
-		return res, err
-	}
-
-	res.Pagination = api.srv.NewPagination(r, int(count), pf.Limit, pf.Offset)
-
-	res.Items = make([]tokenItem, len(items))
-	for i, item := range items {
-		res.Items[i] = newTokenItem(api.srv, r, item, base)
-	}
-
-	return res, nil
 }
 
 // profileForm is the form used by the profile update routes.
