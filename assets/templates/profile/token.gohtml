@@ -7,7 +7,7 @@
 
 <h1 class="title">API Token</h1>
 
-{{ if .Deleted -}}
+{{ if .Token.IsDeleted -}}
 <form action="{{ $url }}/delete" method="POST">
   {{ template "csrfField" . }}
   <div class="message info">
@@ -73,7 +73,7 @@
 </div>
 
 
-{{ if not .Deleted -}}
+{{ if not .Token.IsDeleted -}}
 <h2>Delete token</h2>
 <form action="{{ $url }}/delete" method="POST">
   {{ template "csrfField" . }}

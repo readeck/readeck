@@ -10,7 +10,6 @@ import (
 	"codeberg.org/readeck/readeck/internal/auth/tokens"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
-	"codeberg.org/readeck/readeck/pkg/timers"
 )
 
 // profileViews is an HTTP handler for the user profile web views
@@ -18,9 +17,6 @@ type profileViews struct {
 	chi.Router
 	*profileAPI
 }
-
-// Token deletion timers
-var tokenTimers = timers.NewTimerStore("_tokenTimers")
 
 // newProfileViews returns an new instance of ProfileViews
 func newProfileViews(api *profileAPI) *profileViews {
@@ -114,8 +110,6 @@ func (v *profileViews) userPassword(w http.ResponseWriter, r *http.Request) {
 func (v *profileViews) tokenList(w http.ResponseWriter, r *http.Request) {
 	tl := r.Context().Value(ctxTokenListKey{}).(tokenList)
 
-	tokenTimers.Clean(w, r, v.srv.GetSession(r))
-
 	ctx := server.TC{
 		"Pagination": tl.Pagination,
 		"Tokens":     tl.Items,
@@ -183,14 +177,6 @@ func (v *profileViews) tokenInfo(w http.ResponseWriter, r *http.Request) {
 		"Form":  f,
 	}
 
-	sess := v.srv.GetSession(r)
-	timerID := tokenTimers.Get(sess, ti.UID)
-	if !tokenTimers.Exists(timerID) {
-		tokenTimers.Save(w, r, sess, ti.UID, timerID)
-	} else {
-		ctx["Deleted"] = true
-	}
-
 	v.srv.RenderTemplate(w, r, 200, "profile/token.gohtml", ctx)
 }
 
@@ -204,23 +190,19 @@ func (v *profileViews) tokenDelete(w http.ResponseWriter, r *http.Request) {
 		v.srv.Redirect(w, r, "..", ti.UID)
 	}()
 
-	sess := v.srv.GetSession(r)
 	if df.Cancel {
-		timerID := tokenTimers.Get(sess, ti.UID)
-		tokenTimers.Stop(timerID)
+		tokenTimers.Stop(ti.Token.ID)
 		return
 	}
 
-	timerID := tokenTimers.Start(15*time.Second, func() {
+	tokenTimers.Start(ti.Token.ID, 15*time.Second, func() {
 		log := v.srv.Log(r).WithField("token", ti.UID)
-		if err := ti.Delete(); err != nil {
+		if err := ti.Token.Delete(); err != nil {
 			log.WithError(err).Error("removing token")
 			return
 		}
 		log.Debug("token removed")
 	})
-
-	tokenTimers.Save(w, r, sess, ti.UID, timerID)
 }
 
 type deleteForm struct {

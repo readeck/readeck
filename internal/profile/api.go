@@ -14,6 +14,7 @@ import (
 	"codeberg.org/readeck/readeck/internal/auth/users"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
+	"codeberg.org/readeck/readeck/pkg/timers"
 )
 
 type (
@@ -26,6 +27,9 @@ type profileAPI struct {
 	chi.Router
 	srv *server.Server
 }
+
+// Token deletion timers
+var tokenTimers = timers.NewTimerStore()
 
 // newProfileAPI returns a SettingAPI with its routes set up.
 func newProfileAPI(s *server.Server) *profileAPI {
@@ -272,9 +276,10 @@ type tokenItem struct {
 
 	ID        string     `json:"id"`
 	Href      string     `json:"href"`
-	Created   time.Time  `json:"created" goqu:"skipupdate"`
+	Created   time.Time  `json:"created"`
 	Expires   *time.Time `json:"expires"`
 	IsEnabled bool       `json:"is_enabled"`
+	IsDeleted bool       `json:"is_deleted"`
 }
 
 func newTokenItem(s *server.Server, r *http.Request, t *tokens.Token, base string) tokenItem {
@@ -285,6 +290,7 @@ func newTokenItem(s *server.Server, r *http.Request, t *tokens.Token, base strin
 		Created:   t.Created,
 		Expires:   t.Expires,
 		IsEnabled: t.IsEnabled,
+		IsDeleted: tokenTimers.Exists(t.ID),
 	}
 }
 
