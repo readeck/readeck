@@ -82,7 +82,7 @@ type tokenLoginForm struct {
 }
 
 func (lf *tokenLoginForm) Validate(f *form.Form) {
-	form.Required(f.Fields["username"])
-	form.Required(f.Fields["password"])
-	form.Required(f.Fields["application"])
+	f.Fields["username"].Validate(form.IsRequired)
+	f.Fields["password"].Validate(form.IsRequired)
+	f.Fields["application"].Validate(form.IsRequired)
 }

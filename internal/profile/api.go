@@ -235,9 +235,10 @@ type profileForm struct {
 }
 
 func (sf *profileForm) Validate(f *form.Form) {
-	form.RequiredOrNull(f.Fields["username"])
-	form.RequiredOrNull(f.Fields["email"])
-	form.IsValidEmail(f.Fields["email"])
+	f.Fields["username"].Validate(form.IsRequiredOrNull)
+	f.Fields["email"].Validate(
+		form.IsRequiredOrNull, form.IsValidEmail,
+	)
 }
 
 // passwordForm is the form used by the password update routes.
@@ -247,19 +248,19 @@ type passwordForm struct {
 }
 
 func (pf *passwordForm) Validate(f *form.Form) {
-	form.Required(f.Fields["password"])
+	f.Fields["password"].Validate(form.IsRequired)
 }
 
 // validateForView is the form validator used by the password update
 // web view. It makes the "current" value mandatory and checks it
 // against the current user password.
 func (pf *passwordForm) validateForView(f *form.Form, u *users.User) bool {
-	form.Required(f.Fields["current"])
+	f.Fields["current"].Validate(form.IsRequired)
 	if !f.IsValid() {
 		return false
 	}
 	if !u.CheckPassword(pf.Current) {
-		f.Fields["current"].Errors.Add(errors.New("Invalid password"))
+		f.Fields["current"].Errors.Add(errors.New("invalid password"))
 		return false
 	}
 

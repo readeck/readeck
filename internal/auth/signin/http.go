@@ -107,6 +107,6 @@ type loginForm struct {
 }
 
 func (lf *loginForm) Validate(f *form.Form) {
-	form.Required(f.Fields["username"])
-	form.Required(f.Fields["password"])
+	f.Fields["username"].Validate(form.IsRequired)
+	f.Fields["password"].Validate(form.IsRequired)
 }

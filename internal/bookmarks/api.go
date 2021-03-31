@@ -602,9 +602,10 @@ type createForm struct {
 }
 
 func (cf *createForm) Validate(f *form.Form) {
-	// An empty value yields an error, so form.Required is
-	// not needed in this case.
-	form.IsValidURL(f.Fields["url"], validSchemes)
+	f.Fields["url"].Validate(
+		form.IsRequired,
+		form.IsValidURL(validSchemes),
+	)
 }
 
 type updateForm struct {
