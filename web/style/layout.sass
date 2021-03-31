@@ -37,6 +37,34 @@ aside.sidebar
   padding: $block-spacing/2
   background-color: $white-ter
 
+  h3
+    border-bottom: 1px solid $grey-lighter
+    margin-left: -($block-spacing/2)
+    margin-right: -($block-spacing/2)
+    padding: 0 $block-spacing/2
+    font-weight: 600
+    font-size: 1.2em
+
+  ul
+    margin-left: -($block-spacing/2)
+    margin-right: -($block-spacing/2)
+
+    li
+      border-bottom: 1px solid $white-bis
+
+    a
+      display: block
+      padding: $block-spacing/4 $block-spacing/2
+
+      &.active
+        background-color: $primary
+        color: $primary-invert
+
+      &:hover, &:focus,
+      &.active:hover, &.active:focus
+        background-color: $primary-accent
+        color: $primary-invert
+
 
 // Navigation bar
 nav.navbar
