@@ -30,7 +30,28 @@ var (
 
 	// ErrNotFound is returned when a user record was not found.
 	ErrNotFound = errors.New("not found")
+
+	availableGroups = map[string]string{
+		"none":  "none",
+		"user":  "user",
+		"staff": "staff",
+		"admin": "admin",
+	}
 )
+
+func AvailableGroups() map[string]string {
+	return availableGroups
+}
+
+func ValidGroups() []string {
+	r := make([]string, len(availableGroups))
+	i := 0
+	for k := range availableGroups {
+		r[i] = k
+		i++
+	}
+	return r
+}
 
 // User is a user record in database
 type User struct {
@@ -115,6 +136,15 @@ func (u *User) Save() error {
 	return u.Update(u)
 }
 
+// Delete removes a user from the database
+func (u *User) Delete() error {
+	_, err := db.Q().Delete(TableName).Prepared(true).
+		Where(goqu.C("id").Eq(u.ID)).
+		Executor().Exec()
+
+	return err
+}
+
 // CheckPassword checks if the given password matches the
 // current user password.
 func (u *User) CheckPassword(password string) bool {
@@ -131,10 +161,15 @@ func (u *User) CheckPassword(password string) bool {
 	return true
 }
 
+// HashPassword returns a new hashed password
+func (u *User) HashPassword(password string) (string, error) {
+	return passlib.Hash(password)
+}
+
 // SetPassword set a new user password
 func (u *User) SetPassword(password string) error {
 	var err error
-	if u.Password, err = passlib.Hash(password); err != nil {
+	if u.Password, err = u.HashPassword(password); err != nil {
 		return err
 	}
 

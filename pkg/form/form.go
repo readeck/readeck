@@ -1,6 +1,7 @@
 package form
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"io"
@@ -22,6 +23,7 @@ type (
 	// Form contains the data instance and the derived fields that
 	// can be used in a template or returned in a JSON response.
 	Form struct {
+		ctx      context.Context
 		instance interface{}
 		Fields   map[string]*Field
 		Errors   Errors
@@ -209,6 +211,23 @@ func (f *Form) Validate() {
 	if validator, ok := f.instance.(Validator); ok {
 		validator.Validate(f)
 	}
+}
+
+// Context returns the form current context
+func (f *Form) Context() context.Context {
+	if f.ctx != nil {
+		return f.ctx
+	}
+	return context.Background()
+}
+
+// SetContext set the new form's context
+func (f *Form) SetContext(ctx context.Context) *Form {
+	if ctx == nil {
+		panic("nil context")
+	}
+	f.ctx = ctx
+	return f
 }
 
 // Bind loads and validates the data using the method tied

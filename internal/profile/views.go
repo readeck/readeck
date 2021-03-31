@@ -8,6 +8,7 @@ import (
 
 	"codeberg.org/readeck/readeck/internal/auth"
 	"codeberg.org/readeck/readeck/internal/auth/tokens"
+	"codeberg.org/readeck/readeck/internal/auth/users"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
 )
@@ -44,7 +45,7 @@ func newProfileViews(api *profileAPI) *profileViews {
 // userProfile handles GET and POST requests on /profile.
 func (v *profileViews) userProfile(w http.ResponseWriter, r *http.Request) {
 	user := auth.GetRequestUser(r)
-	pf := &profileForm{}
+	pf := &users.ProfileForm{}
 	f := form.NewForm(pf)
 
 	if r.Method == http.MethodGet {
@@ -78,14 +79,15 @@ func (v *profileViews) userProfile(w http.ResponseWriter, r *http.Request) {
 
 // userPassword handles GET and POST requests on /profile/password
 func (v *profileViews) userPassword(w http.ResponseWriter, r *http.Request) {
-	pf := &passwordForm{}
+	pf := &users.PasswordForm{}
 	f := form.NewForm(pf)
 
 	if r.Method == http.MethodPost {
-		form.Bind(f, r)
 		user := auth.GetRequestUser(r)
+		pf.AddUser(f, user)
 
-		if pf.validateForView(f, user) {
+		form.Bind(f, r)
+		if f.IsValid() {
 			if err := v.UpdatePassword(user, pf); err != nil {
 				v.srv.AddFlash(w, r, "error", "Error while updating your password")
 			} else {
@@ -203,8 +205,4 @@ func (v *profileViews) tokenDelete(w http.ResponseWriter, r *http.Request) {
 		}
 		log.Debug("token removed")
 	})
-}
-
-type deleteForm struct {
-	Cancel bool `json:"cancel"`
 }

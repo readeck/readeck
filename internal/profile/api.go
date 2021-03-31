@@ -50,7 +50,7 @@ func newProfileAPI(s *server.Server) *profileAPI {
 }
 
 // UpdateProfile updates the user profile information.
-func (api *profileAPI) UpdateProfile(u *users.User, sf *profileForm) (map[string]interface{}, error) {
+func (api *profileAPI) UpdateProfile(u *users.User, sf *users.ProfileForm) (map[string]interface{}, error) {
 	updated := map[string]interface{}{}
 	if sf.Email != nil {
 		u.Email = *sf.Email
@@ -73,7 +73,7 @@ func (api *profileAPI) UpdateProfile(u *users.User, sf *profileForm) (map[string
 }
 
 // UpdatePassword updates the user password.
-func (api *profileAPI) UpdatePassword(u *users.User, pf *passwordForm) error {
+func (api *profileAPI) UpdatePassword(u *users.User, pf *users.PasswordForm) error {
 	return u.SetPassword(pf.Password)
 }
 
@@ -115,7 +115,7 @@ func (api *profileAPI) profileInfo(w http.ResponseWriter, r *http.Request) {
 
 // profileUpdate updates the current user profile information.
 func (api *profileAPI) profileUpdate(w http.ResponseWriter, r *http.Request) {
-	uf := &profileForm{}
+	uf := &users.ProfileForm{}
 	f := form.NewForm(uf)
 	form.Bind(f, r)
 
@@ -136,7 +136,7 @@ func (api *profileAPI) profileUpdate(w http.ResponseWriter, r *http.Request) {
 
 // passwordUpdate updates the current user's password.
 func (api *profileAPI) passwordUpdate(w http.ResponseWriter, r *http.Request) {
-	pf := &passwordForm{}
+	pf := &users.PasswordForm{}
 	f := form.NewForm(pf)
 	form.Bind(f, r)
 
@@ -228,45 +228,6 @@ func (api *profileAPI) tokenList(w http.ResponseWriter, r *http.Request) {
 	api.srv.Render(w, r, http.StatusOK, tl.Items)
 }
 
-// profileForm is the form used by the profile update routes.
-type profileForm struct {
-	Username *string `json:"username" conform:"trim"`
-	Email    *string `json:"email" conform:"trim"`
-}
-
-func (sf *profileForm) Validate(f *form.Form) {
-	f.Fields["username"].Validate(form.IsRequiredOrNull)
-	f.Fields["email"].Validate(
-		form.IsRequiredOrNull, form.IsValidEmail,
-	)
-}
-
-// passwordForm is the form used by the password update routes.
-type passwordForm struct {
-	Current  string `json:"current"`
-	Password string `json:"password"`
-}
-
-func (pf *passwordForm) Validate(f *form.Form) {
-	f.Fields["password"].Validate(form.IsRequired)
-}
-
-// validateForView is the form validator used by the password update
-// web view. It makes the "current" value mandatory and checks it
-// against the current user password.
-func (pf *passwordForm) validateForView(f *form.Form, u *users.User) bool {
-	f.Fields["current"].Validate(form.IsRequired)
-	if !f.IsValid() {
-		return false
-	}
-	if !u.CheckPassword(pf.Current) {
-		f.Fields["current"].Errors.Add(errors.New("invalid password"))
-		return false
-	}
-
-	return true
-}
-
 type tokenList struct {
 	Pagination server.Pagination
 	Items      []tokenItem
@@ -293,9 +254,4 @@ func newTokenItem(s *server.Server, r *http.Request, t *tokens.Token, base strin
 		IsEnabled: t.IsEnabled,
 		IsDeleted: tokenTimers.Exists(t.ID),
 	}
-}
-
-type tokenForm struct {
-	Expires   *time.Time `json:"expires"`
-	IsEnabled bool       `json:"is_enabled"`
 }
