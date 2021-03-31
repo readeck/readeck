@@ -36,7 +36,6 @@ CREATE TABLE IF NOT EXISTS bookmark (
     is_marked   boolean     NOT NULL DEFAULT false,
     is_archived boolean     NOT NULL DEFAULT false,
     is_read     boolean     NOT NULL DEFAULT false,
-    is_deleted  boolean     NOT NULL DEFAULT false,
     state       integer     NOT NULL DEFAULT 0,
     url         text        NOT NULL,
     title       text        NOT NULL,

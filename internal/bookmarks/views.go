@@ -128,7 +128,7 @@ func (h *bookmarkViews) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 
 	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
-	if _, err := h.updateBookmark(b, uf); err != nil {
+	if _, err := h.updateBookmark(b, uf, r); err != nil {
 		h.srv.Error(w, r, err)
 		return
 	}
@@ -147,16 +147,15 @@ func (h *bookmarkViews) bookmarkDelete(w http.ResponseWriter, r *http.Request) {
 	form.Bind(f, r)
 	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
-	var err error
-	if df.Cancel {
-		err = h.deleteBookmarkCancel(b)
-	} else {
-		err = h.deleteBookmark(b)
-	}
-
-	if err != nil {
+	if err := b.Update(map[string]interface{}{}); err != nil {
 		h.srv.Error(w, r, err)
 		return
+	}
+
+	if df.Cancel {
+		h.cancelDelete(b, r)
+	} else {
+		h.launchDelete(b, r)
 	}
 
 	redir := "/bookmarks"

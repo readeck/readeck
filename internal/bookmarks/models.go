@@ -88,7 +88,6 @@ type Bookmark struct {
 	Files        BookmarkFiles `db:"files"`
 	Errors       Strings       `db:"errors"`
 	Tags         Strings       `db:"tags"`
-	IsDeleted    bool          `db:"is_deleted"`
 	IsRead       bool          `db:"is_read"`
 	IsArchived   bool          `db:"is_archived"`
 	IsMarked     bool          `db:"is_marked"`

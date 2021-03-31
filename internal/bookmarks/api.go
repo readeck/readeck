@@ -24,10 +24,13 @@ import (
 	"codeberg.org/readeck/readeck/internal/auth"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
+	"codeberg.org/readeck/readeck/pkg/timers"
 	"codeberg.org/readeck/readeck/pkg/zipfs"
 )
 
 var validSchemes = map[string]bool{"http": true, "https": true}
+
+var deleteTimer = timers.NewTimerStore()
 
 type (
 	ctxBookmarkKey     struct{}
@@ -176,7 +179,7 @@ func (api *bookmarkAPI) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 
 	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
-	updated, err := api.updateBookmark(b, uf)
+	updated, err := api.updateBookmark(b, uf, r)
 	if err != nil {
 		api.srv.Error(w, r, err)
 		return
@@ -202,10 +205,12 @@ func (api *bookmarkAPI) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 func (api *bookmarkAPI) bookmarkDelete(w http.ResponseWriter, r *http.Request) {
 	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
 
-	if err := api.deleteBookmark(b); err != nil {
+	if err := b.Update(map[string]interface{}{}); err != nil {
 		api.srv.Error(w, r, err)
 		return
 	}
+
+	api.launchDelete(b, r)
 	w.WriteHeader(http.StatusNoContent)
 }
 
@@ -270,7 +275,7 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 			Select(
 				"b.id", "b.uid", "b.created", "b.updated", "b.state", "b.url", "b.title",
 				"b.site_name", "b.site", "b.authors", "b.lang", "b.type",
-				"b.is_deleted", "b.is_read", "b.is_marked", "b.is_archived",
+				"b.is_read", "b.is_marked", "b.is_archived",
 				"b.tags", "b.description", "b.file_path", "b.files").
 			Where(
 				goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
@@ -381,8 +386,10 @@ func (api *bookmarkAPI) loadCreateParamsHTML(_ http.ResponseWriter, r *http.Requ
 
 // updateBookmark update a bookmark and returns the fields
 // that have been modified.
-func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm) (map[string]interface{}, error) {
+func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm, r *http.Request) (map[string]interface{}, error) {
 	updated := map[string]interface{}{}
+	var deleted interface{}
+
 	if uf.IsRead != nil {
 		b.IsRead = *uf.IsRead
 		updated["is_read"] = b.IsRead
@@ -396,8 +403,7 @@ func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm) (map[string]
 		updated["is_archived"] = b.IsArchived
 	}
 	if uf.IsDeleted != nil {
-		b.IsDeleted = *uf.IsDeleted
-		updated["is_deleted"] = b.IsDeleted
+		deleted = *uf.IsDeleted
 	}
 
 	// Set tags
@@ -424,13 +430,17 @@ func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm) (map[string]
 		updated["tags"] = b.Tags
 	}
 
-	if len(updated) > 0 {
+	if len(updated) > 0 || deleted != nil {
 		updated["updated"] = time.Now()
 		if err := b.Update(updated); err != nil {
 			return updated, err
 		}
-		if updated["is_deleted"] == true {
-			api.launchDelete(b)
+		if d, ok := deleted.(bool); ok && d {
+			api.launchDelete(b, r)
+			updated["is_deleted"] = d
+		} else if ok && !d {
+			api.cancelDelete(b, r)
+			updated["is_deleted"] = d
 		}
 	}
 
@@ -438,47 +448,25 @@ func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm) (map[string]
 	return updated, nil
 }
 
-// deleteBookmark removes a given bookmark.
-func (api *bookmarkAPI) deleteBookmark(b *Bookmark) error {
-	// Mark as removed
-	err := b.Update(map[string]interface{}{
-		"is_deleted": true,
-	})
-	if err != nil {
-		return err
-	}
+func (api *bookmarkAPI) launchDelete(b *Bookmark, r *http.Request) {
+	l := api.srv.Log(r).WithField("uid", b.UID).WithField("id", b.ID)
+	l.Debug("launching bookmark removal")
 
-	api.launchDelete(b)
-	return nil
-}
-
-func (api *bookmarkAPI) launchDelete(b *Bookmark) {
-	uid := b.UID
-	time.AfterFunc(30*time.Second, func() {
-		l := log.WithField("id", uid)
-		b, err := Bookmarks.GetOne(
-			goqu.C("is_deleted").Eq(true),
-			goqu.C("uid").Eq(uid),
-		)
-		if err != nil {
-			if !errors.Is(err, ErrNotFound) {
-				l.WithError(err).Error("Error retrieving bookmark")
-			}
-			return
-		}
-
+	deleteTimer.Start(b.ID, 20*time.Second, func() {
 		if err := b.Delete(); err != nil {
 			l.WithError(err).Error("Error deleting bookmark")
 			return
 		}
-		l.Info("Bookmark deleted")
+
+		l.Debug("bookmark deleted")
 	})
 }
 
-func (api *bookmarkAPI) deleteBookmarkCancel(b *Bookmark) error {
-	return b.Update(map[string]interface{}{
-		"is_deleted": false,
-	})
+func (api *bookmarkAPI) cancelDelete(b *Bookmark, r *http.Request) {
+	api.srv.Log(r).WithField("uid", b.UID).WithField("id", b.ID).
+		Debug("removal canceled")
+
+	deleteTimer.Stop(b.ID)
 }
 
 // bookmarkList is a paginated list of BookmarkItem instances.
@@ -557,7 +545,7 @@ func newBookmarkItem(s *server.Server, r *http.Request, b *Bookmark, base string
 		Lang:         b.Lang,
 		DocumentType: b.DocumentType,
 		Description:  b.Description,
-		IsDeleted:    b.IsDeleted,
+		IsDeleted:    deleteTimer.Exists(b.ID),
 		IsRead:       b.IsRead,
 		IsMarked:     b.IsMarked,
 		IsArchived:   b.IsArchived,
