@@ -100,19 +100,7 @@ func (r userGroupRule) Validate(value interface{}) error {
 
 var isValidGroup = userGroupRule{}
 
-type UserForm struct {
-	Username *string `json:"username" conform:"trim"`
-	Email    *string `json:"email" conform:"trim"`
-	Group    *string `json:"group" conform:"trim"`
-	Password *string `json:"password"`
-}
-
-func (uf *UserForm) Validate(f *form.Form) {
-	f.Fields["username"].Validate(form.IsRequiredOrNull, isValidUsername)
-	f.Fields["email"].Validate(form.IsRequiredOrNull, form.IsValidEmail)
-	f.Fields["group"].Validate(form.IsRequiredOrNull, isValidGroup)
-}
-
+// CreateForm describes a user creation form
 type CreateForm struct {
 	Username string  `json:"username" conform:"trim"`
 	Email    string  `json:"email" conform:"trim"`
@@ -120,9 +108,25 @@ type CreateForm struct {
 	Password string  `json:"password"`
 }
 
+// Validate validates the form.
 func (uf *CreateForm) Validate(f *form.Form) {
 	f.Fields["username"].Validate(form.IsRequired, isValidUsername)
 	f.Fields["password"].Validate(form.IsRequired)
 	f.Fields["email"].Validate(form.IsRequired, form.IsValidEmail)
+	f.Fields["group"].Validate(form.IsRequiredOrNull, isValidGroup)
+}
+
+// UpdateForm describes a user update form.
+type UpdateForm struct {
+	Username *string `json:"username" conform:"trim"`
+	Email    *string `json:"email" conform:"trim"`
+	Group    *string `json:"group" conform:"trim"`
+	Password *string `json:"password"`
+}
+
+// Validate validates the form
+func (uf *UpdateForm) Validate(f *form.Form) {
+	f.Fields["username"].Validate(form.IsRequiredOrNull, isValidUsername)
+	f.Fields["email"].Validate(form.IsRequiredOrNull, form.IsValidEmail)
 	f.Fields["group"].Validate(form.IsRequiredOrNull, isValidGroup)
 }

@@ -39,10 +39,13 @@ var (
 	}
 )
 
+// AvailableGroups returns the available group names.
+// This is a mapping of ID => name.
 func AvailableGroups() map[string]string {
 	return availableGroups
 }
 
+// ValidGroups returns a list of available groups.
 func ValidGroups() []string {
 	r := make([]string, len(availableGroups))
 	i := 0
@@ -205,9 +208,9 @@ func (u *User) HasPermission(obj, act string) bool {
 	if u.Group == "" {
 		return false
 	}
-	if r, err := acls.Check(u.Group, obj, act); err != nil {
+	r, err := acls.Check(u.Group, obj, act)
+	if err != nil {
 		return false
-	} else {
-		return r
 	}
+	return r
 }

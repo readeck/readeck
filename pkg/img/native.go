@@ -57,6 +57,7 @@ func NewNativeImage(r io.Reader) (*NativeImage, error) {
 	}, nil
 }
 
+// Image returns the wrapped image instance.
 func (im *NativeImage) Image() image.Image {
 	return im.m
 }

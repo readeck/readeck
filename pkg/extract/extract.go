@@ -78,6 +78,7 @@ func (m *ProcessMessage) ResetContent() {
 	m.Extractor.Drops()[m.Position].Body = []byte{}
 }
 
+// Cancel fully cancel the extract process.
 func (m *ProcessMessage) Cancel(reason string, args ...interface{}) {
 	m.Log.WithError(fmt.Errorf(reason, args...)).Error("operation canceled")
 	m.canceled = true

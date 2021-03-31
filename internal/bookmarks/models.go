@@ -311,10 +311,13 @@ func (b *Bookmark) getArticle(baseURL string) (*strings.Reader, error) {
 	return strings.NewReader(res), nil
 }
 
+// GetSumStrings returns the string used to generate the etag
+// of the bookmark(s)
 func (b *Bookmark) GetSumStrings() []string {
 	return []string{b.UID, b.Updated.String()}
 }
 
+// GetLastModified returns the last modified times
 func (b *Bookmark) GetLastModified() []time.Time {
 	return []time.Time{b.Updated}
 }
