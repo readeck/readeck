@@ -1,21 +1,26 @@
 {{ extends "base.gohtml" }}
 
 {{ define "body" }}
+{{- $inBookmarks := (pathIs $ "/bookmarks" "/bookmarks/*") -}}
+{{- $inProfile := (pathIs $ "/profile" "/profile/*") -}}
+{{- $inAdmin := (pathIs $ "/admin" "/admin/*") -}}
 <div class="app">
   <nav class="navbar">
     <h1><a href="{{ urlFor $ "/" }}">Readeck</a></h1>
     <div class="main-nav">
-      <a class="button active" href="{{ urlFor $ "/bookmarks" }}">
+      <a class="button{{ if $inBookmarks }} active{{ end }}" href="{{ urlFor $ "/bookmarks" }}">
       {{ icon . "o-bookmarks" }} Bookmarks</a>
     </div>
 
     <div class="user-menu">
-      <a class="button rounded icon" href="{{ urlFor $ "/profile" }}">{{ icon . "o-user" }}</a>
+      <a class="button rounded icon{{ if $inProfile }} active{{ end }}"
+       href="{{ urlFor $ "/profile" }}">{{ icon . "o-user" }}</a>
     </div>
 
     {{ if hasPermission $ "/admin" "read" -}}
     <div>
-      <a class="button rounded icon" href="{{ urlFor $ "/admin" }}">{{ icon . "o-admin" }}</a>
+      <a class="button rounded icon{{ if $inAdmin }} active{{ end }}"
+       href="{{ urlFor $ "/admin" }}">{{ icon . "o-admin" }}</a>
     </div>
     {{- end }}
 

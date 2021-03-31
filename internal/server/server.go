@@ -100,6 +100,16 @@ func New(basePath string) *Server {
 					attrs, s.AssetURL(r, "img/icons.svg"), name),
 			)
 		},
+		"pathIs": func(ctx TC, patterns ...string) bool {
+			r := ctx["request"].(*http.Request)
+			cp := s.CurrentPath(r)
+			for _, p := range patterns {
+				if ok, _ := path.Match(p, cp); ok {
+					return true
+				}
+			}
+			return false
+		},
 		"safeAttr": func(val string) template.HTMLAttr {
 			return template.HTMLAttr(val)
 		},
