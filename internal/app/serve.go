@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/admin"
 	"codeberg.org/readeck/readeck/internal/assets"
 	"codeberg.org/readeck/readeck/internal/auth/signin"
 	"codeberg.org/readeck/readeck/internal/bookmarks"
@@ -55,6 +56,9 @@ func runServe(_ *cobra.Command, _ []string) error {
 
 	// User routes
 	profile.SetupRoutes(s)
+
+	// Admin routes
+	admin.SetupRoutes(s)
 
 	// Only in dev mode
 	if configs.Config.Main.DevMode {
