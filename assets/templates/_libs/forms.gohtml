@@ -23,19 +23,21 @@
 {{- $type := or .type "text" -}}
 {{- $value := eq $type "password" | ternary "" (or .value .field.Value "") -}}{{/* the final "" empties nil values */}}
 {{- $class := or .class "" -}}
+{{- $help := .help }}
 {{- if .field.Errors -}}{{ $class = cat $class "with-errors" }}{{ end -}}
 <div class="field {{ $class }}">
   <label for="{{ .name }}">{{ .label }}:</label>
   <div class="control" {{ template "attrList" .controlAttrs }}>
     <input type="{{ $type }}" id="{{ .name }}" name="{{ .name }}"
      value="{{ $value }}" {{ template "attrList" .inputAttrs }}/>
-    {{- if .field.Errors -}}
+    {{- with .field.Errors -}}
     <ul class="errors">
-      {{- range .field.Errors }}
+      {{- range . }}
         <li>{{ . }}</li>
       {{- end }}
     </ul>
     {{- end }}
+    {{- with $help }}<span class="help">{{ . }}</span>{{ end -}}
   </div>
 </div>
 {{- end }}
@@ -61,6 +63,34 @@
     <input type="checkbox" id="{{ .name }}" name="{{ .name }}"
      {{- if $checked }}checked="checked"{{ end -}} />
     <label class="label-inline" for="{{ .name }}">{{ .label }}</label>
+  </div>
+</div>
+{{- end }}
+
+{{ define "selectField" -}}
+{{- $value := or .value .field.Value "" -}}
+{{- $class := or .class "" -}}
+{{- $options := .options }}
+{{- $help := .help }}
+{{- if .field.Errors -}}{{ $class = cat $class "with-errors" }}{{ end -}}
+<div class="field {{ $class }}">
+  <label for="{{ .name }}">{{ .label }}:</label>
+  <div class="control" {{ template "attrList" .controlAttrs }}>
+    <select name="{{ .name }}" id="{{ .name }}">
+    {{- range $options -}}
+    {{- $k := (index . 0) -}}
+    {{- $v := (index . 1) -}}
+    <option value="{{ $k }}" {{ if eq ($value|toString) $k }}selected="selected"{{ end }}>{{ $v }}</option>
+    {{- end -}}
+    </select>
+    {{- with .field.Errors -}}
+    <ul class="errors">
+      {{- range . }}
+        <li>{{ . }}</li>
+      {{- end }}
+    </ul>
+    {{- end }}
+    {{- with $help }}<span class="help">{{ . }}</span>{{ end -}}
   </div>
 </div>
 {{- end }}
