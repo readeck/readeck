@@ -13,6 +13,7 @@ import "../style/index.sass"
 // Every icon is prefixed with o- (or xs- for solid icons)
 // to make them easier to find in the code, should you need to.
 
+import "@box/solid/bxs-cog.svg?o-admin"
 import "@box/regular/bx-archive.svg?o-archive-off"
 import "@box/solid/bxs-archive.svg?o-archive-on"
 import "@box/solid/bxs-bookmarks.svg?o-bookmarks"
