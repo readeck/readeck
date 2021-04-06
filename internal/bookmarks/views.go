@@ -74,6 +74,10 @@ func (h *bookmarkViews) bookmarkList(w http.ResponseWriter, r *http.Request) {
 		"bookmarks":  bl.Items,
 	}
 
+	if q, ok := r.Context().Value(ctxSearchString{}).(string); ok && q != "" {
+		ctx["Q"] = q
+	}
+
 	h.srv.RenderTemplate(w, r, 200, "bookmarks/index.gohtml", ctx)
 }
 

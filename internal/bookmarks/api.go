@@ -35,6 +35,7 @@ var deleteTimer = timers.NewTimerStore()
 type (
 	ctxBookmarkKey     struct{}
 	ctxBookmarkListKey struct{}
+	ctxSearchString    struct{}
 )
 
 // bookmarkAPI is the base bookmark API router.
@@ -283,9 +284,13 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 
 		ds = ds.Order(goqu.I("created").Desc())
 
-		// if strings.TrimSpace(search.Query) != "" {
-		// 	ds = Bookmarks.AddSearch(ds, search.Query)
-		// }
+		search := &searchForm{}
+		f := form.NewForm(search)
+		f.BindValues(r.URL.Query())
+		if search.Query != "" {
+			st := newSearchString(search.Query)
+			ds = st.toSQLite(ds)
+		}
 
 		ds = ds.
 			Limit(uint(pf.Limit)).
@@ -311,6 +316,9 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 		res.Pagination = api.srv.NewPagination(r, int(count), pf.Limit, pf.Offset)
 
 		ctx := context.WithValue(r.Context(), ctxBookmarkListKey{}, res)
+		if search.Query != "" {
+			ctx = context.WithValue(ctx, ctxSearchString{}, search.Query)
+		}
 
 		if r.Method == http.MethodGet {
 			api.srv.WriteEtag(w, res)
@@ -595,6 +603,10 @@ func newBookmarkItem(s *server.Server, r *http.Request, b *Bookmark, base string
 	}
 
 	return res
+}
+
+type searchForm struct {
+	Query string `json:"q" conform:"trim"`
 }
 
 type createForm struct {

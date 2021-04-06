@@ -2,6 +2,16 @@
 
 {{ define "title" }}Bookmarks{{ end }}
 
+{{ define "extra-nav" -}}
+<div>
+<form action="{{ urlFor $ "" }}" method="GET" class="search">
+  <input title="search in bookmarks" class="rounded"
+   type="text" name="q" value="{{ .Q }}" placeholder="search" />
+  <button title="search">{{ icon $ "o-search" }}</button>
+</form>
+</div>
+{{- end }}
+
 {{ define "content" }}
 <turbo-frame id="bookmark-list"
  data-controller="turbo-refresh"
@@ -23,7 +33,7 @@
   </form>
 </div>
 
-{{- if eq .count 0 }}
+{{- if and (not .Q) (eq .count 0) }}
 {{/* ----------------------------------------------------------------
 Placeholder when no bookmarks
 */}}
@@ -34,6 +44,12 @@ Placeholder when no bookmarks
 {{/* ----------------------------------------------------------------
 Bookmark list */}}
 {{ template "pagination" .pagination }}
+
+{{ if .Q -}}
+<div class="content-block">
+  <p>Your search for <strong>{{ .Q }}</strong> yielded {{ .count }} result(s)</p>
+</div>
+{{- end }}
 
 <div class="bookmark-list">
 {{ range .bookmarks }}

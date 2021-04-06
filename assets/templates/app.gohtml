@@ -12,6 +12,8 @@
       {{ icon . "o-bookmarks" }} Bookmarks</a>
     </div>
 
+    {{ block "extra-nav" .}}{{ end }}
+
     <div class="user-menu">
       <a class="button rounded icon{{ if $inProfile }} active{{ end }}"
        href="{{ urlFor $ "/profile" }}">{{ icon . "o-user" }}</a>
