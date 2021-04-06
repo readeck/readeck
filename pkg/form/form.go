@@ -45,6 +45,12 @@ type (
 	Validator interface {
 		Validate(*Form)
 	}
+
+	// FieldValidator is the interface for a field that implements
+	// its internal validation.
+	FieldValidator interface {
+		Validate(*Field) error
+	}
 )
 
 func init() {
@@ -208,8 +214,18 @@ func (f *Form) BindJSON(r io.Reader) {
 // Validate performs the data validation on the form
 // instance when it exists.
 func (f *Form) Validate() {
+	// First validate the form if it implements Validator
 	if validator, ok := f.instance.(Validator); ok {
 		validator.Validate(f)
+	}
+
+	// Validate each field's inner type implementing FieldValidator
+	for _, field := range f.Fields {
+		if fi, ok := field.instance.Interface().(FieldValidator); ok {
+			if err := fi.Validate(field); err != nil {
+				field.Errors.Add(err)
+			}
+		}
 	}
 }
 
