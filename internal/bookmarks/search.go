@@ -12,6 +12,7 @@ import (
 var allowedSearchFields = map[string]bool{
 	"author": true,
 	"label":  true,
+	"site":   true,
 	"title":  true,
 }
 
@@ -30,26 +31,27 @@ func newSearchString(input string) (res *searchString) {
 }
 
 func (st *searchString) toSQLite(ds *goqu.SelectDataset) *goqu.SelectDataset {
-	q := strings.Builder{}
-	for i, x := range st.terms {
+	// This is a huge mess. We must pass the search query as a full literal,
+	// otherwise it fails on many edge cases.
+	// /!\ HERE ARE DRAGONS!
+	// We must absolutely properly escape the search value to avoid injections.
+	matchQ := []string{}
+	rpl := strings.NewReplacer(`"`, `""`, `'`, `''`)
+
+	for _, x := range st.terms {
+		q := fmt.Sprintf(`"%s"`, rpl.Replace(x.Value))
+
 		if x.Field != "" && allowedSearchFields[x.Field] {
-			q.WriteString(x.Field)
-			q.WriteRune(':')
+			q = fmt.Sprintf("%s:%s", x.Field, q)
 		}
-		s := strings.ReplaceAll(x.Value, `"`, `""`)
-		if x.Quotes {
-			s = fmt.Sprintf(`"%s"`, s)
-		}
-		q.WriteString(s)
-		if i+1 < len(st.terms) {
-			q.WriteRune(' ')
-		}
+
+		matchQ = append(matchQ, q)
 	}
 
 	return ds.Join(
 		goqu.T("bookmark_idx").As("bi"),
 		goqu.On(goqu.Ex{"bi.rowid": goqu.I("b.id")}),
 	).
-		Where(goqu.L("bookmark_idx match ?", q.String())).
+		Where(goqu.L(`bookmark_idx match '?'`, goqu.L(strings.Join(matchQ, " ")))).
 		Order(goqu.L("bm25(bookmark_idx, 12.0, 6.0, 5.0, 2.0, 4.0)").Asc())
 }
