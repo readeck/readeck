@@ -3,6 +3,7 @@ package admin
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -22,7 +23,6 @@ type (
 
 var (
 	errSameUser = errors.New("same user as authenticated")
-	errConflict = errors.New("conflicting user attributes")
 )
 
 type adminAPI struct {
@@ -36,13 +36,13 @@ func newAdminAPI(s *server.Server) *adminAPI {
 
 	r.With(api.srv.WithPermission("read")).Group(func(r chi.Router) {
 		r.With(api.withUserList).Get("/users", api.userList)
-		r.With(api.withUser).Get("/users/{username}", api.userInfo)
+		r.With(api.withUser).Get("/users/{id:\\d+}", api.userInfo)
 	})
 
 	r.With(api.srv.WithPermission("write")).Group(func(r chi.Router) {
 		r.With(api.withUserList).Post("/users", api.userCreate)
-		r.With(api.withUser).Patch("/users/{username}", api.userUpdate)
-		r.With(api.withUser).Delete("/users/{username}", api.userDelete)
+		r.With(api.withUser).Patch("/users/{id:\\d+}", api.userUpdate)
+		r.With(api.withUser).Delete("/users/{id:\\d+}", api.userDelete)
 	})
 
 	return api
@@ -92,10 +92,10 @@ func (api *adminAPI) withUserList(next http.Handler) http.Handler {
 
 func (api *adminAPI) withUser(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		username := chi.URLParam(r, "username")
+		userid := chi.URLParam(r, "id")
 
 		u, err := users.Users.GetOne(
-			goqu.C("username").Eq(username),
+			goqu.C("id").Eq(userid),
 		)
 		if err != nil {
 			api.srv.Status(w, r, http.StatusNotFound)
@@ -107,49 +107,29 @@ func (api *adminAPI) withUser(next http.Handler) http.Handler {
 	})
 }
 
-func (api *adminAPI) createUser(uf *users.CreateForm) error {
+func (api *adminAPI) createUser(uf *users.CreateForm) (*users.User, error) {
 	u := &users.User{
 		Username: uf.Username,
 		Email:    uf.Email,
 		Password: uf.Password,
 	}
 	if uf.Group != nil {
-		u.Group = *uf.Group
+		u.Group = uf.Group.String()
 	} else {
 		u.Group = "user"
 	}
 
-	c, err := users.Users.Query().Where(goqu.Or(
-		goqu.C("email").Eq(uf.Email),
-		goqu.C("username").Eq(uf.Username),
-	)).Count()
-	if err != nil {
-		return err
-	}
-	if c > 0 {
-		return errConflict
-	}
-
-	return users.Users.Create(u)
+	return u, users.Users.Create(u)
 }
 
 func (api *adminAPI) updateUser(u *users.User, uf *users.UpdateForm) (map[string]interface{}, error) {
 	updated := map[string]interface{}{}
-	q := []goqu.Expression{}
 
 	if uf.Username != nil {
 		updated["username"] = uf.Username
-		q = append(q, goqu.And(
-			goqu.C("username").Eq(uf.Username),
-			goqu.C("id").Neq(u.ID),
-		))
 	}
 	if uf.Email != nil {
 		updated["email"] = uf.Email
-		q = append(q, goqu.And(
-			goqu.C("email").Eq(uf.Email),
-			goqu.C("id").Neq(u.ID),
-		))
 	}
 	if uf.Group != nil {
 		updated["group"] = uf.Group
@@ -163,16 +143,6 @@ func (api *adminAPI) updateUser(u *users.User, uf *users.UpdateForm) (map[string
 
 	if len(updated) == 0 {
 		return updated, nil
-	}
-
-	if len(q) > 0 {
-		c, err := users.Users.Query().Where(goqu.Or(q...)).Count()
-		if err != nil {
-			return updated, err
-		}
-		if c > 0 {
-			return updated, errConflict
-		}
 	}
 
 	updated["updated"] = time.Now()
@@ -225,22 +195,22 @@ func (api *adminAPI) userCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := api.createUser(uf)
-	if err == nil {
-		api.srv.TextMessage(w, r, http.StatusCreated, "User created")
-		return
-	}
-	if errors.Is(err, errConflict) {
-		api.srv.TextMessage(w, r, http.StatusConflict, err.Error())
+	u, err := api.createUser(uf)
+	if err != nil {
+		api.srv.Error(w, r, err)
 		return
 	}
 
-	api.srv.Error(w, r, err)
+	w.Header().Set("Location", api.srv.AbsoluteURL(r, ".", fmt.Sprint(u.ID)).String())
+	api.srv.TextMessage(w, r, http.StatusCreated, "User created")
 }
 
 func (api *adminAPI) userUpdate(w http.ResponseWriter, r *http.Request) {
 	uf := &users.UpdateForm{}
 	f := form.NewForm(uf)
+
+	u := r.Context().Value(ctxUserKey{}).(*users.User)
+	uf.SetUser(f, u)
 
 	form.Bind(f, r)
 	if !f.IsValid() {
@@ -248,17 +218,12 @@ func (api *adminAPI) userUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	u := r.Context().Value(ctxUserKey{}).(*users.User)
 	updated, err := api.updateUser(u, uf)
-	if err == nil {
-		api.srv.Render(w, r, http.StatusOK, updated)
+	if err != nil {
+		api.srv.Error(w, r, err)
 		return
 	}
-	if errors.Is(err, errConflict) {
-		api.srv.TextMessage(w, r, http.StatusConflict, err.Error())
-		return
-	}
-	api.srv.Error(w, r, err)
+	api.srv.Render(w, r, http.StatusOK, updated)
 }
 
 func (api *adminAPI) userDelete(w http.ResponseWriter, r *http.Request) {
@@ -284,21 +249,25 @@ type userList struct {
 }
 
 type userItem struct {
-	Href     string    `json:"href"`
-	Created  time.Time `json:"created"`
-	Updated  time.Time `json:"updated"`
-	Username string    `json:"username"`
-	Email    string    `json:"email"`
-	Group    string    `json:"group"`
+	ID        int       `json:"id"`
+	Href      string    `json:"href"`
+	Created   time.Time `json:"created"`
+	Updated   time.Time `json:"updated"`
+	Username  string    `json:"username"`
+	Email     string    `json:"email"`
+	Group     string    `json:"group"`
+	IsDeleted bool      `json:"is_deleted"`
 }
 
 func newUserItem(s *server.Server, r *http.Request, u *users.User, base string) userItem {
 	return userItem{
-		Href:     s.AbsoluteURL(r, base, u.Username).String(),
-		Created:  u.Created,
-		Updated:  u.Updated,
-		Username: u.Username,
-		Email:    u.Email,
-		Group:    u.Group,
+		ID:        u.ID,
+		Href:      s.AbsoluteURL(r, base, fmt.Sprint(u.ID)).String(),
+		Created:   u.Created,
+		Updated:   u.Updated,
+		Username:  u.Username,
+		Email:     u.Email,
+		Group:     u.Group,
+		IsDeleted: userTimers.Exists(u.ID),
 	}
 }

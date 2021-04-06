@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"codeberg.org/readeck/readeck/pkg/form"
+	"github.com/doug-martin/goqu/v9"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 )
 
@@ -51,8 +52,8 @@ type PasswordForm struct {
 	Password string `json:"password"`
 }
 
-// AddUser adds a user to the wrapping form's context.
-func (pf *PasswordForm) AddUser(f *form.Form, u *User) {
+// SetUser adds a user to the wrapping form's context.
+func (pf *PasswordForm) SetUser(f *form.Form, u *User) {
 	ctx := context.WithValue(f.Context(), ctxUserFormKey{}, u)
 	f.SetContext(ctx)
 }
@@ -78,10 +79,18 @@ func (pf *PasswordForm) Validate(f *form.Form) {
 	}
 }
 
-type userGroupRule struct{}
+type GroupChoice string
 
-func (r userGroupRule) Validate(value interface{}) error {
-	value, isNil := validation.Indirect(value)
+func (c *GroupChoice) Options() [][2]string {
+	return availableGroups
+}
+
+func (c *GroupChoice) String() string {
+	return fmt.Sprint(*c)
+}
+
+func (c *GroupChoice) Validate(f *form.Field) error {
+	value, isNil := validation.Indirect(f.Value())
 	if isNil || validation.IsEmpty(value) {
 		return nil
 	}
@@ -98,14 +107,12 @@ func (r userGroupRule) Validate(value interface{}) error {
 	return fmt.Errorf("must be one of %s", strings.Join(ValidGroups(), ", "))
 }
 
-var isValidGroup = userGroupRule{}
-
 // CreateForm describes a user creation form
 type CreateForm struct {
-	Username string  `json:"username" conform:"trim"`
-	Email    string  `json:"email" conform:"trim"`
-	Group    *string `json:"group" conform:"trim"`
-	Password string  `json:"password"`
+	Username string       `json:"username" conform:"trim"`
+	Email    string       `json:"email" conform:"trim"`
+	Group    *GroupChoice `json:"group" conform:"trim"`
+	Password string       `json:"password"`
 }
 
 // Validate validates the form.
@@ -113,20 +120,82 @@ func (uf *CreateForm) Validate(f *form.Form) {
 	f.Fields["username"].Validate(form.IsRequired, isValidUsername)
 	f.Fields["password"].Validate(form.IsRequired)
 	f.Fields["email"].Validate(form.IsRequired, form.IsValidEmail)
-	f.Fields["group"].Validate(form.IsRequiredOrNull, isValidGroup)
+	f.Fields["group"].Validate(form.IsRequiredOrNull)
+
+	// Check that username is not already in use
+	c, err := Users.Query().Where(
+		goqu.C("username").Eq(uf.Username),
+	).Count()
+	if err != nil {
+		f.Errors.Add(errors.New("validation process error"))
+		return
+	}
+	if c > 0 {
+		f.Fields["username"].Errors.Add(errors.New("username is already in use"))
+	}
+
+	// Check that email is not already in use
+	c, err = Users.Query().Where(
+		goqu.C("email").Eq(uf.Email),
+	).Count()
+	if err != nil {
+		f.Errors.Add(errors.New("validation process error"))
+		return
+	}
+	if c > 0 {
+		f.Fields["email"].Errors.Add(errors.New("email is already in use"))
+	}
 }
 
 // UpdateForm describes a user update form.
 type UpdateForm struct {
-	Username *string `json:"username" conform:"trim"`
-	Email    *string `json:"email" conform:"trim"`
-	Group    *string `json:"group" conform:"trim"`
-	Password *string `json:"password"`
+	Username *string      `json:"username" conform:"trim"`
+	Email    *string      `json:"email" conform:"trim"`
+	Group    *GroupChoice `json:"group" conform:"trim"`
+	Password *string      `json:"password"`
+}
+
+// SetUser adds a user to the wrapping form's context.
+func (uf *UpdateForm) SetUser(f *form.Form, u *User) {
+	ctx := context.WithValue(f.Context(), ctxUserFormKey{}, u)
+	f.SetContext(ctx)
 }
 
 // Validate validates the form
 func (uf *UpdateForm) Validate(f *form.Form) {
 	f.Fields["username"].Validate(form.IsRequiredOrNull, isValidUsername)
 	f.Fields["email"].Validate(form.IsRequiredOrNull, form.IsValidEmail)
-	f.Fields["group"].Validate(form.IsRequiredOrNull, isValidGroup)
+	f.Fields["group"].Validate(form.IsRequiredOrNull)
+
+	u := f.Context().Value(ctxUserFormKey{}).(*User)
+
+	// Check that username is not already in use
+	if uf.Username != nil {
+		c, err := Users.Query().Where(
+			goqu.C("username").Eq(uf.Username),
+			goqu.C("id").Neq(u.ID),
+		).Count()
+		if err != nil {
+			f.Errors.Add(errors.New("validation process error"))
+			return
+		}
+		if c > 0 {
+			f.Fields["username"].Errors.Add(errors.New("username is already in use"))
+		}
+	}
+
+	// Check that email is not already in use
+	if uf.Email != nil {
+		c, err := Users.Query().Where(
+			goqu.C("email").Eq(uf.Email),
+			goqu.C("id").Neq(u.ID),
+		).Count()
+		if err != nil {
+			f.Errors.Add(errors.New("validation process error"))
+			return
+		}
+		if c > 0 {
+			f.Fields["email"].Errors.Add(errors.New("email is already in use"))
+		}
+	}
 }

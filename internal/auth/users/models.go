@@ -31,27 +31,29 @@ var (
 	// ErrNotFound is returned when a user record was not found.
 	ErrNotFound = errors.New("not found")
 
-	availableGroups = map[string]string{
-		"none":  "none",
-		"user":  "user",
-		"staff": "staff",
-		"admin": "admin",
+	availableGroups = [][2]string{
+		{"none", "no group"},
+		{"user", "user"},
+		{"staff", "staff"},
+		{"admin", "admin"},
 	}
 )
 
 // AvailableGroups returns the available group names.
 // This is a mapping of ID => name.
 func AvailableGroups() map[string]string {
-	return availableGroups
+	res := map[string]string{}
+	for _, v := range availableGroups {
+		res[v[0]] = v[1]
+	}
+	return res
 }
 
 // ValidGroups returns a list of available groups.
 func ValidGroups() []string {
 	r := make([]string, len(availableGroups))
-	i := 0
-	for k := range availableGroups {
-		r[i] = k
-		i++
+	for i := 0; i < len(availableGroups); i++ {
+		r[i] = availableGroups[i][0]
 	}
 	return r
 }
