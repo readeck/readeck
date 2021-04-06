@@ -276,7 +276,7 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 				"b.id", "b.uid", "b.created", "b.updated", "b.state", "b.url", "b.title",
 				"b.site_name", "b.site", "b.authors", "b.lang", "b.type",
 				"b.is_read", "b.is_marked", "b.is_archived",
-				"b.tags", "b.description", "b.file_path", "b.files").
+				"b.labels", "b.description", "b.file_path", "b.files").
 			Where(
 				goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
 			)
@@ -406,28 +406,28 @@ func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm, r *http.Requ
 		deleted = *uf.IsDeleted
 	}
 
-	// Set tags
-	tagsChanged := false
-	if uf.Tags != nil {
-		b.Tags = funk.UniqString(uf.Tags)
-		tagsChanged = true
+	// Set labels
+	labelsChanged := false
+	if uf.Labels != nil {
+		b.Labels = funk.UniqString(uf.Labels)
+		labelsChanged = true
 	}
 
-	// Add tags
-	if uf.AddTags != nil {
-		b.Tags = funk.UniqString(append(b.Tags, uf.AddTags...))
-		tagsChanged = true
+	// Add labels
+	if uf.AddLabels != nil {
+		b.Labels = funk.UniqString(append(b.Labels, uf.AddLabels...))
+		labelsChanged = true
 	}
 
 	// Remove has the last say
-	if uf.RemoveTags != nil {
-		_, b.Tags = funk.DifferenceString(uf.RemoveTags, b.Tags)
-		tagsChanged = true
+	if uf.RemoveLabels != nil {
+		_, b.Labels = funk.DifferenceString(uf.RemoveLabels, b.Labels)
+		labelsChanged = true
 	}
 
-	if tagsChanged {
-		sort.Strings(b.Tags)
-		updated["tags"] = b.Tags
+	if labelsChanged {
+		sort.Strings(b.Labels)
+		updated["labels"] = b.Labels
 	}
 
 	if len(updated) > 0 || deleted != nil {
@@ -510,7 +510,7 @@ type bookmarkItem struct {
 	IsRead       bool                     `json:"is_read"`
 	IsMarked     bool                     `json:"is_marked"`
 	IsArchived   bool                     `json:"is_archived"`
-	Tags         []string                 `json:"tags"`
+	Labels       []string                 `json:"labels"`
 	Resources    map[string]*bookmarkFile `json:"resources"`
 	Embed        string                   `json:"embed,omitempty"`
 	Errors       []string                 `json:"errors,omitempty"`
@@ -549,14 +549,14 @@ func newBookmarkItem(s *server.Server, r *http.Request, b *Bookmark, base string
 		IsRead:       b.IsRead,
 		IsMarked:     b.IsMarked,
 		IsArchived:   b.IsArchived,
-		Tags:         make([]string, 0),
+		Labels:       make([]string, 0),
 		Resources:    make(map[string]*bookmarkFile),
 
 		mediaURL: s.AbsoluteURL(r, "/bm", b.FilePath),
 	}
 
-	if b.Tags != nil {
-		res.Tags = b.Tags
+	if b.Labels != nil {
+		res.Labels = b.Labels
 	}
 
 	switch res.DocumentType {
@@ -609,14 +609,14 @@ func (cf *createForm) Validate(f *form.Form) {
 }
 
 type updateForm struct {
-	IsRead     *bool   `json:"is_read"`
-	IsMarked   *bool   `json:"is_marked"`
-	IsArchived *bool   `json:"is_archived"`
-	IsDeleted  *bool   `json:"is_deleted"`
-	Tags       Strings `json:"tags"`
-	AddTags    Strings `json:"add_tags"`
-	RemoveTags Strings `json:"remove_tags"`
-	RedirTo    string  `json:"_to"`
+	IsRead       *bool   `json:"is_read"`
+	IsMarked     *bool   `json:"is_marked"`
+	IsArchived   *bool   `json:"is_archived"`
+	IsDeleted    *bool   `json:"is_deleted"`
+	Labels       Strings `json:"labels"`
+	AddLabels    Strings `json:"add_labels"`
+	RemoveLabels Strings `json:"remove_labels"`
+	RedirTo      string  `json:"_to"`
 }
 
 type deleteForm struct {

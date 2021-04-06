@@ -51,9 +51,9 @@
             <li>{{ icon $ "o-link" }} <a href="{{ .item.URL }}">{{ .item.URL }}</a></li>
           </ul>
 
-          {{ template "bookmark:tags" dict "ctx" $
-                                           "item" .item
-                                           "baseURL" "./.." }}
+          {{ template "bookmark:labels" dict "ctx" $
+                                             "item" .item
+                                             "baseURL" "./.." }}
 
           {{ with .item.Errors }}
           <div class="errors" data-controller="reveal">

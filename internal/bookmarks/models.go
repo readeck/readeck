@@ -87,7 +87,7 @@ type Bookmark struct {
 	FilePath     string        `db:"file_path"`
 	Files        BookmarkFiles `db:"files"`
 	Errors       Strings       `db:"errors"`
-	Tags         Strings       `db:"tags"`
+	Labels       Strings       `db:"labels"`
 	IsRead       bool          `db:"is_read"`
 	IsArchived   bool          `db:"is_archived"`
 	IsMarked     bool          `db:"is_marked"`

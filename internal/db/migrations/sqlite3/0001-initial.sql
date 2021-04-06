@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS bookmark (
     file_path   text     NOT NULL DEFAULT "",
     files       json     NOT NULL DEFAULT "",
     errors      json     NOT NULL DEFAULT "",
-    tags        json     NOT NULL DEFAULT "",
+    labels      json     NOT NULL DEFAULT "",
 
     CONSTRAINT fk_bookmark_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
@@ -64,37 +64,38 @@ CREATE VIRTUAL TABLE IF NOT EXISTS bookmark_idx USING fts5(
     description,
     text,
     site,
-    authors
+    author,
+    label
 );
 
 DROP TRIGGER IF EXISTS bookmark_ai;
 CREATE TRIGGER bookmark_ai AFTER INSERT ON bookmark BEGIN
     INSERT INTO bookmark_idx (
-        rowid, title, description, text, site, authors
+        rowid, title, description, text, site, author, label
     ) VALUES (
-        new.id, new.title, new.description, new.text, new.site_name || ' ' || new.site, new.authors
+        new.id, new.title, new.description, new.text, new.site_name || ' ' || new.site, new.authors, new.labels
     );
 END;
 
 DROP TRIGGER IF EXISTS bookmark_au;
 CREATE TRIGGER bookmark_au AFTER UPDATE ON bookmark BEGIN
     INSERT INTO bookmark_idx(
-        bookmark_idx, rowid, title, description, text, site, authors
+        bookmark_idx, rowid, title, description, text, site, author, label
     ) VALUES (
-        'delete', old.id, old.title, old.description, old.text, old.site, old.authors
+        'delete', old.id, old.title, old.description, old.text, old.site, old.authors, old.labels
     );
     INSERT INTO bookmark_idx (
-        rowid, title, description, text, site, authors
+        rowid, title, description, text, site, author, label
     ) VALUES (
-        new.id, new.title, new.description, new.text, new.site_name || ' ' || new.site, new.authors
+        new.id, new.title, new.description, new.text, new.site_name || ' ' || new.site, new.authors, new.labels
     );
 END;
 
 DROP TRIGGER IF EXISTS bookmark_ad;
 CREATE TRIGGER IF NOT EXISTS bookmark_ad AFTER DELETE ON bookmark BEGIN
     INSERT INTO bookmark_idx(
-        bookmark_idx, rowid, title, description, text, site, authors
+        bookmark_idx, rowid, title, description, text, site, author, label
     ) VALUES (
-        'delete', old.id, old.title, old.description, old.text, old.site, old.authors
+        'delete', old.id, old.title, old.description, old.text, old.site, old.authors, old.labels
     );
 END;

@@ -79,8 +79,8 @@ bookmarks:card renders a bookmark card
   </a></div>
   <div class="card-content">
     <h3 class="title"><a href="{{ $url }}" data-turbo-frame="_top">{{ default "untitled" $x.Title }}</a></h3>
-    {{- if $x.Tags }}
-    <ul class="badges">{{ range $x.Tags }}
+    {{- with $x.Labels }}
+    <ul class="badges">{{ range . }}
         <li class="badge">{{ . }}</li>
     {{ end }}</ul>
     {{ end -}}
@@ -201,10 +201,10 @@ bookmark:actions renders a bookmark action form
 {{- end -}}
 
 
-{{- define "bookmark:tags" -}}
+{{- define "bookmark:labels" -}}
 {{- $x := .item -}}
 {{- $url := urlFor .ctx (or .baseURL ".") $x.ID -}}
-<turbo-frame id="bookmark-tags-{{ $x.ID }}">
+<turbo-frame id="bookmark-labels-{{ $x.ID }}">
 <form action="{{ $url }}" method="post"
  data-controller="turbo-form"
  data-turbo-form-action-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}"
@@ -212,14 +212,14 @@ bookmark:actions renders a bookmark action form
   {{ template "csrfField" .ctx }}
   <input type="hidden" name="_to" value="{{ .ctx.currentPath }}" />
   <button type="submit" style="display: none"></button>
-  <ul class="badges editable">{{ range $x.Tags }}
+  <ul class="badges editable">{{ range $x.Labels }}
     <li class="badge">{{ . }}
     <button class="button-clear button-delete" type="submit"
-      name="remove_tags" value="{{ . }}"></button>
+      name="remove_labels" value="{{ . }}"></button>
     </li>
   {{ end }}
     <li class="control">
-      <input type="text" name="add_tags" placeholder="Add a new label" />
+      <input type="text" name="add_labels" placeholder="Add a new label" />
       <button type="submit">Add label</button>
     </li>
   </ul>
