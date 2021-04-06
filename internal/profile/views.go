@@ -84,7 +84,7 @@ func (v *profileViews) userPassword(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 		user := auth.GetRequestUser(r)
-		pf.AddUser(f, user)
+		pf.SetUser(f, user)
 
 		form.Bind(f, r)
 		if f.IsValid() {
@@ -197,7 +197,7 @@ func (v *profileViews) tokenDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tokenTimers.Start(ti.Token.ID, 15*time.Second, func() {
+	tokenTimers.Start(ti.Token.ID, 20*time.Second, func() {
 		log := v.srv.Log(r).WithField("token", ti.UID)
 		if err := ti.Token.Delete(); err != nil {
 			log.WithError(err).Error("removing token")
