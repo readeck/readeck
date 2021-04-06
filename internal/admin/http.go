@@ -11,4 +11,7 @@ func SetupRoutes(s *server.Server) {
 
 	// API routes
 	s.AddRoute("/api/admin", api)
+
+	// Website views
+	s.AddRoute("/admin", newAdminViews(api))
 }

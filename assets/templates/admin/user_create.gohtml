@@ -1,0 +1,44 @@
+{{ extends "admin/base.gohtml" }}
+
+{{ define "title" }}Create user{{ end }}
+
+{{ define "content" }}
+<h1 class="title">New user</h1>
+<form action="{{ urlFor $ "" }}" method="POST">
+  {{ template "formErrors" .Form }}
+  {{ template "csrfField" . }}
+
+  {{ template "textField" (dict "field" .Form.Fields.username
+                           "name" "username"
+                           "label" "Username"
+                           "class" "horizontal"
+                           ) }}
+
+  {{ template "textField" (dict "field" .Form.Fields.email
+                           "type" "email"
+                           "name" "email"
+                           "label" "Email address"
+                           "class" "horizontal"
+                           ) }}
+
+  {{ template "selectField" (dict "field" .Form.Fields.group
+                           "name" "group"
+                           "label" "Group"
+                           "class" "horizontal"
+                           "options" .Form.Fields.group.Value.Options
+                           ) }}
+
+  {{ template "textField" (dict "field" .Form.Fields.password
+                           "type" "password"
+                           "name" "password"
+                           "label" "Password"
+                           "class" "horizontal"
+                           "controlAttrs" (dict "data-controller" "pass-reveal"
+                                                "data-pass-reveal-icon-show-value" "o-show"
+                                                "data-pass-reveal-icon-hide-value" "o-hide")
+                           "inputAttrs" (dict "data-pass-reveal-target" "field")
+                           ) }}
+
+  <p><button type="submit">Save</button></p>
+</form>
+{{ end }}

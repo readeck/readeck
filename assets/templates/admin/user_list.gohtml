@@ -1,0 +1,31 @@
+{{ extends "admin/base.gohtml" }}
+
+{{ define "title" }}Users{{ end }}
+
+{{ define "content" }}
+
+<h1 class="title">Users</h1>
+
+<p><a href="{{ urlFor $ "." "add" }}" class="button">Add a new user</a></p>
+
+{{ with .users }}
+{{ template "pagination" $.pagination }}
+<div class="panel">
+  {{ range .}}
+  <div class="panel-content">
+    <div>
+      <strong><a href="{{ .Href }}">{{ .Username }}</a></strong>
+      ({{ .Group }})
+    </div>
+    <div><small>
+      Created on: {{ .Created | date "2006-01-02" }},
+      Last update: {{ .Updated | date "2006-01-02" }}
+    </small></div>
+  </div>
+  {{ end }}
+</div>
+
+{{ template "pagination" $.pagination }}
+{{ end }}
+
+{{ end }}
