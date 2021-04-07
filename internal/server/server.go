@@ -21,6 +21,7 @@ import (
 	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/internal/auth"
 	"codeberg.org/readeck/readeck/internal/auth/users"
+	"codeberg.org/readeck/readeck/pkg/glob"
 )
 
 // Server is a wrapper around chi router.
@@ -102,9 +103,9 @@ func New(basePath string) *Server {
 		},
 		"pathIs": func(ctx TC, patterns ...string) bool {
 			r := ctx["request"].(*http.Request)
-			cp := s.CurrentPath(r)
+			cp := "/" + strings.TrimPrefix(r.URL.Path, s.BasePath)
 			for _, p := range patterns {
-				if ok, _ := path.Match(p, cp); ok {
+				if glob.Glob(p, cp) {
 					return true
 				}
 			}
