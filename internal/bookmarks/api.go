@@ -289,7 +289,7 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 		f.BindValues(r.URL.Query())
 		if search.Query != "" {
 			st := newSearchString(search.Query)
-			ds = st.toSQLite(ds)
+			ds = st.toSelectDataSet(ds)
 		}
 
 		ds = ds.

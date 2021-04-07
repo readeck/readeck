@@ -140,16 +140,6 @@ func (m *BookmarkManager) GetOne(expressions ...goqu.Expression) (*Bookmark, err
 	return &b, nil
 }
 
-// AddSearch adds the search query to an existing SelectDataset.
-func (m *BookmarkManager) AddSearch(ds *goqu.SelectDataset, search string) *goqu.SelectDataset {
-	return ds.Join(
-		goqu.T("bookmark_idx").As("bi"),
-		goqu.On(goqu.Ex{"bi.rowid": goqu.I("b.id")}),
-	).
-		Where(goqu.L("bookmark_idx match ?", search)).
-		Order(goqu.L("bm25(bookmark_idx, 12.0, 6.0, 5.0, 2.0, 4.0)").Asc())
-}
-
 // Update updates some bookmark values.
 func (b *Bookmark) Update(v interface{}) error {
 	if b.ID == 0 {

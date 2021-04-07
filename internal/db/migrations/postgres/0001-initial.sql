@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS token (
     expires     timestamptz   NULL,
     is_enabled  boolean       NOT NULL DEFAULT true,
     application varchar(128)  NOT NULL,
-    roles       json          NOT NULL DEFAULT '[]',
+    roles       jsonb         NOT NULL DEFAULT '[]',
 
     CONSTRAINT fk_token_user FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE
 );
@@ -42,16 +42,77 @@ CREATE TABLE IF NOT EXISTS bookmark (
     site        text        NOT NULL DEFAULT '',
     site_name   text        NOT NULL DEFAULT '',
     published   timestamptz,
-    authors     json        NOT NULL DEFAULT '[]',
+    authors     jsonb       NOT NULL DEFAULT '[]',
     lang        varchar(16) NOT NULL DEFAULT '',
     type        varchar(64) NOT NULL DEFAULT '',
     description text        NOT NULL DEFAULT '',
-    text        text        NOT NULL DEFAULT '',
+    "text"      text        NOT NULL DEFAULT '',
     embed       text        NOT NULL DEFAULT '',
     file_path   text        NOT NULL DEFAULT '',
-    files       json        NOT NULL DEFAULT '[]',
-    errors      json        NOT NULL DEFAULT '[]',
-    labels      json        NOT NULL DEFAULT '[]',
+    files       jsonb       NOT NULL DEFAULT '[]',
+    errors      jsonb       NOT NULL DEFAULT '[]',
+    labels      jsonb       NOT NULL DEFAULT '[]',
 
     CONSTRAINT fk_bookmark_user FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE
   );
+
+
+--
+-- Search configuration
+--
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
+-- CREATE TEXT SEARCH CONFIGURATION ts (COPY = english);
+
+ALTER TEXT SEARCH CONFIGURATION ts
+ALTER MAPPING for hword, hword_part, word, host
+WITH unaccent, english_stem, french_stem;
+
+CREATE TABLE bookmark_search (
+	bookmark_id int4 NOT NULL PRIMARY KEY,
+	title       tsvector NULL,
+	description tsvector NULL,
+	"text"      tsvector NULL,
+	site        tsvector NULL,
+	author      tsvector NULL,
+	"label"     tsvector NULL,
+
+    CONSTRAINT fk_bookmark_search_bookmark FOREIGN KEY (bookmark_id) REFERENCES bookmark(id) ON DELETE CASCADE
+);
+
+CREATE INDEX bookmark_search_text_idx ON bookmark_search USING GIN ("text");
+CREATE INDEX bookmark_search_title_idx  ON bookmark_search USING GIN (title);
+CREATE INDEX bookmark_search_site_idx   ON bookmark_search USING GIN (site);
+CREATE INDEX bookmark_search_author_idx ON bookmark_search USING GIN (author);
+CREATE INDEX bookmark_search_label_idx  ON bookmark_search USING GIN (label);
+
+CREATE OR REPLACE FUNCTION bookmark_search_update()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	DELETE FROM bookmark_search WHERE bookmark_id = OLD.id;
+
+	IF tg_op = 'UPDATE' OR tg_op = 'INSERT' THEN
+		INSERT INTO bookmark_search (
+			bookmark_id, title, description, "text", site, author, "label"
+		) VALUES (
+			NEW.id,
+            setweight(to_tsvector('ts', NEW.title), 'A'),
+            to_tsvector('ts', NEW.description),
+			to_tsvector('ts', NEW."text"),
+            to_tsvector('ts',
+                COALESCE(NEW.site_name, '') || ' ' ||
+                REGEXP_REPLACE(COALESCE(NEW.site, ''), '^www\.', '') || ' ' ||
+                REPLACE(REGEXP_REPLACE(COALESCE(NEW.site, ''), '^www\.', ''), '.', ' ')
+            ),
+			jsonb_to_tsvector('ts', NEW.authors, '["string"]'),
+			setweight(jsonb_to_tsvector('ts', NEW.labels, '["string"]'), 'A')
+		);
+	END IF;
+	RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER bookmark_tsu AFTER INSERT OR UPDATE ON bookmark
+	FOR EACH ROW EXECUTE PROCEDURE bookmark_search_update();
