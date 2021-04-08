@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/auth"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
 )
@@ -85,6 +85,7 @@ func (h *bookmarkViews) bookmarkList(w http.ResponseWriter, r *http.Request) {
 
 func (h *bookmarkViews) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 	b := r.Context().Value(ctxBookmarkKey{}).(*Bookmark)
+	user := auth.GetRequestUser(r)
 	item := newBookmarkItem(h.srv, r, b, "")
 	item.Embed = b.Embed
 	item.Errors = b.Errors
@@ -106,7 +107,7 @@ func (h *bookmarkViews) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 
 	ctx["out"] = w
 
-	if configs.Config.Main.DevMode {
+	if user.Settings.DebugInfo {
 		for k, x := range map[string]string{
 			"_props": "props.json",
 			"_log":   "log",
