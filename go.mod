@@ -12,23 +12,23 @@ require (
 	github.com/araddon/dateparse v0.0.0-20210207001429-0eec95c9db7e
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
 	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
-	github.com/casbin/casbin/v2 v2.25.5
+	github.com/casbin/casbin/v2 v2.26.0
 	github.com/cristalhq/jwt/v3 v3.0.12
 	github.com/doug-martin/goqu/v9 v9.11.0
 	github.com/fatih/color v1.10.0
 	github.com/gammazero/deque v0.0.0-20201010052221-3932da5530cc // indirect
 	github.com/gammazero/workerpool v1.1.1
-	github.com/go-chi/chi/v5 v5.0.1
+	github.com/go-chi/chi/v5 v5.0.2
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 	github.com/go-shiori/dom v0.0.0-20201011032054-d6b74a54fe52
 	github.com/go-shiori/go-readability v0.0.0-20201011032228-bdc871772408
 	github.com/gorilla/csrf v1.7.0
 	github.com/gorilla/schema v1.2.0
 	github.com/gorilla/sessions v1.2.1
-	github.com/hlandau/passlib v1.0.10
+	github.com/hlandau/passlib v1.0.11
 	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
-	github.com/jackc/pgx/v4 v4.10.1
+	github.com/jackc/pgx/v4 v4.11.0
 	github.com/jarcoal/httpmock v1.0.8
 	github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e // indirect
 	github.com/komkom/toml v0.0.0-20210317065440-24f427ca88cc
@@ -41,13 +41,11 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.1.3
 	github.com/stretchr/testify v1.7.0
-	github.com/tdewolff/parse/v2 v2.5.12
+	github.com/tdewolff/parse/v2 v2.5.14
 	github.com/thoas/go-funk v0.8.0
-	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83 // indirect
 	golang.org/x/image v0.0.0-20210220032944-ac19c3e999fb
 	golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	golang.org/x/term v0.0.0-20210317153231-de623e64d2a6
 	golang.org/x/text v0.3.5
 	gopkg.in/hlandau/easymetric.v1 v1.0.0 // indirect
 	gopkg.in/hlandau/measurable.v1 v1.0.1 // indirect
