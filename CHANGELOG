@@ -1,5 +1,12 @@
 # Changlog
 
+## [0.2.0] - 2021-04-08
+### Added
+- ACLs using RBAC with roles on users
+- Admin section, for user management
+- Improved profile section
+- Better caching of pages when possible
+
 ## [0.1.2] - 2021-03-21
 ### Fixed
 - Never try to download and resize images that are too big (more than 3Mpx)
