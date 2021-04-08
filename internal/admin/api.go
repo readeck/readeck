@@ -185,7 +185,7 @@ func (api *adminAPI) userList(w http.ResponseWriter, r *http.Request) {
 func (api *adminAPI) userInfo(w http.ResponseWriter, r *http.Request) {
 	u := r.Context().Value(ctxUserKey{}).(*users.User)
 	item := newUserItem(api.srv, r, u, "./..")
-	item.Settings = &u.Settings
+	item.Settings = u.Settings
 
 	api.srv.Render(w, r, http.StatusOK, item)
 }

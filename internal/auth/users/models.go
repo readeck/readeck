@@ -62,14 +62,14 @@ func ValidGroups() []string {
 
 // User is a user record in database
 type User struct {
-	ID       int          `db:"id" goqu:"skipinsert,skipupdate"`
-	Created  time.Time    `db:"created" goqu:"skipupdate"`
-	Updated  time.Time    `db:"updated"`
-	Username string       `db:"username"`
-	Email    string       `db:"email"`
-	Password string       `db:"password"`
-	Group    string       `db:"group"`
-	Settings UserSettings `db:"settings"`
+	ID       int           `db:"id" goqu:"skipinsert,skipupdate"`
+	Created  time.Time     `db:"created" goqu:"skipupdate"`
+	Updated  time.Time     `db:"updated"`
+	Username string        `db:"username"`
+	Email    string        `db:"email"`
+	Password string        `db:"password"`
+	Group    string        `db:"group"`
+	Settings *UserSettings `db:"settings"`
 }
 
 // Manager is a query helper for user entries.

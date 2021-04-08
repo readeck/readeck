@@ -83,11 +83,11 @@ type profileInfoProvider struct {
 	Application string `json:"application"`
 }
 type profileInfoUser struct {
-	Username string             `json:"username"`
-	Email    string             `json:"email"`
-	Created  time.Time          `json:"created"`
-	Updated  time.Time          `json:"updated"`
-	Settings users.UserSettings `json:"settings"`
+	Username string              `json:"username"`
+	Email    string              `json:"email"`
+	Created  time.Time           `json:"created"`
+	Updated  time.Time           `json:"updated"`
+	Settings *users.UserSettings `json:"settings"`
 }
 type profileInfo struct {
 	Provider profileInfoProvider `json:"provider"`

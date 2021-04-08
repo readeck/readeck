@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS user (
     username text     UNIQUE NOT NULL,
     email    text     UNIQUE NOT NULL,
     password text     NOT NULL,
-    `group`  text     NOT NULL DEFAULT "user"
+    `group`  text     NOT NULL DEFAULT "user",
     settings json     NOT NULL DEFAULT "{}"
 );
 
