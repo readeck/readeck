@@ -26,6 +26,10 @@
       </div>
 
       {{ range .form.Fields.url.Errors }}<p class="text-danger"><strong>{{ . }}</strong></p>{{ end }}
+
+      {{- if and (not .Q) (pathIs . "/bookmarks") (eq .count 0) -}}
+      <p><strong>You don't have any bookmark yet. Start saving pages now!</strong></p>
+      {{- end -}}
     </form>
   </div>
 
@@ -41,14 +45,6 @@
   </div>
 </div>
 
-{{- if and (not .Q) (eq .count 0) }}
-{{/* ----------------------------------------------------------------
-Placeholder when no bookmarks
-*/}}
-<div class="placeholder">
-  <p>You don't have any bookmark yet. Start saving pages now!</p>
-</div>
-{{- else -}}
 {{/* ----------------------------------------------------------------
 Bookmark list */}}
 {{ template "pagination" .pagination }}
@@ -66,7 +62,6 @@ Bookmark list */}}
                                     "baseURL" "/bookmarks" }}
 {{ end }}
 </div>
-{{ end }}
 
 {{ template "pagination" .pagination }}
 </turbo-frame>
