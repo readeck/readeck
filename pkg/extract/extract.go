@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
@@ -223,7 +224,8 @@ func (e *Extractor) NewProcessMessage(step ProcessStep) *ProcessMessage {
 func (e *Extractor) GetLogger() *log.Logger {
 	logger := log.New()
 	logger.Formatter = log.StandardLogger().Formatter
-	logger.Level = log.StandardLogger().Level
+	logger.Level = log.DebugLevel
+	logger.SetOutput(ioutil.Discard)
 	logger.AddHook(&messageLogHook{e})
 
 	return logger

@@ -51,9 +51,13 @@ func (h *messageLogHook) Levels() []log.Level {
 	return log.AllLevels
 }
 func (h *messageLogHook) Fire(entry *log.Entry) error {
+	if entry.Level <= log.StandardLogger().Level {
+		msg, _ := entry.Logger.Formatter.Format(entry)
+		log.StandardLogger().Out.Write(msg)
+	}
+
 	b, _ := messageLogFormat.Format(entry)
 	h.e.Logs = append(h.e.Logs, strings.TrimSpace(string(b)))
-
 	if entry.Level <= log.ErrorLevel {
 		b, _ = errorLogFormat.Format(entry)
 		h.e.errors = append(h.e.errors, errors.New(entry.Message))
