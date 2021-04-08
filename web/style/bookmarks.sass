@@ -1,28 +1,66 @@
 @use "config" as *
 @use "plugins/content" as *
+@use "plugins/form" as *
 
-// Bookmark creation form
+// Bookmark list controls
 // ------------------------------------------------------------------
-.bookmark-form-new
+.list-controlls
+  display: grid
+  align-items: center
+  grid-template-columns: 2fr auto auto
+  gap: $block-spacing
+  margin-bottom: $block-spacing
+
+  @media screen and (max-width: 700px)
+    display: block
+
+    &>*
+      margin-bottom: $block-spacing/2
+
+  .bookmark-new
+    form,
+    .compound,
+    input
+      width: 100%
+
+    button
+      white-space: nowrap
+
+    p.text-danger
+      margin: 0 0 0 1rem
+
+  .bookmark-filters
     display: flex
-    margin-bottom: 1.5rem
+    justify-content: center
+    align-items: center
+    gap: 1.5rem
 
-    h1
-        flex-grow: 0
-        margin: 0 1rem 0 0
-        line-height: 1.2
+    a, a:visited
+      border-bottom: 3px solid $grey-lighter
+      color: $grey-dark
 
+      &:hover, &:focus, &:active,
+      &.active
+        color: $primary
+        border-color: $primary
+
+      &.active
+        font-weight: 600
+
+  .bookmark-search
     form
-      flex-grow: 1
+      display: inline-flex
+      width: 100%
 
-      & > .compound
-        display: flex
+      input
+        width: 100%
+        padding-right: 2.4em
 
-        input
-          flex-grow: 1
-
-      & > p.text-danger
-        margin: 0 0 0 1rem
+      button
+        margin-left: -2.4em
+        border: none
+        background: none
+        color: $primary
 
 
 // Bookmark list

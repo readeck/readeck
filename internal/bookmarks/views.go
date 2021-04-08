@@ -24,14 +24,16 @@ func newBookmarkViews(api *bookmarkAPI) *bookmarkViews {
 
 	r.With(h.srv.WithPermission("read")).Group(func(r chi.Router) {
 		r.With(api.withBookmarkList).Get("/", h.bookmarkList)
-		r.With(api.withBookmark).Get("/{uid}", h.bookmarkInfo)
+		r.With(api.withBookmarkFilters, api.withBookmarkList).
+			Get("/{filter:(unread|archives|favorites)}", h.bookmarkList)
+		r.With(api.withBookmark).Get("/{uid:[a-zA-Z0-9]{18,22}}", h.bookmarkInfo)
 	})
 
 	r.With(h.srv.WithPermission("write")).Group(func(r chi.Router) {
 		r.With(api.withBookmarkList).Post("/", h.bookmarkList)
 		r.With(api.withBookmark).Group(func(r chi.Router) {
-			r.Post("/{uid}", h.bookmarkUpdate)
-			r.Post("/{uid}/delete", h.bookmarkDelete)
+			r.Post("/{uid:[a-zA-Z0-9]{18,22}}", h.bookmarkUpdate)
+			r.Post("/{uid:[a-zA-Z0-9]{18,22}}/delete", h.bookmarkDelete)
 		})
 	})
 

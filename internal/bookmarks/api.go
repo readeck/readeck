@@ -36,6 +36,7 @@ type (
 	ctxBookmarkKey     struct{}
 	ctxBookmarkListKey struct{}
 	ctxSearchString    struct{}
+	ctxFilterForm      struct{}
 )
 
 // bookmarkAPI is the base bookmark API router.
@@ -59,9 +60,9 @@ func newBookmarkAPI(s *server.Server) *bookmarkAPI {
 	r.With(api.srv.WithPermission("read")).Group(func(r chi.Router) {
 		r.With(api.withBookmarkList).Get("/", api.bookmarkList)
 		r.With(api.withBookmark).Group(func(r chi.Router) {
-			r.Get("/{uid}", api.bookmarkInfo)
-			r.Get("/{uid}/article", api.bookmarkArticle)
-			r.Get("/{uid}/x/*", api.bookmarkResource)
+			r.Get("/{uid:[a-zA-Z0-9]{18,22}}", api.bookmarkInfo)
+			r.Get("/{uid:[a-zA-Z0-9]{18,22}}/article", api.bookmarkArticle)
+			r.Get("/{uid:[a-zA-Z0-9]{18,22}}/x/*", api.bookmarkResource)
 		})
 
 	})
@@ -69,8 +70,8 @@ func newBookmarkAPI(s *server.Server) *bookmarkAPI {
 	r.With(api.srv.WithPermission("write")).Group(func(r chi.Router) {
 		r.Post("/", api.bookmarkCreate)
 		r.With(api.withBookmark).Group(func(r chi.Router) {
-			r.Patch("/{uid}", api.bookmarkUpdate)
-			r.Delete("/{uid}", api.bookmarkDelete)
+			r.Patch("/{uid:[a-zA-Z0-9]{18,22}}", api.bookmarkUpdate)
+			r.Delete("/{uid:[a-zA-Z0-9]{18,22}}", api.bookmarkDelete)
 		})
 	})
 
@@ -259,6 +260,26 @@ func (api *bookmarkAPI) withBookmark(next http.Handler) http.Handler {
 	})
 }
 
+func (api *bookmarkAPI) withBookmarkFilters(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		filter := chi.URLParam(r, "filter")
+		filters := &filterForm{}
+
+		switch filter {
+		case "unread":
+			filters.setRead(false)
+			filters.setArchived(false)
+		case "archives":
+			filters.setArchived(true)
+		case "favorites":
+			filters.setMarked(true)
+		}
+
+		ctx := context.WithValue(r.Context(), ctxFilterForm{}, filters)
+		next.ServeHTTP(w, r.Clone(ctx))
+	})
+}
+
 func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		res := bookmarkList{}
@@ -284,12 +305,34 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 
 		ds = ds.Order(goqu.I("created").Desc())
 
+		// Search filter
 		search := &searchForm{}
-		f := form.NewForm(search)
-		f.BindValues(r.URL.Query())
+		sf := form.NewForm(search)
+		sf.BindValues(r.URL.Query())
 		if search.Query != "" {
 			st := newSearchString(search.Query)
 			ds = st.toSelectDataSet(ds)
+		}
+
+		// Status filters
+		// status come first from request context and if nothing is found
+		// we handle the querystring filters.
+		var filters *filterForm
+		filters, ok := r.Context().Value(ctxFilterForm{}).(*filterForm)
+		if !ok {
+			filters = &filterForm{}
+			ff := form.NewForm(filters)
+			ff.BindValues(r.URL.Query())
+		}
+
+		if filters.IsRead != nil {
+			ds = ds.Where(goqu.L("b.is_read").Eq(filters.IsRead))
+		}
+		if filters.IsMarked != nil {
+			ds = ds.Where(goqu.L("b.is_marked").Eq(filters.IsMarked))
+		}
+		if filters.IsArchived != nil {
+			ds = ds.Where(goqu.L("b.is_archived").Eq(filters.IsArchived))
 		}
 
 		ds = ds.
@@ -607,6 +650,22 @@ func newBookmarkItem(s *server.Server, r *http.Request, b *Bookmark, base string
 
 type searchForm struct {
 	Query string `json:"q" conform:"trim"`
+}
+
+type filterForm struct {
+	IsRead     *bool `json:"is_read"`
+	IsMarked   *bool `json:"is_marked"`
+	IsArchived *bool `json:"is_archived"`
+}
+
+func (ff *filterForm) setRead(v bool) {
+	ff.IsRead = &v
+}
+func (ff *filterForm) setMarked(v bool) {
+	ff.IsMarked = &v
+}
+func (ff *filterForm) setArchived(v bool) {
+	ff.IsArchived = &v
 }
 
 type createForm struct {

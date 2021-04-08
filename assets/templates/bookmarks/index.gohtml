@@ -4,11 +4,7 @@
 
 {{ define "extra-nav" -}}
 <div>
-<form action="{{ urlFor $ "" }}" method="GET" class="search">
-  <input title="search in bookmarks" class="rounded"
-   type="text" name="q" value="{{ .Q }}" placeholder="search" />
-  <button title="search">{{ icon $ "o-search" }}</button>
-</form>
+
 </div>
 {{- end }}
 
@@ -17,20 +13,32 @@
  data-controller="turbo-refresh"
  data-turbo-refresh-interval-value="10"
  data-turbo-refresh-on-value=".card.state-deleted">
-<div class="bookmark-form-new">
-  <h1 class="title">Bookmarks</h1>
 
-  <form action="{{ urlFor $ "/bookmarks" }}" method="POST"
-   data-controller="turbo-form">
-    {{ template "csrfField" . }}
-    <div class="compound">
-      <input class="rounded" type="text" name="url"
-      value="{{ .form.Fields.url.Value }}" placeholder="https://" />
-      <button class="rounded" type="submit">Add link</button>
-    </div>
+<div class="list-controlls">
+  <div class="bookmark-new">
+    <form action="{{ urlFor $ "/bookmarks" }}" method="POST"
+     data-controller="turbo-form">
+      {{ template "csrfField" . }}
+      <div class="compound">
+        <input class="rounded" type="text" name="url" size="15"
+        value="{{ .form.Fields.url.Value }}" placeholder="https://" />
+        <button class="rounded" type="submit">Save link</button>
+      </div>
 
-    {{ range .form.Fields.url.Errors }}<p class="text-danger"><strong>{{ . }}</strong></p>{{ end }}
-  </form>
+      {{ range .form.Fields.url.Errors }}<p class="text-danger"><strong>{{ . }}</strong></p>{{ end }}
+    </form>
+  </div>
+
+  {{ template "bookmarks:filters" $ }}
+
+  <div class="bookmark-search">
+    <form action="{{ urlFor $ "" }}" method="GET"
+     data-controller="turbo-form" data-turbo-form-disabled-value="true">
+      <input title="search in bookmarks" class="rounded" size="10"
+      type="text" name="q" value="{{ .Q }}" placeholder="search" />
+      <button title="search">{{ icon $ "o-search" }}</button>
+    </form>
+  </div>
 </div>
 
 {{- if and (not .Q) (eq .count 0) }}
@@ -53,7 +61,9 @@ Bookmark list */}}
 
 <div class="bookmark-list">
 {{ range .bookmarks }}
-  {{ template "bookmarks:card" dict "ctx" $ "item" . }}
+  {{ template "bookmarks:card" dict "ctx" $
+                                    "item" .
+                                    "baseURL" "/bookmarks" }}
 {{ end }}
 </div>
 {{ end }}

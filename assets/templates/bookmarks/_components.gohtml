@@ -36,6 +36,20 @@ bookmarks:photo renders a video bookmark
 {{- end -}}
 {{- end -}}
 
+{{- define "bookmarks:filters" -}}
+{{- $url := urlFor . "/bookmarks" }}
+{{- $inAll := (pathIs $ "/bookmarks") -}}
+{{- $inUnread := (pathIs $ "/bookmarks/unread") -}}
+{{- $inArchives := (pathIs $ "/bookmarks/archives") -}}
+{{- $inFavorites := (pathIs $ "/bookmarks/favorites") -}}
+<ul class="bookmark-filters">
+  <li><a class="{{ if $inAll }} active{{ end }}" href="{{ $url }}">All</a></li>
+  <li><a class="{{ if $inUnread }} active{{ end }}" href="{{ $url }}/unread">{{ icon . "o-check-off" }} Unread</a></li>
+  <li><a class="{{ if $inArchives }} active{{ end }}" href="{{ $url }}/archives">{{ icon . "o-archive-on" }} Archive</a></li>
+  <li><a class="{{ if $inFavorites }} active{{ end }}" href="{{ $url }}/favorites">{{ icon . "o-favorite-on" }} Favorites</a></li>
+</ul>
+{{- end -}}
+
 
 {{/*
 bookmarks:card renders a bookmark card
