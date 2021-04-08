@@ -141,6 +141,10 @@ func (api *adminAPI) updateUser(u *users.User, uf *users.UpdateForm) (map[string
 		}
 	}
 
+	if uf.Settings != nil {
+		updated["settings"] = uf.Settings
+	}
+
 	if len(updated) == 0 {
 		return updated, nil
 	}
@@ -181,6 +185,7 @@ func (api *adminAPI) userList(w http.ResponseWriter, r *http.Request) {
 func (api *adminAPI) userInfo(w http.ResponseWriter, r *http.Request) {
 	u := r.Context().Value(ctxUserKey{}).(*users.User)
 	item := newUserItem(api.srv, r, u, "./..")
+	item.Settings = &u.Settings
 
 	api.srv.Render(w, r, http.StatusOK, item)
 }
@@ -249,14 +254,15 @@ type userList struct {
 }
 
 type userItem struct {
-	ID        int       `json:"id"`
-	Href      string    `json:"href"`
-	Created   time.Time `json:"created"`
-	Updated   time.Time `json:"updated"`
-	Username  string    `json:"username"`
-	Email     string    `json:"email"`
-	Group     string    `json:"group"`
-	IsDeleted bool      `json:"is_deleted"`
+	ID        int                 `json:"id"`
+	Href      string              `json:"href"`
+	Created   time.Time           `json:"created"`
+	Updated   time.Time           `json:"updated"`
+	Username  string              `json:"username"`
+	Email     string              `json:"email"`
+	Group     string              `json:"group"`
+	Settings  *users.UserSettings `json:"settings,omitempty"`
+	IsDeleted bool                `json:"is_deleted"`
 }
 
 func newUserItem(s *server.Server, r *http.Request, u *users.User, base string) userItem {

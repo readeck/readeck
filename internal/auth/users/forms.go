@@ -149,10 +149,11 @@ func (uf *CreateForm) Validate(f *form.Form) {
 
 // UpdateForm describes a user update form.
 type UpdateForm struct {
-	Username *string      `json:"username" conform:"trim"`
-	Email    *string      `json:"email" conform:"trim"`
-	Group    *GroupChoice `json:"group" conform:"trim"`
-	Password *string      `json:"password"`
+	Username *string       `json:"username" conform:"trim"`
+	Email    *string       `json:"email" conform:"trim"`
+	Group    *GroupChoice  `json:"group" conform:"trim"`
+	Password *string       `json:"password"`
+	Settings *UserSettings `json:"settings"`
 }
 
 // SetUser adds a user to the wrapping form's context.

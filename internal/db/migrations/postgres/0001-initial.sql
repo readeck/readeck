@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS "user" (
     email    varchar(128) UNIQUE NOT NULL,
     password varchar(256) NOT NULL,
     "group"  varchar(64)  NOT NULL DEFAULT 'user'
+    settings jsonb        NOT NULL DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS token (

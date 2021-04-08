@@ -1,6 +1,8 @@
 package users
 
 import (
+	"database/sql/driver"
+	"encoding/json"
 	"errors"
 	"hash/crc32"
 	"strings"
@@ -60,13 +62,14 @@ func ValidGroups() []string {
 
 // User is a user record in database
 type User struct {
-	ID       int       `db:"id" goqu:"skipinsert,skipupdate"`
-	Created  time.Time `db:"created" goqu:"skipupdate"`
-	Updated  time.Time `db:"updated"`
-	Username string    `db:"username"`
-	Email    string    `db:"email"`
-	Password string    `db:"password"`
-	Group    string    `db:"group"`
+	ID       int          `db:"id" goqu:"skipinsert,skipupdate"`
+	Created  time.Time    `db:"created" goqu:"skipupdate"`
+	Updated  time.Time    `db:"updated"`
+	Username string       `db:"username"`
+	Email    string       `db:"email"`
+	Password string       `db:"password"`
+	Group    string       `db:"group"`
+	Settings UserSettings `db:"settings"`
 }
 
 // Manager is a query helper for user entries.
@@ -215,4 +218,29 @@ func (u *User) HasPermission(obj, act string) bool {
 		return false
 	}
 	return r
+}
+
+type UserSettings struct {
+	DebugInfo bool `json:"debug_info"`
+}
+
+func (s *UserSettings) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+
+	v, err := db.JSONBytes(value)
+	if err != nil {
+		return err
+	}
+	json.Unmarshal(v, s)
+	return nil
+}
+
+func (s *UserSettings) Value() (driver.Value, error) {
+	v, err := json.Marshal(s)
+	if err != nil {
+		return "", err
+	}
+	return string(v), nil
 }

@@ -83,10 +83,11 @@ type profileInfoProvider struct {
 	Application string `json:"application"`
 }
 type profileInfoUser struct {
-	Username string    `json:"username"`
-	Email    string    `json:"email"`
-	Created  time.Time `json:"created"`
-	Updated  time.Time `json:"updated"`
+	Username string             `json:"username"`
+	Email    string             `json:"email"`
+	Created  time.Time          `json:"created"`
+	Updated  time.Time          `json:"updated"`
+	Settings users.UserSettings `json:"settings"`
 }
 type profileInfo struct {
 	Provider profileInfoProvider `json:"provider"`
@@ -107,6 +108,7 @@ func (api *profileAPI) profileInfo(w http.ResponseWriter, r *http.Request) {
 			Email:    info.User.Email,
 			Created:  info.User.Created,
 			Updated:  info.User.Updated,
+			Settings: info.User.Settings,
 		},
 	}
 
