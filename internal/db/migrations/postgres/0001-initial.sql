@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS bookmark (
     is_read     boolean     NOT NULL DEFAULT false,
     state       integer     NOT NULL DEFAULT 0,
     url         text        NOT NULL,
+    domain      text        NOT NULL,
     title       text        NOT NULL,
     site        text        NOT NULL DEFAULT '',
     site_name   text        NOT NULL DEFAULT '',
@@ -62,7 +63,7 @@ CREATE TABLE IF NOT EXISTS bookmark (
 --
 CREATE EXTENSION IF NOT EXISTS unaccent;
 
--- CREATE TEXT SEARCH CONFIGURATION ts (COPY = english);
+CREATE TEXT SEARCH CONFIGURATION ts (COPY = english);
 
 ALTER TEXT SEARCH CONFIGURATION ts
 ALTER MAPPING for hword, hword_part, word, host
@@ -102,9 +103,10 @@ BEGIN
             to_tsvector('ts', NEW.description),
 			to_tsvector('ts', NEW."text"),
             to_tsvector('ts',
-                COALESCE(NEW.site_name, '') || ' ' ||
-                REGEXP_REPLACE(COALESCE(NEW.site, ''), '^www\.', '') || ' ' ||
-                REPLACE(REGEXP_REPLACE(COALESCE(NEW.site, ''), '^www\.', ''), '.', ' ')
+                NEW.site_name || ' ' || NEW.domain || ' ' ||
+                REGEXP_REPLACE(NEW.site, '^www\.', '') || ' ' ||
+                REPLACE(NEW.domain, '.', ' ') ||
+                REPLACE(REGEXP_REPLACE(NEW.site, '^www\.', ''), '.', ' ')
             ),
 			jsonb_to_tsvector('ts', NEW.authors, '["string"]'),
 			setweight(jsonb_to_tsvector('ts', NEW.labels, '["string"]'), 'A')

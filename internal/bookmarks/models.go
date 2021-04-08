@@ -75,6 +75,7 @@ type Bookmark struct {
 	State        BookmarkState `db:"state"`
 	URL          string        `db:"url"`
 	Title        string        `db:"title"`
+	Domain       string        `db:"domain"`
 	Site         string        `db:"site"`
 	SiteName     string        `db:"site_name"`
 	Published    *time.Time    `db:"published"`

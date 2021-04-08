@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS bookmark (
     state       integer  NOT NULL DEFAULT 0,
     url         text     NOT NULL,
     title       text     NOT NULL,
+    domain      text     NOT NULL DEFAULT "",
     site        text     NOT NULL DEFAULT "",
     site_name   text     NOT NULL DEFAULT "",
     published   datetime,
@@ -73,7 +74,7 @@ CREATE TRIGGER bookmark_ai AFTER INSERT ON bookmark BEGIN
     INSERT INTO bookmark_idx (
         rowid, title, description, text, site, author, label
     ) VALUES (
-        new.id, new.title, new.description, new.text, new.site_name || ' ' || new.site, new.authors, new.labels
+        new.id, new.title, new.description, new.text, new.site_name || ' ' || new.site || ' ' || new.domain, new.authors, new.labels
     );
 END;
 
@@ -87,7 +88,7 @@ CREATE TRIGGER bookmark_au AFTER UPDATE ON bookmark BEGIN
     INSERT INTO bookmark_idx (
         rowid, title, description, text, site, author, label
     ) VALUES (
-        new.id, new.title, new.description, new.text, new.site_name || ' ' || new.site, new.authors, new.labels
+        new.id, new.title, new.description, new.text, new.site_name || ' ' || new.site || ' ' || new.domain, new.authors, new.labels
     );
 END;
 

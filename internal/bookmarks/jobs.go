@@ -13,6 +13,7 @@ import (
 
 	"github.com/gammazero/workerpool"
 	log "github.com/sirupsen/logrus"
+	"golang.org/x/net/publicsuffix"
 
 	"codeberg.org/readeck/readeck/pkg/archiver"
 	"codeberg.org/readeck/readeck/pkg/extract"
@@ -106,6 +107,7 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 		b.Updated = time.Now()
 		b.URL = drop.UnescapedURL()
 		b.State = StateLoaded
+		b.Domain, _ = publicsuffix.EffectiveTLDPlusOne(drop.URL.Hostname())
 		b.Title = drop.Title
 		b.Site = drop.URL.Hostname()
 		b.SiteName = drop.Site
