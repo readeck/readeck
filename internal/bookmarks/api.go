@@ -326,13 +326,13 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 		}
 
 		if filters.IsRead != nil {
-			ds = ds.Where(goqu.L("b.is_read").Eq(filters.IsRead))
+			ds = ds.Where(goqu.C("is_read").Table("b").Eq(goqu.V(filters.IsRead)))
 		}
 		if filters.IsMarked != nil {
-			ds = ds.Where(goqu.L("b.is_marked").Eq(filters.IsMarked))
+			ds = ds.Where(goqu.C("is_marked").Table("b").Eq(goqu.V(filters.IsMarked)))
 		}
 		if filters.IsArchived != nil {
-			ds = ds.Where(goqu.L("b.is_archived").Eq(filters.IsArchived))
+			ds = ds.Where(goqu.C("is_archived").Table("b").Eq(goqu.V(filters.IsArchived)))
 		}
 
 		ds = ds.
