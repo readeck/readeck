@@ -116,6 +116,7 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 		b.DocumentType = drop.DocumentType
 		b.Description = drop.Description
 		b.Text = ex.Text
+		b.WordCount = len(strings.Fields(b.Text))
 
 		for _, x := range drop.Authors {
 			b.Authors = append(b.Authors, x)

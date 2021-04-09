@@ -90,6 +90,9 @@
         color: $primary-accent
 
     &:not(:hover,:focus,:focus-within)
+      .item-site img
+        filter: saturate(0) opacity(0.5)
+
       .item-actions button.state-off,
       .item-actions button.action-delete
         color: $grey-light
@@ -128,13 +131,12 @@
       display: flex
       align-items: center
       justify-content: flex-start
-      font-weight: 600
+      gap: 0.25rem
       color: $grey-dark
 
       img
         height: 1.8rem
         width: auto
-        margin-right: .25rem
 
     .item-actions
       margin-top: .25rem

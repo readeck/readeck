@@ -100,12 +100,13 @@ bookmarks:card renders a bookmark card
     {{ end -}}
   </div>
   <div class="card-bottom">
-    <strong class="item-site">
+    <span class="item-site">
     {{- if $x.Resources.icon -}}
       <img loading="lazy" src="{{ $x.Resources.icon.Src }}" alt=""
         width="{{ $x.Resources.icon.Width }}" height="{{ $x.Resources.icon.Height }}">
-    {{- end }} {{ $x.SiteName }}
-    </strong>
+    {{- end }} <strong>{{ $x.SiteName }}</strong>
+    {{- if and (eq $x.Type "article") (gt $x.ReadingTime 0)  -}} •&nbsp;{{ $x.ReadingTime }}&nbsp;min{{- end -}}
+    </span>
     <div class="item-actions">
       {{- if $x.IsDeleted }}
         <span class="text-danger">

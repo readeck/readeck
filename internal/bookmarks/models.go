@@ -84,6 +84,7 @@ type Bookmark struct {
 	DocumentType string        `db:"type"`
 	Description  string        `db:"description"`
 	Text         string        `db:"text"`
+	WordCount    int           `db:"word_count"`
 	Embed        string        `db:"embed"`
 	FilePath     string        `db:"file_path"`
 	Files        BookmarkFiles `db:"files"`
@@ -185,6 +186,11 @@ func (b *Bookmark) Delete() error {
 // StateName returns the current bookmark state name.
 func (b *Bookmark) StateName() string {
 	return StateNames[b.State]
+}
+
+// ReadingTime returns the aproximated reading time
+func (b *Bookmark) ReadingTime() int {
+	return b.WordCount / 200
 }
 
 func (b *Bookmark) getBaseFileURL() (string, error) {

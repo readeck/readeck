@@ -49,6 +49,9 @@
               <li>{{ icon $ "o-pen" }} By {{ . | join ", " }}</li>
             {{- end }}
             <li>{{ icon $ "o-link" }} <a href="{{ .item.URL }}" target="top">{{ .item.Domain }}</a></li>
+            {{ if and (eq .item.Type "article") (gt .item.ReadingTime 0)  -}}
+              <li>{{ icon $ "o-clock" }} {{ .item.ReadingTime }}&nbsp;min</li>
+            {{- end}}
           </ul>
 
           {{ template "bookmark:labels" dict "ctx" $

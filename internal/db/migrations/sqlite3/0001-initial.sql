@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS bookmark (
     type        text     NOT NULL DEFAULT "",
     description text     NOT NULL DEFAULT "",
     text        text     NOT NULL DEFAULT "",
+    word_count  integer  NOT NULL DEFAULT 0,
     embed       text     NOT NULL DEFAULT "",
     file_path   text     NOT NULL DEFAULT "",
     files       json     NOT NULL DEFAULT "",
