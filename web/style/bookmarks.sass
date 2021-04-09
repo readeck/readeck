@@ -78,16 +78,22 @@
     flex-direction: column
     height: 100%
     border-radius: $radius
-    box-shadow: 2px 2px 8px rgba(0,0,0, .1)
+    box-shadow: 2px 2px 12px rgba(0,0,0, .1)
 
     &.state-deleted
       .card-image, .card-content, .item-site
         opacity: 0.3
 
-    &:hover, &:focus
-      box-shadow: 2px 2px 8px rgba(0,0,0, .2)
+    &:hover, &:focus, &:focus-within
+      box-shadow: 2px 2px 12px rgba(0,0,0, .2)
       .card-content h3 a
         color: $primary-accent
+
+    &:not(:hover,:focus,:focus-within)
+      .item-actions button.state-off,
+      .item-actions button.action-delete
+        color: $grey-light
+
 
   .card-image
     width: 100%
@@ -145,6 +151,12 @@
         font-size: 1.6rem
         padding: 1rem 0
         margin: 0 .5rem 0 0
+
+      button.action-delete
+        color: $danger
+
+        &:hover, &:focus
+          color: $danger-accent
 
 
 .bookmark-loading

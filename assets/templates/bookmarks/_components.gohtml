@@ -81,7 +81,7 @@ bookmarks:card renders a bookmark card
 </turbo-frame>
 {{ else }}
 <turbo-frame id="bookmark-card-{{ .item.ID }}">
-<div class="card{{ $x.IsDeleted | ternary " state-deleted" "" }}">
+<div class="card{{ $x.IsDeleted | ternary " state-deleted" "" }}" tabindex="0">
   <div class="card-image"><a href="{{ $url }}">
   {{- with $x.Resources.thumbnail }}
   <img loading="lazy" src="{{ .Src }}" alt=""
@@ -127,13 +127,13 @@ bookmarks:card renders a bookmark card
        data-turbo-form-method-value="patch">
         {{ template "csrfField" .ctx }}
         <input type="hidden" name="_to" value="{{ .ctx.currentPath }}" />
-        <button class="button-clear" name="is_read" value="{{ $x.IsRead | ternary 0 1 }}">
+        <button class="button-clear state-{{ $x.IsRead | ternary "on" "off" }}" name="is_read" value="{{ $x.IsRead | ternary 0 1 }}">
         {{ icon .ctx ($x.IsRead | ternary "o-check-on" "o-check-off") }}
         </button>
-        <button class="button-clear" name="is_marked" value="{{ $x.IsMarked | ternary 0 1 }}">
+        <button class="button-clear state-{{ $x.IsMarked | ternary "on" "off" }}" name="is_marked" value="{{ $x.IsMarked | ternary 0 1 }}">
         {{ icon .ctx ($x.IsMarked | ternary "o-favorite-on" "o-favorite-off") }}
         </button>
-        <button class="button-clear" name="is_archived" value="{{ $x.IsArchived | ternary 0 1 }}">
+        <button class="button-clear state-{{ $x.IsArchived | ternary "on" "off" }}" name="is_archived" value="{{ $x.IsArchived | ternary 0 1 }}">
         {{ icon .ctx ($x.IsArchived | ternary "o-archive-on" "o-archive-off") }}
         </button>
       </form>
@@ -141,7 +141,7 @@ bookmarks:card renders a bookmark card
       <form action="{{ $url }}/delete" method="post">
         {{ template "csrfField" .ctx }}
         <input type="hidden" name="_to" value="{{ .ctx.currentPath }}" />
-        <button class="button-clear" name="is_deleted" value="1"
+        <button class="button-clear action-delete" name="is_deleted" value="1"
          data-controller="turbo-form"
          data-turbo-form-action-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}"
          data-turbo-form-method-value="patch">
