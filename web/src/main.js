@@ -1,10 +1,20 @@
 // Fonts
-import "fontsource-source-sans-pro/400.css"
-import "fontsource-source-sans-pro/600.css"
-import "fontsource-merriweather"
+import "@fontsource/public-sans/400.css"
+import "@fontsource/public-sans/400-italic.css"
+import "@fontsource/public-sans/600.css"
+import "@fontsource/public-sans/600-italic.css"
+import "@fontsource/public-sans/700.css"
+import "@fontsource/public-sans/700-italic.css"
+
+import "@fontsource/lora/400.css"
+import "@fontsource/lora/400-italic.css"
+import "@fontsource/lora/700.css"
+import "@fontsource/lora/700-italic.css"
+
 
 // Style
 import "../style/index.sass"
+
 
 // Icons
 // They are all combined into a big SVG file that's included

@@ -38,6 +38,7 @@
     a, a:visited
       border-bottom: 3px solid $grey-lighter
       color: $grey-dark
+      line-height: 1
 
       &:hover, &:focus, &:active,
       &.active
@@ -45,7 +46,7 @@
         border-color: $primary
 
       &.active
-        font-weight: 600
+        font-weight: 700
 
   .bookmark-search
     form
@@ -77,11 +78,16 @@
     flex-direction: column
     height: 100%
     border-radius: $radius
-    box-shadow: 2px 2px 8px rgba(0,0,0, .2)
+    box-shadow: 2px 2px 8px rgba(0,0,0, .1)
 
     &.state-deleted
       .card-image, .card-content, .item-site
         opacity: 0.3
+
+    &:hover, &:focus
+      box-shadow: 2px 2px 8px rgba(0,0,0, .2)
+      .card-content h3 a
+        color: $primary-accent
 
   .card-image
     width: 100%
@@ -105,6 +111,9 @@
       line-height: 1.2
       margin: 0 0 $block-spacing/2 0
 
+      a
+        color: $black
+
   .card-bottom
     padding: 0 .5rem
     font-size: .8em
@@ -113,6 +122,8 @@
       display: flex
       align-items: center
       justify-content: flex-start
+      font-weight: 600
+      color: $grey-dark
 
       img
         height: 1.8rem

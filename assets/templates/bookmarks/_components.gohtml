@@ -105,7 +105,6 @@ bookmarks:card renders a bookmark card
       <img loading="lazy" src="{{ $x.Resources.icon.Src }}" alt=""
         width="{{ $x.Resources.icon.Width }}" height="{{ $x.Resources.icon.Height }}">
     {{- end }} {{ $x.SiteName }}
-    <a href="{{ $x.URL }}" data-turbo-frame="_top">{{ icon .ctx "o-link" }}</a>
     </strong>
     <div class="item-actions">
       {{- if $x.IsDeleted }}
