@@ -8,7 +8,7 @@
   <nav class="navbar">
     <h1><a href="{{ urlFor $ "/" }}">Readeck</a></h1>
     <div class="main-nav">
-      <a class="button{{ if $inBookmarks }} active{{ end }}" href="{{ urlFor $ "/bookmarks" }}">
+      <a class="button{{ if $inBookmarks }} active{{ end }}" href="{{ urlFor $ "/bookmarks/unread" }}">
       {{ icon . "o-bookmarks" }} Bookmarks</a>
     </div>
 
