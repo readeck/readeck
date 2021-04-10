@@ -121,6 +121,7 @@ func (h *adminViews) userInfo(w http.ResponseWriter, r *http.Request) {
 				if auth.GetRequestUser(r).ID == u.ID {
 					nu, _ := users.Users.GetOne(goqu.C("id").Eq(u.ID))
 					sess := h.srv.GetSession(r)
+					sess.ID = ""
 					sess.Values["check_code"] = nu.CheckCode()
 				}
 				h.srv.AddFlash(w, r, "info", "User updated")

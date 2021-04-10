@@ -62,6 +62,7 @@ func (v *profileViews) userProfile(w http.ResponseWriter, r *http.Request) {
 				// Renew the check code in this user's session.
 				// We needn't save the session since AddFlash does it already.
 				sess := v.srv.GetSession(r)
+				sess.ID = ""
 				sess.Values["check_code"] = user.CheckCode()
 				v.srv.AddFlash(w, r, "info", "Profile updated")
 			}

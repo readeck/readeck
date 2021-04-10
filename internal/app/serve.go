@@ -40,6 +40,11 @@ func runServe(_ *cobra.Command, _ []string) error {
 
 	s := server.New(configs.Config.Server.Prefix)
 
+	// Init session store
+	if err := s.InitSession(); err != nil {
+		return err
+	}
+
 	// Static asserts
 	assets.SetupRoutes(s)
 

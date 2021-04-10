@@ -90,11 +90,6 @@ func appPersistentPreRun(_ *cobra.Command, _ []string) error {
 	if err := createFolder(configs.Config.Main.DataDirectory); err != nil {
 		log.WithError(err).Fatal("Can't create data directory")
 	}
-	if err := createFolder(path.Join(
-		configs.Config.Main.DataDirectory, "sessions"),
-	); err != nil {
-		log.WithError(err).Fatal("Can't create data directory")
-	}
 
 	// SQLite data path
 	if dsn.Scheme == "sqlite3" {

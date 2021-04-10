@@ -63,6 +63,7 @@ type configDB struct {
 }
 
 type configSession struct {
+	StoreURL   string `json:"store_url"`
 	CookieName string `json:"cookie_name"`
 	MaxAge     int    `json:"max_age"` // in minutes
 }
@@ -131,6 +132,7 @@ var Config = config{
 		Host: "127.0.0.1",
 		Port: 5000,
 		Session: configSession{
+			StoreURL:   "file:",
 			CookieName: "sxid",
 			MaxAge:     86400 * 30,
 		},
