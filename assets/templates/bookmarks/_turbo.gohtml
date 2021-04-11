@@ -1,11 +1,21 @@
+<turbo-stream action="update" target="bookmark-card-{{ .item.ID }}">
+<template>
 {{ template "bookmarks:card" dict "ctx" $
                                   "item" .item
                                   "baseURL" "/bookmarks" }}
+</template>
+</turbo-stream>
 
+<turbo-stream action="update" target="bookmark-actions-{{ .item.ID }}">
+<template>
 {{ template "bookmark:actions" dict "ctx" $
                                     "item" .item
                                     "baseURL" "/bookmarks" }}
+</template>
+</turbo-stream>
 
+<turbo-stream action="update" target="bookmark-labels-{{ .item.ID }}">
+<template>
 {{ template "bookmark:labels" dict "ctx" $
                                    "item" .item
                                    "baseURL" "/bookmarks" }}

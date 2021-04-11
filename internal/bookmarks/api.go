@@ -98,7 +98,7 @@ func (api *bookmarkAPI) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 	item := newBookmarkItem(api.srv, r, b, "./..")
 
 	if api.srv.IsTurboRequest(r) {
-		api.srv.RenderTemplate(w, r, 200, "bookmarks/_turbo.gohtml", server.TC{
+		api.srv.RenderTurboStream(w, r, 200, "bookmarks/_turbo.gohtml", server.TC{
 			"item": newBookmarkItem(api.srv, r, b, "./.."),
 		})
 		return
@@ -190,7 +190,7 @@ func (api *bookmarkAPI) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 	updated["href"] = api.srv.AbsoluteURL(r).String()
 
 	if api.srv.IsTurboRequest(r) {
-		api.srv.RenderTemplate(w, r, 200, "bookmarks/_turbo.gohtml", server.TC{
+		api.srv.RenderTurboStream(w, r, 200, "bookmarks/_turbo.gohtml", server.TC{
 			"item": newBookmarkItem(api.srv, r, b, "./.."),
 		})
 		return

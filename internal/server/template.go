@@ -30,6 +30,21 @@ func (s *Server) RenderTemplate(w http.ResponseWriter, r *http.Request,
 	}
 }
 
+// RenderTurboStream yields an HTML response with turbo-stream content-type.
+func (s *Server) RenderTurboStream(w http.ResponseWriter, r *http.Request,
+	status int, name string, context TC) {
+
+	w.Header().Set("Content-Type", "text/vnd.turbo-stream.html; charset=utf-8")
+	if status >= 100 {
+		w.WriteHeader(status)
+	}
+
+	err := xt.ExecuteTemplate(w, name, s.templatePayload(r, context))
+	if err != nil {
+		panic(err)
+	}
+}
+
 // TC is a simple type to carry template context.
 type TC map[string]interface{}
 
