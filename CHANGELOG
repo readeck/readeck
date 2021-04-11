@@ -1,5 +1,9 @@
 # Changlog
 
+## [0.2.2] - 2021-04-11
+### Added
+- Increased remote image size limit to 30Mpx
+
 ## [0.2.1] - 2021-04-11
 ### Added
 - Reading time information
