@@ -39,8 +39,8 @@ func NewNativeImage(r io.Reader) (*NativeImage, error) {
 		return nil, err
 	}
 
-	// 6Mpx is already too much
-	if c.Width*c.Height > 6000000 {
+	// Limit image size to 30Mpx
+	if c.Width*c.Height > 30000000 {
 		return nil, errors.New("image is too big")
 	}
 
