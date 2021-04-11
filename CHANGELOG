@@ -1,5 +1,11 @@
 # Changlog
 
+## [0.2.1] - 2021-04-11
+### Added
+- Reading time information
+- Optional Redis session store
+- Bookmark actions at the end of the article
+
 ## [0.2.0] - 2021-04-08
 ### Added
 - ACLs using RBAC with roles on users
