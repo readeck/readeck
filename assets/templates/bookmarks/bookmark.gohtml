@@ -117,7 +117,15 @@
   {{- else if eq .item.Type "video" -}}
     {{ template "bookmarks:video" .item }}
   {{- end -}}
+
+  <div class="bottom-actions">
+  {{ template "bookmark:bottom-actions" dict "ctx" $
+                                             "item" .item
+                                             "baseURL" "./.." }}
+  </div>
 </div>
+
+
 {{ end }}
 <turbo-frame>
 {{ end }}

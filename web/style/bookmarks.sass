@@ -179,7 +179,8 @@
 
 .page
     .summary,
-    &.page-article
+    &.page-article,
+    .bottom-actions
         max-width: 80rem
         margin-left: auto
         margin-right: auto
@@ -274,6 +275,18 @@
               background-color: $danger
               color: $danger-invert
 
+    .bottom-actions
+      border-top: 1px solid $grey-lighter
+      margin-top: $block-spacing
+      padding-top: $block-spacing/2
+
+      form
+        display: flex
+        justify-content: center
+        gap: 1em
+
+      button
+        gap: 0.5rem
 
 
     &.page-photo > figure > img

@@ -215,6 +215,39 @@ bookmark:actions renders a bookmark action form
 {{- end -}}
 
 
+{{/*
+bookmark:mark-read renders a form and button to mark a bookmark as read
+(dict "ctx" $ "item" bookmarks.bookmarkItem)
+*/}}
+{{- define "bookmark:bottom-actions" -}}
+{{- $x := .item -}}
+{{- $url := urlFor .ctx (or .baseURL ".") $x.ID -}}
+{{- $textRead := $x.IsRead | ternary "Mark as unread" "Mark as read" }}
+{{- $textFav := $x.IsMarked | ternary "Remove from favorites" "Add to favorites" }}
+{{- $textArch := $x.IsArchived | ternary "Remove from archives" "Add to archives" }}
+<turbo-frame id="bookmark-bottom-actions-{{ .item.ID }}">
+<form action="{{ $url }}" method="post"
+     data-controller="turbo-form"
+     data-turbo-form-action-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}"
+     data-turbo-form-method-value="patch">
+  {{ template "csrfField" .ctx }}
+  <button class="outlined rounded" name="is_read" value="{{ $x.IsRead | ternary 0 1 }}">
+    {{ icon .ctx ($x.IsRead | ternary "o-check-on" "o-check-off") }}
+    {{ $textRead }}
+  </button>
+  <button class="outlined rounded" name="is_marked" value="{{ $x.IsMarked | ternary 0 1 }}">
+    {{ icon .ctx ($x.IsMarked | ternary "o-favorite-on" "o-favorite-off") }}
+    {{ $textFav }}
+  </button>
+  <button class="outlined rounded" name="is_archived" value="{{ $x.IsArchived | ternary 0 1 }}">
+  {{ icon .ctx ($x.IsArchived | ternary "o-archive-on" "o-archive-off") }}
+  {{ $textArch }}
+  </button>
+</form>
+</turbo-frame>
+{{- end -}}
+
+
 {{- define "bookmark:labels" -}}
 {{- $x := .item -}}
 {{- $url := urlFor .ctx (or .baseURL ".") $x.ID -}}
