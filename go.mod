@@ -14,6 +14,7 @@ require (
 	github.com/biessek/golang-ico v0.0.0-20180326222316-d348d9ea4670
 	github.com/casbin/casbin/v2 v2.26.0
 	github.com/cristalhq/jwt/v3 v3.0.12
+	github.com/dop251/goja v0.0.0-20210406175830-1b11a6af686d
 	github.com/doug-martin/goqu/v9 v9.11.0
 	github.com/fatih/color v1.10.0
 	github.com/gammazero/deque v0.0.0-20201010052221-3932da5530cc // indirect
@@ -42,13 +43,14 @@ require (
 	github.com/mitchellh/copystructure v1.1.1 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.1.3
+	github.com/spyzhov/ajson v0.4.2
 	github.com/stretchr/testify v1.7.0
 	github.com/tdewolff/parse/v2 v2.5.14
 	github.com/thoas/go-funk v0.8.0
 	golang.org/x/image v0.0.0-20210220032944-ac19c3e999fb
 	golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	golang.org/x/text v0.3.5
+	golang.org/x/text v0.3.6
 	gopkg.in/hlandau/easymetric.v1 v1.0.0 // indirect
 	gopkg.in/hlandau/measurable.v1 v1.0.1 // indirect
 	gopkg.in/hlandau/passlib.v1 v1.0.10 // indirect

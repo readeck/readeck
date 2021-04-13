@@ -19,6 +19,7 @@ import (
 	"codeberg.org/readeck/readeck/pkg/extract/contents"
 	"codeberg.org/readeck/readeck/pkg/extract/fftr"
 	"codeberg.org/readeck/readeck/pkg/extract/meta"
+	"codeberg.org/readeck/readeck/pkg/extract/rules"
 )
 
 var workerPool *workerpool.WorkerPool
@@ -75,6 +76,7 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 			CheckIPProcessor,
 			meta.ExtractMeta,
 			meta.ExtractOembed,
+			rules.ApplyRules,
 			meta.SetDropProperties,
 			meta.ExtractFavicon,
 			meta.ExtractPicture,

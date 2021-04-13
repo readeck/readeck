@@ -17,6 +17,7 @@ import (
 	"codeberg.org/readeck/readeck/pkg/extract/contents"
 	"codeberg.org/readeck/readeck/pkg/extract/fftr"
 	"codeberg.org/readeck/readeck/pkg/extract/meta"
+	"codeberg.org/readeck/readeck/pkg/extract/rules"
 )
 
 // cookbookAPI is the base cookbook api router.
@@ -63,6 +64,7 @@ func (api *cookbookAPI) extract(w http.ResponseWriter, r *http.Request) {
 		bookmarks.CheckIPProcessor,
 		meta.ExtractMeta,
 		meta.ExtractOembed,
+		rules.ApplyRules,
 		meta.SetDropProperties,
 		meta.ExtractFavicon,
 		meta.ExtractPicture,
