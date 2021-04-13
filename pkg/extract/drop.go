@@ -16,6 +16,7 @@ import (
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/charset"
 	"golang.org/x/net/idna"
+	"golang.org/x/net/publicsuffix"
 	"golang.org/x/text/encoding"
 	"golang.org/x/text/transform"
 )
@@ -28,6 +29,7 @@ var (
 // Drop is the result of a content extraction of one resource.
 type Drop struct {
 	URL          *url.URL
+	Domain       string
 	ContentType  string
 	Charset      string
 	DocumentType string
@@ -50,16 +52,19 @@ type Drop struct {
 func NewDrop(src *url.URL) *Drop {
 	// First, copy url and ensure it's a unicode version
 	var uri *url.URL
+	domain := ""
 	if src != nil {
 		uri = new(url.URL)
 		*uri = *src
 		if host, err := idna.ToUnicode(uri.Host); err == nil {
 			uri.Host = host
 		}
+		domain, _ = publicsuffix.EffectiveTLDPlusOne(uri.Hostname())
 	}
 
 	return &Drop{
 		URL:      uri,
+		Domain:   domain,
 		Meta:     DropMeta{},
 		Authors:  []string{},
 		Body:     []byte{},

@@ -75,8 +75,6 @@ func ExtractMeta(m *extract.ProcessMessage, next extract.Processor) extract.Proc
 		d.Lang = d.Lang[0:2]
 	}
 
-	d.Date, _ = dateparse.ParseLocal(d.Meta.LookupGet("html.date"))
-
 	m.Log.WithField("count", len(d.Meta)).Debug("metadata loaded")
 	return next
 }
@@ -89,6 +87,9 @@ func SetDropProperties(m *extract.ProcessMessage, next extract.Processor) extrac
 	}
 
 	d := m.Extractor.Drop()
+
+	// Set publication date
+	d.Date, _ = dateparse.ParseLocal(d.Meta.LookupGet("html.date"))
 
 	// Set document type from opengraph value
 	if d.DocumentType == "" {

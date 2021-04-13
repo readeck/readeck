@@ -60,7 +60,6 @@ func TestMeta(t *testing.T) {
 			assert.Equal(t, []string{"Olivier", "schema author"}, ex.Drop().Authors)
 			assert.Equal(t, "My website", ex.Drop().Site)
 			assert.Equal(t, "en", ex.Drop().Lang)
-			assert.Equal(t, time.Date(2020, 9, 1, 11, 12, 34, 0, time.Local), ex.Drop().Date)
 
 			assert.Equal(t, extract.DropMeta{
 				"dc.creator":          {"author 3", "author 4"},
@@ -202,6 +201,7 @@ func TestMeta(t *testing.T) {
 			SetDropProperties(pm, nil)
 
 			assert.Equal(t, "article", ex.Drop().DocumentType)
+			assert.Equal(t, time.Date(2020, 9, 1, 11, 12, 34, 0, time.Local), ex.Drop().Date)
 		})
 
 		t.Run("process video", func(t *testing.T) {

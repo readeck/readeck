@@ -77,22 +77,32 @@ func TestDrop(t *testing.T) {
 		tests := []struct {
 			src string
 			res string
+			dom string
 		}{
 			{
 				"http://example.net/test/test",
 				"http://example.net/test/test",
+				"example.net",
 			},
 			{
 				"http://belgië.icom.museum/€test",
 				"http://belgië.icom.museum/€test",
+				"icom.museum",
 			},
 			{
 				"http://xn--wgv71a.icom.museum/%C2%A9",
 				"http://日本.icom.museum/©",
+				"icom.museum",
 			},
 			{
 				"http://日本.icom.museum/",
 				"http://日本.icom.museum/",
+				"icom.museum",
+			},
+			{
+				"http://example.co.jp",
+				"http://example.co.jp",
+				"example.co.jp",
 			},
 		}
 
@@ -100,6 +110,7 @@ func TestDrop(t *testing.T) {
 			t.Run(x.src, func(t *testing.T) {
 				d := NewDrop(mustParse(x.src))
 				assert.Equal(t, x.res, d.UnescapedURL())
+				assert.Equal(t, x.dom, d.Domain)
 			})
 		}
 	})
