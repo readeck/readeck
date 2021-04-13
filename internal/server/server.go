@@ -116,7 +116,7 @@ func New(basePath string) *Server {
 		},
 		"urlFor": func(ctx TC, name ...string) string {
 			r := ctx["request"].(*http.Request)
-			return s.AbsoluteURL(r, name...).String()
+			return s.AbsoluteURL(r, name...).Path
 		},
 	})
 
