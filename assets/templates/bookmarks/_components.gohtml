@@ -128,9 +128,6 @@ bookmarks:card renders a bookmark card
        data-turbo-form-method-value="patch">
         {{ template "csrfField" .ctx }}
         <input type="hidden" name="_to" value="{{ .ctx.currentPath }}" />
-        <button class="button-clear state-{{ $x.IsRead | ternary "on" "off" }}" name="is_read" value="{{ $x.IsRead | ternary 0 1 }}">
-        {{ icon .ctx ($x.IsRead | ternary "o-check-on" "o-check-off") }}
-        </button>
         <button class="button-clear state-{{ $x.IsMarked | ternary "on" "off" }}" name="is_marked" value="{{ $x.IsMarked | ternary 0 1 }}">
         {{ icon .ctx ($x.IsMarked | ternary "o-favorite-on" "o-favorite-off") }}
         </button>
@@ -187,9 +184,6 @@ bookmark:actions renders a bookmark action form
      data-turbo-form-method-value="patch">
       {{ template "csrfField" .ctx }}
       <div class="compound">
-        <button class="outlined rounded icon" name="is_read" value="{{ $x.IsRead | ternary 0 1 }}">
-        {{ icon .ctx ($x.IsRead | ternary "o-check-on" "o-check-off") }}
-        </button>
         <button class="outlined rounded icon" name="is_marked" value="{{ $x.IsMarked | ternary 0 1 }}">
         {{ icon .ctx ($x.IsMarked | ternary "o-favorite-on" "o-favorite-off") }}
         </button>
@@ -216,32 +210,27 @@ bookmark:actions renders a bookmark action form
 
 
 {{/*
-bookmark:mark-read renders a form and button to mark a bookmark as read
+bookmark:bottom-actions renders a form and actions to perform at the end of a bookmark
 (dict "ctx" $ "item" bookmarks.bookmarkItem)
 */}}
 {{- define "bookmark:bottom-actions" -}}
 {{- $x := .item -}}
 {{- $url := urlFor .ctx (or .baseURL ".") $x.ID -}}
-{{- $textRead := $x.IsRead | ternary "Mark as unread" "Mark as read" }}
+{{- $textArch := $x.IsArchived | ternary "Remove from archive" "Move to archive" }}
 {{- $textFav := $x.IsMarked | ternary "Remove from favorites" "Add to favorites" }}
-{{- $textArch := $x.IsArchived | ternary "Remove from archives" "Add to archives" }}
 <turbo-frame id="bookmark-bottom-actions-{{ .item.ID }}">
 <form action="{{ $url }}" method="post"
      data-controller="turbo-form"
      data-turbo-form-action-value="{{ urlFor .ctx "/api/bookmarks" $x.ID }}"
      data-turbo-form-method-value="patch">
   {{ template "csrfField" .ctx }}
-  <button class="outlined rounded" name="is_read" value="{{ $x.IsRead | ternary 0 1 }}">
-    {{ icon .ctx ($x.IsRead | ternary "o-check-on" "o-check-off") }}
-    {{ $textRead }}
+  <button class="outlined rounded" name="is_archived" value="{{ $x.IsArchived | ternary 0 1 }}">
+    {{ icon .ctx ($x.IsArchived | ternary "o-archive-on" "o-archive-off") }}
+    {{ $textArch }}
   </button>
   <button class="outlined rounded" name="is_marked" value="{{ $x.IsMarked | ternary 0 1 }}">
     {{ icon .ctx ($x.IsMarked | ternary "o-favorite-on" "o-favorite-off") }}
     {{ $textFav }}
-  </button>
-  <button class="outlined rounded" name="is_archived" value="{{ $x.IsArchived | ternary 0 1 }}">
-  {{ icon .ctx ($x.IsArchived | ternary "o-archive-on" "o-archive-off") }}
-  {{ $textArch }}
   </button>
 </form>
 </turbo-frame>

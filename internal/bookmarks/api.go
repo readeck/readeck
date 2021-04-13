@@ -267,7 +267,6 @@ func (api *bookmarkAPI) withBookmarkFilters(next http.Handler) http.Handler {
 
 		switch filter {
 		case "unread":
-			filters.setRead(false)
 			filters.setArchived(false)
 		case "archives":
 			filters.setArchived(true)
@@ -297,7 +296,7 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 			Select(
 				"b.id", "b.uid", "b.created", "b.updated", "b.state", "b.url", "b.title",
 				"b.domain", "b.site", "b.site_name", "b.authors", "b.lang", "b.type",
-				"b.is_read", "b.is_marked", "b.is_archived",
+				"b.is_marked", "b.is_archived",
 				"b.labels", "b.description", "b.word_count", "b.file_path", "b.files").
 			Where(
 				goqu.C("user_id").Eq(auth.GetRequestUser(r).ID),
@@ -325,9 +324,6 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 			ff.BindValues(r.URL.Query())
 		}
 
-		if filters.IsRead != nil {
-			ds = ds.Where(goqu.C("is_read").Table("b").Eq(goqu.V(filters.IsRead)))
-		}
 		if filters.IsMarked != nil {
 			ds = ds.Where(goqu.C("is_marked").Table("b").Eq(goqu.V(filters.IsMarked)))
 		}
@@ -441,10 +437,6 @@ func (api *bookmarkAPI) updateBookmark(b *Bookmark, uf *updateForm, r *http.Requ
 	updated := map[string]interface{}{}
 	var deleted interface{}
 
-	if uf.IsRead != nil {
-		b.IsRead = *uf.IsRead
-		updated["is_read"] = b.IsRead
-	}
 	if uf.IsMarked != nil {
 		b.IsMarked = *uf.IsMarked
 		updated["is_marked"] = b.IsMarked
@@ -558,7 +550,6 @@ type bookmarkItem struct {
 	Type         string                   `json:"type"`
 	Description  string                   `json:"description"`
 	IsDeleted    bool                     `json:"is_deleted"`
-	IsRead       bool                     `json:"is_read"`
 	IsMarked     bool                     `json:"is_marked"`
 	IsArchived   bool                     `json:"is_archived"`
 	Labels       []string                 `json:"labels"`
@@ -597,7 +588,6 @@ func newBookmarkItem(s *server.Server, r *http.Request, b *Bookmark, base string
 		DocumentType: b.DocumentType,
 		Description:  b.Description,
 		IsDeleted:    deleteTimer.Exists(b.ID),
-		IsRead:       b.IsRead,
 		IsMarked:     b.IsMarked,
 		IsArchived:   b.IsArchived,
 		Labels:       make([]string, 0),
@@ -653,14 +643,10 @@ type searchForm struct {
 }
 
 type filterForm struct {
-	IsRead     *bool `json:"is_read"`
 	IsMarked   *bool `json:"is_marked"`
 	IsArchived *bool `json:"is_archived"`
 }
 
-func (ff *filterForm) setRead(v bool) {
-	ff.IsRead = &v
-}
 func (ff *filterForm) setMarked(v bool) {
 	ff.IsMarked = &v
 }
@@ -680,7 +666,6 @@ func (cf *createForm) Validate(f *form.Form) {
 }
 
 type updateForm struct {
-	IsRead       *bool   `json:"is_read"`
 	IsMarked     *bool   `json:"is_marked"`
 	IsArchived   *bool   `json:"is_archived"`
 	IsDeleted    *bool   `json:"is_deleted"`
