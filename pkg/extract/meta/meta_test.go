@@ -379,33 +379,6 @@ func TestMeta(t *testing.T) {
 			assert.Equal(t, d.Pictures["image"].Size[0], 1280)
 			assert.Equal(t, d.Pictures["thumbnail"].Size[0], 380)
 		})
-
-		t.Run("process vimeo", func(t *testing.T) {
-			ex, _ := extract.New("http://example.net/", nil)
-			pm := ex.NewProcessMessage(extract.StepDom)
-			pm.Dom, _ = html.Parse(bytes.NewReader(getFileContents("meta/meta1.html")))
-
-			d := ex.Drop()
-			d.DocumentType = "video"
-			d.Site = "Vimeo"
-
-			d.Meta = extract.DropMeta{
-				"x.picture_url": {"http://example.net/picture?src0=http://example.net/img.jpeg&src1=whatever"},
-			}
-			ExtractPicture(pm, nil)
-			assert.Equal(t, d.Pictures["image"].Size[0], 800)
-			assert.Equal(t, d.Pictures["thumbnail"].Size[0], 380)
-
-			d.Meta["x.picture_url"] = []string{"http://example.net/img.jpeg"}
-			ExtractPicture(pm, nil)
-			assert.Equal(t, d.Pictures["image"].Size[0], 800)
-			assert.Equal(t, d.Pictures["thumbnail"].Size[0], 380)
-
-			d.Meta["x.picture_url"] = []string{"http://example.net/\b0x7fimg.jpeg"}
-			ExtractPicture(pm, nil)
-			assert.Equal(t, d.Pictures["image"].Size[0], 800)
-			assert.Equal(t, d.Pictures["thumbnail"].Size[0], 380)
-		})
 	})
 
 	t.Run("ExtractFavicon", func(t *testing.T) {

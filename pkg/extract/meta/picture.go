@@ -1,8 +1,6 @@
 package meta
 
 import (
-	"net/url"
-
 	"codeberg.org/readeck/readeck/pkg/extract"
 )
 
@@ -24,9 +22,6 @@ func ExtractPicture(m *extract.ProcessMessage, next extract.Processor) extract.P
 		"twitter.image",
 		"oembed.thumbnail_url",
 	)
-
-	// Some special cases here
-	href = getVimeoPicture(d, href)
 
 	if href == "" {
 		return next
@@ -61,22 +56,4 @@ func ExtractPicture(m *extract.ProcessMessage, next extract.Processor) extract.P
 	d.Pictures["thumbnail"] = thumbnail
 
 	return next
-}
-
-func getVimeoPicture(d *extract.Drop, src string) string {
-	if !(d.DocumentType == "video" && d.Site == "Vimeo") {
-		return src
-	}
-
-	u, err := url.Parse(src)
-	if err != nil {
-		return src
-	}
-
-	s := u.Query().Get("src0")
-	if s != "" {
-		return s
-	}
-
-	return src
 }
