@@ -36,8 +36,7 @@
   {{ template "bookmarks:filters" $ }}
 
   <div class="bookmark-search">
-    <form action="{{ urlFor $ "" }}" method="GET"
-     data-controller="turbo-form" data-turbo-form-disabled-value="true">
+    <form action="{{ urlFor $ "" }}" method="GET">
       <input title="search in bookmarks" class="rounded" size="10"
       type="text" name="q" value="{{ .Q }}" placeholder="search" />
       <button title="search">{{ icon $ "o-search" }}</button>

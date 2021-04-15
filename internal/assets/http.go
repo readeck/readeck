@@ -62,6 +62,11 @@ type directFileServer struct {
 func (f *directFileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	mtime := configs.BuildTime().Truncate(time.Second)
 
+	if r.URL.Path == "/manifest.json" {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
 	// Super shortchut for If-Modified-Since
 	ims := r.Header.Get("If-Modified-Since")
 	t, err := http.ParseTime(ims)

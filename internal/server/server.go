@@ -225,7 +225,7 @@ func (s *Server) CurrentPath(r *http.Request) string {
 
 // AssetURL returns the real URL for a given asset.
 func (s *Server) AssetURL(r *http.Request, name string) string {
-	return s.AbsoluteURL(r, "/assets", assets.AssetMap()[name]).String()
+	return s.AbsoluteURL(r, "/assets", assets.AssetMap()[name]).Path
 }
 
 // IsTurboRequest returns true when the request was made with

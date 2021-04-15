@@ -43,7 +43,6 @@ build-dev:
 clean:
 	rm -rf dist
 	rm -rf assets/www/*
-	rm -f  assets/templates/base.gohtml
 	go clean
 
 list:

@@ -16,7 +16,7 @@
 {{- end }}
 
 {{ define "attrList" -}}
-{{ range $k, $v := . -}}{{ $k|safeAttr }}="{{ $v }}" {{- end }}
+{{ range $k, $v := . -}}{{ $k|safeAttr }}="{{ $v }}" {{ end }}
 {{- end }}
 
 {{ define "textField" -}}
@@ -61,7 +61,7 @@
   <span class="spacer">&nbsp;</span>
   <div class="control">
     <input type="checkbox" id="{{ .name }}" name="{{ .name }}"
-     {{- if $checked }}checked="checked"{{ end -}} />
+     {{- if $checked }} checked="checked"{{ end -}} />
     <label class="label-inline" for="{{ .name }}">{{ .label }}</label>
   </div>
 </div>

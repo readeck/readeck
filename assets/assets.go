@@ -35,7 +35,7 @@ func TemplatesFS() fs.FS {
 var assetMap map[string]string
 
 func init() {
-	f, err := Assets.Open("www/assets.json")
+	f, err := Assets.Open("www/manifest.json")
 	if err != nil {
 		panic(err)
 	}
