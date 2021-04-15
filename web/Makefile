@@ -3,6 +3,10 @@
 build:
 	npm run build
 
+.PHONY:clean
+clean:
+	npm run clean
+
 .PHONY:lint
 lint:
 	npm run lint
