@@ -5,7 +5,6 @@ export default class extends Controller {
     return {
       action: String,
       method: String,
-      disabled: Boolean,
     }
   }
 
@@ -13,20 +12,14 @@ export default class extends Controller {
     let tagName = this.element.tagName.toLowerCase()
     switch (tagName) {
     case "form":
-      if (this.disabledValue) {
-        this.element.setAttribute("data-action", `${this.identifier}#stopSubmit`)
-      } else {
-        this.conditionnalAttr("action", this.actionValue, this.hasActionValue)
-        this.conditionnalAttr("method", this.methodValue, this.hasMethodValue)
-      }
+      this.element.setAttribute("data-turbo", "true")
+      this.conditionnalAttr("action", this.actionValue, this.hasActionValue)
+      this.conditionnalAttr("method", this.methodValue, this.hasMethodValue)
       break
     case "button":
-      if (this.disabledValue) {
-        this.element.setAttribute("data-action", `${this.identifier}#stopSubmit`)
-      } else {
-        this.conditionnalAttr("formaction", this.actionValue, this.hasActionValue)
-        this.conditionnalAttr("formmethod", this.methodValue, this.hasMethodValue)
-      }
+      this.element.closest("form").setAttribute("data-turbo", "true")
+      this.conditionnalAttr("formaction", this.actionValue, this.hasActionValue)
+      this.conditionnalAttr("formmethod", this.methodValue, this.hasMethodValue)
       break
     default:
       throw new Error("turbo-form can only be used on form and button elements")
