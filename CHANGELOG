@@ -1,5 +1,19 @@
 # Changlog
 
+## [0.2.3] - 2021-04-18
+### Added
+- Rule engine for extraction, in ES5
+- Rules for some big websites
+
+### Removed
+- Read status on bookmark, only keep "archived".
+
+### Fixed
+- Focus bug on label edition.
+
+### Changed
+- Assets are now made with gulp and the JS bundle is served as a module.
+
 ## [0.2.2] - 2021-04-11
 ### Added
 - Increased remote image size limit to 30Mpx
