@@ -1,4 +1,4 @@
-<turbo-stream action="update" target="bookmark-card-{{ .item.ID }}">
+<turbo-stream action="replace" target="bookmark-card-{{ .item.ID }}">
 <template>
 {{ template "bookmarks:card" dict "ctx" $
                                   "item" .item
@@ -6,7 +6,7 @@
 </template>
 </turbo-stream>
 
-<turbo-stream action="update" target="bookmark-actions-{{ .item.ID }}">
+<turbo-stream action="replace" target="bookmark-actions-{{ .item.ID }}">
 <template>
 {{ template "bookmark:actions" dict "ctx" $
                                     "item" .item
@@ -14,7 +14,7 @@
 </template>
 </turbo-stream>
 
-<turbo-stream action="update" target="bookmark-labels-{{ .item.ID }}">
+<turbo-stream action="replace" target="bookmark-labels-{{ .item.ID }}">
 <template>
 {{ template "bookmark:labels" dict "ctx" $
                                    "item" .item
@@ -22,7 +22,7 @@
 </template>
 </turbo-stream>
 
-<turbo-stream action="update" target="bookmark-bottom-actions-{{ .item.ID }}">
+<turbo-stream action="replace" target="bookmark-bottom-actions-{{ .item.ID }}">
 <template>
 {{ template "bookmark:bottom-actions" dict "ctx" $
                                       "item" .item
