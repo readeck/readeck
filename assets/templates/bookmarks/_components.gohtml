@@ -248,17 +248,23 @@ bookmark:bottom-actions renders a form and actions to perform at the end of a bo
   {{ template "csrfField" .ctx }}
   <input type="hidden" name="_to" value="{{ .ctx.currentPath }}" />
   <button type="submit" style="display: none"></button>
-  <ul class="badges editable">{{ range $x.Labels }}
-    <li class="badge">{{ . }}
-    <button class="button-clear button-delete" type="submit"
-      name="remove_labels" value="{{ . }}"></button>
-    </li>
-  {{ end }}
-    <li class="control">
-      <input type="text" name="add_labels" placeholder="Add a new label" />
+  <div class="bookmark-labels">
+    {{ template "bookmark:label-list" $x }}
+    <div class="control">
+      <input type="text" name="add_labels" placeholder="Add a new label"
+       data-turbo-empty-submit-end="1" />
       <button type="submit">Add label</button>
-    </li>
-  </ul>
+    </div>
+  </div>
 </form>
 </turbo-frame>
+{{- end -}}
+
+{{- define "bookmark:label-list" -}}
+<ul class="badges editable" id="bookmark-label-list-{{ .ID }}">{{ range .Labels }}
+  <li class="badge">{{ . }}
+  <button class="button-clear button-delete" type="submit"
+    name="remove_labels" value="{{ . }}"></button>
+  </li>
+{{ end }}</ul>
 {{- end -}}

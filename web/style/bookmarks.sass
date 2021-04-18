@@ -257,6 +257,31 @@
             padding-left: 1.2em
             list-style: disc
 
+        .bookmark-labels
+          &>*
+            display: inline-flex
+
+          .control
+            input[type='text']
+              width: 10em
+              height: auto
+              padding: .1rem .4rem
+              border: none
+              border-bottom: 1px solid #eee
+              font-size: 1.4rem
+
+            button
+              height: auto
+              padding: .2rem .4rem
+              font-size: 1.4rem
+              background-color: $grey-lighter
+              border-color: $grey-lighter
+
+          &:focus-within, &:hover
+            .control button
+              background-color: $primary
+              border-color: $primary
+
         .item-actions
           display: flex
           align-items: center

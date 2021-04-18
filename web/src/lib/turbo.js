@@ -14,3 +14,11 @@ document.addEventListener("turbo:before-fetch-request", (evt) => {
   // Mark the request for turbo rendering
   evt.detail.fetchOptions.headers["X-Turbo"] = "1"
 })
+
+document.addEventListener("turbo:submit-end", (evt) => {
+  // Empty children with data-turbo-empty-submit-end
+  // attribute after form submission.
+  evt.target
+    .querySelectorAll("[data-turbo-empty-submit-end]")
+    .forEach(x => x.value = "")
+})

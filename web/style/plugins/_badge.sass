@@ -31,38 +31,3 @@
       &::before,
       &::after
         background-color: $white
-
-  &.editable
-    border: 1px solid transparent
-    border-radius: $radius
-    padding: $block-spacing/4 $block-spacing/4 0
-
-    .control
-      flex-grow: 1
-      display: inline-flex
-      align-items: center
-      vertical-align: middle
-      margin-bottom: .5rem
-      // justify-content: center
-
-      input[type='text']
-        width: 10em
-        height: auto
-        padding: .1rem .4rem
-        border: none
-        border-bottom: 1px solid #eee
-        font-size: 1.4rem
-
-      button
-        height: auto
-        padding: .2rem .4rem
-        font-size: 1.4rem
-        background-color: $grey-lighter
-        border-color: $grey-lighter
-
-    &:focus-within
-      border-color: $primary
-
-      .control button
-        background-color: $primary
-        border-color: $primary

@@ -14,11 +14,9 @@
 </template>
 </turbo-stream>
 
-<turbo-stream action="replace" target="bookmark-labels-{{ .item.ID }}">
+<turbo-stream action="replace" target="bookmark-label-list-{{ .item.ID }}">
 <template>
-{{ template "bookmark:labels" dict "ctx" $
-                                   "item" .item
-                                   "baseURL" "/bookmarks" }}
+{{ template "bookmark:label-list" .item }}
 </template>
 </turbo-stream>
 
