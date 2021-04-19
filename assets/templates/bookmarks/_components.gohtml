@@ -14,10 +14,12 @@ bookmarks:video renders a video bookmark
 */}}
 {{- define "bookmarks:video" -}}
 {{- if .Resources.image -}}
-<div class="video-player"
- data-controller="video" data-video-embed-value="{{ .Embed }}">
-  <img alt="" src="{{ .Resources.image.Src }}"
-   width="{{ .Resources.image.Width }}" height="{{ .Resources.image.Height }}">
+<div class="video-wrapper">
+  <div class="video-player"
+  data-controller="video" data-video-embed-value="{{ .Embed }}">
+    <img alt="" src="{{ .Resources.image.Src }}"
+    width="{{ .Resources.image.Width }}" height="{{ .Resources.image.Height }}">
+  </div>
 </div>
 {{- end -}}
 {{- end -}}
