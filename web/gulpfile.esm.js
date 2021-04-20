@@ -13,7 +13,7 @@ import gulpPostcss from "gulp-postcss"
 import gulpRename from "gulp-rename"
 import * as gulpSass from "@mr-hope/gulp-sass"
 import gulpSourcemaps from "gulp-sourcemaps"
-import gulpSvgSprite from "gulp-svg-sprite"
+import gulpSvgStore from "gulp-svgstore"
 import vinylSourceStream from "vinyl-source-stream"
 
 import del from "del"
@@ -197,22 +197,14 @@ function icon_sprite() {
 
   return gulp
     .src(Object.values(icons))
-    .pipe(gulpSvgSprite({
-      mode: {
-        symbol: {
-          sprite: "img/icons.svg",
-        },
-      },
-      shape: {
-        id: {
-          generator: (_, file) => {
-            let p = path.relative(file.cwd, file.path)
-            let id = Object.entries(icons).find(x => x[1] == p)[0]
-            return id
-          },
-        },
-      },
+    .pipe(gulpRename((file, f) => {
+      // Set new filename on each entry in order to set
+      // a chosen ID on each symbol.
+      let p = path.relative(f.cwd, f.path)
+      let id = Object.entries(icons).find(x => x[1] == p)[0]
+      file.basename = id
     }))
+    .pipe(gulpSvgStore())
     .pipe(gulpRename("img/icons.svg"))
     .pipe(hashName())
     .pipe(destCompress("gz"))
