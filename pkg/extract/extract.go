@@ -32,13 +32,16 @@ type (
 	ProcessMessage struct {
 		Context   context.Context
 		Extractor *Extractor
-		Position  int
 		Log       *log.Entry
 		Dom       *html.Node
 
-		step     ProcessStep
-		canceled bool
-		values   map[string]interface{}
+		position     int
+		resetCounter int
+		maxReset     int
+		maxDrops     int
+		step         ProcessStep
+		canceled     bool
+		values       map[string]interface{}
 	}
 )
 
@@ -64,6 +67,21 @@ func (m *ProcessMessage) Step() ProcessStep {
 	return m.step
 }
 
+// Position returns the current process position
+func (m *ProcessMessage) Position() int {
+	return m.position
+}
+
+// ResetPosition lets the process start over (normally with a new URL).
+// It holds a counter and cancels everything after too many resets (defined by maxReset).
+func (m *ProcessMessage) ResetPosition() {
+	if m.resetCounter >= m.maxReset {
+		m.Cancel("too many redirects")
+	}
+	m.resetCounter++
+	m.position = -1
+}
+
 // Value returns a stored message value.
 func (m *ProcessMessage) Value(name string) interface{} {
 	return m.values[name]
@@ -77,7 +95,7 @@ func (m *ProcessMessage) SetValue(name string, value interface{}) {
 // ResetContent empty the message Dom and all the drops body
 func (m *ProcessMessage) ResetContent() {
 	m.Dom = nil
-	m.Extractor.Drops()[m.Position].Body = []byte{}
+	m.Extractor.Drops()[m.position].Body = []byte{}
 }
 
 // Cancel fully cancel the extract process.
@@ -117,18 +135,18 @@ func (l URLList) IsPresent(v *url.URL) bool {
 
 // Extractor is a page extractor.
 type Extractor struct {
-	URL     *url.URL
-	HTML    []byte
-	Text    string
-	Visited URLList
-	Logs    []string
+	URL       *url.URL
+	HTML      []byte
+	Text      string
+	Visited   URLList
+	Logs      []string
+	Context   context.Context
+	LogFields *log.Fields
 
 	client     *http.Client
 	processors ProcessList
 	errors     Error
 	drops      []*Drop
-	Context    context.Context
-	LogFields  *log.Fields
 }
 
 // New returns an Extractor instance for a given URL,
@@ -233,10 +251,13 @@ func (e *Extractor) NewProcessMessage(step ProcessStep) *ProcessMessage {
 	}
 
 	return &ProcessMessage{
-		Extractor: e,
-		Log:       logEntry,
-		step:      step,
-		values:    make(map[string]interface{}),
+		Extractor:    e,
+		Log:          logEntry,
+		step:         step,
+		resetCounter: 0,
+		maxReset:     10,
+		maxDrops:     100,
+		values:       make(map[string]interface{}),
 	}
 }
 
@@ -266,10 +287,15 @@ func (e *Extractor) Run() {
 			i++
 			continue
 		}
-
 		e.Visited.Add(d.URL)
 
-		m.Position = i
+		// Don't let any page fool us into processing an
+		// unlimited number of pages.
+		if len(e.drops) >= m.maxDrops {
+			m.Cancel("too many pages")
+		}
+
+		m.position = i
 
 		// Start extraction
 		m.Log.WithField("idx", i).WithField("url", d.URL.String()).Info("start")
@@ -332,7 +358,7 @@ func (e *Extractor) Run() {
 		}
 
 		// A processor can change the position in the loop
-		i = m.Position + 1
+		i = m.position + 1
 	}
 
 	// Postprocess

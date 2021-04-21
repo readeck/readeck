@@ -65,7 +65,7 @@ func init() {
 // ApplyRules is a processor that applies a matching JS script.
 // It gives more latitude to do some site by site improvements.
 func ApplyRules(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Step() != extract.StepDom || m.Position > 0 {
+	if m.Step() != extract.StepDom || m.Position() > 0 {
 		return next
 	}
 

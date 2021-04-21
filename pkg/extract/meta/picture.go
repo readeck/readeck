@@ -7,7 +7,7 @@ import (
 // ExtractPicture is a processor that extracts the picture from the document
 // metadata. It has to come after ExtractMeta.
 func ExtractPicture(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Step() != extract.StepDom || m.Position > 0 {
+	if m.Step() != extract.StepDom || m.Position() > 0 {
 		return next
 	}
 

@@ -17,7 +17,7 @@ import (
 // ExtractOembed is a processor that extracts the picture from the document
 // metadata. It has to come after ExtractMeta.
 func ExtractOembed(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Step() != extract.StepDom || m.Dom == nil || m.Position > 0 {
+	if m.Step() != extract.StepDom || m.Dom == nil || m.Position() > 0 {
 		return next
 	}
 

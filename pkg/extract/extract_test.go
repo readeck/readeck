@@ -2,6 +2,7 @@ package extract
 
 import (
 	"errors"
+	"strconv"
 	"testing"
 
 	"github.com/jarcoal/httpmock"
@@ -71,13 +72,14 @@ func TestExtractorRun(t *testing.T) {
 
 	httpmock.RegisterResponder("GET", "/404", httpmock.NewJsonResponderOrPanic(404, ""))
 	httpmock.RegisterResponder("GET", "/page1", newHTMLResponder(200, "html/ex1.html"))
+	httpmock.RegisterResponder("GET", `=~^/loop/\d+`, newHTMLResponder(200, "html/ex1.html"))
 
 	p1 := func(m *ProcessMessage, next Processor) Processor {
 		if m.Step() != StepBody {
 			return next
 		}
 
-		m.Extractor.Drops()[m.Position].Body = []byte("test")
+		m.Extractor.Drops()[m.Position()].Body = []byte("test")
 		return next
 	}
 
@@ -96,7 +98,7 @@ func TestExtractorRun(t *testing.T) {
 			return next
 		}
 
-		m.Extractor.Drops()[m.Position].Body = m.Value("newbody").([]byte)
+		m.Extractor.Drops()[m.Position()].Body = m.Value("newbody").([]byte)
 
 		return next
 	}
@@ -106,17 +108,59 @@ func TestExtractorRun(t *testing.T) {
 			return next
 		}
 
-		if m.Position == 0 {
+		if m.Position() == 0 {
 			m.Extractor.AddDrop(mustParse("http://example.org/page1"))
 		}
-		if m.Position == 1 {
+		if m.Position() == 1 {
 			m.Extractor.AddDrop(mustParse("http://example.net/page1"))
 		}
-		if m.Position > 2 {
+		if m.Position() > 2 {
 			// That will never happen
 			panic("We should never loop")
 		}
 		return next
+	}
+
+	loopProcessor := func() Processor {
+		// Simulates the case of a page managing to force a processor into infinite
+		// redirections to a new content page.
+		iterations := 200
+		i := 0
+		return func(m *ProcessMessage, next Processor) Processor {
+			if m.Step() != StepDom {
+				return next
+			}
+
+			if i >= iterations {
+				return next
+			}
+
+			i++
+			u, _ := m.Extractor.Drop().URL.Parse(strconv.Itoa(i))
+
+			m.Extractor.ReplaceDrop(u)
+			m.ResetPosition()
+
+			return next
+		}
+	}
+
+	tooManyDropProcessor := func() Processor {
+		iterations := 200
+		i := 0
+		return func(m *ProcessMessage, next Processor) Processor {
+			if m.Step() != StepFinish {
+				return next
+			}
+			if i >= iterations {
+				return next
+			}
+
+			i++
+			u, _ := m.Extractor.Drop().URL.Parse(strconv.Itoa(i))
+			m.Extractor.AddDrop(u)
+			return next
+		}
 	}
 
 	t.Run("simple", func(t *testing.T) {
@@ -163,4 +207,27 @@ func TestExtractorRun(t *testing.T) {
 		assert.Equal(t, "http://example.org/page1", ex.Drops()[1].URL.String())
 	})
 
+	t.Run("too many redirects", func(t *testing.T) {
+		ex, _ := New("http://example.net/loop/0", nil)
+		ex.AddProcessors(loopProcessor())
+		ex.Run()
+		assert.Equal(t, 1, len(ex.Errors()))
+		assert.Equal(t, "operation canceled", ex.Errors().Error())
+		assert.Equal(t,
+			`[ERRO] operation canceled error="too many redirects"`,
+			ex.Logs[len(ex.Logs)-2],
+		)
+	})
+
+	t.Run("too many pages", func(t *testing.T) {
+		ex, _ := New("http://example.net/loop/0", nil)
+		ex.AddProcessors(tooManyDropProcessor())
+		ex.Run()
+		assert.Equal(t, 1, len(ex.Errors()))
+		assert.Equal(t, "operation canceled", ex.Errors().Error())
+		assert.Equal(t,
+			`[ERRO] operation canceled error="too many pages"`,
+			ex.Logs[len(ex.Logs)-2],
+		)
+	})
 }

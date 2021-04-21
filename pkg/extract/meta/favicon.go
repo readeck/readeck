@@ -31,7 +31,7 @@ var iconExt = map[string]string{
 // ExtractFavicon is a processor that extracts the favicon
 // for the first extracted document.
 func ExtractFavicon(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Step() != extract.StepDom || m.Position > 0 {
+	if m.Step() != extract.StepDom || m.Position() > 0 {
 		return next
 	}
 

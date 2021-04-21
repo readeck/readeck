@@ -30,7 +30,7 @@ func LoadConfiguration(m *extract.ProcessMessage, next extract.Processor) extrac
 		}
 	}
 
-	if m.Position > 0 || m.Step() != extract.StepStart {
+	if m.Position() > 0 || m.Step() != extract.StepStart {
 		return next
 	}
 
@@ -140,7 +140,7 @@ func ExtractBody(m *extract.ProcessMessage, next extract.Processor) extract.Proc
 
 // ExtractAuthor applies the "author" directives to find an author.
 func ExtractAuthor(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Position > 0 || m.Step() != extract.StepDom {
+	if m.Position() > 0 || m.Step() != extract.StepDom {
 		return next
 	}
 
@@ -168,7 +168,7 @@ func ExtractAuthor(m *extract.ProcessMessage, next extract.Processor) extract.Pr
 // ExtractDate applies the "date" directives to find a date. If a date is found
 // we try to parse it.
 func ExtractDate(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Position > 0 || m.Step() != extract.StepDom {
+	if m.Position() > 0 || m.Step() != extract.StepDom {
 		return next
 	}
 
@@ -282,8 +282,12 @@ func FindContentPage(m *extract.ProcessMessage, next extract.Processor) extract.
 		}
 
 		m.Log.WithField("url", u.String()).Info("fftr found single page link")
-		m.Extractor.ReplaceDrop(u)
-		m.Position = -1
+		if err = m.Extractor.ReplaceDrop(u); err != nil {
+			m.Log.WithError(err).Error("cannot replace page")
+			return nil
+		}
+
+		m.ResetPosition()
 
 		return nil
 	}
@@ -304,16 +308,13 @@ func FindNextPage(m *extract.ProcessMessage, next extract.Processor) extract.Pro
 	}
 
 	for _, selector := range cfg.NextPageLinkSelectors {
-		// nodes, _ := m.Dom.Root().Search(selector)
 		node, _ := htmlquery.Query(m.Dom, selector)
 		if node == nil {
 			continue
 		}
 
-		// href := nodes[0].Attr("href")
 		href := dom.GetAttribute(node, "href")
 		if href == "" {
-			// href = nodes[0].Content()
 			href = dom.TextContent(node)
 		}
 		if href == "" {

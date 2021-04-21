@@ -21,7 +21,7 @@ var (
 // ExtractMeta is a processor that extracts metadata from the
 // document and set the Drop values accordingly.
 func ExtractMeta(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Step() != extract.StepDom || m.Dom == nil || m.Position > 0 {
+	if m.Step() != extract.StepDom || m.Dom == nil || m.Position() > 0 {
 		return next
 	}
 
@@ -82,7 +82,7 @@ func ExtractMeta(m *extract.ProcessMessage, next extract.Processor) extract.Proc
 // SetDropProperties will set some Drop properties bases on the retrieved
 // metadata. It must be run after ExtractMeta and ExtractOembed.
 func SetDropProperties(m *extract.ProcessMessage, next extract.Processor) extract.Processor {
-	if m.Step() != extract.StepDom || m.Position > 0 {
+	if m.Step() != extract.StepDom || m.Position() > 0 {
 		return next
 	}
 
