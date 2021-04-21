@@ -1,0 +1,8 @@
+<ul class="badges editable" id="bookmark-label-list-{{ .ID }}">
+{{- range .Labels -}}
+  <li class="badge">{{ . }}
+  <button class="button-clear button-delete" type="submit"
+    name="remove_labels" value="{{ . }}"></button>
+  </li>
+{{- end -}}
+</ul>

@@ -1,0 +1,105 @@
+{{- import "/_libs/common" -}}
+{{- textArch := .IsArchived ? "Remove from archive" : "Move to archive" -}}
+{{- textFav := .IsMarked ? "Remove from favorites" : "Add to favorites" -}}
+
+{{- url := urlFor(`/bookmarks`, .ID) }}
+{{- if !.Loaded }}
+  <turbo-frame id="bookmark-card-{{ .ID }}"
+   data-controller="turbo-refresh"
+   data-turbo-refresh-interval-value="2"
+   data-turbo-refresh-on-value=".card .bookmark-loading"
+   data-turbo-refresh-src-value="{{ urlFor(`/api/bookmarks`, .ID) }}">
+  <div class="card">
+    <div class="card-image">
+      <img loading="lazy" src="{{ urlFor(`/assets/rnd`, .ID) }}.svg" alt=""
+       width="256" height="160">
+    </div>
+    <div class="card-content">
+      <div class="bookmark-loading">
+        {{ yield spinner() }}
+      </div>
+    </div>
+    <div class="card-bottom">
+      <strong class="item-actions">Loading {{ .Site }}…</strong>
+    </div>
+  </div>
+  </turbo-frame>
+{{ else }}
+  <turbo-frame id="bookmark-card-{{ .ID }}">
+  <div class="card{{ if .IsDeleted }} state-deleted{{ end }}">
+    <div class="card-image"><a href="{{ url }}">
+      {{ if isset(.Resources.thumbnail) -}}
+        <img loading="lazy" src="{{ .Resources.thumbnail.Src }}" alt=""
+         width="{{ .Resources.thumbnail.Width }}"
+         height="{{ .Resources.thumbnail.Height }}">
+      {{- else -}}
+        <img loading="lazy" src="{{ urlFor(`/assets/rnd`, .ID) }}.svg" alt=""
+         width="256" height="160">
+      {{- end }}
+    </a></div>
+
+    <div class="card-content">
+      <h3 class="title"><a href="{{ url }}"
+      data-turbo-frame="_top">{{ default(.Title, "untitled") }}</a></h3>
+      {{ if len(.Labels) -}}
+      <ul class="badges">{{ range .Labels -}}
+        <li class="badge">{{ . }}</li>
+      {{- end }}</ul>
+      {{- end }}
+    </div>
+
+    <div class="card-bottom">
+      <span class="item-site">
+        {{- if isset(.Resources.icon) -}}
+          <img loading="lazy" src="{{ .Resources.icon.Src }}" alt=""
+           width="{{ .Resources.icon.Width }}" height="{{ .Resources.icon.Height }}">
+        {{- end }} <strong>{{ .SiteName }}</strong>
+        {{ if .Type == "article" && .ReadingTime() > 0 }} •&nbsp;{{ .ReadingTime() }}&nbsp;min{{- end -}}
+        </span>
+        <div class="item-actions">
+          {{- if .IsDeleted -}}
+            <span class="text-danger">
+              This bookmark will be removed in a few seconds.
+            </span>
+            <form action="{{ url }}" method="post">
+              {{ yield csrfField() }}
+              <input type="hidden" name="cancel" value="1" />
+              <input type="hidden" name="_to" value="{{ currentPath }}" />
+              <button type="submit" name="is_deleted" value="0"
+              data-controller="turbo-form"
+              data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+              data-turbo-form-method-value="patch">{{ yield icon(name="o-undo") }}&nbsp;Undo</button>
+            </form>
+          {{- else -}}
+            <form action="{{url }}" method="post"
+            data-controller="turbo-form"
+            data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+            data-turbo-form-method-value="patch">
+              {{ yield csrfField() }}
+              <input type="hidden" name="_to" value="{{ currentPath }}" />
+              <button class="button-clear" name="is_marked" value="{{ .IsMarked ? 0 : 1 }}"
+              title="{{ textFav }}">
+                {{ yield icon(name=(.IsMarked ? "o-favorite-on" : "o-favorite-off")) }}
+              </button>
+              <button class="button-clear" name="is_archived" value="{{ .IsArchived ? 0 : 1 }}"
+              title="{{ textArch }}">
+                {{ yield icon(name=(.IsArchived ? "o-archive-on" : "o-archive-off")) }}
+              </button>
+            </form>
+
+            <form action="{{ urlFor(`/bookmarks`, .ID, `delete`) }}" method="post">
+              {{ yield csrfField() }}
+              <input type="hidden" name="_to" value="{{ currentPath }}" />
+              <button class="button-clear action-delete" name="is_deleted" value="1"
+                data-controller="turbo-form"
+                data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+                data-turbo-form-method-value="patch">
+                {{ yield icon(name="o-trash") }}
+              </button>
+            </form>
+          {{- end -}}
+        </div>
+    </div>
+  </div>
+  </turbo-frame>
+{{ end -}}

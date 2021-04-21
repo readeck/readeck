@@ -1,0 +1,68 @@
+{{ extends "/app" }}
+{{- import "/_libs/pagination" -}}
+
+{{ block title() }}Bookmarks{{ end }}
+
+{{ block mainContent() -}}
+<turbo-frame id="bookmark-list"
+ data-controller="turbo-refresh"
+ data-turbo-refresh-interval-value="10"
+ data-turbo-refresh-on-value=".card.state-deleted">
+
+  <div class="list-controlls">
+    <div class="bookmark-new">
+      <form action="{{ urlFor(`/bookmarks`) }}" method="post"
+       data-controller="turbo-form">
+        {{ yield csrfField() }}
+        <div class="compound">
+          <input class="rounded" type="text" name="url" size="15"
+          value="{{ string(.Form.Fields.url.Value()) }}" placeholder="https://" />
+          <button class="rounded" type="submit">Save link</button>
+        </div>
+
+        {{ range .Form.Fields.url.Errors }}<p class="text-danger"><strong>{{ . }}</strong></p>{{ end }}
+
+        {{- if (!isset(.Q) || empty(.Q)) && pathIs("/bookmarks") && .Pagination.TotalCount == 0 -}}
+          <p><strong>You don't have any bookmark yet. Start saving pages now!</strong></p>
+        {{- end -}}
+      </form>
+    </div>
+
+    <ul class="bookmark-filters">
+      <li><a class="{{ if pathIs(`/bookmarks`) }} active{{ end }}"
+      href="{{ urlFor(`/bookmarks`) }}">All</a></li>
+      <li><a class="{{ if pathIs(`/bookmarks/unread`) }} active{{ end }}"
+      href="{{ urlFor(`/bookmarks`, `unread`) }}">{{ yield icon(name="o-check-off") }} Unread</a></li>
+      <li><a class="{{ if pathIs(`/bookmarks/archives`) }} active{{ end }}"
+      href="{{ urlFor(`/bookmarks`, `archives`) }}">{{ yield icon(name="o-archive-on") }} Archive</a></li>
+      <li><a class="{{ if pathIs(`/bookmarks/favorites`) }} active{{ end }}"
+      href="{{ urlFor(`/bookmarks`, `favorites`) }}">{{ yield icon(name="o-favorite-on") }} Favorites</a></li>
+    </ul>
+
+    <div class="bookmark-search">
+      <form action="{{ urlFor(``) }}" method="get">
+        <input title="search in bookmarks" class="rounded" size="10"
+        type="text" name="q" value="{{ isset(.Q) ? .Q : `` }}" placeholder="search" />
+        <button title="search">{{ yield icon(name="o-search") }}</button>
+      </form>
+    </div>
+  </div>
+
+  {{- include "/_libs/pagination" .Pagination -}}
+
+  {{- if isset(.Q) && !empty(.Q) -}}
+    <div class="content-block">
+      <p>Your search for <strong>{{ .Q }}</strong> yielded
+      {{ .Pagination.TotalCount }} result(s)</p>
+    </div>
+  {{- end -}}
+
+  <div class="bookmark-list">
+  {{- range .Bookmarks -}}
+    {{- include "./components/card" . -}}
+  {{- end -}}
+  </div>
+
+  {{- include "/_libs/pagination" .Pagination -}}
+</turbo-frame>
+{{- end }}

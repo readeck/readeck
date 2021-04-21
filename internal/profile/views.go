@@ -75,7 +75,7 @@ func (v *profileViews) userProfile(w http.ResponseWriter, r *http.Request) {
 	ctx := server.TC{
 		"Form": f,
 	}
-	v.srv.RenderTemplate(w, r, 200, "profile/index.gohtml", ctx)
+	v.srv.RenderTemplate(w, r, 200, "profile/index", ctx)
 }
 
 // userPassword handles GET and POST requests on /profile/password
@@ -107,7 +107,7 @@ func (v *profileViews) userPassword(w http.ResponseWriter, r *http.Request) {
 	ctx := server.TC{
 		"Form": f,
 	}
-	v.srv.RenderTemplate(w, r, 200, "profile/password.gohtml", ctx)
+	v.srv.RenderTemplate(w, r, 200, "profile/password", ctx)
 }
 
 func (v *profileViews) tokenList(w http.ResponseWriter, r *http.Request) {
@@ -117,7 +117,7 @@ func (v *profileViews) tokenList(w http.ResponseWriter, r *http.Request) {
 		"Pagination": tl.Pagination,
 		"Tokens":     tl.Items,
 	}
-	v.srv.RenderTemplate(w, r, 200, "profile/token_list.gohtml", ctx)
+	v.srv.RenderTemplate(w, r, 200, "profile/token_list", ctx)
 }
 
 func (v *profileViews) tokenCreate(w http.ResponseWriter, r *http.Request) {
@@ -180,7 +180,7 @@ func (v *profileViews) tokenInfo(w http.ResponseWriter, r *http.Request) {
 		"Form":  f,
 	}
 
-	v.srv.RenderTemplate(w, r, 200, "profile/token.gohtml", ctx)
+	v.srv.RenderTemplate(w, r, 200, "profile/token", ctx)
 }
 
 func (v *profileViews) tokenDelete(w http.ResponseWriter, r *http.Request) {

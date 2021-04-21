@@ -1,0 +1,47 @@
+{{ extends "/base" }}
+{{ import "/_libs/forms" }}
+
+{{ block body() -}}
+{{- inBookmarks := pathIs("/bookmarks", "/bookmarks/*") -}}
+{{- inProfile := pathIs("/profile", "/profile/*") -}}
+{{- inAdmin := pathIs("/admin", "/admin/*") -}}
+<div class="app">
+  <nav class="navbar">
+    <h1><a href="{{ urlFor(`/`) }}">Readeck</a></h1>
+    <div class="main-nav">
+      <a class="button{{ if inBookmarks }} active{{ end}}"
+       href="{{ urlFor(`/bookmarks/unread`) }}">
+       {{ yield icon(name="o-bookmarks") }} Bookmarks</a>
+    </div>
+
+    <div class="user-menu">
+      <a class="button rounded icon{{ if inProfile }} active{{ end}}"
+       href="{{ urlFor(`/profile`) }}">{{
+        yield icon(name="o-user") }}</a>
+    </div>
+
+    {{ if  hasPermission("/admin", "read") -}}
+    <div>
+      <a class="button rounded icon{{ if inAdmin }} active{{ end}}"
+       href="{{ urlFor(`/admin`) }}">{{
+        yield icon(name="o-admin") }}</a>
+    </div>
+    {{- end }}
+
+    <form action="{{ urlFor(`/logout`)}}" method="post">
+      {{ yield csrfField() }}
+      <button type="submit">{{ yield icon(name="o-logout") }} Logout</button>
+    </form>
+  </nav>
+
+  {{ yield main() content }}
+  {{ yield mainAside() }}
+  <div class="main {{ yield mainClass() }}">
+    <main>
+      {{ yield flashes() }}
+      {{ yield mainContent() }}
+    </main>
+  </div>
+  {{ end }}
+</div>
+{{- end}}

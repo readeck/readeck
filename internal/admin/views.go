@@ -61,12 +61,11 @@ func (h *adminViews) userList(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := server.TC{
-		"count":      ul.Pagination.TotalCount,
-		"pagination": ul.Pagination,
-		"users":      ul.Items,
+		"Pagination": ul.Pagination,
+		"Users":      ul.Items,
 	}
 
-	h.srv.RenderTemplate(w, r, 200, "admin/user_list.gohtml", ctx)
+	h.srv.RenderTemplate(w, r, 200, "/admin/user_list", ctx)
 }
 
 func (h *adminViews) userCreate(w http.ResponseWriter, r *http.Request) {
@@ -93,7 +92,7 @@ func (h *adminViews) userCreate(w http.ResponseWriter, r *http.Request) {
 	ctx := server.TC{
 		"Form": f,
 	}
-	h.srv.RenderTemplate(w, r, 200, "admin/user_create.gohtml", ctx)
+	h.srv.RenderTemplate(w, r, 200, "/admin/user_create", ctx)
 }
 
 func (h *adminViews) userInfo(w http.ResponseWriter, r *http.Request) {
@@ -132,11 +131,11 @@ func (h *adminViews) userInfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := server.TC{
-		"item": item,
+		"User": item,
 		"Form": f,
 	}
 
-	h.srv.RenderTemplate(w, r, 200, "admin/user.gohtml", ctx)
+	h.srv.RenderTemplate(w, r, 200, "/admin/user", ctx)
 }
 
 func (h *adminViews) userDelete(w http.ResponseWriter, r *http.Request) {

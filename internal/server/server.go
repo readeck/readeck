@@ -2,8 +2,6 @@ package server
 
 import (
 	"fmt"
-	"html/template"
-	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -12,7 +10,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Masterminds/sprig"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	log "github.com/sirupsen/logrus"
@@ -20,8 +17,6 @@ import (
 	"codeberg.org/readeck/readeck/assets"
 	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/internal/auth"
-	"codeberg.org/readeck/readeck/internal/auth/users"
-	"codeberg.org/readeck/readeck/pkg/glob"
 )
 
 // Server is a wrapper around chi router.
@@ -62,63 +57,6 @@ func New(basePath string) *Server {
 		s.ErrorPages,
 		s.SetSecurityHeaders(),
 	)
-
-	// Init templates
-	s.TemplateFuncs(sprig.FuncMap())
-	s.TemplateFuncs(template.FuncMap{
-		"assetURL": func(ctx TC, name string) string {
-			r := ctx["request"].(*http.Request)
-			return s.AssetURL(r, name)
-		},
-		"cp": func(out io.Writer, in io.Reader) (string, error) {
-			_, err := io.Copy(out, in)
-			return "", err
-		},
-		"hasPermission": func(ctx TC, obj, act string) bool {
-			user, ok := ctx["user"].(*users.User)
-			if !ok || user == nil {
-				return false
-			}
-			return user.HasPermission(obj, act)
-		},
-		"icon": func(ctx TC, name string, args ...interface{}) template.HTML {
-			r := ctx["request"].(*http.Request)
-			attrs := ""
-			if len(args)%2 == 0 {
-				seenClass := false
-				for i := 0; i < len(args); i += 2 {
-					seenClass = seenClass || args[i] == "class"
-					attrs = fmt.Sprintf(`%s %s="%s"`, attrs, args[i], args[i+1])
-				}
-				if !seenClass {
-					attrs = fmt.Sprintf(`%s %s="%s"`, attrs, "class", "svgicon")
-				}
-			}
-
-			return template.HTML(
-				fmt.Sprintf(
-					svgTemplate,
-					attrs, s.AssetURL(r, "img/icons.svg"), name),
-			)
-		},
-		"pathIs": func(ctx TC, patterns ...string) bool {
-			r := ctx["request"].(*http.Request)
-			cp := "/" + strings.TrimPrefix(r.URL.Path, s.BasePath)
-			for _, p := range patterns {
-				if glob.Glob(p, cp) {
-					return true
-				}
-			}
-			return false
-		},
-		"safeAttr": func(val string) template.HTMLAttr {
-			return template.HTMLAttr(val)
-		},
-		"urlFor": func(ctx TC, name ...string) string {
-			r := ctx["request"].(*http.Request)
-			return s.AbsoluteURL(r, name...).Path
-		},
-	})
 
 	return s
 }

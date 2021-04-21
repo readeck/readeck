@@ -85,7 +85,7 @@ func (h *authHandler) login(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *authHandler) renderLoginForm(w http.ResponseWriter, r *http.Request, status int, f *form.Form) {
-	h.srv.RenderTemplate(w, r, status, "auth/login.gohtml", map[string]interface{}{
+	h.srv.RenderTemplate(w, r, status, "/auth/login", map[string]interface{}{
 		"Form": f,
 	})
 }
