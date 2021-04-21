@@ -19,6 +19,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"codeberg.org/readeck/readeck/configs"
+	"codeberg.org/readeck/readeck/internal/auth/users"
 	"codeberg.org/readeck/readeck/internal/db"
 )
 
@@ -139,6 +140,28 @@ func (m *BookmarkManager) GetOne(expressions ...goqu.Expression) (*Bookmark, err
 	}
 
 	return &b, nil
+}
+
+// DeleteUserBookmakrs remove all bookmarks for a given user.
+// Normally we don't need such a process but since, a bookmark
+// holds a file, we can't only rely on the foreign key cascade
+// deletion. Hence this.
+func (m *BookmarkManager) DeleteUserBookmakrs(u *users.User) error {
+	ds := Bookmarks.Query().
+		Where(goqu.C("user_id").Eq(u.ID))
+
+	items := []*Bookmark{}
+	if err := ds.ScanStructs(&items); err != nil {
+		return err
+	}
+
+	for _, b := range items {
+		if err := b.Delete(); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 // Update updates some bookmark values.

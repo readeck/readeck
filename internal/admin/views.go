@@ -161,7 +161,7 @@ func (h *adminViews) userDelete(w http.ResponseWriter, r *http.Request) {
 
 	userTimers.Start(u.ID, 20*time.Second, func() {
 		log := h.srv.Log(r).WithField("id", u.ID)
-		if err := u.Delete(); err != nil {
+		if err := h.deleteUser(r, u); err != nil {
 			log.WithError(err).Error("removing user")
 			return
 		}

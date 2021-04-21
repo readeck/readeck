@@ -12,6 +12,7 @@ import (
 
 	"codeberg.org/readeck/readeck/internal/auth"
 	"codeberg.org/readeck/readeck/internal/auth/users"
+	"codeberg.org/readeck/readeck/internal/bookmarks"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/form"
 )
@@ -165,6 +166,11 @@ func (api *adminAPI) updateUser(u *users.User, uf *users.UpdateForm) (map[string
 func (api *adminAPI) deleteUser(r *http.Request, u *users.User) error {
 	if u.ID == auth.GetRequestUser(r).ID {
 		return errSameUser
+	}
+
+	// Remove user's bookmarks first
+	if err := bookmarks.Bookmarks.DeleteUserBookmakrs(u); err != nil {
+		return err
 	}
 
 	return u.Delete()
