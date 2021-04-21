@@ -1,0 +1,20 @@
+{{- import "/_libs/common" -}}
+{{- textArch := .IsArchived ? "Remove from archive" : "Move to archive" -}}
+{{- textFav := .IsMarked ? "Remove from favorites" : "Add to favorites" -}}
+
+<turbo-frame id="bookmark-bottom-actions-{{ .ID }}">
+<form action="{{ urlFor(`/bookmarks`, .ID) }}" method="post"
+ data-controller="turbo-form"
+ data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+ data-turbo-form-method-value="patch">
+  {{ yield csrfField() }}
+  <button class="outlined rounded" name="is_archived" value="{{ .IsArchived ? 0 : 1 }}">
+    {{ yield icon(name=(.IsArchived ? "o-archive-on" : "o-archive-off")) }}
+    {{ textArch }}
+  </button>
+  <button class="outlined rounded" name="is_marked" value="{{ .IsMarked ? 0 : 1 }}">
+    {{ yield icon(name=(.IsMarked ? "o-favorite-on" : "o-favorite-off")) }}
+    {{ textFav }}
+  </button>
+</form>
+</turbo-frame>

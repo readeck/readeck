@@ -1,0 +1,40 @@
+{{ extends "./base" }}
+{{ import "/_libs/forms" }}
+
+{{ block title() }}API Tokens{{ end }}
+
+{{ block mainContent() }}
+<h1 class="title">Your API Tokens</h1>
+
+<form action="{{ urlFor() }}" method="post">
+  {{ yield csrfField() }}
+  <p><button type="submit">Create a new API token</button></p>
+</form>
+
+{{ if .Tokens }}
+<h3>Your available tokens</h3>
+
+{{ include "/_libs/pagination" .Pagination }}
+<div class="panel">
+{{ range .Tokens }}
+<div class="panel-content">
+  <div>
+    {{- if .IsEnabled -}}
+      {{ yield icon(name="o-check-on", class="svgicon success-fg") }}
+    {{- else -}}
+      {{ yield icon(name="o-cross", class="svgicon danger-fg") }}
+    {{- end }}
+    <a href="{{ urlFor(`.`, .ID ) }}">{{ .ID }}</a>
+    <small>- {{ .Application }}</small>
+  </div>
+  <div><small>Created on: {{ date(.Created, "2006-01-02") }}
+  {{- if .Expires }} (Expires on: {{ date(.Expires, "2006-01-02") }}){{ end -}}
+  </small></div>
+</div>
+{{ end }}
+</div>
+{{ include "/_libs/pagination" .Pagination }}
+
+{{ end }}
+
+{{ end }}

@@ -1,0 +1,50 @@
+{{- import "/_libs/common" -}}
+{{- textArch := .IsArchived ? "Remove from archive" : "Move to archive" -}}
+{{- textFav := .IsMarked ? "Remove from favorites" : "Add to favorites" -}}
+
+<turbo-frame id="bookmark-actions-{{ .ID }}">
+<div class="item-actions">
+  {{- if .IsDeleted -}}
+    <span class="text-danger">
+      This bookmark will be removed in a few seconds.
+    </span>
+    <form action="{{ urlFor(`/bookmarks`, .ID, `delete`) }}" method="post">
+      {{ yield csrfField() }}
+      <input type="hidden" name="cancel" value="1" />
+      <input type="hidden" name="_to" value="{{ currentPath }}" />
+      <button type="submit" name="is_deleted" value="0"
+       data-controller="turbo-form"
+       data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+       data-turbo-form-method-value="patch">{{ yield icon(name="o-undo") }}&nbsp;Undo</button>
+    </form>
+  {{- else -}}
+    <form action="{{ urlFor(`/bookmarks`, .ID) }}" method="post"
+    data-controller="turbo-form"
+    data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+    data-turbo-form-method-value="patch">
+      {{ yield csrfField() }}
+      <div class="compound">
+        <button class="outlined rounded icon" name="is_marked" value="{{ .IsMarked ? 0 : 1 }}"
+        title="{{ textFav }}">
+          {{ yield icon(name=(.IsMarked ? "o-favorite-on" : "o-favorite-off")) }}
+        </button>
+        <button class="outlined rounded icon" name="is_archived" value="{{ .IsArchived ? 0 : 1 }}"
+        title="{{ textArch }}">
+          {{ yield icon(name=(.IsArchived ? "o-archive-on" : "o-archive-off")) }}
+        </button>
+      </div>
+    </form>
+
+    <form action="{{ urlFor(`/bookmarks`, .ID, `delete`) }}" method="post">
+      {{ yield csrfField() }}
+      <input type="hidden" name="_to" value="{{ currentPath }}" />
+      <button class="outlined rounded icon delete" name="is_deleted" value="1"
+        data-controller="turbo-form"
+        data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+        data-turbo-form-method-value="patch">
+        {{ yield icon(name="o-trash") }}
+      </button>
+    </form>
+  {{- end -}}
+</div>
+</turbo-frame>

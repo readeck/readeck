@@ -164,8 +164,8 @@ func (w *responseWriterInterceptor) Write(c []byte) (int, error) {
 		})
 		return w.ResponseWriter.Write(b)
 	case "text/html":
-		ctx := TC{"status": w.statusCode}
-		w.srv.RenderTemplate(w.ResponseWriter, w.r, 0, "error.gohtml", ctx)
+		ctx := TC{"Status": w.statusCode}
+		w.srv.RenderTemplate(w.ResponseWriter, w.r, 0, "error", ctx)
 	default:
 		return w.ResponseWriter.Write([]byte(http.StatusText(w.statusCode)))
 	}

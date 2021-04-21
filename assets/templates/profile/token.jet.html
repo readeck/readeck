@@ -1,15 +1,14 @@
-{{ extends "profile/base.gohtml" }}
+{{ extends "./base" }}
+{{ import "/_libs/forms" }}
 
-{{ define "title" }}API Token{{ end }}
+{{ block title() }}API Token{{ end }}
 
-{{ define "content" }}
-{{- $url := urlFor $ .Token.UID -}}
-
-<h1 class="title">API Token</h1>
+{{ block mainContent() }}
+<h1 class="title">{{ yield title() }}</h1>
 
 {{ if .Token.IsDeleted -}}
-<form action="{{ $url }}/delete" method="POST">
-  {{ template "csrfField" . }}
+<form action="{{ urlFor(`.`, `delete`) }}" method="POST">
+  {{ yield csrfField() }}
   <div class="message info">
     <div class="field horizontal">
       Token will be removed in a few seconds&nbsp;
@@ -22,31 +21,32 @@
 
 <h2 class="title">Properties</h2>
 
-<form action="{{ $url }}" method="POST">
-  {{ template "formErrors" .Form }}
-  {{ template "csrfField" . }}
+<form action="{{ urlFor() }}" method="post">
+  {{ yield formErrors(form=.Form) }}
+  {{ yield csrfField() }}
 
   <div class="field horizontal">
     <label>Token ID:</label>
     <div class="control">{{ .Token.UID }}</div>
   </div>
-
   <div class="field horizontal">
     <label>Application:</label>
     <div class="control">{{ .Token.Application }}</div>
   </div>
 
-  {{ template "checkboxField" (dict "field" .Form.Fields.is_enabled
-                                    "name" "is_enabled"
-                                    "label" "Enabled"
-                                    "class" "horizontal"
-                                    )}}
-  {{ template "dateField" (dict "field" .Form.Fields.expires
-                           "type" "text"
-                           "name" "expires"
-                           "label" "Expires at"
-                           "class" "horizontal"
-                           ) }}
+  {{ yield checkboxField(
+    field=.Form.Fields.is_enabled,
+    name="is_enabled",
+    label="Enabled",
+    class="horizontal",
+  ) }}
+
+  {{ yield dateField(
+    field=.Form.Fields.expires,
+    name="expires",
+    label="Expires at",
+    class="horizontal",
+  ) }}
 
   <p><button type="submit">Save</button></p>
 </form>
@@ -73,12 +73,13 @@
 </div>
 
 
-{{ if not .Token.IsDeleted -}}
+{{ if !.Token.IsDeleted -}}
 <h2>Delete token</h2>
-<form action="{{ $url }}/delete" method="POST">
-  {{ template "csrfField" . }}
+<form action="{{ urlFor(`.`, `delete`) }}" method="POST">
+  {{ yield csrfField() }}
   <p><button class="button-danger">Delete token</button></p>
 </form>
 {{- end }}
+
 
 {{ end }}

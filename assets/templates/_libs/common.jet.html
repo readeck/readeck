@@ -1,0 +1,20 @@
+{{- block icon(name, class="svgicon") -}}
+<span class="{{ class }}"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" width="16"><use
+href="{{ assetURL(`img/icons.svg`) }}#{{ name }}"></use></svg></span>
+{{- end -}}
+
+{{- block csrfField() -}}
+<span style="display:none;"><input type="hidden" name="{{ csrfName }}" value="{{ csrfToken }}"></span>
+{{- end -}}
+
+{{- block flashes() -}}
+{{ range flashes }}
+  <div class="message {{ .Type }}">
+    <strong>{{ .Message }}</strong>
+  </div>
+{{ end }}
+{{- end -}}
+
+{{- block spinner() -}}
+{{ yield icon(name="o-spinner", class="svgicon loader")}}
+{{- end -}}

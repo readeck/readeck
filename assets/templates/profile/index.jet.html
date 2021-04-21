@@ -1,0 +1,31 @@
+{{ extends "./base" }}
+{{ import "/_libs/forms" }}
+
+{{ block title() }}Profile{{ end }}
+
+{{ block mainContent() }}
+<h1 class="title">Your profile</h1>
+
+<form action="{{ urlFor() }}" method="post">
+  {{ yield formErrors(form=.Form) }}
+  {{ yield csrfField() }}
+
+  {{ yield textField(
+    field=.Form.Fields.username,
+    name="username",
+    label="Username",
+    class="horizontal",
+  ) }}
+
+  {{ yield textField(
+    field=.Form.Fields.email,
+    type="email",
+    name="email",
+    label="Email",
+    class="horizontal",
+  ) }}
+
+  <p><button type="submit">Save</button></p>
+</form>
+
+{{ end }}

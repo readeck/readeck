@@ -1,0 +1,108 @@
+{{ extends "/app" }}
+
+{{- block title() -}}
+  {{- if !.Item.Loaded -}}
+    Bookmark loading
+  {{- else -}}
+    {{ .Item.Title }}
+  {{- end }} - Bookmarks
+{{- end -}}
+
+{{- block head() -}}
+  {{- if !.Item.Loaded -}}
+    <noscript><meta http-equiv="refresh" content="5"></noscript>
+  {{- end -}}
+{{- end -}}
+
+{{- block mainContent() -}}
+<turbo-frame id="bookmark-{{ .Item.ID }}" data-controller="turbo-refresh"
+ data-turbo-refresh-on-value=".page .bookmark-loading"
+ data-turbo-refresh-interval-value="3">
+  {{- if !.Item.Loaded -}}
+    <div class="page page-article">
+      <div class="bookmark-loading">
+        {{ yield spinner() }}
+        Bookmark is loading…
+      </div>
+    </div>
+  {{- else -}}
+    <div class="page page-{{ .Item.Type }}">
+      <div class="summary">
+        <h1 class="title is-h2">{{ .Item.Title }}</h1>
+        {{- if !empty(.Item.Description) -}}
+          <p class="subtitle">{{ .Item.Description }}</p>
+        {{- end -}}
+
+        <div class="box">
+          <div class="box-wrap">
+            <div class="box-content">
+              <ul>
+                <li>
+                {{- if isset(.Item.Resources.icon) -}}
+                <span><img class="site-icon" alt="" src="{{ .Item.Resources.icon.Src }}"
+                         width="{{ .Item.Resources.icon.Width }}"
+                         height="{{ .Item.Resources.icon.Height }}"></span>
+                {{- end -}}
+                <strong>{{ default(.Item.SiteName, "no site name") }}</strong>
+                </li>
+                {{- if !empty(.Item.Published) -}}
+                  <li>{{ yield icon(name="o-calendar") }}
+                  Published on {{ date(.Item.Published, "02 January 2006") }}</li>
+                {{- end -}}
+                {{- if !empty(.Item.Authors) -}}
+                  <li>{{ yield icon(name="o-pen") }}
+                  By {{ join(.Item.Authors, ", ") }}</li>
+                {{- end -}}
+                <li>{{ yield icon(name="o-link") }} <a href="{{ .Item.URL }}" target="top"
+                  >{{ .Item.Domain }}</a></li>
+                {{- if .Item.Type == "article" && .Item.ReadingTime() > 0 -}}
+                <li>{{ yield icon(name="o-clock") }} {{ .Item.ReadingTime() }}&nbsp;min</li>
+                {{- end -}}
+              </ul>
+
+              {{ include "./components/labels_form" .Item }}
+
+              {{- if len(.Item.Errors) -}}
+              <div class="errors" data-controller="reveal">
+                <span data-reveal-target="trigger">{{ yield icon(name="o-error") }}
+                Errors occured during extraction:</span>
+                <ul data-reveal-target="hide">
+                  {{ range .Item.Errors }}<li>{{ . }}</li>{{ end }}
+                </ul>
+              </div>
+              {{- end -}}
+
+            </div>
+
+            {{- if isset(.Item.Resources.thumbnail) -}}
+            <div class="box-image">
+              <img src="{{ .Item.Resources.thumbnail.Src }}" alt=""
+               width="{{ .Item.Resources.thumbnail.Width }}"
+               height="{{ .Item.Resources.thumbnail.Height }}" />
+            </div>
+            {{- end -}}
+          </div>
+
+          {{ include "./components/actions" .Item }}
+
+        </div>
+
+      </div>
+
+      {{- if .Item.Type == "article" -}}
+        <div class="reader-content">
+        {{ rawCopy(.Out, .HTML) }}
+        </div>
+      {{- else if .Item.Type == "photo" -}}
+        {{ include "./components/bookmark_photo" .Item }}
+      {{- else if .Item.Type == "video" -}}
+        {{ include "./components/bookmark_video" .Item }}
+      {{- end -}}
+
+      <div class="bottom-actions">
+      {{- include "./components/bottom_actions" .Item -}}
+      </div>
+    </div>
+  {{- end -}}
+</turbo-frame>
+{{- end -}}

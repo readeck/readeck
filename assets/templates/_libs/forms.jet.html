@@ -1,0 +1,96 @@
+{{- block formErrors(form) -}}
+  {{- if !form.IsValid() -}}
+    <div class="message error">
+      <strong>Errors</strong>
+      {{ range form.Errors }}
+        <p>{{ . }}</p>
+      {{ else }}
+        <p>Please check your form for errors.</p>
+      {{ end }}
+    </div>
+  {{- end -}}
+{{- end -}}
+
+
+{{- block formField(field, name, label, help, class="", controlAttrs="") -}}
+  {{- if field.Errors -}}{{ class = class + " with-errors" }}{{- end -}}
+
+  <div class="field{{ if class }} {{ class }}{{ end }}">
+    <label for="{{ name }}">{{ label }}:</label>
+    <div class="control" {{ controlAttrs|raw }}>
+      {{ yield content }}
+      {{ if field.Errors }}
+        <ul class="errors">
+        {{- range field.Errors }}
+          <li>{{ . }}</li>
+        {{ end -}}
+        </ul>
+      {{ end }}
+      {{ if help }}<span class="help">{{ help }}{{ end }}
+    </div>
+  </div>
+{{- end -}}
+
+
+{{- block textField(
+  field, value=nil, type="text", name, label, class="", help,
+  controlAttrs="", inputAttrs=""
+) -}}
+  {{- if type == "password" -}}
+    {{ value = "" }}
+  {{- else if value == nil -}}
+    {{ value = field.Value() }}
+  {{- end -}}
+
+  {{- yield formField(field=field, name=name, label=label, help=help, class=class,
+                      controlAttrs=controlAttrs) content -}}
+    <input type="{{ type }}" id="{{ name }}" name="{{ name }}"
+     value="{{ value }}" {{ inputAttrs|raw }} />
+  {{- end -}}
+{{- end -}}
+
+
+{{- block dateField(
+  field, value=nil, type="text", name, label, class, help,
+  controlAttrs="", inputAttrs=""
+) -}}
+  {{ value = date(field.Value(), "2006-01-02") }}
+  {{ yield textField(field=field, value=value, type="date", name=name,
+                     label=label, class=class, help=help,
+                     controlAttrs=controlAttrs, inputAttrs=inputAttrs) }}
+{{- end -}}
+
+
+{{- block selectField(
+  field, value=nil, options, name, label, class, help,
+  controlAttrs=""
+) -}}
+  {{- if value == nil -}}
+    {{ value = field.Value() }}
+  {{- end -}}
+  {{- if field.Errors -}}{{ class = class + " with-errors" }}{{ end }}
+  {{- yield formField(field=field, name=name, label=label, help=help, class=class,
+                      controlAttrs=controlAttrs) content -}}
+    <select name="{{ name }}" id="{{ name }}">
+      {{- range options -}}
+        <option value="{{ .[0] }}" {{ if string(value) == .[0] }}selected="selected"{{ end }}>{{ .[1] }}</option>
+      {{- end -}}
+    </select>
+  {{- end -}}
+{{- end -}}
+
+
+{{- block checkboxField(
+  field, checked=nil, name, label, class="", help
+) -}}
+  {{- if checked == nil }}{{ checked = field.Value() }}{{ end -}}
+  {{- if field.Errors -}}{{ class = class + " with-errors" }}{{ end }}
+  <div class="field{{ if class }} {{ class }}{{ end }}">
+    <span class="spacer">&nbsp;</span>
+    <div class="control">
+      <input type="checkbox" id="{{ name }}" name="{{ name }}"
+      {{- if checked }} checked="checked"{{ end -}} />
+      <label class="label-inline" for="{{ name }}">{{ label }}</label>
+    </div>
+  </div>
+{{- end -}}

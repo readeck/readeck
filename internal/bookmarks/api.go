@@ -98,9 +98,9 @@ func (api *bookmarkAPI) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 	item := newBookmarkItem(api.srv, r, b, "./..")
 
 	if api.srv.IsTurboRequest(r) {
-		api.srv.RenderTurboStream(w, r, 200, "bookmarks/_turbo.gohtml", server.TC{
-			"item": newBookmarkItem(api.srv, r, b, "./.."),
-		})
+		api.srv.RenderTurboStream(w, r,
+			"/bookmarks/components/card", "replace",
+			"bookmark-card-"+b.UID, item)
 		return
 	}
 
@@ -190,9 +190,31 @@ func (api *bookmarkAPI) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {
 	updated["href"] = api.srv.AbsoluteURL(r).String()
 
 	if api.srv.IsTurboRequest(r) {
-		api.srv.RenderTurboStream(w, r, 200, "bookmarks/_turbo.gohtml", server.TC{
-			"item": newBookmarkItem(api.srv, r, b, "./.."),
-		})
+		item := newBookmarkItem(api.srv, r, b, "./..")
+
+		_, withLabels := updated["labels"]
+		_, withMarked := updated["is_marked"]
+		_, withArchived := updated["is_archived"]
+		_, withDeleted := updated["is_deleted"]
+
+		if withLabels {
+			api.srv.RenderTurboStream(w, r,
+				"/bookmarks/components/labels", "replace",
+				"bookmark-label-list-"+b.UID, item)
+		}
+		if withMarked || withArchived || withDeleted {
+			api.srv.RenderTurboStream(w, r,
+				"/bookmarks/components/actions", "replace",
+				"bookmark-actions-"+b.UID, item)
+			api.srv.RenderTurboStream(w, r,
+				"/bookmarks/components/card", "replace",
+				"bookmark-card-"+b.UID, item)
+		}
+		if withMarked || withArchived {
+			api.srv.RenderTurboStream(w, r,
+				"/bookmarks/components/bottom_actions", "replace",
+				"bookmark-bottom-actions-"+b.UID, item)
+		}
 		return
 	}
 

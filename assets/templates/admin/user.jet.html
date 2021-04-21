@@ -1,0 +1,65 @@
+{{ extends "./base" }}
+{{ import "/_libs/forms" }}
+
+{{ block title() }}Users - {{ .User.Username }}{{ end }}
+
+{{ block mainContent() }}
+<h1 class="title">{{ .User.Username }}</h1>
+
+{{- if .User.IsDeleted -}}
+  <form action="{{ urlFor(`.`, `delete`) }}" method="POST">
+  {{ yield csrfField() }}
+  <div class="message info">
+    <div class="field horizontal">
+      User will be removed in a few second&nbsp;
+      <button name="cancel" value="1">Cancel</button>
+    </div>
+  </div>
+  </p>
+</form>
+{{- end -}}
+
+<form action="{{ urlFor() }}" method="post">
+  {{ yield formErrors(form=.Form) }}
+  {{ yield csrfField() }}
+
+  {{ yield textField(field=.Form.Fields.username,
+                     name="username",
+                     label="Username",
+                     class="horizontal",) }}
+
+  {{ yield textField(field=.Form.Fields.email,
+                     type="email",
+                     name="email",
+                     label="Email address",
+                     class="horizontal",) }}
+
+  {{ yield selectField(field=.Form.Fields.group,
+                       name="group",
+                       label="Group",
+                       class="horizontal",
+                       options=.Form.Fields.group.Value().Options(),) }}
+
+  {{ yield textField(field=.Form.Fields.password,
+                     type="password",
+                     name="password",
+                     label="Password",
+                     class="horizontal",
+                     help="will not change if empty",
+                     controlAttrs=attrList("data-controller", "pass-reveal",
+                          "data-pass-reveal-icon-show-value", "o-show",
+                          "data-pass-reveal-icon-hide-value", "o-hide"),
+                     inputAttrs=attrList("data-pass-reveal-target", "field"),
+  ) }}
+
+  <p><button type="submit">Save</button></p>
+</form>
+
+{{- if .User.ID != user.ID && !.User.IsDeleted -}}
+  <form action="{{ urlFor(`.`, `delete`) }}" method="POST">
+    {{ yield csrfField() }}
+    <p><button class="button-danger">Delete this user</button></p>
+  </form>
+{{- end -}}
+
+{{ end }}

@@ -1,0 +1,38 @@
+{{ extends "/base" }}
+{{ import "/_libs/forms" }}
+
+{{ block title() }}Login{{ end }}
+
+{{ block body() }}
+<main class="login">
+  <form action="" method="post" data-controller="login-form"
+   data-action="login-form#validate">
+    {{ yield formErrors(form=.Form) }}
+    {{ yield csrfField() }}
+
+    {{ yield textField(field=.Form.Fields.username,
+                       name="username",
+                       label="Username",
+                       class="max",
+                       inputAttrs=attrList("data-login-form-target", "username"),
+    ) }}
+    {{ yield textField(field=.Form.Fields.password,
+                       type="password",
+                       name="password",
+                       label="Password",
+                       class="max",
+                       controlAttrs=attrList(
+                         "data-controller", "pass-reveal",
+                         "data-pass-reveal-icon-show-value", "o-show",
+                         "data-pass-reveal-icon-hide-value", "o-hide"),
+                       inputAttrs=attrList(
+                         "data-pass-reveal-target", "field",
+                         "data-login-form-target", "password"),
+    ) }}
+
+    {* {{ attrList("truc-data", "t<>estla")|raw }} *}
+
+    <div><button type="submit" class="button is-link">Login</button></div>
+  </form>
+</main>
+{{ end }}

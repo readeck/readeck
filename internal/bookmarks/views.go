@@ -70,17 +70,16 @@ func (h *bookmarkViews) bookmarkList(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := server.TC{
-		"form":       f,
-		"count":      bl.Pagination.TotalCount,
-		"pagination": bl.Pagination,
-		"bookmarks":  bl.Items,
+		"Form":       f,
+		"Pagination": bl.Pagination,
+		"Bookmarks":  bl.Items,
 	}
 
 	if q, ok := r.Context().Value(ctxSearchString{}).(string); ok && q != "" {
 		ctx["Q"] = q
 	}
 
-	h.srv.RenderTemplate(w, r, 200, "bookmarks/index.gohtml", ctx)
+	h.srv.RenderTemplate(w, r, 200, "/bookmarks/index", ctx)
 }
 
 func (h *bookmarkViews) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
@@ -91,21 +90,21 @@ func (h *bookmarkViews) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 	item.Errors = b.Errors
 
 	ctx := server.TC{
-		"item": item,
+		"Item": item,
 	}
 
 	buf, err := h.getBookmarkArticle(&item)
 	if err != nil {
 		if os.IsNotExist(err) {
-			ctx["html"] = strings.NewReader("")
+			ctx["HTML"] = strings.NewReader("")
 		} else {
 			panic(err)
 		}
 	} else {
-		ctx["html"] = buf
+		ctx["HTML"] = buf
 	}
 
-	ctx["out"] = w
+	ctx["Out"] = w
 
 	if user.Settings.DebugInfo {
 		for k, x := range map[string]string{
@@ -120,7 +119,7 @@ func (h *bookmarkViews) bookmarkInfo(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	h.srv.RenderTemplate(w, r, 200, "bookmarks/bookmark.gohtml", ctx)
+	h.srv.RenderTemplate(w, r, 200, "/bookmarks/bookmark", ctx)
 }
 
 func (h *bookmarkViews) bookmarkUpdate(w http.ResponseWriter, r *http.Request) {

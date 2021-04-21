@@ -1,0 +1,19 @@
+{{ extends "/app" }}
+
+{{ block mainClass() }}content-block{{ end }}
+
+{{ block mainAside() }}
+{{ inProfile := pathIs("/profile") }}
+{{ inPassword := pathIs("/profile/password") -}}
+{{ inTokens := pathIs("/profile/tokens", "/profile/tokens/*") -}}
+<aside class="sidebar">
+<h3>User settings</h3>
+<ul>
+  <li><a class="{{ if inProfile }}active{{ end }}" href="{{ urlFor(`/profile`) }}">Profile</a></li>
+  <li><a class="{{ if inPassword }}active{{ end }}" href="{{ urlFor(`/profile/password`) }}">Password</a></li>
+  {{ if hasPermission("/profile/tokens", "read") -}}
+  <li><a class="{{ if inTokens }}active{{ end }}" href="{{ urlFor(`/profile/tokens`) }}">API Tokens</a></li>
+  {{- end }}
+</ul>
+</aside>
+{{ end }}
