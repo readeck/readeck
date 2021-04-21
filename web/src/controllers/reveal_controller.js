@@ -18,7 +18,10 @@ export default class extends Controller {
     })
   }
 
-  toggle () {
+  toggle(evt) {
+    if (evt) {
+      evt.preventDefault()
+    }
     this.visibleValue ? this.show() : this.hide()
   }
 

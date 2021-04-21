@@ -71,7 +71,6 @@
                 </ul>
               </div>
               {{- end -}}
-
             </div>
 
             {{- if isset(.Item.Resources.thumbnail) -}}
@@ -84,8 +83,10 @@
           </div>
 
           {{ include "./components/actions" .Item }}
-
         </div>
+        {{- if user.Settings.DebugInfo -}}
+          {{ include "./components/debug" map("log", ._log, "props", ._props) }}
+        {{- end -}}
 
       </div>
 

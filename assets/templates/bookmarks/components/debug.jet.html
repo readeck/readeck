@@ -1,0 +1,10 @@
+<div data-controller="reveal">
+  <a href="#" data-reveal-target="trigger"><small>Debug info</small></a>
+  <div data-reveal-target="hide" class="content-block">
+    <strong>Extraction log</strong>
+    <pre style="max-height: 20em; overflow: scroll">{{ .log }}</pre>
+
+    <strong>Properties</strong>
+    <pre style="max-height: 40em; overflow: scroll">{{ .props }}</pre>
+  </div>
+</div>
