@@ -11,6 +11,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	log "github.com/sirupsen/logrus"
 
+	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/internal/bookmarks"
 	"codeberg.org/readeck/readeck/internal/server"
 	"codeberg.org/readeck/readeck/pkg/extract"
@@ -51,17 +52,16 @@ func (api *cookbookAPI) extract(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ex, err := extract.New(src, nil)
+	ex, err := extract.New(
+		src, nil,
+		extract.SetLogFields(&log.Fields{"@id": api.srv.GetReqID(r)}),
+		extract.SetDeniedIPs(configs.ExtractorDeniedIPs()),
+	)
 	if err != nil {
 		panic(err)
 	}
 
-	if reqID := api.srv.GetReqID(r); reqID != "" {
-		ex.LogFields = &log.Fields{"@id": reqID}
-	}
-
 	ex.AddProcessors(
-		bookmarks.CheckIPProcessor,
 		meta.ExtractMeta,
 		meta.ExtractOembed,
 		rules.ApplyRules,

@@ -218,6 +218,16 @@ func JwtPk() ed25519.PublicKey {
 	return jwtPk
 }
 
+// ExtractorDeniedIPs returns the value of Config.Extractor.DeniedIPs
+// as a slice of *net.IPNet
+func ExtractorDeniedIPs() []*net.IPNet {
+	res := make([]*net.IPNet, len(Config.Extractor.DeniedIPs))
+	for i, x := range Config.Extractor.DeniedIPs {
+		res[i] = x.IPNet
+	}
+	return res
+}
+
 // Version returns the current readeck version
 func Version() string {
 	return version

@@ -14,6 +14,7 @@ import (
 	"github.com/gammazero/workerpool"
 	log "github.com/sirupsen/logrus"
 
+	"codeberg.org/readeck/readeck/configs"
 	"codeberg.org/readeck/readeck/pkg/archiver"
 	"codeberg.org/readeck/readeck/pkg/extract"
 	"codeberg.org/readeck/readeck/pkg/extract/contents"
@@ -64,16 +65,17 @@ func enqueueExtractPage(ctx context.Context, b *Bookmark, html []byte) {
 			runtime.GC()
 		}()
 
-		ex, err := extract.New(b.URL, html)
+		ex, err := extract.New(
+			b.URL, html,
+			extract.SetLogFields(&log.Fields{"@id": ctx.Value(ctxJobRequestID{}).(string)}),
+			extract.SetDeniedIPs(configs.ExtractorDeniedIPs()),
+		)
 		if err != nil {
 			log.WithError(err).Error()
 			return
 		}
 
-		ex.LogFields = &log.Fields{"@id": ctx.Value(ctxJobRequestID{}).(string)}
-
 		ex.AddProcessors(
-			CheckIPProcessor,
 			meta.ExtractMeta,
 			meta.ExtractOembed,
 			rules.ApplyRules,

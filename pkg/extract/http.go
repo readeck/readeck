@@ -1,19 +1,27 @@
 package extract
 
 import (
+	"fmt"
+	"net"
 	"net/http"
 	"time"
+
+	"golang.org/x/net/idna"
 )
 
 // Transport is a wrapper around http.RoundTripper that
 // lets you set default headers sent with every request.
 type Transport struct {
-	tr     http.RoundTripper
-	header http.Header
+	tr        http.RoundTripper
+	header    http.Header
+	deniedIPs []*net.IPNet
 }
 
 // RoundTrip is the transport interceptor.
 func (t *Transport) RoundTrip(req *http.Request) (*http.Response, error) {
+	if err := t.checkDestIP(req); err != nil {
+		return nil, err
+	}
 	req.Header = t.header
 	return t.tr.RoundTrip(req)
 }
@@ -26,6 +34,34 @@ func (t *Transport) SetHeader(name, value string) {
 // GetHeader returns a header value from transport
 func (t *Transport) GetHeader(name string) string {
 	return t.header.Get(name)
+}
+
+func (t *Transport) checkDestIP(r *http.Request) error {
+	if len(t.deniedIPs) == 0 {
+		// An empty list disables the IP check altogether
+		return nil
+	}
+
+	hostname := r.URL.Hostname()
+	host, err := idna.ToASCII(hostname)
+	if err != nil {
+		return fmt.Errorf("invalid hostname %s", hostname)
+	}
+
+	ips, err := net.LookupIP(host)
+	if err != nil {
+		return fmt.Errorf("cannot resolve %s", host)
+	}
+
+	for _, cidr := range t.deniedIPs {
+		for _, ip := range ips {
+			if cidr.Contains(ip) {
+				return fmt.Errorf("ip %s is blocked by rule %s", ip, cidr)
+			}
+		}
+	}
+
+	return nil
 }
 
 // NewClient returns a new http.Client with our custom transport.
@@ -55,7 +91,9 @@ func NewClient() *http.Client {
 	return client
 }
 
-// SetHeader set a header on a given client
+// SetHeader sets a header on a given client
 func SetHeader(client *http.Client, name, value string) {
-	client.Transport.(*Transport).header.Set(name, value)
+	if t, ok := client.Transport.(*Transport); ok {
+		t.header.Set(name, value)
+	}
 }

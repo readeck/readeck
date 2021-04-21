@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"net/url"
 	"strings"
@@ -132,7 +133,7 @@ type Extractor struct {
 
 // New returns an Extractor instance for a given URL,
 // with a default HTTP client.
-func New(src string, html []byte) (*Extractor, error) {
+func New(src string, html []byte, options ...func(e *Extractor)) (*Extractor, error) {
 	URL, err := url.Parse(src)
 	if err != nil {
 		return nil, err
@@ -152,7 +153,28 @@ func New(src string, html []byte) (*Extractor, error) {
 		res.drops[0].Body = html
 	}
 
+	for _, fn := range options {
+		fn(res)
+	}
+
 	return res, nil
+}
+
+// SetLogFields sets the default log fields for the extractor.
+func SetLogFields(f *log.Fields) func(e *Extractor) {
+	return func(e *Extractor) {
+		e.LogFields = f
+	}
+}
+
+// SetDeniedIPs sets a list of ip or cird that cannot be reached
+// by the extraction client.
+func SetDeniedIPs(netList []*net.IPNet) func(e *Extractor) {
+	return func(e *Extractor) {
+		if t, ok := e.client.Transport.(*Transport); ok {
+			t.deniedIPs = netList
+		}
+	}
 }
 
 // Client returns the extractor's HTTP client.
