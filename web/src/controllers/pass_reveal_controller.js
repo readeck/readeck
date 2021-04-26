@@ -18,17 +18,17 @@ export default class extends Controller {
   connect() {
     // Create the button
     this.icon = icon.getIcon()
+    $(this.icon).addClass("align-middle")
 
-    $(this.fieldTarget).after(
-      $.E("button")
-        .addClass("button-clear")
-        .attr("type", "button")
-        .attr("data-action", `click->${this.identifier}#toggle`)
-        .css("padding", "0")
-        .css("marginLeft", "-2.4rem")
-        .css("marginTop", "0.9rem")
-        .append(this.icon),
-    )
+    $(this.fieldTarget)
+      .addClass("pr-8")
+      .after(
+        $.E("button")
+          .addClass("-ml-6", "mr-2")
+          .attr("type", "button")
+          .attr("data-action", `click->${this.identifier}#toggle`)
+          .append(this.icon),
+      )
 
     // Set the icon
     this.iconValue = this.iconShowValue

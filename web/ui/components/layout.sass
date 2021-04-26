@@ -1,0 +1,25 @@
+@layer components
+  .layout\:app
+    height: 100vh
+    display: grid
+    grid-template-rows: auto 1fr
+    grid-template-columns: auto 1fr
+    grid-template-areas: "header header" "sidebar main"
+
+  .layout\:nav
+    grid-area: header
+
+  .layout\:main
+    grid-area: main
+    @apply overflow-y-auto
+
+  .layout\:sidebar
+    grid-area: sidebar
+    @apply w-48 p-4 shadow bg-gray-100 overflow-y-auto
+
+  .sidebar\:title
+    @apply leading-none text-xl mb-2
+
+  .sidebar\:link
+    @apply block rounded px-2 py-1.5 my-2 -ml-2 link hf:bg-gray-200
+    @apply data-current:bg-gray-200

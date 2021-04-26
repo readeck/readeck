@@ -9,7 +9,7 @@ export default class extends Controller {
 
   connect () {
     $.E("button")
-      .addClass("button-clear")
+      .addClass("text-primary", "hf:text-primary-dark")
       .attr("type", "button")
       .attr("data-action", `${this.identifier}#copy`)
       .append(icon.getIcon("o-copy"))

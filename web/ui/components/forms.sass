@@ -1,0 +1,21 @@
+@layer components
+  // Form fields
+  .field
+    @apply mb-4
+
+    label
+      @apply text-gray-800 font-bold
+
+    label[for]
+      @apply cursor-pointer
+
+  // Horizontal field
+  .field-h
+    @apply flex-none md:flex md:items-baseline max-w-xl
+
+    & > label:first-child, & > .field-spacer:first-child
+      @apply w-44 md:mr-2
+
+  // Field with an error
+  .field-err
+    @apply box-content p-2 -mx-2 rounded bg-red-100 bg-opacity-80

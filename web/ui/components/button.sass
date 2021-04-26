@@ -1,0 +1,36 @@
+@layer components
+  .btn
+    @apply inline-block p-2 leading-tight border cursor-pointer
+    @apply bg-gray-400 border-gray-400
+    @apply transition-colors duration-200
+    @apply hf:bg-gray-600 hf:border-gray-600
+
+  .btn-outlined
+    @apply btn
+    @apply bg-transparent border-gray-600
+    @apply text-gray-600
+    @apply hf:bg-gray-600 hf:text-white hf:border-gray-600
+
+  .btn-primary
+    @apply btn rounded
+    @apply bg-primary border-primary
+    @apply text-white
+    @apply hf:text-white hf:bg-primary-dark hf:border-primary-dark
+
+  .btn-danger
+    @apply btn rounded
+    @apply bg-red-600 border-red-600
+    @apply text-white
+    @apply hf:text-white hf:bg-red-800 hf:border-red-800
+
+  .btn-outlined-primary
+    @apply btn
+    @apply bg-transparent border-primary
+    @apply text-primary
+    @apply hf:bg-primary hf:text-white hf:border-primary
+
+  .btn-outlined-danger
+    @apply btn
+    @apply bg-transparent border-red-600
+    @apply text-red-600
+    @apply hf:bg-red-600 hf:text-white hf:border-red-600

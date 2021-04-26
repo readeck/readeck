@@ -1,0 +1,27 @@
+@layer components
+  .pgn
+    @apply flex items-center
+
+    & > a
+      @apply px-2
+
+    .pgn-prev
+      @apply order-1
+
+    .pgn-next
+      @apply order-3
+
+    & > ul
+      @apply flex flex-grow order-2 items-center justify-center
+
+    a, span
+      @apply inline-flex items-center justify-center mx-1
+      @apply h-8 rounded-full
+      min-width: theme("spacing.8")
+
+    a
+      @apply link border
+      @apply hf:text-white hf:bg-primary hf:border-primary
+
+    .pgn-current
+      @apply text-white bg-primary border-primary
