@@ -1,17 +1,22 @@
 <turbo-frame id="bookmark-labels-{{ .ID }}">
 <form action="{{ urlFor(`/bookmarks`, .ID) }}" method="post"
+ class="mt-2"
  data-controller="turbo-form"
  data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
  data-turbo-form-method-value="patch">
   {{ yield csrfField() }}
   <input type="hidden" name="_to" value="{{ currentPath }}" />
   <button type="submit" style="display: none"></button>
-  <div class="bookmark-labels">
-    {{ include "./labels" . }}
-    <div class="control">
+  <div class="">
+    {{- include "./labels" . -}}
+    <div class="inline-flex text-sm items-center">
       <input type="text" name="add_labels" placeholder="Add a new label"
+       class="bg-transparent border-gray-300 border-b p-1 w-28"
        data-turbo-empty-submit-end="1" />
-      <button type="submit">Add label</button>
+      <button type="submit"
+       class="bg-gray-200 text-white text-sm p-1 ml-2 rounded
+       border border-transparent hf:border-primary-dark
+       group-hover:bg-primary group-focus-within:bg-primary">Add label</button>
     </div>
   </div>
 </form>

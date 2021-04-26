@@ -1,0 +1,11 @@
+{{- block list(class="") -}}
+<div class="border divide-y shadow rounded {{ class }}">
+{{ yield content }}
+</div>
+{{- end -}}
+
+{{- block list_item(class="") -}}
+<div class="p-4 {{ class }}">
+{{ yield content }}
+</div>
+{{- end -}}

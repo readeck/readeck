@@ -82,7 +82,7 @@ func (h *adminViews) userCreate(w http.ResponseWriter, r *http.Request) {
 		if f.IsValid() {
 			u, err := h.createUser(uf)
 			if err == nil {
-				h.srv.AddFlash(w, r, "info", "User created")
+				h.srv.AddFlash(w, r, "success", "User created")
 				h.srv.Redirect(w, r, "./..", fmt.Sprint(u.ID))
 				return
 			}
@@ -123,7 +123,7 @@ func (h *adminViews) userInfo(w http.ResponseWriter, r *http.Request) {
 					sess.ID = ""
 					sess.Values["check_code"] = nu.CheckCode()
 				}
-				h.srv.AddFlash(w, r, "info", "User updated")
+				h.srv.AddFlash(w, r, "success", "User updated")
 				h.srv.Redirect(w, r, fmt.Sprint(u.ID))
 				return
 			}

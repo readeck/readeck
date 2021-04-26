@@ -4,9 +4,12 @@
 {{ block title() }}Login{{ end }}
 
 {{ block body() }}
-<main class="login">
-  <form action="" method="post" data-controller="login-form"
+<main class="w-full max-w-sm py-10 px-6 mt-12 m-auto bg-white rounded-md shadow-md">
+  <h1 class="text-3xl font-bold text-center text-gray-700">Readeck</h1>
+
+  <form class="mt-6" action="" method="post" data-controller="login-form"
    data-action="login-form#validate">
+
     {{ yield formErrors(form=.Form) }}
     {{ yield csrfField() }}
 
@@ -20,7 +23,6 @@
                        type="password",
                        name="password",
                        label="Password",
-                       class="max",
                        controlAttrs=attrList(
                          "data-controller", "pass-reveal",
                          "data-pass-reveal-icon-show-value", "o-show",
@@ -30,9 +32,7 @@
                          "data-login-form-target", "password"),
     ) }}
 
-    {* {{ attrList("truc-data", "t<>estla")|raw }} *}
-
-    <div><button type="submit" class="button is-link">Login</button></div>
+    <button class="btn block mt-6 w-full rounded-md text-white bg-gray-800 border-gray-800" type="submit">Login</button>
   </form>
 </main>
 {{ end }}

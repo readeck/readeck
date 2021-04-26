@@ -4,7 +4,7 @@
 {{ block title() }}New User{{ end }}
 
 {{ block mainContent() }}
-<h1 class="title">{{ yield title() }}</h1>
+<h1 class="title text-h2">{{ yield title() }}</h1>
 
 <form action="{{ urlFor() }}" method="post">
   {{ yield formErrors(form=.Form) }}
@@ -13,32 +13,32 @@
   {{ yield textField(field=.Form.Fields.username,
                      name="username",
                      label="Username",
-                     class="horizontal",) }}
+                     class="field-h",) }}
 
   {{ yield textField(field=.Form.Fields.email,
                      type="email",
                      name="email",
                      label="Email address",
-                     class="horizontal",) }}
+                     class="field-h",) }}
 
   {{ yield selectField(field=.Form.Fields.group,
                        name="group",
                        label="Group",
-                       class="horizontal",
+                       class="field-h",
                        options=.Form.Fields.group.Value().Options(),) }}
 
   {{ yield textField(field=.Form.Fields.password,
                      type="password",
                      name="password",
                      label="Password",
-                     class="horizontal",
+                     class="field-h",
                      controlAttrs=attrList("data-controller", "pass-reveal",
                           "data-pass-reveal-icon-show-value", "o-show",
                           "data-pass-reveal-icon-hide-value", "o-hide"),
                      inputAttrs=attrList("data-pass-reveal-target", "field"),
   ) }}
 
-  <p><button type="submit">Save</button></p>
+  <p><button class="btn-primary" type="submit">Save</button></p>
 </form>
 
 {{ end }}

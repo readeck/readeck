@@ -29,20 +29,23 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-svgstore": "^7.0.1",
     "merge-stream": "^2.0.0",
+    "mini-svg-data-uri": "^1.2.3",
     "open-color": "^1.8.0",
     "postcss": "^8.2.10",
     "postcss-copy": "^7.1.0",
     "postcss-import": "^14.0.1",
     "postcss-preset-env": "^6.7.0",
+    "postcss-selector-parser": "^6.0.5",
     "sass": "^1.32.8",
     "stimulus": "^2.0.0",
+    "tailwindcss": "^2.1.1",
     "through2": "^4.0.2",
     "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
     "lint": "eslint *.js ./src",
-    "build": "gulp",
+    "build": "NODE_ENV=production gulp",
     "clean": "gulp clean",
-    "watch": "gulp dev"
+    "watch": "NODE_ENV=production gulp dev"
   }
 }

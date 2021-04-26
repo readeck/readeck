@@ -4,32 +4,29 @@
 {{ block title() }}API Token{{ end }}
 
 {{ block mainContent() }}
-<h1 class="title">{{ yield title() }}</h1>
+<h1 class="title text-h2">{{ yield title() }}</h1>
 
 {{ if .Token.IsDeleted -}}
 <form action="{{ urlFor(`.`, `delete`) }}" method="POST">
   {{ yield csrfField() }}
-  <div class="message info">
-    <div class="field horizontal">
+  {{- yield message() content -}}
       Token will be removed in a few seconds&nbsp;
-      <button name="cancel" value="1">Cancel</button>
-    </div>
-  </div>
-  </p>
+      <button class="btn-primary" name="cancel" value="1">Cancel</button>
+  {{- end -}}
 </form>
 {{- end }}
 
-<h2 class="title">Properties</h2>
+<h2 class="title text-h3">Properties</h2>
 
-<form action="{{ urlFor() }}" method="post">
+<form class="mb-4" action="{{ urlFor() }}" method="post">
   {{ yield formErrors(form=.Form) }}
   {{ yield csrfField() }}
 
-  <div class="field horizontal">
+  <div class="field field-h">
     <label>Token ID:</label>
     <div class="control">{{ .Token.UID }}</div>
   </div>
-  <div class="field horizontal">
+  <div class="field field-h">
     <label>Application:</label>
     <div class="control">{{ .Token.Application }}</div>
   </div>
@@ -38,46 +35,43 @@
     field=.Form.Fields.is_enabled,
     name="is_enabled",
     label="Enabled",
-    class="horizontal",
+    class="field-h",
   ) }}
 
   {{ yield dateField(
     field=.Form.Fields.expires,
     name="expires",
     label="Expires at",
-    class="horizontal",
+    class="field-h",
   ) }}
 
-  <p><button type="submit">Save</button></p>
+  <p><button class="btn-primary" type="submit">Save</button></p>
 </form>
 
-<h2 class="title">API authentication</h2>
+<h2 class="title text-h3">API authentication</h2>
 
-<div class="field max" data-controller="clipboard">
-  <div data-clipboard-target="label">
-    <strong>Your API token</strong>
-  </div>
-  <textarea readonly="1" style="height:5em; max-width:40em"
+<div class="w-full max-w-xl mb-6" data-controller="clipboard">
+  <label class="font-semibold">Your API token</label>
+  <span data-clipboard-target="label"></span>
+  <textarea readonly="1" class="form-textarea w-full h-24"
    data-clipboard-target="content">{{ .JWT }}</textarea>
 </div>
 
-<div class="field max" data-controller="clipboard">
-  <p>You can use this token by passing as an <code>Authorization: Bearer</code>
-  HTTP header.</p>
-
-  <div data-clipboard-target="label">
-    <strong>HTTP Header</strong>
-  </div>
-  <textarea readonly="1" style="height:5em; max-width:40em"
+<p class="mb-2">You can use this token by passing it as an <code>Authorization: Bearer</code>
+HTTP header.</p>
+<div class="w-full max-w-xl mb-4" data-controller="clipboard">
+  <label class="font-semibold">HTTP Header</label>
+  <span data-clipboard-target="label"></span>
+  <textarea readonly="1" class="form-textarea w-full h-28"
    data-clipboard-target="content">Authorization: Bearer {{ .JWT }}</textarea>
 </div>
 
 
 {{ if !.Token.IsDeleted -}}
-<h2>Delete token</h2>
+<h2 class="title text-h3">Delete token</h2>
 <form action="{{ urlFor(`.`, `delete`) }}" method="POST">
   {{ yield csrfField() }}
-  <p><button class="button-danger">Delete token</button></p>
+  <p><button class="btn-danger">Delete token</button></p>
 </form>
 {{- end }}
 

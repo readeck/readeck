@@ -1,6 +1,9 @@
 {{- if isset(.Resources.image) -}}
-<figure>
-  <img alt="" src="{{ .Resources.image.Src }}"
-   width="{{ .Resources.image.Width }}" height="{{ .Resources.image.Height }}">
-</figure>
+<div class="mt-6">
+  <figure>
+    <img alt="" src="{{ .Resources.image.Src }}"
+     class="mx-auto"
+     width="{{ .Resources.image.Width }}" height="{{ .Resources.image.Height }}">
+  </figure>
+</div>
 {{- end -}}

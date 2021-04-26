@@ -1,0 +1,272 @@
+{{ extends "/app" }}
+
+{{ block mainContent() }}
+<h1 class="title text-h2">Testing typography</h1>
+<hr>
+
+<div class="font-serif text-lg leading-none max-w-prose mx-auto prose-grid prose">
+<h1>Typography</h1>
+
+<p>This page lists you major HTML elements and gives you some hints on how to use them.</p>
+
+<h2>Block level elements</h2>
+
+<h3>Paragraph</h3>
+
+<p>Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing
+to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or
+conversations in it, "and what is the use of a book," thought Alice, "without pictures or
+conversations?"</p>
+
+<p>So she was considering in her own mind, (as well as she could, for the hot day made her feel very
+sleepy and stupid,) whether the pleasure of making a daisy-chain would be worth the trouble of
+getting up and picking the daisies, when suddenly a white rabbit with pink eyes ran close by
+her.</p>
+
+<p>Download <a href="https://www.gutenberg.org/ebooks/11">Alice's Adventures in Wonderland</a></p>
+
+<hr />
+
+<p>Use <code>&lt;br&gt;</code> for line breaks.</p>
+<p>All in the golden afternoon<br />
+Full leisurely we glide;<br />
+For both our oars, with little skill,<br />
+By little arms are plied,<br />
+While little hands make vain pretence<br />
+Our wanderings to guide.</p>
+
+<h3>Heading</h3>
+
+<p>Heading are made of &lt;h1&gt; to &lt;h6&gt; tags. You can also use classes with the same
+name (<code>.h1</code>, <code>.h2</code>, etc.).</p>
+
+<h4>Heading 4</h4>
+
+<p>Everyone has the right to freedom of opinion and expression; this right includes freedom to hold
+opinions without interference and to seek, receive and impart information and ideas through any
+media and regardless of frontiers.</p>
+
+<h5>Heading 5</h5>
+
+<ol>
+  <li>Everyone has the right to freedom of peaceful assembly and association.</li>
+  <li>No one may be compelled to belong to an association.</li>
+</ol>
+
+<h6>Heading 6</h6>
+
+<p>All human beings are born free and equal in dignity and rights. They are endowed with reason and
+conscience and should act towards one another in a spirit of brotherhood.</p>
+
+<h3>Unordered and ordered lists</h3>
+
+<p>To present items in lists, use <code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code> tags.</p>
+
+<ul>
+  <li>to practice tolerance and live together in peace with one another as good neighbours,
+  and</li>
+  <li>to unite our strength to maintain international peace and security, and</li>
+  <li>to ensure, by the acceptance of principles and the institution of methods, that armed
+  force shall not be used, save in the common interest, and</li>
+  <li>to employ international machinery for the promotion of the economic and social advancement
+  of all peoples,</li>
+</ul>
+
+<ol>
+  <li>There are established as the principal organs of the United Nations:
+    <ul>
+      <li>a General Assembly</li>
+      <li>a Security Council</li>
+      <li>an Economic and Social Council</li>
+      <li>a Trusteeship Council</li>
+      <li>an International Court of Justice</li>
+      <li>and a Secretariat.</li>
+    </ul>
+  </li>
+  <li>Such subsidiary organs as may be found necessary may be established in accordance with
+  the present Charter.</li>
+</ol>
+
+<h3>Definition lists</h3>
+
+<dl>
+  <dt>purpose (plural purposes)</dt>
+  <dd>A result that is desired; an intention</dd>
+
+  <dt>recursion</dt>
+  <dd>the act of recurring</dd>
+
+  <dt>pleasure</dt>
+  <dd>
+    <ul>
+      <li>A state of being pleased.</li>
+      <li>A person, thing or action that causes enjoyment.</li>
+      <li>One's preference</li>
+      <li>The will or desire of someone or some agency in power</li>
+    </ul>
+  </dd>
+</dl>
+
+<h3>Quoting</h3>
+
+<p>To make long quotes, use <code>&lt;blockquote&gt;</code> tag.</p>
+
+<blockquote>
+  <p>There was only one student in the room, who was bending over a distant table absorbed in his
+  work. At the sound of our steps he glanced round and sprang to his feet with a cry of pleasure:
+  "I've found it! I've found it," he shouted to my companion, running towards us with a test-tube
+  in his hand. "I have found a re-agent which is precipitated by hæmoglobin, and by nothing else."
+  Had he discovered a gold mine, greater delight could not have shone upon his features.</p>
+  <p><cite>A Study in Scarlet</cite> by Arthur Conan Doyle</p>
+</blockquote>
+
+
+<h3>Code blocks</h3>
+
+<p>To show some code, use <code>&lt;pre&gt;</code> tag.</p>
+
+<pre>
+static void nf_conntrack_double_unlock(unsigned int h1, unsigned int h2)
+{
+    h1 %= CONNTRACK_LOCKS;
+    h2 %= CONNTRACK_LOCKS;
+    spin_unlock(&amp;nf_conntrack_locks[h1]);
+    if (h1 != h2)
+        spin_unlock(&amp;nf_conntrack_locks[h2]);
+}
+</pre>
+
+<h3>Figure</h3>
+
+<figure>
+<figcaption>R code example</figcaption>
+<pre>
+sumofsquares &lt;- function(x){
+  return(sum(x^2))
+}
+</pre>
+</figure>
+
+
+<h2>Text level elements</h2>
+
+<dl>
+  <dt><code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code></dt>
+  <dd>How will the <strong>struggle for existence</strong>, discussed too briefly in the last
+  chapter, act in regard to <em>variation</em>?</dd>
+
+  <dt><code>&lt;i&gt;</code></dt>
+  <dd>Since the ancients (as we are told by <i>Pappus</i>) made great account of the science of
+  mechanics in the investigation of natural things…</dd>
+
+  <dt><code>&lt;b&gt;</code></dt>
+  <dd>Let <b>AFL</b> be a sphere turning uniformly about the axis <b>S</b>, and let the concentric
+  circles <b>BGM</b>, <b>CHN</b>, <b>DIO</b>, <b>EKP</b>, &amp;c. divide the fluid into innumerable
+  concentric orbs of the same thickness.</dd>
+
+  <dt><code>&lt;abbr&gt;</code></dt>
+  <dd>Non <abbr title="United Nations">UN</abbr> states are identified as such. Works related to
+  states, counties etc are collected on linked pages.</dd>
+
+  <dt><code>&lt;dfn&gt;</code></dt>
+  <dd><dfn>Barking</dfn> is an area of east London, England, and forms part of the London Borough
+  of Barking and Dagenham.</dd>
+
+  <dt><code>&lt;del&gt;</code> and <code>&lt;ins&gt;</code></dt>
+  <dd>Shall we have a channel tunnel? To this question I would reply <del>"No,"</del>
+  <ins>"Yes,"</ins> decidedly and emphatically <del>"No,"</del> <ins>"Yes,"</ins></dd>
+
+  <dt><code>&lt;u&gt;</code></dt>
+  <dd>"Cast Away Illusions, Prepare for Struggle" <u lang="zh">毛泽东</u> said.</dd>
+
+  <dt><code>&lt;mark&gt;</code></dt>
+  <dd>I drew my chair a little <mark>nearer</mark>. "Now, how did you know that I was going to
+  propose?" I asked in genuine wonder.</dd>
+
+  <dt><code>&lt;code&gt;</code> and <code>&lt;kbd&gt;</code></dt>
+  <dd>On UNIX you can clear your terminal by typing <code>clear</code> or with
+  <kbd>Ctrl+l</kbd> shortcut.</dd>
+
+  <dt><code>&lt;small&gt;</code></dt>
+  <dd>She looked at me with a wondering <small>distrust</small> which was much more to my mind than
+  her whole-hearted confidence.</dd>
+
+  <dt><code>&lt;sub&gt;</code> and <code>&lt;sup&gt;</code></dt>
+  <dd>Water is the chemical substance with chemical formula H<sub>2</sub>O.
+  He is best known for his mass–energy equivalence formula E = mc<sup>2</sup> (which has been
+  dubbed "the world's most famous equation")</dd>
+
+  <dt><code>&lt;q&gt;</code></dt>
+  <dd>Many inline quotations. <q>Default one</q> or <span lang="de"><q>German <q>one</q></q></span>
+  or even <q lang="fr">embeded <q>quotes</q> with <q lang="en">another language</q></q>.</dd>
+</dl>
+
+<h2>Tables</h2>
+
+<h3>Basic table</h3>
+
+<table>
+  <tr>
+    <th>Clara Barton</th>
+    <td>1821</td>
+    <td>U.S.</td>
+  </tr>
+  <tr>
+    <th>Marie Curie</td>
+    <td>1867</td>
+    <td>Kingdom of Poland</td>
+  </tr>
+  <tr>
+    <th>Grace Hopper</th>
+    <td>1906</td>
+    <td>U.S.</td>
+  </tr>
+  <tr>
+    <th>Grace Hopper</th>
+    <td>1906</td>
+    <td>U.S.</td>
+  </tr>
+</table>
+
+<h2>Fancy table</h2>
+
+<p>A table with <code>&lt;caption&gt;</code>, <code>&lt;thead&gt;</code>,
+<code>&lt;tbody&gt;</code> and <code>&lt;tfoot&gt;</code>.</p>
+
+<table>
+  <caption>Great scientists</caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date of birth</th>
+      <th>Country of birth</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td>Footer</td>
+      <td>Footer</td>
+      <td>Footer</td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <td>Isaac Newton</td>
+      <td>1643</td>
+      <td>England</td>
+    </tr>
+    <tr>
+      <td>Albert Einstein</td>
+      <td>1879</td>
+      <td>German Empire</td>
+    </tr>
+    <tr>
+      <td>Stephen Hawking</td>
+      <td>1942</td>
+      <td>England</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+{{ end }}

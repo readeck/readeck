@@ -3,16 +3,12 @@
 {{ block title() }}Error{{ end }}
 
 {{ block body() }}
-<div class="app">
-  <nav class="navbar">
-    <div class="main-nav">
-      <h1><a href="{{ urlFor(`/`) }}">Readeck</a></h1>
-    </div>
-  </nav>
+<div class="layout:app">
+  {{- include "./nav" -}}
 
-  <div class="main">
-    <main>
-      <h1 class="title">Error</h1>
+  <div class="layout:main">
+    <main class="p-6">
+      <h1 class="text-h1 title">Error</h1>
 
       {{ if .Status == 403 }}
       <p>Permission denied</p>

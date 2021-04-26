@@ -1,0 +1,36 @@
+<nav class="layout:nav leading-none bg-gray-900 text-white shadow flex items-center py-2 px-6">
+  <h1 class="mr-4 text-lg font-bold"><a href="{{ urlFor(`/`) }}">Readeck</a></h1>
+  <div class="flex-grow">
+    {{- if  hasPermission("/bookmarks", "read") -}}
+      <a class="p-2 rounded hf:bg-blue-700 data-current:bg-blue-900"
+      href="{{ urlFor(`/bookmarks/unread`) }}"
+      data-current="{{ pathIs(`/bookmarks`, `/bookmarks/*`) }}"
+      >{{ yield icon(name="o-bookmarks") }} Bookmarks</a>
+    {{- end -}}
+  </div>
+
+  <div class="grid grid-flow-col gap-2 items-center">
+    {{- if  hasPermission("/profile", "read") -}}
+      <a class="inline-flex items-center justify-center text-xl leading-none
+        rounded-full w-8 h-8 hf:bg-blue-700
+        data-current:bg-blue-900"
+        href="{{ urlFor(`/profile`) }}"
+        data-current="{{ pathIs(`/profile`, `/profile/*`) }}">{{
+        yield icon(name="o-user") }}</a>
+    {{- end -}}
+
+    {{- if  hasPermission("/admin", "read") -}}
+      <a class="inline-flex items-center justify-center text-xl leading-none
+       rounded-full w-8 h-8 hf:bg-blue-700
+       data-current:bg-blue-900"
+       href="{{ urlFor(`/admin`) }}"
+       data-current="{{ pathIs(`/admin`, `/admin/*`) }}">{{
+        yield icon(name="o-admin") }}</a>
+    {{- end }}
+
+    <form class="inline-block" action="{{ urlFor(`/logout`)}}" method="post">
+      {{ yield csrfField() }}
+      <button class="p-2 rounded hf:bg-blue-700" type="submit">{{ yield icon(name="o-logout") }} Logout</button>
+    </form>
+  </div>
+  </nav>

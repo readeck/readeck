@@ -1,29 +1,30 @@
 {{ extends "./base" }}
+{{ import "/_libs/list" }}
 
 {{ block title() }}Users{{ end }}
 
 {{ block mainContent() }}
-<h1 class="title">{{ yield title() }}</h1>
+<h1 class="title text-h2">{{ yield title() }}</h1>
 
-<p><a href="{{ urlFor(`.`, `add`)}}" class="button">Add a new user</a></p>
+<p><a href="{{ urlFor(`.`, `add`)}}" class="btn-primary">Add a new user</a></p>
 
 {{ if .Users }}
 {{ include "/_libs/pagination" .Pagination }}
 
-<div class="panel">
+{{ yield list(class="my-6") content}}
 {{ range .Users }}
-  <div class="panel-content">
+  {{ yield list_item() content }}
     <div>
-      <strong><a href="{{ urlFor(`.`, .ID) }}">{{ .Username }}</a></strong>
+      <strong><a class="link" href="{{ urlFor(`.`, .ID) }}">{{ .Username }}</a></strong>
       ({{ .Group }})
     </div>
-    <div><small>
+    <div class="text-sm">
       Created on: {{ date(.Created, "2006-01-02") }},
       Last update: {{ date(.Updated, "2006-01-02") }}
-    </small></div>
-  </div>
+    </div>
+  {{ end }}
 {{ end }}
-</div>
+{{ end }}
 
 {{ include "/_libs/pagination" .Pagination }}
 {{ end }}

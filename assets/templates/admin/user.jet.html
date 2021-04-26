@@ -4,18 +4,15 @@
 {{ block title() }}Users - {{ .User.Username }}{{ end }}
 
 {{ block mainContent() }}
-<h1 class="title">{{ .User.Username }}</h1>
+<h1 class="title text-h2">{{ .User.Username }}</h1>
 
 {{- if .User.IsDeleted -}}
   <form action="{{ urlFor(`.`, `delete`) }}" method="POST">
   {{ yield csrfField() }}
-  <div class="message info">
-    <div class="field horizontal">
-      User will be removed in a few second&nbsp;
-      <button name="cancel" value="1">Cancel</button>
-    </div>
-  </div>
-  </p>
+  {{- yield message(type="info") content -}}
+    User will be removed in a few second&nbsp;
+    <button class="btn-primary" name="cancel" value="1">Cancel</button>
+  {{- end -}}
 </form>
 {{- end -}}
 
@@ -26,25 +23,25 @@
   {{ yield textField(field=.Form.Fields.username,
                      name="username",
                      label="Username",
-                     class="horizontal",) }}
+                     class="field-h") }}
 
   {{ yield textField(field=.Form.Fields.email,
                      type="email",
                      name="email",
                      label="Email address",
-                     class="horizontal",) }}
+                     class="field-h",) }}
 
   {{ yield selectField(field=.Form.Fields.group,
                        name="group",
                        label="Group",
-                       class="horizontal",
+                       class="field-h",
                        options=.Form.Fields.group.Value().Options(),) }}
 
   {{ yield textField(field=.Form.Fields.password,
                      type="password",
                      name="password",
                      label="Password",
-                     class="horizontal",
+                     class="field-h",
                      help="will not change if empty",
                      controlAttrs=attrList("data-controller", "pass-reveal",
                           "data-pass-reveal-icon-show-value", "o-show",
@@ -52,13 +49,13 @@
                      inputAttrs=attrList("data-pass-reveal-target", "field"),
   ) }}
 
-  <p><button type="submit">Save</button></p>
+  <p><button class="btn-primary" type="submit">Save</button></p>
 </form>
 
 {{- if .User.ID != user.ID && !.User.IsDeleted -}}
-  <form action="{{ urlFor(`.`, `delete`) }}" method="POST">
+  <form class="mt-4" action="{{ urlFor(`.`, `delete`) }}" method="POST">
     {{ yield csrfField() }}
-    <p><button class="button-danger">Delete this user</button></p>
+    <p><button class="btn-danger" type="submit">Delete this user</button></p>
   </form>
 {{- end -}}
 

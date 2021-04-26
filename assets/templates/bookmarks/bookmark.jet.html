@@ -1,4 +1,5 @@
 {{ extends "/app" }}
+{{ import "./components/common" }}
 
 {{- block title() -}}
   {{- if !.Item.Loaded -}}
@@ -16,93 +17,96 @@
 
 {{- block mainContent() -}}
 <turbo-frame id="bookmark-{{ .Item.ID }}" data-controller="turbo-refresh"
- data-turbo-refresh-on-value=".page .bookmark-loading"
+ data-turbo-refresh-on-value="[data-deleted]"
  data-turbo-refresh-interval-value="3">
   {{- if !.Item.Loaded -}}
-    <div class="page page-article">
-      <div class="bookmark-loading">
-        {{ yield spinner() }}
-        Bookmark is loading…
-      </div>
+    <div class="text-center mt-4">
+      <span class="text-3xl">{{ yield spinner() }}</span>
+      <p class="text-lg">Bookmark is loading…</p>
     </div>
   {{- else -}}
-    <div class="page page-{{ .Item.Type }}">
-      <div class="summary">
-        <h1 class="title is-h2">{{ .Item.Title }}</h1>
-        {{- if !empty(.Item.Description) -}}
-          <p class="subtitle">{{ .Item.Description }}</p>
-        {{- end -}}
-
-        <div class="box">
-          <div class="box-wrap">
-            <div class="box-content">
-              <ul>
-                <li>
-                {{- if isset(.Item.Resources.icon) -}}
-                <span><img class="site-icon" alt="" src="{{ .Item.Resources.icon.Src }}"
-                         width="{{ .Item.Resources.icon.Width }}"
-                         height="{{ .Item.Resources.icon.Height }}"></span>
-                {{- end -}}
-                <strong>{{ default(.Item.SiteName, "no site name") }}</strong>
-                </li>
-                {{- if !empty(.Item.Published) -}}
-                  <li>{{ yield icon(name="o-calendar") }}
-                  Published on {{ date(.Item.Published, "02 January 2006") }}</li>
-                {{- end -}}
-                {{- if !empty(.Item.Authors) -}}
-                  <li>{{ yield icon(name="o-pen") }}
-                  By {{ join(.Item.Authors, ", ") }}</li>
-                {{- end -}}
-                <li>{{ yield icon(name="o-link") }} <a href="{{ .Item.URL }}" target="top"
-                  >{{ .Item.Domain }}</a></li>
-                {{- if .Item.Type == "article" && .Item.ReadingTime() > 0 -}}
-                <li>{{ yield icon(name="o-clock") }} {{ .Item.ReadingTime() }}&nbsp;min</li>
-                {{- end -}}
-              </ul>
-
-              {{ include "./components/labels_form" .Item }}
-
-              {{- if len(.Item.Errors) -}}
-              <div class="errors" data-controller="reveal">
-                <span data-reveal-target="trigger">{{ yield icon(name="o-error") }}
-                Errors occured during extraction:</span>
-                <ul data-reveal-target="hide">
-                  {{ range .Item.Errors }}<li>{{ . }}</li>{{ end }}
-                </ul>
-              </div>
-              {{- end -}}
-            </div>
-
-            {{- if isset(.Item.Resources.thumbnail) -}}
-            <div class="box-image">
-              <img src="{{ .Item.Resources.thumbnail.Src }}" alt=""
-               width="{{ .Item.Resources.thumbnail.Width }}"
-               height="{{ .Item.Resources.thumbnail.Height }}" />
-            </div>
-            {{- end -}}
-          </div>
-
-          {{ include "./components/actions" .Item }}
-        </div>
-        {{- if user.Settings.DebugInfo -}}
-          {{ include "./components/debug" map("log", ._log, "props", ._props) }}
-        {{- end -}}
-
-      </div>
-
-      {{- if .Item.Type == "article" -}}
-        <div class="reader-content">
-        {{ rawCopy(.Out, .HTML) }}
-        </div>
-      {{- else if .Item.Type == "photo" -}}
-        {{ include "./components/bookmark_photo" .Item }}
-      {{- else if .Item.Type == "video" -}}
-        {{ include "./components/bookmark_video" .Item }}
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-2xl font-serif">{{ .Item.Title }}</h1>
+      {{- if !empty(.Item.Description) -}}
+        <p class="mt-1 text-lg leading-tight text-justify font-serif italic">{{ .Item.Description }}</p>
       {{- end -}}
+    </div>
 
-      <div class="bottom-actions">
-      {{- include "./components/bottom_actions" .Item -}}
+    <div class="max-w-3xl mx-auto rounded-lg shadow-lg mt-4 overflow-hidden">
+      <div class="group flex">
+        {{- if isset(.Item.Resources.thumbnail) -}}
+        <div class="order-2 ml-2 mb-2">
+          <img src="{{ .Item.Resources.thumbnail.Src }}" alt=""
+            class="rounded-bl-lg max-w-44 max-h-44 h-auto w-auto"
+            width="{{ .Item.Resources.thumbnail.Width }}"
+            height="{{ .Item.Resources.thumbnail.Height }}" />
+        </div>
+        {{- end -}}
+
+        <div class="order-1 flex-grow pl-4 pb-4">
+          <ul class="mt-4">
+            <li class="flex items-center mb-2">
+            {{- if isset(.Item.Resources.icon) -}}
+            <img class="inline mr-1 w-5 h-auto"
+             alt="" src="{{ .Item.Resources.icon.Src }}"
+             width="{{ .Item.Resources.icon.Width }}"
+             height="{{ .Item.Resources.icon.Height }}">
+            {{- end -}}
+            <strong>{{ default(.Item.SiteName, "no site name") }}</strong>
+            </li>
+            {{- if !empty(.Item.Published) -}}
+              {{- yield line_icon(icon="o-calendar") content -}}
+                Published on {{ date(.Item.Published, "02 January 2006") }}</li>
+              {{- end -}}
+            {{- end -}}
+            {{- if !empty(.Item.Authors) -}}
+              {{- yield line_icon(icon="o-pen") content -}}
+                By {{ join(.Item.Authors, ", ") }}</li>
+              {{- end -}}
+            {{- end -}}
+            {{- yield line_icon(icon="o-link") content -}}
+              <a href="{{ .Item.URL }}" class="link" target="top">{{ .Item.Domain }}</a>
+            {{- end -}}
+            {{- if .Item.Type == "article" && .Item.ReadingTime() > 0 -}}
+              {{- yield line_icon(icon="o-clock") content -}}
+                {{ .Item.ReadingTime() }}&nbsp;min
+              {{- end -}}
+            {{- end -}}
+          </ul>
+
+          {{ include "./components/labels_form" .Item }}
+
+          {{- if len(.Item.Errors) -}}
+            <div data-controller="reveal" class="mt-4">
+              <span data-reveal-target="trigger"
+               class="text-sm bg-red-700 text-white inline-block p-0.5 rounded">{{ yield icon(name="o-error") }}
+              Errors occured during extraction</span>
+              <ul data-reveal-target="hide" class="text-red-800">{{ range .Item.Errors }}
+                <li class="mt-0.5">{{ . }}</li>
+              {{ end }}</ul>
+            </div>
+          {{- end -}}
+        </div>
       </div>
+      {{ include "./components/actions" .Item }}
+    </div>
+
+    {{- if user.Settings.DebugInfo -}}
+      {{ include "./components/debug" map("log", ._log, "props", ._props) }}
+    {{- end -}}
+
+    {{- if .Item.Type == "article" -}}
+      <div class="font-serif text-lg leading-normal max-w-3xl mt-6 mx-auto prose">
+      {{ rawCopy(.Out, .HTML) }}
+      </div>
+    {{- else if .Item.Type == "photo" -}}
+      {{ include "./components/bookmark_photo" .Item }}
+    {{- else if .Item.Type == "video" -}}
+      {{ include "./components/bookmark_video" .Item }}
+    {{- end -}}
+
+    <div class="max-w-3xl mx-auto mt-6 pt-6 border-t flex justify-center">
+    {{- include "./components/bottom_actions" .Item -}}
     </div>
   {{- end -}}
 </turbo-frame>

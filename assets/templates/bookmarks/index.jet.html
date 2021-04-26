@@ -9,18 +9,20 @@
  data-turbo-refresh-interval-value="10"
  data-turbo-refresh-on-value=".card.state-deleted">
 
-  <div class="list-controlls">
-    <div class="bookmark-new">
+  <div class="grid grid-flow-row lg:grid-cols-bk-tools items-center gap-4">
+    <div class="">
       <form action="{{ urlFor(`/bookmarks`) }}" method="post"
        data-controller="turbo-form">
         {{ yield csrfField() }}
-        <div class="compound">
-          <input class="rounded" type="text" name="url" size="15"
-          value="{{ string(.Form.Fields.url.Value()) }}" placeholder="https://" />
-          <button class="rounded" type="submit">Save link</button>
+        <div class="flex">
+          <input type="text" name="url" size="15"
+           class="form-input rounded-l-full pl-4 w-full"
+           value="{{ string(.Form.Fields.url.Value()) }}" placeholder="https://" />
+          <button class="btn-primary -r-full pr-4 whitespace-nowrap"
+           type="submit">Save link</button>
         </div>
 
-        {{ range .Form.Fields.url.Errors }}<p class="text-danger"><strong>{{ . }}</strong></p>{{ end }}
+        {{ range .Form.Fields.url.Errors }}<p class="ml-4 text-red-700"><strong>{{ . }}</strong></p>{{ end }}
 
         {{- if (!isset(.Q) || empty(.Q)) && pathIs("/bookmarks") && .Pagination.TotalCount == 0 -}}
           <p><strong>You don't have any bookmark yet. Start saving pages now!</strong></p>
@@ -28,22 +30,26 @@
       </form>
     </div>
 
-    <ul class="bookmark-filters">
-      <li><a class="{{ if pathIs(`/bookmarks`) }} active{{ end }}"
+    <ul class="grid grid-flow-col-dense justify-center divide-x -mx-2">
+      <li class="px-2"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
+       data-current="{{ pathIs(`/bookmarks`) }}"
       href="{{ urlFor(`/bookmarks`) }}">All</a></li>
-      <li><a class="{{ if pathIs(`/bookmarks/unread`) }} active{{ end }}"
+      <li class="px-2"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
+       data-current="{{ pathIs(`/bookmarks/unread`) }}"
       href="{{ urlFor(`/bookmarks`, `unread`) }}">{{ yield icon(name="o-check-off") }} Unread</a></li>
-      <li><a class="{{ if pathIs(`/bookmarks/archives`) }} active{{ end }}"
+      <li class="px-2"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
+       data-current="{{ pathIs(`/bookmarks/archives`) }}"
       href="{{ urlFor(`/bookmarks`, `archives`) }}">{{ yield icon(name="o-archive-on") }} Archive</a></li>
-      <li><a class="{{ if pathIs(`/bookmarks/favorites`) }} active{{ end }}"
+      <li class="px-2"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
+       data-current="{{ pathIs(`/bookmarks/favorites`) }}"
       href="{{ urlFor(`/bookmarks`, `favorites`) }}">{{ yield icon(name="o-favorite-on") }} Favorites</a></li>
     </ul>
 
-    <div class="bookmark-search">
-      <form action="{{ urlFor(``) }}" method="get">
-        <input title="search in bookmarks" class="rounded" size="10"
+    <div>
+      <form action="{{ urlFor(``) }}" method="get" class="lg:inline-flex">
+        <input title="search in bookmarks" class="form-input rounded-full pl-4 pr-8 w-full lg:w-50" size="10"
         type="text" name="q" value="{{ isset(.Q) ? .Q : `` }}" placeholder="search" />
-        <button title="search">{{ yield icon(name="o-search") }}</button>
+        <button title="search" class="-ml-6 mr-2">{{ yield icon(name="o-search") }}</button>
       </form>
     </div>
   </div>
@@ -51,13 +57,13 @@
   {{- include "/_libs/pagination" .Pagination -}}
 
   {{- if isset(.Q) && !empty(.Q) -}}
-    <div class="content-block">
+    <div class="my-4">
       <p>Your search for <strong>{{ .Q }}</strong> yielded
       {{ .Pagination.TotalCount }} result(s)</p>
     </div>
   {{- end -}}
 
-  <div class="bookmark-list">
+  <div class="my-4 grid grid-cols-cards gap-4">
   {{- range .Bookmarks -}}
     {{- include "./components/card" . -}}
   {{- end -}}

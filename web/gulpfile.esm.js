@@ -22,11 +22,6 @@ import through from "through2"
 
 import {stimulusPlugin} from "esbuild-plugin-stimulus"
 
-import postcssCopy from "postcss-copy"
-import atImport from "postcss-import"
-import postCssPresetEnv from "postcss-preset-env"
-import cssnano from "cssnano"
-
 
 const DEST=path.resolve("../assets/www")
 
@@ -154,10 +149,11 @@ function js_bundle() {
 // css creates the CSS bundle.
 function css_bundle() {
   const processors = [
-    atImport(),
-    postcssCopy({
+    require("postcss-import"),
+    require("tailwindcss"),
+    require("postcss-copy")({
       basePath: [
-        "style",
+        "ui",
         "node_modules/@fontsource/lora/files",
         "node_modules/@fontsource/public-sans/files",
       ],
@@ -171,13 +167,13 @@ function css_bundle() {
         return `${folder}/${m.name}.${m.hash.substr(0, 8)}.${m.ext}`
       },
     }),
-    postCssPresetEnv(),
-    cssnano(),
+    require("autoprefixer"),
+    require("cssnano"),
   ]
 
   return gulp
     .src([
-      "style/index.sass",
+      "ui/index.sass",
     ])
     .pipe(gulpSourcemaps.init())
     .pipe(gulpSass.sass().on("error", gulpSass.sass.logError))
@@ -303,7 +299,7 @@ function watch_js() {
 
 function watch_css() {
   gulp.watch(
-    ["style/**/*"],
+    ["tailwind.config.js", "ui/**/*", "../assets/templates/**/*.jet.html"],
     gulp.series(
       clean_css,
       css_bundle,
@@ -326,10 +322,13 @@ function watch_media() {
 
 exports.clean = clean_all
 exports.js = js_bundle
-exports.css = css_bundle
+exports.css = gulp.series(clean_css, css_bundle)
 exports.icons = icon_sprite
 exports.favicons = generate_favicons
 exports.copy = copy_files
+
+exports["watch:css"] = watch_css
+exports["watch:js"] = watch_js
 
 exports.dev = gulp.series(
   full_build,
