@@ -3,32 +3,33 @@
 {{- textFav := .IsMarked ? "Remove from favorites" : "Add to favorites" -}}
 
 <turbo-frame id="bookmark-actions-{{ .ID }}">
-<div class="item-actions">
+<div class="flex bg-gray-100 px-4 py-2 items-center">
   {{- if .IsDeleted -}}
-    <span class="text-danger">
+    <span class="text-red-700" data-deleted="true">
       This bookmark will be removed in a few seconds.
     </span>
     <form action="{{ urlFor(`/bookmarks`, .ID, `delete`) }}" method="post">
       {{ yield csrfField() }}
       <input type="hidden" name="cancel" value="1" />
       <input type="hidden" name="_to" value="{{ currentPath }}" />
-      <button type="submit" name="is_deleted" value="0"
+      <button class="btn-primary ml-2" type="submit" name="is_deleted" value="0"
        data-controller="turbo-form"
        data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
        data-turbo-form-method-value="patch">{{ yield icon(name="o-undo") }}&nbsp;Undo</button>
     </form>
   {{- else -}}
     <form action="{{ urlFor(`/bookmarks`, .ID) }}" method="post"
+    class="flex-grow"
     data-controller="turbo-form"
     data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
     data-turbo-form-method-value="patch">
       {{ yield csrfField() }}
-      <div class="compound">
-        <button class="outlined rounded icon" name="is_marked" value="{{ .IsMarked ? 0 : 1 }}"
+      <div class="inline-flex">
+        <button class="btn-outlined-primary leading-none rounded-l-full border-r-0 pl-3" name="is_marked" value="{{ .IsMarked ? 0 : 1 }}"
         title="{{ textFav }}">
           {{ yield icon(name=(.IsMarked ? "o-favorite-on" : "o-favorite-off")) }}
         </button>
-        <button class="outlined rounded icon" name="is_archived" value="{{ .IsArchived ? 0 : 1 }}"
+        <button class="btn-outlined-primary leading-none rounded-r-full border-l-0 pr-3" name="is_archived" value="{{ .IsArchived ? 0 : 1 }}"
         title="{{ textArch }}">
           {{ yield icon(name=(.IsArchived ? "o-archive-on" : "o-archive-off")) }}
         </button>
@@ -38,7 +39,7 @@
     <form action="{{ urlFor(`/bookmarks`, .ID, `delete`) }}" method="post">
       {{ yield csrfField() }}
       <input type="hidden" name="_to" value="{{ currentPath }}" />
-      <button class="outlined rounded icon delete" name="is_deleted" value="1"
+      <button class="btn-outlined-danger leading-none rounded-full px-2" name="is_deleted" value="1"
         data-controller="turbo-form"
         data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
         data-turbo-form-method-value="patch">

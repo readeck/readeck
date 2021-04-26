@@ -3,11 +3,11 @@
 {{ block mainClass() }}content-block{{ end }}
 
 {{ block mainAside() }}
-{{ inUsers := pathIs("/admin/users", "/admin/users/*") }}
-<aside class="sidebar">
-<h3>Admin</h3>
+<aside class="layout:sidebar">
+<h3 class="sidebar:title">Admin</h3>
 <ul>
-  <li><a class="{{ if inUsers }}active{{ end }}" href="{{ urlFor(`/admin/users`) }}">Users</a></li>
+  <li><a class="sidebar:link" href="{{ urlFor(`/admin/users`) }}"
+   data-current="{{ pathIs(`/admin/users`, `/admin/users/*`) }}">Users</a></li>
 </ul>
 </aside>
 {{ end }}

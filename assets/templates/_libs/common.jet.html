@@ -1,5 +1,6 @@
-{{- block icon(name, class="svgicon") -}}
-<span class="{{ class }}"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" width="16"><use
+{{- block icon(name, class="svgicon", svgClass="") -}}
+<span class="{{ class }}"><svg xmlns="http://www.w3.org/2000/svg"
+viewbox="0 0 100 100" class="inline-block w-4 h-4 {{ svgClass }}"><use
 href="{{ assetURL(`img/icons.svg`) }}#{{ name }}"></use></svg></span>
 {{- end -}}
 
@@ -7,14 +8,34 @@ href="{{ assetURL(`img/icons.svg`) }}#{{ name }}"></use></svg></span>
 <span style="display:none;"><input type="hidden" name="{{ csrfName }}" value="{{ csrfToken }}"></span>
 {{- end -}}
 
+{{- block message(type="info") -}}
+{{- icon := "o-info" -}}
+{{- color := "bg-blue-700" -}}
+{{- if type == "success" -}}
+  {{- icon = "o-check-on" -}}
+  {{- color = "bg-green-700" -}}
+{{- else if type == "error" -}}
+  {{- icon = "o-error" -}}
+  {{- color = "bg-red-800" -}}
+{{- end -}}
+<div class="flex overflow-hidden bg-white rounded-lg shadow-md my-6 w-full max-w-xl">
+  <div class="flex items-center justify-center w-12 text-white {{ color }}">
+    {{- yield icon(name=icon) -}}
+  </div>
+  <div class="p-4 flex-grow {{ color }} bg-opacity-5">
+    {{- yield content -}}
+  </div>
+</div>
+{{- end -}}
+
 {{- block flashes() -}}
 {{ range flashes }}
-  <div class="message {{ .Type }}">
+  {{- yield message(type=.Type) content -}}
     <strong>{{ .Message }}</strong>
-  </div>
+  {{- end -}}
 {{ end }}
 {{- end -}}
 
 {{- block spinner() -}}
-{{ yield icon(name="o-spinner", class="svgicon loader")}}
+{{ yield icon(name="o-spinner", svgClass="animate-spin stroke-current")}}
 {{- end -}}

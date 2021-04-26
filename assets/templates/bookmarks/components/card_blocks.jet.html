@@ -1,0 +1,13 @@
+{{- block card() -}}
+<div class="h-full overflow-hidden rounded shadow-md flex flex-col
+  focus-within:shadow-lg hover:shadow-lg group">
+{{ yield content }}
+</div>
+{{- end -}}
+
+{{- block card_image(src, width, height) -}}
+<img loading="lazy" alt="" src="{{ src }}"
+ class="object-cover object-top max-h-40 w-full"
+ width="{{ width }}"
+ height="{{ height }}">
+{{- end -}}

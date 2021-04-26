@@ -4,7 +4,7 @@
 {{ block title() }}Profile{{ end }}
 
 {{ block mainContent() }}
-<h1 class="title">Your profile</h1>
+<h1 class="title text-h2">Your profile</h1>
 
 <form action="{{ urlFor() }}" method="post">
   {{ yield formErrors(form=.Form) }}
@@ -14,7 +14,7 @@
     field=.Form.Fields.username,
     name="username",
     label="Username",
-    class="horizontal",
+    class="field-h",
   ) }}
 
   {{ yield textField(
@@ -22,10 +22,10 @@
     type="email",
     name="email",
     label="Email",
-    class="horizontal",
+    class="field-h",
   ) }}
 
-  <p><button type="submit">Save</button></p>
+  <p><button class="btn-primary" type="submit">Save</button></p>
 </form>
 
 {{ end }}

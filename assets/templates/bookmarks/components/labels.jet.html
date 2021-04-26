@@ -1,8 +1,11 @@
-<ul class="badges editable" id="bookmark-label-list-{{ .ID }}">
+{{ import "/_libs/common" }}
+
+<ul class="inline" id="bookmark-label-list-{{ .ID }}">
 {{- range .Labels -}}
-  <li class="badge">{{ . }}
-  <button class="button-clear button-delete" type="submit"
-    name="remove_labels" value="{{ . }}"></button>
+  <li class="inline-flex items-center text-sm bg-gray-200 py-1 px-1 mr-1 mb-1 rounded">{{ . }}
+  <button class="ml-1 text-gray-600 hf:text-red-700"
+   type="submit" name="remove_labels" value="{{ . }}"
+  >{{ yield icon(name="o-cross", class="svgicon text-lg leading-none") }}</button>
   </li>
 {{- end -}}
 </ul>

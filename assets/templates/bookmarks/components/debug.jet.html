@@ -1,10 +1,10 @@
-<div data-controller="reveal">
-  <a href="#" data-reveal-target="trigger"><small>Debug info</small></a>
-  <div data-reveal-target="hide" class="content-block">
+<div class="max-w-3xl mx-auto text-sm leading-none" data-controller="reveal">
+  <a href="#" class="link" data-reveal-target="trigger"><small>Debug info</small></a>
+  <div data-reveal-target="hide" class="mt-4">
     <strong>Extraction log</strong>
-    <pre style="max-height: 20em; overflow: scroll">{{ .log }}</pre>
+    <pre class="mb-4 max-h-80 overflow-scroll p-2 border">{{ .log }}</pre>
 
     <strong>Properties</strong>
-    <pre style="max-height: 40em; overflow: scroll">{{ .props }}</pre>
+    <pre class="max-h-80 overflow-scroll p-2 border">{{ .props }}</pre>
   </div>
 </div>

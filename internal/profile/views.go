@@ -64,7 +64,7 @@ func (v *profileViews) userProfile(w http.ResponseWriter, r *http.Request) {
 				sess := v.srv.GetSession(r)
 				sess.ID = ""
 				sess.Values["check_code"] = user.CheckCode()
-				v.srv.AddFlash(w, r, "info", "Profile updated")
+				v.srv.AddFlash(w, r, "success", "Profile updated")
 			}
 
 			v.srv.Redirect(w, r, "profile")
@@ -96,7 +96,7 @@ func (v *profileViews) userPassword(w http.ResponseWriter, r *http.Request) {
 				// We needn't save the session since AddFlash does it already.
 				sess := v.srv.GetSession(r)
 				sess.Values["check_code"] = user.CheckCode()
-				v.srv.AddFlash(w, r, "info", "Your password was changed.")
+				v.srv.AddFlash(w, r, "success", "Your password was changed.")
 			}
 
 			v.srv.Redirect(w, r, "password")
@@ -134,7 +134,7 @@ func (v *profileViews) tokenCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	v.srv.AddFlash(w, r, "info", "New token created.")
+	v.srv.AddFlash(w, r, "success", "New token created.")
 	v.srv.Redirect(w, r, ".", t.UID)
 }
 
@@ -161,7 +161,7 @@ func (v *profileViews) tokenInfo(w http.ResponseWriter, r *http.Request) {
 				v.srv.Log(r).WithError(err).Error("server error")
 				v.srv.AddFlash(w, r, "error", "Error while updating token")
 			} else {
-				v.srv.AddFlash(w, r, "info", "Token was updated.")
+				v.srv.AddFlash(w, r, "success", "Token was updated.")
 			}
 			v.srv.Redirect(w, r, ti.UID)
 			return

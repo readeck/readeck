@@ -1,25 +1,22 @@
 {{- if .TotalPages > 1 -}}
-  <nav class="pagination">
+  <nav class="pgn my-4">
     {{- if .PreviousPage -}}
-      <a href="{{ .PreviousPage }}" class="pagination-previous">Previous</a>
+      <a href="{{ .PreviousPage }}" class="pgn-prev">Previous</a>
     {{- end -}}
     {{- if .NextPage -}}
-      <a href="{{ .NextPage }}" class="pagination-next">Next</a>
+      <a href="{{ .NextPage }}" class="pgn-next">Next</a>
     {{- end -}}
 
     <ul class="pagination-list">
     {{- current := .CurrentPage -}}
     {{- range .PageLinks -}}
-      {{- class := "pagination-link" -}}
-      {{- if .Index == current -}}
-        {{- class = class + " is-current" -}}
-      {{- end -}}
       <li>
-      {{- if .Index != 0 -}}
-        <a href="{{ .URL }}" class="{{ class }}"
-        aria-label="Go to page {{ .Index }}">{{ .Index }}</a>
+      {{- if .Index == current -}}
+        <span class="pgn-current">{{ .Index }}</span>
+      {{- else if .Index != 0 -}}
+        <a href="{{ .URL }}" aria-label="Go to page {{ .Index }}">{{ .Index }}</a>
       {{- else -}}
-        <span class="pagination-ellipsis">&hellip;</span>
+        <span>&hellip;</span>
       {{- end -}}
       </li>
     {{- end -}}
