@@ -164,7 +164,7 @@ func parseLine(line string) ([3]string, error) {
 	}
 
 	m := lineRE.FindAllStringSubmatch(line, -1)
-	if strings.HasPrefix(m[0][3], "'") && strings.HasSuffix(m[0][3], "'") {
+	if strings.HasPrefix(m[0][3], "'") && strings.HasSuffix(m[0][3], "'") && len(m[0][3]) > 1 {
 		m[0][3] = m[0][3][1 : len(m[0][3])-1]
 	}
 
