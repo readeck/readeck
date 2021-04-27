@@ -70,6 +70,7 @@ type User struct {
 	Password string        `db:"password"`
 	Group    string        `db:"group"`
 	Settings *UserSettings `db:"settings"`
+	Seed     int           `db:"seed"`
 }
 
 // Manager is a query helper for user entries.

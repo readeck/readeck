@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS user (
     email    text     UNIQUE NOT NULL,
     password text     NOT NULL,
     `group`  text     NOT NULL DEFAULT "user",
-    settings json     NOT NULL DEFAULT "{}"
+    settings json     NOT NULL DEFAULT "{}",
+    seed     integer  NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS token (
