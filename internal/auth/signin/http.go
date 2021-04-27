@@ -3,6 +3,7 @@ package signin
 import (
 	"errors"
 	"net/http"
+	"time"
 
 	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi/v5"
@@ -76,10 +77,8 @@ func (h *authHandler) login(w http.ResponseWriter, r *http.Request) {
 	sess := h.srv.GetSession(r)
 	sess.Values["u"] = user.ID
 	sess.Values["s"] = user.Seed
-
-	if err := sess.Save(r, w); err != nil {
-		panic(err)
-	}
+	sess.Values["t"] = time.Now().Unix()
+	sess.Save(r, w)
 
 	h.srv.Redirect(w, r, "/")
 }
