@@ -33,11 +33,11 @@
     </div>
 
     <div class="max-w-3xl mx-auto rounded-lg shadow-lg mt-4 overflow-hidden">
-      <div class="group flex">
+      <div class="group flex flex-col sm:flex-row">
         {{- if isset(.Item.Resources.thumbnail) -}}
-        <div class="order-2 ml-2 mb-2">
+        <div class="sm:order-2 sm:ml-2 mb-2">
           <img src="{{ .Item.Resources.thumbnail.Src }}" alt=""
-            class="rounded-bl-lg max-w-44 max-h-44 h-auto w-auto"
+            class="w-full sm:rounded-bl-lg sm:max-w-44 sm:max-h-44 sm:h-auto sm:w-auto"
             width="{{ .Item.Resources.thumbnail.Width }}"
             height="{{ .Item.Resources.thumbnail.Height }}" />
         </div>
@@ -105,7 +105,7 @@
       {{ include "./components/bookmark_video" .Item }}
     {{- end -}}
 
-    <div class="max-w-3xl mx-auto mt-6 pt-6 border-t flex justify-center">
+    <div class="max-w-3xl mx-auto mt-6 pt-6 border-t">
     {{- include "./components/bottom_actions" .Item -}}
     </div>
   {{- end -}}

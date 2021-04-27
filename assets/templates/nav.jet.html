@@ -1,8 +1,10 @@
-<nav class="layout:nav leading-none bg-gray-900 text-white shadow flex items-center py-2 px-6">
-  <h1 class="mr-4 text-lg font-bold"><a href="{{ urlFor(`/`) }}">Readeck</a></h1>
-  <div class="flex-grow">
+<nav class="layout:nav leading-none bg-gray-900 text-white shadow py-2 px-6
+ flex flex-col justify-center space-y-2 items-center
+ sm:flex-row sm:space-y-0">
+  <div class="flex-grow flex items-center">
+    <h1 class="mr-4 text-lg font-bold"><a href="{{ urlFor(`/`) }}">Readeck</a></h1>
     {{- if  hasPermission("/bookmarks", "read") -}}
-      <a class="p-2 rounded hf:bg-blue-700 data-current:bg-blue-900"
+      <a class="p-2 rounded whitespace-nowrap hf:bg-blue-700 data-current:bg-blue-900"
       href="{{ urlFor(`/bookmarks/unread`) }}"
       data-current="{{ pathIs(`/bookmarks`, `/bookmarks/*`) }}"
       >{{ yield icon(name="o-bookmarks") }} Bookmarks</a>
