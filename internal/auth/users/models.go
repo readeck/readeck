@@ -4,7 +4,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"errors"
-	"hash/crc32"
+	"math/rand"
 	"strings"
 	"time"
 
@@ -111,6 +111,7 @@ func (m *Manager) Create(user *User) error {
 
 	user.Created = time.Now()
 	user.Updated = user.Created
+	user.SetSeed()
 
 	ds := db.Q().Insert(TableName).
 		Rows(user).
@@ -185,15 +186,11 @@ func (u *User) SetPassword(password string) error {
 	return u.Update(goqu.Record{"password": u.Password, "updated": time.Now()})
 }
 
-// CheckCode returns a crc32 checksum of combined user information
-// (username, email, password).
-// This value is stored by the session and then validated on
-// each request. This allows to invalidate every session when the user
-// changes any of this information.
-func (u *User) CheckCode() uint32 {
-	return crc32.Checksum([]byte(
-		u.Username+u.Email+u.Password,
-	), crc32.IEEETable)
+// SetSeed sets a new seed to the user. It returns the seed as an integer value
+// and does *not* save the data but the seed is accessible on the user instance.
+func (u *User) SetSeed() int {
+	u.Seed = rand.Intn(32767)
+	return u.Seed
 }
 
 // IsAnonymous returns true when the instance is not set to any existing user

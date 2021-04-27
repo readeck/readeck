@@ -34,21 +34,24 @@ func (p *SessionAuthProvider) Authenticate(w http.ResponseWriter, r *http.Reques
 		p.clearSession(sess, w, r)
 		return r, nil
 	}
-
-	userID, ok := sess.Values["user_id"].(int)
+	id, ok := sess.Values["u"].(int)
+	if !ok {
+		p.clearSession(sess, w, r)
+		return r, nil
+	}
+	seed, ok := sess.Values["s"].(int)
 	if !ok {
 		p.clearSession(sess, w, r)
 		return r, nil
 	}
 
-	u, err := users.Users.GetOne(goqu.C("id").Eq(userID))
+	u, err := users.Users.GetOne(goqu.C("id").Eq(id))
 	if err != nil {
 		p.clearSession(sess, w, r)
 		return r, err
 	}
 
-	chk, _ := sess.Values["check_code"].(uint32)
-	if chk != u.CheckCode() {
+	if u.Seed != seed {
 		p.clearSession(sess, w, r)
 		return r, err
 	}
@@ -66,7 +69,6 @@ func (p *SessionAuthProvider) Authenticate(w http.ResponseWriter, r *http.Reques
 
 func (p *SessionAuthProvider) clearSession(sess *sessions.Session, w http.ResponseWriter, r *http.Request) {
 	sess.Options.MaxAge = -1
-	delete(sess.Values, "user_id")
 	sess.Save(r, w)
 	p.Redirect(w, r)
 }

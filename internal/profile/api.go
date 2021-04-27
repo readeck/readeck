@@ -63,6 +63,7 @@ func (api *profileAPI) UpdateProfile(u *users.User, sf *users.ProfileForm) (map[
 
 	if len(updated) > 0 {
 		updated["updated"] = time.Now()
+		updated["seed"] = u.SetSeed()
 		if err := u.Update(updated); err != nil {
 			return updated, err
 		}
@@ -73,8 +74,12 @@ func (api *profileAPI) UpdateProfile(u *users.User, sf *users.ProfileForm) (map[
 }
 
 // UpdatePassword updates the user password.
-func (api *profileAPI) UpdatePassword(u *users.User, pf *users.PasswordForm) error {
-	return u.SetPassword(pf.Password)
+func (api *profileAPI) UpdatePassword(u *users.User, pf *users.PasswordForm) (err error) {
+	if err = u.SetPassword(pf.Password); err != nil {
+		return
+	}
+	err = u.Update(map[string]interface{}{"seed": u.SetSeed()})
+	return
 }
 
 // userProfile is the mapping returned by the profileInfo route.

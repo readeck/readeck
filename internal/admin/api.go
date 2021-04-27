@@ -150,14 +150,21 @@ func (api *adminAPI) updateUser(u *users.User, uf *users.UpdateForm) (map[string
 		return updated, nil
 	}
 
-	updated["updated"] = time.Now()
-	if err := u.Update(updated); err != nil {
-		delete(updated, "password")
-		return updated, err
+	// Update the seed when password is changed.
+	if updated["password"] != nil {
+		updated["seed"] = u.SetSeed()
 	}
 
-	if uf.Password != nil {
-		updated["password"] = ""
+	defer func() {
+		if uf.Password != nil {
+			updated["password"] = ""
+		}
+		delete(updated, "seed")
+	}()
+
+	updated["updated"] = time.Now()
+	if err := u.Update(updated); err != nil {
+		return updated, err
 	}
 
 	return updated, nil

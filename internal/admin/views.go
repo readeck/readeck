@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/doug-martin/goqu/v9"
 	"github.com/go-chi/chi/v5"
 
 	"codeberg.org/readeck/readeck/internal/auth"
@@ -118,13 +117,15 @@ func (h *adminViews) userInfo(w http.ResponseWriter, r *http.Request) {
 			if err == nil {
 				// Refresh session if same user
 				if auth.GetRequestUser(r).ID == u.ID {
-					nu, _ := users.Users.GetOne(goqu.C("id").Eq(u.ID))
 					sess := h.srv.GetSession(r)
-					sess.ID = ""
-					sess.Values["check_code"] = nu.CheckCode()
+					sess.Values["u"] = u.ID
+					sess.Values["s"] = u.Seed
 				}
 				h.srv.AddFlash(w, r, "success", "User updated")
 				h.srv.Redirect(w, r, fmt.Sprint(u.ID))
+				return
+			} else {
+				h.srv.Error(w, r, err)
 				return
 			}
 		}

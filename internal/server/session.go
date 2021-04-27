@@ -3,19 +3,12 @@ package server
 import (
 	"context"
 	"encoding/gob"
-	"errors"
-	"fmt"
 	"net/http"
-	"net/url"
-	"os"
 	"path"
-	"strconv"
 
-	"github.com/go-redis/redis/v8"
 	"github.com/gorilla/sessions"
 
 	"codeberg.org/readeck/readeck/configs"
-	"codeberg.org/readeck/readeck/pkg/redisstore"
 )
 
 type (
@@ -33,84 +26,13 @@ type FlashMessage struct {
 	Message string
 }
 
-// InitSession creates the session store based on the value of
-// server.session.store_url.
+// InitSession creates the session store.
 func (s *Server) InitSession() error {
 	// Register flash message type
 	gob.Register(FlashMessage{})
 
-	// Load session store
-	storeURL, err := url.Parse(configs.Config.Server.Session.StoreURL)
-	if err != nil {
-		return err
-	}
-
-	switch storeURL.Scheme {
-	case "file":
-		// File session store
-		// If not path is specified, we use "sessions" in the data folder
-		p := storeURL.Path
-		if storeURL.Path == "" {
-			p = path.Join(configs.Config.Main.DataDirectory, "sessions")
-		}
-		// Create the session path if needed
-		stat, err := os.Stat(p)
-		if err != nil {
-			if errors.Is(err, os.ErrNotExist) {
-				if err := os.MkdirAll(p, 0750); err != nil {
-					return err
-				}
-			} else {
-				return err
-			}
-		} else if !stat.IsDir() {
-			return fmt.Errorf("'%s' is not a directory", p)
-		}
-
-		// Start the store
-		store = sessions.NewFilesystemStore(
-			path.Join(p),
-			configs.CookieHashKey(),
-			configs.CookieBlockKey(),
-		)
-	case "redis":
-		// Redis store.
-		// URL is: redis://host:port?db=n (port and db are optional)
-		host := storeURL.Host
-		p := storeURL.Port()
-		if p == "" {
-			p = "6379"
-		}
-		port, err := strconv.Atoi(p)
-		if err != nil {
-			return fmt.Errorf("invalid redis port %s", p)
-		}
-		d := storeURL.Query().Get("db")
-		if d == "" {
-			d = "0"
-		}
-		db, err := strconv.Atoi(d)
-		if err != nil {
-			return fmt.Errorf("invalid redis db number %s", d)
-		}
-
-		// Start the store
-		client := redis.NewClient(&redis.Options{
-			Addr: fmt.Sprintf("%s:%d", host, port),
-			DB:   db,
-		})
-		store, err = redisstore.NewRedisStore(
-			context.Background(),
-			client,
-			configs.CookieHashKey(),
-			configs.CookieBlockKey(),
-		)
-		if err != nil {
-			return err
-		}
-	default:
-		return fmt.Errorf("unknown session backend: %s", storeURL.Scheme)
-	}
+	// Create the session store
+	store = sessions.NewCookieStore(configs.CookieHashKey(), configs.CookieBlockKey())
 
 	return nil
 }
