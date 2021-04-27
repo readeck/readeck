@@ -26,10 +26,15 @@
     [
       "\u0026gt;\u0026lt;/iframe\u0026gt;\u003c/html\u003e",
       "\u003e\u003c/iframe\u003e"
+    ],
+    [
+      "\u0026quot;",
+      "'"
     ]
   ],
   "http_headers": {
-    "user-agent": "PHP/7.2"
+    "cookie": "CONSENT=YES+srp.gws-20220606;",
+    "user-agent": "PHP/7.4"
   },
   "tests": [
     {

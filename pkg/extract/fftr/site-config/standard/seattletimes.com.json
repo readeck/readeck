@@ -1,16 +1,13 @@
 {
   "title_selectors": null,
   "body_selectors": [
-    "//div[contains(concat(' ',normalize-space(@class),' '),' article ')]"
+    "//div[@id=\"article-content\"]"
   ],
-  "date_selectors": [
-    "//meta[@itemprop=\"datePublished\"]/@content"
-  ],
+  "date_selectors": null,
   "author_selectors": null,
   "strip_selectors": null,
   "strip_id_or_class": [
-    "newsrelated",
-    "news-single__categories"
+    "ad-container"
   ],
   "strip_image_src": null,
   "native_ad_selectors": null,
@@ -23,8 +20,10 @@
   "http_headers": null,
   "tests": [
     {
-      "url": "https://typo3.org/article/frontend-editing-planning-the-next-major-version",
-      "contains": []
+      "url": "https://www.seattletimes.com/nation-world/nation/ex-cia-engineer-tells-judge-hes-incarcerated-like-an-animal/",
+      "contains": [
+        "horrified by the conditions in which he has to live daily"
+      ]
     }
   ]
 }

@@ -10,7 +10,8 @@
     "//meta[@name=\"author\"]/@content"
   ],
   "strip_selectors": [
-    "//div[contains(@class, 'tweet-footer')]//span"
+    "//div[contains(@class, 'tweet-footer')]//span",
+    "//p[contains(concat(' ',normalize-space(@class),' '),' button-wrapper ')]"
   ],
   "strip_id_or_class": [
     "expanded-link-description",

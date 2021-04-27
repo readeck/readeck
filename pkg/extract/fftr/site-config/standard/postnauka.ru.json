@@ -1,16 +1,17 @@
 {
   "title_selectors": null,
   "body_selectors": [
-    "//div[contains(concat(' ',normalize-space(@class),' '),' article ')]"
+    "//div[contains(@class, 'm-post__main') or contains(@class, 'm-longread__body')]"
   ],
-  "date_selectors": [
-    "//meta[@itemprop=\"datePublished\"]/@content"
-  ],
+  "date_selectors": null,
   "author_selectors": null,
   "strip_selectors": null,
   "strip_id_or_class": [
-    "newsrelated",
-    "news-single__categories"
+    "m-longread__blocks-footer",
+    "m-longread__team",
+    "m-post__blocks-footer",
+    "m-post__team",
+    "ph-info__group"
   ],
   "strip_image_src": null,
   "native_ad_selectors": null,
@@ -23,7 +24,11 @@
   "http_headers": null,
   "tests": [
     {
-      "url": "https://typo3.org/article/frontend-editing-planning-the-next-major-version",
+      "url": "https://postnauka.ru/faq/6604",
+      "contains": []
+    },
+    {
+      "url": "https://postnauka.ru/longreads/155958",
       "contains": []
     }
   ]

@@ -1,16 +1,17 @@
 {
   "title_selectors": null,
   "body_selectors": [
-    "//div[contains(concat(' ',normalize-space(@class),' '),' article ')]"
+    "//article[contains(concat(' ',normalize-space(@class),' '),' post ')]"
   ],
-  "date_selectors": [
-    "//meta[@itemprop=\"datePublished\"]/@content"
-  ],
+  "date_selectors": null,
   "author_selectors": null,
   "strip_selectors": null,
   "strip_id_or_class": [
-    "newsrelated",
-    "news-single__categories"
+    "breadcrumbs",
+    "post-box-meta-single",
+    "post-related",
+    "post-pagination",
+    "tags-share-box"
   ],
   "strip_image_src": null,
   "native_ad_selectors": null,
@@ -23,7 +24,7 @@
   "http_headers": null,
   "tests": [
     {
-      "url": "https://typo3.org/article/frontend-editing-planning-the-next-major-version",
+      "url": "http://woshub.com/windows-edb-file-too-big-how-to-reduce-size/",
       "contains": []
     }
   ]

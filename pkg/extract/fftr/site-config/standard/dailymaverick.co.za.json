@@ -9,7 +9,9 @@
   "author_selectors": [
     "//meta[@name=\"author\"]/@content"
   ],
-  "strip_selectors": null,
+  "strip_selectors": [
+    "//p[contains(@class, 'image-caption')]"
+  ],
   "strip_id_or_class": [
     "lightgallery-icon"
   ],

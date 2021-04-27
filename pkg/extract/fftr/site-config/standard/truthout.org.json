@@ -1,16 +1,15 @@
 {
   "title_selectors": null,
   "body_selectors": [
-    "//div[contains(concat(' ',normalize-space(@class),' '),' article ')]"
+    "//div[@id=\"article-content\"]"
   ],
-  "date_selectors": [
-    "//meta[@itemprop=\"datePublished\"]/@content"
-  ],
+  "date_selectors": null,
   "author_selectors": null,
-  "strip_selectors": null,
+  "strip_selectors": [
+    "//aside"
+  ],
   "strip_id_or_class": [
-    "newsrelated",
-    "news-single__categories"
+    "inline-callout"
   ],
   "strip_image_src": null,
   "native_ad_selectors": null,
@@ -23,8 +22,10 @@
   "http_headers": null,
   "tests": [
     {
-      "url": "https://typo3.org/article/frontend-editing-planning-the-next-major-version",
-      "contains": []
+      "url": "https://truthout.org/articles/noam-chomsky-bidens-foreign-policy-is-largely-indistinguishable-from-trumps/",
+      "contains": [
+        "Cuba since independence in 1959 has been the target of unremitting U.S. violence and torture"
+      ]
     }
   ]
 }

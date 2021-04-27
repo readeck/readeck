@@ -3,7 +3,7 @@
     "//meta[@property=\"og:title\"]/@content"
   ],
   "body_selectors": [
-    "//div[contains(concat(' ',normalize-space(@class),' '),' article__body ')] | //div[contains(concat(' ',normalize-space(@class),' '),' article-body ')]"
+    "//div[contains(concat(' ',normalize-space(@class),' '),' article__body ')] | //div[contains(concat(' ',normalize-space(@class),' '),' article-body ')] | //div[contains(@class, 'c-article-body')]"
   ],
   "date_selectors": [
     "//meta[@name=\"dc.date\"]/@content",

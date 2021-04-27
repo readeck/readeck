@@ -1,13 +1,17 @@
 {
-  "title_selectors": null,
+  "title_selectors": [
+    "//article[contains(concat(' ',normalize-space(@class),' '),' story ')]//h1"
+  ],
   "body_selectors": [
-    "//div[contains(concat(' ',normalize-space(@class),' '),' story-text ')]"
+    "//article[contains(concat(' ',normalize-space(@class),' '),' story ')]"
   ],
   "date_selectors": null,
   "author_selectors": null,
-  "strip_selectors": null,
+  "strip_selectors": [
+    "//p[contains(concat(' ',normalize-space(@class),' '),' date ')]"
+  ],
   "strip_id_or_class": [
-    "news-bodycopy"
+    "story-sharing"
   ],
   "strip_image_src": null,
   "native_ad_selectors": null,
@@ -16,7 +20,20 @@
   "autodetect_on_failure": true,
   "single_page_link_selectors": null,
   "next_page_link_selectors": null,
-  "replace_strings": null,
+  "replace_strings": [
+    [
+      "src=\"/assets//img/highlight_ph.png\"",
+      ""
+    ],
+    [
+      "src=\"/assets/img/highlight_ph.png\"",
+      ""
+    ],
+    [
+      "data-src=\"",
+      "src=\""
+    ]
+  ],
   "http_headers": null,
   "tests": [
     {

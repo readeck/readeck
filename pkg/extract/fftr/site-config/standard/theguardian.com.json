@@ -3,8 +3,7 @@
     "//h1[@articleprop='headline']"
   ],
   "body_selectors": [
-    "//article",
-    "//div[contains(concat(' ',normalize-space(@class),' '),' content__main ')]//div[contains(concat(' ',normalize-space(@class),' '),' gs-container ')]"
+    "//figure[.//picture[@itemProp=\"contentUrl\"]] | //div[contains(@class, 'article-body')]"
   ],
   "date_selectors": [
     "//article//time/@datetime"
@@ -14,10 +13,10 @@
   ],
   "strip_selectors": [
     "//article//div[contains(@class, 'content__secondary-column')]",
-    "//article//aside",
+    "//aside",
     "//article//div[contains(@class, 'block-share')]",
-    "//article//div[@class='submeta']",
-    "//article//span[contains(@class, 'inline-expand-image')]",
+    "//div[@class='submeta']",
+    "//span[contains(@class, 'inline-expand-image')]",
     "//article//div[@class='kindleWidget']",
     "//article//div[@class='email-subscription']",
     "//article//script",
@@ -31,11 +30,15 @@
     "//form",
     "//div[starts-with(@id, \"qanda-\")]",
     "//figure[@data-atom-type=\"qanda\" or @data-atom-type=\"profile\"]",
+    "//div[@data-print-layout=\"hide\"]",
     "//figcaption",
+    "//svg",
     "//article//div[contains(@class, 'content__meta-container')]",
     "//iframe[@srcdoc]"
   ],
   "strip_id_or_class": [
+    "sign-in-gate",
+    "js-ad-slot",
     "hide-on-mobile",
     "reveal-caption",
     "readerquestions",

@@ -1,7 +1,7 @@
 {
   "title_selectors": null,
   "body_selectors": [
-    "//div[contains(concat(' ',normalize-space(@class),' '),' post ')]"
+    "//div[contains(concat(' ',normalize-space(@class),' '),' blogpage ')]"
   ],
   "date_selectors": [
     "//time[@itemprop=\"datepublished\"]/@datetime"
@@ -11,8 +11,11 @@
     "//form"
   ],
   "strip_id_or_class": [
-    "commentsform",
-    "post-meta-group-additional"
+    "c-blog-header",
+    "c-blog-footer",
+    "c-blog-authors",
+    "c-blog-comments",
+    "c-blog-commentform"
   ],
   "strip_image_src": null,
   "native_ad_selectors": null,

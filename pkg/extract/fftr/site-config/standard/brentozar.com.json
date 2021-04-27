@@ -1,17 +1,12 @@
 {
   "title_selectors": null,
   "body_selectors": [
-    "//div[contains(concat(' ',normalize-space(@class),' '),' article ')]"
+    "//div[contains(concat(' ',normalize-space(@class),' '),' post_content ')]"
   ],
-  "date_selectors": [
-    "//meta[@itemprop=\"datePublished\"]/@content"
-  ],
+  "date_selectors": null,
   "author_selectors": null,
   "strip_selectors": null,
-  "strip_id_or_class": [
-    "newsrelated",
-    "news-single__categories"
-  ],
+  "strip_id_or_class": null,
   "strip_image_src": null,
   "native_ad_selectors": null,
   "tidy": false,
@@ -23,7 +18,7 @@
   "http_headers": null,
   "tests": [
     {
-      "url": "https://typo3.org/article/frontend-editing-planning-the-next-major-version",
+      "url": "https://www.brentozar.com/archive/2018/06/cpu-cores-or-memory-offline-the-problem-with-standard-edition-vms/",
       "contains": []
     }
   ]

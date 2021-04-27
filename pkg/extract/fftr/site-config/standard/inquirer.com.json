@@ -1,22 +1,37 @@
 {
   "title_selectors": null,
   "body_selectors": [
-    "//div[@id='article-body']"
+    "//article//div[contains(@class, 'feed-header')] | //div[@id='article-body']"
   ],
   "date_selectors": null,
-  "author_selectors": null,
-  "strip_selectors": null,
+  "author_selectors": [
+    "//meta[@name=\"author\"]/@content"
+  ],
+  "strip_selectors": [
+    "//div[@data-type=\"ad\"]",
+    "//div[@data-type=\"interstitial_link\"]",
+    "//div[contains(@class, 'card-content')][./div[contains(@class, 'recommender-header')]]"
+  ],
   "strip_id_or_class": [
-    "related-stories"
+    "related-stories",
+    "arcad",
+    "arc-ad-wrapper"
   ],
   "strip_image_src": null,
   "native_ad_selectors": null,
   "tidy": false,
   "prune": false,
   "autodetect_on_failure": true,
-  "single_page_link_selectors": null,
+  "single_page_link_selectors": [
+    "//link[@rel=\"amphtml\"]/@href"
+  ],
   "next_page_link_selectors": null,
-  "replace_strings": null,
+  "replace_strings": [
+    [
+      "height=\"2\" width=\"3\"",
+      ""
+    ]
+  ],
   "http_headers": null,
   "tests": [
     {

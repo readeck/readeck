@@ -23,6 +23,7 @@
     "//article//header",
     "//div[contains(@class, \"CommentsWrapper\")]",
     "//*[contains(@class, 'VisuallyHidden')]",
+    "//svg",
     "//div[contains(@class, \"story-feature\") and not(contains(@class, 'full-width'))]",
     "//span[@class=\"story-date\"]",
     "//div[@class=\"warning\"]//p",

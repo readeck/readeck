@@ -1,0 +1,47 @@
+{
+  "title_selectors": null,
+  "body_selectors": [
+    "//div[@class='entry-inner']"
+  ],
+  "date_selectors": null,
+  "author_selectors": null,
+  "strip_selectors": [
+    "//img[contains(concat(\" \", normalize-space(@class), \" \"), \" jetpack-lazy-image \")]",
+    "//div[@class='aawp']"
+  ],
+  "strip_id_or_class": [
+    "aawp-disclaimer"
+  ],
+  "strip_image_src": null,
+  "native_ad_selectors": null,
+  "tidy": false,
+  "prune": false,
+  "autodetect_on_failure": true,
+  "single_page_link_selectors": null,
+  "next_page_link_selectors": null,
+  "replace_strings": [
+    [
+      "\u003cnoscript\u003e",
+      "\u003c!-- noscript --\u003e"
+    ],
+    [
+      "\u003c/noscript\u003e",
+      "\u003c!-- /noscript --\u003e"
+    ]
+  ],
+  "http_headers": null,
+  "tests": [
+    {
+      "url": "https://stadt-bremerhaven.de/google-meet-laesst-sich-nun-auf-alle-cast-faehigen-geraete-streamen/",
+      "contains": []
+    },
+    {
+      "url": "https://stadt-bremerhaven.de/nanoleaf-essentials-a60-mit-thread-im-test/",
+      "contains": []
+    },
+    {
+      "url": "https://stadt-bremerhaven.de/facebook-stellt-heute-wohl-noch-neue-audio-loesungen-vor/",
+      "contains": []
+    }
+  ]
+}
