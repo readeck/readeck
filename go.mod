@@ -19,12 +19,10 @@ require (
 	github.com/gammazero/workerpool v1.1.1
 	github.com/go-chi/chi/v5 v5.0.2
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
-	github.com/go-redis/redis/v8 v8.8.0
 	github.com/go-shiori/dom v0.0.0-20201011032054-d6b74a54fe52
 	github.com/go-shiori/go-readability v0.0.0-20201011032228-bdc871772408
 	github.com/gorilla/csrf v1.7.0
 	github.com/gorilla/schema v1.2.0
-	github.com/gorilla/securecookie v1.1.1
 	github.com/gorilla/sessions v1.2.1
 	github.com/hlandau/passlib v1.0.11
 	github.com/jackc/pgx/v4 v4.11.0
