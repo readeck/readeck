@@ -6,6 +6,7 @@ import (
 	"crypto/sha256"
 	"crypto/sha512"
 	"encoding/json"
+	"fmt"
 	"net"
 	"os"
 	"runtime"
@@ -137,9 +138,7 @@ var Config = config{
 			MaxAge:     86400 * 30,
 		},
 	},
-	Database: configDB{
-		Source: "sqlite3:data/db.sqlite3",
-	},
+	Database: configDB{},
 	Extractor: configExtractor{
 		NumWorkers: runtime.NumCPU(),
 		DeniedIPs: []configIPNet{
@@ -164,6 +163,10 @@ func LoadConfiguration(configPath string) error {
 	dec := json.NewDecoder(toml.New(fd))
 	if err := dec.Decode(&Config); err != nil {
 		return err
+	}
+
+	if Config.Database.Source == "" {
+		Config.Database.Source = fmt.Sprintf("sqlite3:%s/db.sqlite3", Config.Main.DataDirectory)
 	}
 
 	loadKeys(Config.Main.SecretKey)
