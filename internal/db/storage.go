@@ -4,14 +4,13 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"io/fs"
 	"net/url"
-	"path"
 	"time"
 
+	"codeberg.org/readeck/readeck/internal/db/migrations"
 	"github.com/doug-martin/goqu/v9"
 	log "github.com/sirupsen/logrus"
-
-	"codeberg.org/readeck/readeck/internal/db/migrations"
 )
 
 // Connector is an interface for a database connector.
@@ -118,7 +117,7 @@ type migration struct {
 // and apply each one ordered by filename.
 func applyMigrations() error {
 	root := Driver().Dialect()
-	files, err := migrations.Files.ReadDir(root)
+	sfs, err := fs.Sub(migrations.Files, root)
 	if err != nil {
 		return err
 	}
@@ -128,67 +127,67 @@ func applyMigrations() error {
 		return err
 	}
 
-	log.WithField("last_id", last.ID).
-		WithField("last_name", last.Name).
-		Debug("schema migrations")
-
-	for _, mf := range files {
-		if mf.IsDir() {
-			continue
-		}
-
-		var mid int
-		var mname string
-		fmt.Sscanf(mf.Name(), "%d-%s", &mid, &mname)
-
-		if mid <= last.ID {
-			continue
-		}
-
-		sql, err := migrations.Files.ReadFile(path.Join(root, mf.Name()))
-		if err != nil {
-			return err
-		}
-		if err := applyMigration(mid, mname, sql); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-// applyMigration applies a given migration. In the same transaction
-// we execute the SQL fetched from the file and add an entry in the
-// migration table.
-func applyMigration(id int, name string, sql []byte) error {
-	log.WithField("id", id).WithField("name", name).Debug("migration")
-
 	tx, err := Q().Begin()
 	if err != nil {
 		return err
 	}
 	return tx.Wrap(func() error {
-		if _, err := tx.Exec(string(sql)); err != nil {
-			return err
+		// When last.ID is -1, it means there's no schema, so we create it.
+		// The schema is full and there's no need to apply any migration, only
+		// to mark them.
+		if last.ID < 0 {
+			sql, err := fs.ReadFile(sfs, "schema.sql")
+			if err != nil {
+				return err
+			}
+			log.Debug("initial schema")
+			if _, err = tx.Exec(string(sql)); err != nil {
+				return err
+			}
 		}
 
-		_, err := tx.Insert(goqu.T("migration")).Rows(map[string]interface{}{
-			"id":      id,
-			"name":    name,
-			"applied": time.Now(),
-		}).Executor().Exec()
-		return err
+		for _, m := range migrationList {
+			if m.id <= last.ID {
+				continue
+			}
+
+			if last.ID >= 0 { // Only apply migrations when there is a schema already
+				for _, fn := range m.funcList {
+					if err := fn(tx, sfs); err != nil {
+						return err
+					}
+				}
+			}
+
+			if err = insertMigration(tx, m.id, m.name); err != nil {
+				return err
+			}
+		}
+
+		return nil
 	})
 }
 
+// insertMigration adds an entry in the migration table.
+func insertMigration(tx *goqu.TxDatabase, id int, name string) error {
+	_, err := tx.Insert(goqu.T("migration")).Rows(map[string]interface{}{
+		"id":      id,
+		"name":    name,
+		"applied": time.Now(),
+	}).Executor().Exec()
+	return err
+}
+
+// getLastMigration returns the last executed migration.
 func getLastMigration() (m *migration, err error) {
-	m = &migration{ID: 0}
+	m = &migration{}
 
 	// Check if the migration table exists. If it doesn't
 	// it means we start from the beginning.
 	if ok, err := driver.HasTable("migration"); err != nil {
 		return m, err
 	} else if !ok {
+		m.ID = -1
 		return m, nil
 	}
 
