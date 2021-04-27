@@ -126,8 +126,11 @@ func SetDropProperties(m *extract.ProcessMessage, next extract.Processor) extrac
 		d.DocumentType = otype
 	}
 
-	// Default to article type
-	if d.DocumentType == "" {
+	// Document type is only a predefined set and nothing more
+	switch d.DocumentType {
+	case "article", "photo", "video":
+		// Valid values
+	default:
 		d.DocumentType = "article"
 	}
 
