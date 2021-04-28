@@ -96,8 +96,10 @@
     {{- end -}}
 
     {{- if .Item.Type == "article" -}}
-      <div class="font-serif text-lg leading-normal max-w-3xl mt-6 mx-auto prose">
-      {{ rawCopy(.Out, .HTML) }}
+      <div class="max-w-3xl mt-6 mx-auto">
+        <div class="font-serif text-lg leading-normal prose">
+          {{- rawCopy(.Out, .HTML) -}}
+        </div>
       </div>
     {{- else if .Item.Type == "photo" -}}
       {{ include "./components/bookmark_photo" .Item }}

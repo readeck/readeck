@@ -6,6 +6,8 @@
   "o-calendar":     "node_modules/boxicons/svg/regular/bx-calendar.svg",
   "o-check-off":    "node_modules/boxicons/svg/regular/bx-check-circle.svg",
   "o-check-on":     "node_modules/boxicons/svg/solid/bxs-check-circle.svg",
+  "o-chevron-l":    "node_modules/boxicons/svg/regular/bx-chevron-left.svg",
+  "o-chevron-r":    "node_modules/boxicons/svg/regular/bx-chevron-right.svg",
   "o-clock":        "node_modules/boxicons/svg/regular/bx-stopwatch.svg",
   "o-copy":         "node_modules/boxicons/svg/solid/bxs-copy.svg",
   "o-cross":        "node_modules/boxicons/svg/solid/bxs-x-circle.svg",

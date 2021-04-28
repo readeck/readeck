@@ -30,17 +30,17 @@
       </form>
     </div>
 
-    <ul class="grid grid-flow-col-dense justify-center divide-x -mx-2">
-      <li class="px-2"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
+    <ul class="flex flex-wrap justify-center divide-x -mx-2">
+      <li class="px-2 mb-2 sm:mb-0"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
        data-current="{{ pathIs(`/bookmarks`) }}"
       href="{{ urlFor(`/bookmarks`) }}">All</a></li>
-      <li class="px-2"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
+      <li class="px-2 mb-2 sm:mb-0"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
        data-current="{{ pathIs(`/bookmarks/unread`) }}"
       href="{{ urlFor(`/bookmarks`, `unread`) }}">{{ yield icon(name="o-check-off") }} Unread</a></li>
-      <li class="px-2"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
+      <li class="px-2 mb-2 sm:mb-0"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
        data-current="{{ pathIs(`/bookmarks/archives`) }}"
       href="{{ urlFor(`/bookmarks`, `archives`) }}">{{ yield icon(name="o-archive-on") }} Archive</a></li>
-      <li class="px-2"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
+      <li class="px-2 mb-2 sm:mb-0"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
        data-current="{{ pathIs(`/bookmarks/favorites`) }}"
       href="{{ urlFor(`/bookmarks`, `favorites`) }}">{{ yield icon(name="o-favorite-on") }} Favorites</a></li>
     </ul>

@@ -107,9 +107,6 @@ module.exports = {
     },
   },
   plugins: [
-    // require("@tailwindcss/forms")({
-    //   strategy: "class",
-    // }),
     require("./ui/plugins/interactions"),
     require("./ui/plugins/forms"),
     require("./ui/plugins/prose"),

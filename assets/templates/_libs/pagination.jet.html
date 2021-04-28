@@ -1,25 +1,37 @@
 {{- if .TotalPages > 1 -}}
-  <nav class="pgn my-4">
-    {{- if .PreviousPage -}}
-      <a href="{{ .PreviousPage }}" class="pgn-prev">Previous</a>
-    {{- end -}}
-    {{- if .NextPage -}}
-      <a href="{{ .NextPage }}" class="pgn-next">Next</a>
-    {{- end -}}
-
-    <ul class="pagination-list">
-    {{- current := .CurrentPage -}}
-    {{- range .PageLinks -}}
-      <li>
-      {{- if .Index == current -}}
-        <span class="pgn-current">{{ .Index }}</span>
-      {{- else if .Index != 0 -}}
-        <a href="{{ .URL }}" aria-label="Go to page {{ .Index }}">{{ .Index }}</a>
+  <nav class="my-4 flex items-center justify-center">
+    <div class="flex-1 flex justify-between sm:hidden">
+      {{- if .PreviousPage -}}
+        <a href="{{ .PreviousPage }}" class="px-4 py-2 border border-gray-300 rounded-md hf:text-primary">Previous</a>
       {{- else -}}
-        <span>&hellip;</span>
+        <span></span>
       {{- end -}}
-      </li>
-    {{- end -}}
-    </ul>
+      {{- if .NextPage -}}
+        <a href="{{ .NextPage }}" class="px-4 py-2 border border-gray-300 rounded-md hf:text-primary">Next</a>
+      {{- end -}}
+    </div>
+
+    <div class="hidden overflow-hidden sm:flex items-center justify-center flex-shrink border border-gray-300 rounded-md divide-x">
+      {{- if .PreviousPage -}}
+        <a href="{{ .PreviousPage }}" class="py-2 px-4 hf:bg-gray-200 hf:text-primary"
+         aria-label="Go to previous page">{{ yield icon(name="o-chevron-l") }}</a>
+      {{- end -}}
+
+      {{- current := .CurrentPage -}}
+      {{- range .PageLinks -}}
+        {{- if .Index == current -}}
+          <span class="py-2 px-4 bg-gray-200 font-bold">{{ .Index }}</span>
+        {{- else if .Index != 0 -}}
+          <a href="{{ .URL }}" aria-label="Go to page {{ .Index }}" class="py-2 px-4 hf:bg-gray-200 hf:text-primary">{{ .Index }}</a>
+        {{- else -}}
+          <span class="py-2 px-4 text-gray-600">&hellip;</span>
+        {{- end -}}
+      {{- end -}}
+
+      {{- if .NextPage -}}
+        <a href="{{ .NextPage }}" class="py-2 px-4 hf:bg-gray-200 hf:text-primary"
+         aria-label="Go to next page">{{ yield icon(name="o-chevron-r") }}</a>
+      {{- end -}}
+    </div>
   </nav>
 {{- end -}}
