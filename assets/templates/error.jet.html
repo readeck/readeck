@@ -1,24 +1,16 @@
-{{ extends "/base" }}
+{{ extends "/app" }}
 
 {{ block title() }}Error{{ end }}
 
-{{ block body() }}
-<div class="layout:app">
-  {{- include "./nav" -}}
+{{ block mainContent() }}
+<h1 class="text-h1 title">Error</h1>
 
-  <div class="layout:main">
-    <main class="p-6">
-      <h1 class="text-h1 title">Error</h1>
-
-      {{ if .Status == 403 }}
-      <p>Permission denied</p>
-      {{ else if .Status == 404 }}
-      <p>Page not found</p>
-      {{ else }}
-      <p>An error occured</p>
-      {{ end }}
-    </main>
-  </div>
-</div>
+{{ if .Status == 403 }}
+<p>Permission denied</p>
+{{ else if .Status == 404 }}
+<p>Page not found</p>
+{{ else }}
+<p>An error occured</p>
+{{ end }}
 
 {{ end }}

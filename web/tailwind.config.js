@@ -45,9 +45,18 @@ module.exports = {
         "bk-tools": "2fr auto auto",
         "cards": "repeat(auto-fill, minmax(14rem, 1fr))",
       },
+      height: {
+        "max-content": "max-content",
+      },
       maxWidth: {
         40: "10rem",
         44: "11rem",
+      },
+      minWidth: {
+        48: "12rem",
+      },
+      width: {
+        "md": "28rem",
       },
     },
   },
@@ -81,6 +90,9 @@ module.exports = {
         "group-hover",
         "group-focus-within",
         "hf",
+      ],
+      fontWeight: [
+        "data-current",
       ],
       opacity: [
         "group-hf",
