@@ -9,8 +9,8 @@
  data-turbo-refresh-interval-value="10"
  data-turbo-refresh-on-value=".card.state-deleted">
 
-  <div class="grid grid-flow-row lg:grid-cols-bk-tools items-center gap-4">
-    <div class="">
+  <div class="flex flex-col md:flex-row">
+    <div class="flex-grow mb-4 md:mr-4 md:mb-0">
       <form action="{{ urlFor(`/bookmarks`) }}" method="post"
        data-controller="turbo-form">
         {{ yield csrfField() }}
@@ -31,10 +31,10 @@
     </div>
 
     <div>
-      <form action="{{ urlFor(``) }}" method="get" class="lg:inline-flex">
-        <input title="search in bookmarks" class="form-input rounded-full pl-4 pr-8 w-full lg:w-50" size="10"
+      <form action="{{ urlFor(``) }}" method="get" class="flex">
+        <input title="search in bookmarks" class="form-input rounded-full pl-4 pr-8 w-full md:max-w-xs" size="14"
         type="text" name="q" value="{{ isset(.Q) ? .Q : `` }}" placeholder="search" />
-        <button title="search" class="-ml-6 mr-2">{{ yield icon(name="o-search") }}</button>
+        <button title="search" class="leading-normal -ml-6 mr-2">{{ yield icon(name="o-search") }}</button>
       </form>
     </div>
   </div>
