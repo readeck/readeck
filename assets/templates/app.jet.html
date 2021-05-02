@@ -2,17 +2,23 @@
 {{ import "/_libs/forms" }}
 
 {{ block body() -}}
-<div class="layout:app">
-  {{- include "./nav" -}}
+<div class="min-h-screen max-w-7xl mx-auto flex">
+  <main class="order-2 flex-grow px-4 pt-4 pb-14">
+    {{ yield flashes() }}
+    {{ yield mainContent() }}
+  </main>
 
-  {{ yield main() content }}
-  {{ yield mainAside() }}
-  <div class="layout:main {{ yield mainClass() }}">
-    <main class="p-6">
-      {{ yield flashes() }}
-      {{ yield mainContent() }}
-    </main>
+  <label for="--sl-toggle" class="md:hidden fixed z-50 right-2 bottom-2 w-12 h-12 inline-flex
+  items-center justify-center cursor-pointer rounded-full bg-primary text-white">{{ yield icon(name="o-menu") }}</label>
+  <input type="checkbox" id="--sl-toggle" class="sidebar:ctrl">
+  <div class="order-1 flex-shrink-0 sidebar:content
+    pr-4 fixed top-0 bottom-0 left-0 right-0 overflow-y-auto z-40
+    flex justify-start text-gray-800
+    md:sticky md:h-screen md:w-64 md:left-auto md:bottom-auto">
+    <nav class="w-full min-h-full h-max-content max-w-md z-40 p-4 shadow-lg bg-gradient-to-r from-gray-50 to-gray-100">
+      {{ include "./nav" }}
+    </nav>
   </div>
-  {{ end }}
 </div>
+
 {{- end}}

@@ -1,38 +1,75 @@
-<nav class="layout:nav leading-none bg-gray-900 text-white shadow py-2 px-6
- flex flex-col justify-center space-y-2 items-center
- sm:flex-row sm:space-y-0">
-  <div class="flex-grow flex items-center">
-    <h1 class="mr-4 text-lg font-bold"><a href="{{ urlFor(`/`) }}">Readeck</a></h1>
-    {{- if  hasPermission("/bookmarks", "read") -}}
-      <a class="p-2 rounded whitespace-nowrap hf:bg-blue-700 data-current:bg-blue-900"
-      href="{{ urlFor(`/bookmarks/unread`) }}"
-      data-current="{{ pathIs(`/bookmarks`, `/bookmarks/*`) }}"
-      >{{ yield icon(name="o-bookmarks") }} Bookmarks</a>
+{{- inBookmarks := pathIs("/bookmarks", "/bookmarks/*") -}}
+{{- inProfile := pathIs("/profile", "/profile/*") -}}
+{{- inAdmin := pathIs("/admin", "/admin/*") -}}
+
+<h1 class="text-center text-xl leading-none font-bold">Readeck</h1>
+
+
+{{- if  hasPermission("/bookmarks", "read") -}}
+  <div class="my-4 pt-4 border-t">
+    <h2 class="sidebar:title" data-current="{{ inBookmarks }}"><a
+    class="sidebar:link" href="{{ urlFor(`/bookmarks/unread`)}}">{{- yield icon(name=(inBookmarks ? "o-chevron-d" : "o-chevron-r")) }}
+    Bookmarks</a></h2>
+    {{- if inBookmarks -}}
+    <ul class="mt-2">
+      <li class="mb-1"><a class="sidebar:link"
+        data-current="{{ pathIs(`/bookmarks`) }}"
+      href="{{ urlFor(`/bookmarks`) }}">{{ yield icon(name="o-library") }} All</a></li>
+      <li class="mb-1"><a class="sidebar:link"
+        data-current="{{ pathIs(`/bookmarks/unread`) }}"
+      href="{{ urlFor(`/bookmarks`, `unread`) }}">{{ yield icon(name="o-check-off") }} Unread</a></li>
+      <li class="mb-1"><a class="sidebar:link"
+        data-current="{{ pathIs(`/bookmarks/archives`) }}"
+      href="{{ urlFor(`/bookmarks`, `archives`) }}">{{ yield icon(name="o-archive-off") }} Archive</a></li>
+      <li class="mb-1"><a class="sidebar:link"
+        data-current="{{ pathIs(`/bookmarks/favorites`) }}"
+      href="{{ urlFor(`/bookmarks`, `favorites`) }}">{{ yield icon(name="o-favorite-off") }} Favorites</a></li>
+    </ul>
     {{- end -}}
   </div>
+{{- end -}}
 
-  <div class="grid grid-flow-col gap-2 items-center">
-    {{- if  hasPermission("/profile", "read") -}}
-      <a class="inline-flex items-center justify-center text-xl leading-none
-        rounded-full w-8 h-8 hf:bg-blue-700
-        data-current:bg-blue-900"
-        href="{{ urlFor(`/profile`) }}"
-        data-current="{{ pathIs(`/profile`, `/profile/*`) }}">{{
-        yield icon(name="o-user") }}</a>
-    {{- end -}}
+{{- if !user.IsAnonymous() -}}
+  {{- if  hasPermission("/profile", "read") -}}
+    <div class="my-4 pt-4 border-t">
+      <h2 class="sidebar:title" data-current="{{ inProfile }}"><a
+      class="sidebar:link" href="{{ urlFor(`/profile`)}}">{{- yield icon(name=(inProfile ? "o-chevron-d" : "o-chevron-r")) }}
+      {{ user.Username }}</a></h2>
+      {{- if inProfile -}}
+      <ul class="mt-2">
+        <li class="mb-1"><a class="sidebar:link" href="{{ urlFor(`/profile`) }}"
+        data-current="{{ pathIs(`/profile`) }}">{{ yield icon(name="o-user") }} Profile</a></li>
+        <li class="mb-1"><a class="sidebar:link" href="{{ urlFor(`/profile/password`) }}"
+        data-current="{{ pathIs(`/profile/password`) }}">{{ yield icon(name="o-key") }} Password</a></li>
+        {{ if hasPermission("/profile/tokens", "read") -}}
+          <li class="mb-1"><a class="sidebar:link" href="{{ urlFor(`/profile/tokens`) }}"
+          data-current="{{ pathIs(`/profile/tokens`, `/profile/tokens/*`) }}">{{ yield icon(name="o-terminal") }} API Tokens</a></li>
+        {{- end }}
+      </ul>
+      {{- end -}}
+    </div>
+  {{- end -}}
 
-    {{- if  hasPermission("/admin", "read") -}}
-      <a class="inline-flex items-center justify-center text-xl leading-none
-       rounded-full w-8 h-8 hf:bg-blue-700
-       data-current:bg-blue-900"
-       href="{{ urlFor(`/admin`) }}"
-       data-current="{{ pathIs(`/admin`, `/admin/*`) }}">{{
-        yield icon(name="o-admin") }}</a>
-    {{- end }}
+  {{- if  hasPermission("/admin", "read") -}}
+    <div class="my-4 pt-4 border-t">
+      <h2 class="sidebar:title" data-current="{{ inAdmin }}"><a
+      class="sidebar:link" href="{{ urlFor(`/admin`) }}">{{- yield icon(name=(inAdmin ? "o-chevron-d" : "o-chevron-r")) }}
+      Management</a></h2>
+      {{- if inAdmin -}}
+      <ul class="mt-2">
+        <li class="mb-1"><a class="sidebar:link" href="{{ urlFor(`/admin/users`) }}"
+      data-current="{{ pathIs(`/admin/users`, `/admin/users/*`) }}">{{ yield icon(name="o-user") }} Users</a></li>
+      </ul>
+      {{- end -}}
+    </div>
+  {{- end -}}
 
-    <form class="inline-block" action="{{ urlFor(`/logout`)}}" method="post">
+  <div class="my-4 pt-4 pl-2 border-t">
+    <form class="block" action="{{ urlFor(`/logout`)}}" method="post">
       {{ yield csrfField() }}
-      <button class="p-2 rounded hf:bg-blue-700" type="submit">{{ yield icon(name="o-logout") }} Logout</button>
+      <button class="hf:text-primary font-semibold" type="submit">{{ yield icon(name="o-logout") }} Logout</button>
     </form>
   </div>
-  </nav>
+{{- end -}}
+
+{{ yield mainNav() }}

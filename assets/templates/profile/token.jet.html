@@ -1,4 +1,4 @@
-{{ extends "./base" }}
+{{ extends "/app" }}
 {{ import "/_libs/forms" }}
 
 {{ block title() }}API Token{{ end }}
@@ -50,7 +50,7 @@
 
 <h2 class="title text-h3">API authentication</h2>
 
-<div class="w-full max-w-xl mb-6" data-controller="clipboard">
+<div class="w-full mb-6" data-controller="clipboard">
   <label class="font-semibold">Your API token</label>
   <span data-clipboard-target="label"></span>
   <textarea readonly="1" class="form-textarea w-full h-24"
@@ -59,7 +59,7 @@
 
 <p class="mb-2">You can use this token by passing it as an <code>Authorization: Bearer</code>
 HTTP header.</p>
-<div class="w-full max-w-xl mb-4" data-controller="clipboard">
+<div class="w-full mb-4" data-controller="clipboard">
   <label class="font-semibold">HTTP Header</label>
   <span data-clipboard-target="label"></span>
   <textarea readonly="1" class="form-textarea w-full h-28"
@@ -74,6 +74,5 @@ HTTP header.</p>
   <p><button class="btn-danger">Delete token</button></p>
 </form>
 {{- end }}
-
 
 {{ end }}

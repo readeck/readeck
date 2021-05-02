@@ -1,6 +1,6 @@
 <turbo-frame id="bookmark-labels-{{ .ID }}">
 <form action="{{ urlFor(`/bookmarks`, .ID) }}" method="post"
- class="mt-2"
+ class="px-4 mb-2"
  data-controller="turbo-form"
  data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
  data-turbo-form-method-value="patch">

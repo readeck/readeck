@@ -9,8 +9,8 @@
  data-turbo-refresh-interval-value="10"
  data-turbo-refresh-on-value=".card.state-deleted">
 
-  <div class="grid grid-flow-row lg:grid-cols-bk-tools items-center gap-4">
-    <div class="">
+  <div class="flex flex-col md:flex-row">
+    <div class="flex-grow mb-4 md:mr-4 md:mb-0">
       <form action="{{ urlFor(`/bookmarks`) }}" method="post"
        data-controller="turbo-form">
         {{ yield csrfField() }}
@@ -30,26 +30,11 @@
       </form>
     </div>
 
-    <ul class="flex flex-wrap justify-center divide-x -mx-2">
-      <li class="px-2 mb-2 sm:mb-0"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
-       data-current="{{ pathIs(`/bookmarks`) }}"
-      href="{{ urlFor(`/bookmarks`) }}">All</a></li>
-      <li class="px-2 mb-2 sm:mb-0"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
-       data-current="{{ pathIs(`/bookmarks/unread`) }}"
-      href="{{ urlFor(`/bookmarks`, `unread`) }}">{{ yield icon(name="o-check-off") }} Unread</a></li>
-      <li class="px-2 mb-2 sm:mb-0"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
-       data-current="{{ pathIs(`/bookmarks/archives`) }}"
-      href="{{ urlFor(`/bookmarks`, `archives`) }}">{{ yield icon(name="o-archive-on") }} Archive</a></li>
-      <li class="px-2 mb-2 sm:mb-0"><a class="whitespace-nowrap font-semibold text-gray-700 border-b-4 border-gray-200 hf:text-primary hf:border-primary data-current:text-primary-dark data-current:border-primary-dark"
-       data-current="{{ pathIs(`/bookmarks/favorites`) }}"
-      href="{{ urlFor(`/bookmarks`, `favorites`) }}">{{ yield icon(name="o-favorite-on") }} Favorites</a></li>
-    </ul>
-
     <div>
-      <form action="{{ urlFor(``) }}" method="get" class="lg:inline-flex">
-        <input title="search in bookmarks" class="form-input rounded-full pl-4 pr-8 w-full lg:w-50" size="10"
+      <form action="{{ urlFor(``) }}" method="get" class="flex">
+        <input title="search in bookmarks" class="form-input rounded-full pl-4 pr-8 w-full md:max-w-xs" size="14"
         type="text" name="q" value="{{ isset(.Q) ? .Q : `` }}" placeholder="search" />
-        <button title="search" class="-ml-6 mr-2">{{ yield icon(name="o-search") }}</button>
+        <button title="search" class="leading-normal -ml-6 mr-2">{{ yield icon(name="o-search") }}</button>
       </form>
     </div>
   </div>
@@ -63,7 +48,7 @@
     </div>
   {{- end -}}
 
-  <div class="my-4 grid grid-cols-cards gap-4">
+  <div class="my-4 grid lg:grid-cols-cards gap-4">
   {{- range .Bookmarks -}}
     {{- include "./components/card" . -}}
   {{- end -}}

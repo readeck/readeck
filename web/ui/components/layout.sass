@@ -1,25 +1,13 @@
 @layer components
-  .layout\:app
-    height: 100vh
-    display: grid
-    grid-template-rows: auto 1fr
-    grid-template-columns: auto 1fr
-    grid-template-areas: "header header" "sidebar main"
+  .sidebar\:ctrl
+    display: none
 
-  .layout\:nav
-    grid-area: header
-
-  .layout\:main
-    grid-area: main
-    @apply sm:overflow-y-auto
-
-  .layout\:sidebar
-    grid-area: sidebar
-    @apply w-48 p-4 shadow bg-gray-100 overflow-y-auto
+  .sidebar\:ctrl:not(:checked) + .sidebar\:content
+    @apply hidden md:block
 
   .sidebar\:title
-    @apply leading-none text-xl mb-2
+    @apply uppercase data-current:font-bold
 
   .sidebar\:link
-    @apply block rounded px-2 py-1.5 my-2 -ml-2 link hf:bg-gray-200
-    @apply data-current:bg-gray-200
+    @apply hf:text-primary data-current:font-bold data-current:text-primary-dark
+    @apply block leading-none py-1 pl-1 border-l-2 border-transparent hf:border-primary data-current:border-primary-dark
