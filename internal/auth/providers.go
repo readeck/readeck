@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"codeberg.org/readeck/readeck/internal/auth/users"
+	"github.com/readeck/readeck/internal/auth/users"
 )
 
 type (

@@ -7,9 +7,9 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"codeberg.org/readeck/readeck/internal/auth"
-	"codeberg.org/readeck/readeck/internal/server"
-	"codeberg.org/readeck/readeck/pkg/form"
+	"github.com/readeck/readeck/internal/auth"
+	"github.com/readeck/readeck/internal/server"
+	"github.com/readeck/readeck/pkg/form"
 )
 
 type bookmarkViews struct {

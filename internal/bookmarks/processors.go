@@ -1,7 +1,7 @@
 package bookmarks
 
 import (
-	"codeberg.org/readeck/readeck/pkg/extract"
+	"github.com/readeck/readeck/pkg/extract"
 )
 
 // CleanDomProcessor is a last pass of cleaning on the resulting DOM node.

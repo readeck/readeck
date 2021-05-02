@@ -3,7 +3,7 @@ package dashboard
 import (
 	"net/http"
 
-	"codeberg.org/readeck/readeck/internal/server"
+	"github.com/readeck/readeck/internal/server"
 )
 
 // SetupRoutes mounts the routes for the auth domain.

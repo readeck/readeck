@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"codeberg.org/readeck/readeck/configs"
+	"github.com/readeck/readeck/configs"
 )
 
 func setHost(r *http.Request) error {

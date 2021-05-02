@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"codeberg.org/readeck/readeck/configs"
+	"github.com/readeck/readeck/configs"
 )
 
 // Message is used by the server's Message() method.

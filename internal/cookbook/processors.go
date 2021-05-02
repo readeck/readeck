@@ -7,8 +7,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"codeberg.org/readeck/readeck/pkg/archiver"
-	"codeberg.org/readeck/readeck/pkg/extract"
+	"github.com/readeck/readeck/pkg/archiver"
+	"github.com/readeck/readeck/pkg/extract"
 )
 
 type ctxLogger struct{}

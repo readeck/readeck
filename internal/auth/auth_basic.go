@@ -7,7 +7,7 @@ import (
 
 	"github.com/doug-martin/goqu/v9"
 
-	"codeberg.org/readeck/readeck/internal/auth/users"
+	"github.com/readeck/readeck/internal/auth/users"
 )
 
 // BasicAuthProvider handles basic HTTP authentication method

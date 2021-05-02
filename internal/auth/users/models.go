@@ -11,8 +11,8 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/hlandau/passlib"
 
-	"codeberg.org/readeck/readeck/internal/acls"
-	"codeberg.org/readeck/readeck/internal/db"
+	"github.com/readeck/readeck/internal/acls"
+	"github.com/readeck/readeck/internal/db"
 )
 
 func init() {

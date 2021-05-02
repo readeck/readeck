@@ -5,8 +5,8 @@ DATE := $(shell git log -1 --format=%cI)
 TAGS := omit_load_extension foreign_keys json1 fts5 secure_delete
 BUILD_TAGS := $(TAGS)
 VERSION_FLAGS := \
-	-X 'codeberg.org/readeck/readeck/configs.version=$(VERSION)' \
-	-X 'codeberg.org/readeck/readeck/configs.buildTimeStr=$(DATE)'
+	-X 'github.com/readeck/readeck/configs.version=$(VERSION)' \
+	-X 'github.com/readeck/readeck/configs.buildTimeStr=$(DATE)'
 
 SITECONFIG_REPO=https://github.com/j0k3r/graby-site-config.git
 SITECONFIG_CLONE=graby-site-config
@@ -54,7 +54,7 @@ list:
 # Launch the documentation
 .PHONY: doc
 doc:
-	@echo "Visit http://localhost:6060/pkg/codeberg.org/readeck/readeck/?m=all"
+	@echo "Visit http://localhost:6060/pkg/github.com/readeck/readeck/?m=all"
 	godoc
 
 # Linting

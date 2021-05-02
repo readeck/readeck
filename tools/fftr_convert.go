@@ -17,7 +17,7 @@ import (
 	"regexp"
 	"strings"
 
-	"codeberg.org/readeck/readeck/pkg/extract/fftr"
+	"github.com/readeck/readeck/pkg/extract/fftr"
 )
 
 func main() {

@@ -14,9 +14,9 @@ import (
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/sync/semaphore"
 
-	"codeberg.org/readeck/readeck/pkg/archiver"
-	"codeberg.org/readeck/readeck/pkg/extract"
-	"codeberg.org/readeck/readeck/pkg/img"
+	"github.com/readeck/readeck/pkg/archiver"
+	"github.com/readeck/readeck/pkg/extract"
+	"github.com/readeck/readeck/pkg/img"
 )
 
 const (

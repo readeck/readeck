@@ -7,7 +7,7 @@ import (
 	"sort"
 	"time"
 
-	"codeberg.org/readeck/readeck/configs"
+	"github.com/readeck/readeck/configs"
 )
 
 // Etager must provides a function that returns a list of

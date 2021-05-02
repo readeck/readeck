@@ -9,7 +9,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	log "github.com/sirupsen/logrus"
 
-	"codeberg.org/readeck/readeck/configs"
+	"github.com/readeck/readeck/configs"
 )
 
 type httpLogFormatter struct{}

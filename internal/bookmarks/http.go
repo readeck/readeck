@@ -7,8 +7,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"codeberg.org/readeck/readeck/internal/server"
-	"codeberg.org/readeck/readeck/pkg/zipfs"
+	"github.com/readeck/readeck/internal/server"
+	"github.com/readeck/readeck/pkg/zipfs"
 )
 
 // SetupRoutes mounts the routes for the bookmarks domain.

@@ -13,7 +13,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spyzhov/ajson"
 
-	"codeberg.org/readeck/readeck/pkg/extract"
+	"github.com/readeck/readeck/pkg/extract"
 )
 
 //go:embed site-rules/*

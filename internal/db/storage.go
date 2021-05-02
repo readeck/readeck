@@ -8,9 +8,10 @@ import (
 	"net/url"
 	"time"
 
-	"codeberg.org/readeck/readeck/internal/db/migrations"
 	"github.com/doug-martin/goqu/v9"
 	log "github.com/sirupsen/logrus"
+
+	"github.com/readeck/readeck/internal/db/migrations"
 )
 
 // Connector is an interface for a database connector.

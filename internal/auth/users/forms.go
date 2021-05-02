@@ -7,9 +7,10 @@ import (
 	"regexp"
 	"strings"
 
-	"codeberg.org/readeck/readeck/pkg/form"
 	"github.com/doug-martin/goqu/v9"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
+
+	"github.com/readeck/readeck/pkg/form"
 )
 
 type (

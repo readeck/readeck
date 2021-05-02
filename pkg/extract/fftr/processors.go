@@ -11,7 +11,7 @@ import (
 	"github.com/araddon/dateparse"
 	"github.com/go-shiori/dom"
 
-	"codeberg.org/readeck/readeck/pkg/extract"
+	"github.com/readeck/readeck/pkg/extract"
 )
 
 // LoadConfiguration will try to find a matching fftr configuration

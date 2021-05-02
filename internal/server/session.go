@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/sessions"
 
-	"codeberg.org/readeck/readeck/configs"
+	"github.com/readeck/readeck/configs"
 )
 
 type (

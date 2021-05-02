@@ -14,7 +14,7 @@ import (
 	"github.com/antchfx/htmlquery"
 	"github.com/go-shiori/dom"
 
-	"codeberg.org/readeck/readeck/pkg/extract"
+	"github.com/readeck/readeck/pkg/extract"
 )
 
 var (

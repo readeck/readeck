@@ -14,9 +14,9 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	log "github.com/sirupsen/logrus"
 
-	"codeberg.org/readeck/readeck/assets"
-	"codeberg.org/readeck/readeck/configs"
-	"codeberg.org/readeck/readeck/internal/auth"
+	"github.com/readeck/readeck/assets"
+	"github.com/readeck/readeck/configs"
+	"github.com/readeck/readeck/internal/auth"
 )
 
 // Server is a wrapper around chi router.

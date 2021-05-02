@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"codeberg.org/readeck/readeck/internal/app"
+	"github.com/readeck/readeck/internal/app"
 )
 
 func main() {
