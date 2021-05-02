@@ -1,5 +1,16 @@
 # Changlog
 
+## [0.3.1] - 2021-05-02
+### Changed
+- New design, more mobile friendly
+- Session now only uses encrypted cookies
+
+### Fixed
+- Limit the document type to predefined values
+
+### Added
+- Security features on blocked IPs and loop prevention during extraction
+
 ## [0.2.3] - 2021-04-18
 ### Added
 - Rule engine for extraction, in ES5
