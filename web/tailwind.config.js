@@ -48,12 +48,8 @@ module.exports = {
       height: {
         "max-content": "max-content",
       },
-      maxWidth: {
-        40: "10rem",
-        44: "11rem",
-      },
-      minWidth: {
-        48: "12rem",
+      padding: {
+        "16/9": "56.25%",
       },
       width: {
         "md": "28rem",

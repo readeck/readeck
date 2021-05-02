@@ -35,18 +35,12 @@
       {{- end }}
     </a>
 
-    <div class="flex-grow p-2 {{ if .IsDeleted }}opacity-50{{ end }}">
-      <h3 class="mb-3 leading-tight group-hover:text-primary group-focus-within:text-primary"><a href="{{ url }}"
+    <div class="flex-grow p-2 flex flex-col">
+      <h3 class="mb-2 leading-tight font-semibold {{ if .IsDeleted }}opacity-50{{ end }}
+       group-hover:text-primary group-focus-within:text-primary"><a href="{{ url }}"
       data-turbo-frame="_top" class="hf:text-primary-dark">{{ default(.Title, "untitled") }}</a></h3>
-      {{ if len(.Labels) -}}
-      <ul class="inline-flex flex-wrap justify-start">{{ range .Labels -}}
-        <li class="text-sm bg-gray-300 leading-none py-1 px-1 mr-1 rounded">{{ . }}</li>
-      {{- end }}</ul>
-      {{- end }}
-    </div>
 
-    <div>
-      <span class="px-2 flex items-center mb-2 text-xs text-gray-600 {{ if .IsDeleted }}opacity-50{{ end }}">
+      <span class="flex items-center mb-2 text-xs text-gray-600 {{ if .IsDeleted }}opacity-50{{ end }}">
         {{- if isset(.Resources.icon) -}}
           <img class="h-4 w-auto filter grayscale opacity-50
            group-hover:filter-none group-hover:opacity-100
@@ -55,58 +49,66 @@
            width="{{ .Resources.icon.Width }}" height="{{ .Resources.icon.Height }}">
         {{- end }} <strong class="ml-2 mr-2 leading-none">{{ .SiteName }}</strong>
         {{ if .Type == "article" && .ReadingTime() > 0 }} •&nbsp;{{ .ReadingTime() }}&nbsp;min{{- end -}}
-        </span>
-        <div class="flex border-t p-2 items-center">
-          {{- if .IsDeleted -}}
-            <span class="mr-2 text-red-700 text-xs font-semibold">
-              This bookmark will be removed in a few seconds.
-            </span>
-            <form action="{{ url }}" method="post">
-              {{ yield csrfField() }}
-              <input type="hidden" name="cancel" value="1" />
-              <input type="hidden" name="_to" value="{{ currentPath }}" />
-              <button type="submit" name="is_deleted" value="0"
-               class="btn-primary whitespace-nowrap text-sm py-1"
-               data-controller="turbo-form"
-               data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
-               data-turbo-form-method-value="patch">{{ yield icon(name="o-undo") }} Undo</button>
-            </form>
-          {{- else -}}
-            <form action="{{url }}" method="post"
-            class="flex-grow text-gray-400 group-hover:text-primary group-focus-within:text-primary"
-            data-controller="turbo-form"
-            data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
-            data-turbo-form-method-value="patch">
-              {{ yield csrfField() }}
-              <input type="hidden" name="_to" value="{{ currentPath }}" />
-              <button
-               class="fill-current hf:text-primary-dark {{ if .IsMarked}}text-primary{{ end }}"
-               name="is_marked" value="{{ .IsMarked ? 0 : 1 }}"
-               title="{{ textFav }}">
-                {{ yield icon(name=(.IsMarked ? "o-favorite-on" : "o-favorite-off")) }}
-              </button>
-              <button class="fill-current hf:text-primary-dark {{ if .IsArchived}}text-primary{{ end }}"
-               name="is_archived" value="{{ .IsArchived ? 0 : 1 }}"
-               title="{{ textArch }}">
-                {{ yield icon(name=(.IsArchived ? "o-archive-on" : "o-archive-off")) }}
-              </button>
-            </form>
+      </span>
 
-            <form action="{{ urlFor(`/bookmarks`, .ID, `delete`) }}" method="post"
-             class="text-gray-400 group-hover:text-red-600 group-focus-within:text-red-700">
-              {{ yield csrfField() }}
-              <input type="hidden" name="_to" value="{{ currentPath }}" />
-              <button class="fill-current hf:text-red-800" name="is_deleted" value="1"
-               data-controller="turbo-form"
-               data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
-               data-turbo-form-method-value="patch"
-               title="Delete this bookmark">
-                {{ yield icon(name="o-trash") }}
-              </button>
-            </form>
-          {{- end -}}
-        </div>
+      {{ if len(.Labels) -}}
+      <ul class="inline-flex flex-wrap justify-start {{ if .IsDeleted }}opacity-50{{ end }}">{{ range .Labels -}}
+        <li class="text-sm bg-gray-300 leading-none py-1 px-1 mr-1 rounded">{{ . }}</li>
+      {{- end }}</ul>
+      {{- end }}
+
+      <div class="flex flex-grow items-end mt-2 text-lg">
+        {{- if .IsDeleted -}}
+          <span class="text-red-700 text-xs font-semibold">
+            This bookmark will be removed in a few seconds.
+          </span>
+          <form action="{{ url }}" method="post">
+            {{ yield csrfField() }}
+            <input type="hidden" name="cancel" value="1" />
+            <input type="hidden" name="_to" value="{{ currentPath }}" />
+            <button type="submit" name="is_deleted" value="0"
+              class="btn-primary whitespace-nowrap text-sm py-1"
+              data-controller="turbo-form"
+              data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+              data-turbo-form-method-value="patch">{{ yield icon(name="o-undo") }} Undo</button>
+          </form>
+        {{- else -}}
+          <form action="{{url }}" method="post"
+          class="flex-grow text-gray-200 group-hover:text-primary group-focus-within:text-primary"
+          data-controller="turbo-form"
+          data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+          data-turbo-form-method-value="patch">
+            {{ yield csrfField() }}
+            <input type="hidden" name="_to" value="{{ currentPath }}" />
+            <button
+              class="fill-current hf:text-primary-dark {{ if .IsMarked}}text-primary{{ end }}"
+              name="is_marked" value="{{ .IsMarked ? 0 : 1 }}"
+              title="{{ textFav }}">
+              {{ yield icon(name=(.IsMarked ? "o-favorite-on" : "o-favorite-off")) }}
+            </button>
+            <button class="fill-current hf:text-primary-dark {{ if .IsArchived}}text-primary{{ end }}"
+              name="is_archived" value="{{ .IsArchived ? 0 : 1 }}"
+              title="{{ textArch }}">
+              {{ yield icon(name=(.IsArchived ? "o-archive-on" : "o-archive-off")) }}
+            </button>
+          </form>
+
+          <form action="{{ urlFor(`/bookmarks`, .ID, `delete`) }}" method="post"
+            class="text-gray-200 group-hover:text-red-600 group-focus-within:text-red-700">
+            {{ yield csrfField() }}
+            <input type="hidden" name="_to" value="{{ currentPath }}" />
+            <button class="fill-current hf:text-red-800" name="is_deleted" value="1"
+              data-controller="turbo-form"
+              data-turbo-form-action-value="{{ urlFor(`/api/bookmarks`, .ID) }}"
+              data-turbo-form-method-value="patch"
+              title="Delete this bookmark">
+              {{ yield icon(name="o-trash") }}
+            </button>
+          </form>
+        {{- end -}}
+      </div>
     </div>
+
   {* </div> *}
   {{- end -}}
   </turbo-frame>
