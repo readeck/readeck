@@ -37,6 +37,7 @@ type (
 	ctxBookmarkListKey struct{}
 	ctxSearchString    struct{}
 	ctxFilterForm      struct{}
+	ctxDefaultLimit    struct{}
 )
 
 // bookmarkAPI is the base bookmark API router.
@@ -301,6 +302,15 @@ func (api *bookmarkAPI) withBookmarkFilters(next http.Handler) http.Handler {
 	})
 }
 
+func (api *bookmarkAPI) withDefaultLimit(limit int) func(next http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			ctx := context.WithValue(r.Context(), ctxDefaultLimit{}, limit)
+			next.ServeHTTP(w, r.Clone(ctx))
+		})
+	}
+}
+
 func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		res := bookmarkList{}
@@ -311,7 +321,11 @@ func (api *bookmarkAPI) withBookmarkList(next http.Handler) http.Handler {
 			return
 		}
 		if pf.Limit == 0 {
-			pf.Limit = 30
+			if limit, ok := r.Context().Value(ctxDefaultLimit{}).(int); ok {
+				pf.Limit = limit
+			} else {
+				pf.Limit = 50
+			}
 		}
 
 		ds := Bookmarks.Query().
